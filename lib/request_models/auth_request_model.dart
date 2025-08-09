@@ -7,9 +7,8 @@ part 'auth_request_model.g.dart';
 @Freezed()
 class PaginationRequestModel with _$PaginationRequestModel{
   const factory PaginationRequestModel({
-    String? orderId,
-    String? categoryId,
-    String? subCategoryId,
+    String? hostelId,
+    String? roomId,
     String? type,
     required int? page
   }) = _PaginationRequestModel;
@@ -45,13 +44,18 @@ class VerifyOtpRequestModel with _$VerifyOtpRequestModel{
 @Freezed()
 class RegistrationRequestModel with _$RegistrationRequestModel{
   const factory RegistrationRequestModel({
+    String? hostelId,
     String? mobile,
     String? name,
     String? email,
     String? hostelImage,
+    String? hostelType,
     String? hostelLicence,
     String? hostelName,
     String? aboutHostel,
+    List<String>? images,
+    List<String>? amenities,
+    List<String>? rules,
     String? gstIn,
     LocationModel? location,
   }) = _RegistrationRequestModel;

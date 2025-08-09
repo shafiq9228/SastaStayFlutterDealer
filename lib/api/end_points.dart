@@ -11,5 +11,10 @@ class EndPoints {
   static const uploadFile = "uploadFile";
 
   static const registerHostel = "registerHostel";
+  static const fetchHostels = "fetchHostels";
+  static const fetchHostelDetails = "fetchHostelDetails";
+  static const fetchHostelRooms = "fetchHostelRooms";
+  static const fetchAmenities = "fetchAmenities";
+  static const setAsPrimaryHostel = "setAsPrimaryHostel";
 
 }

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../components/custom_progress_bar.dart';
 import '../components/primary_button.dart';
 import '../components/progress_button.dart';
+import '../components/uploaded_view_component.dart';
+import '../components/uploading_view_component.dart';
 import '../request_models/auth_request_model.dart';
 import '../response_model/auth_response_model.dart';
 import '../utils/app_styles.dart';
@@ -13,6 +15,7 @@ import '../utils/custom_colors.dart';
 import '../utils/preference_manager.dart';
 import '../utils/statefullwrapper.dart';
 import '../view_models/auth_view_model.dart';
+import 'file_picker_page.dart';
 import 'location_picker_page.dart';
 
 class RegisterHostelPage extends StatefulWidget {
@@ -33,6 +36,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
   Rx<bool> rejectedValuesAdded = false.obs;
   Rx<bool> rejected = false.obs;
   Rx<String> registerValue = "".obs;
+  Rx<String> selectedHostelType = "Boys".obs;
   RxBool registerByMobile = true.obs;
 
   final preferenceManager = Get.put(PreferenceManager());
@@ -59,8 +63,8 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                 rejectedReason.value = responseUserData?.primaryHostel?.reason ?? "";
                 final primaryHostel = responseUserData?.primaryHostel;
                 if(rejected.value && rejectedValuesAdded.value == false){
-                    authViewModel.companyImage.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
-                    authViewModel.companyLicence.value = rejectedFields?.contains("hostelLicence") == true ? "" : primaryHostel?.hostelLicence ?? "";
+                    authViewModel.hostelImage.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
+                    authViewModel.hostelLicence.value = rejectedFields?.contains("hostelLicence") == true ? "" : primaryHostel?.hostelLicence ?? "";
                     hostelNameController.text = rejectedFields?.contains("hostelName") == true ? "" : primaryHostel?.hostelName ?? "";
                     aboutHostelController.text = rejectedFields?.contains("aboutHostel") == true ? "" : primaryHostel?.aboutHostel ?? "";
                     gstInController.text =  rejectedFields?.contains("gstIn") == true ? "" : primaryHostel?.gstIn ?? "";
@@ -105,12 +109,22 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                     padding: const EdgeInsets.symmetric(vertical:10),
                                     child: Text("Hostel Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
                                   ),
-                                  // SizedBox(
-                                  //   child: authViewModel.companyImage.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: authViewModel.companyImage.value, fileName: 'companyImage')  :
-                                  //   UploadingViewComponent(uploadingText: "Upload Image", onClick: (){
-                                  //     Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'companyImage'));
-                                  //   }),
-                                  // ),
+                                  SizedBox(
+                                    child: authViewModel.hostelImage.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: authViewModel.hostelImage.value, fileName: 'hostelImage')  :
+                                    UploadingViewComponent(uploadingText: "Upload Image", onClick: (){
+                                      Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'hostelImage'));
+                                    }),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical:10),
+                                    child: Text("Hostel Licence",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+                                  ),
+                                  SizedBox(
+                                    child: authViewModel.hostelLicence.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: authViewModel.hostelLicence.value, fileName: 'hostelLicence')  :
+                                    UploadingViewComponent(uploadingText: "Upload Licence Copy", onClick: (){
+                                      Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'hostelLicence'));
+                                    }),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(vertical:10),
                                     child: Text("Hostel Name",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
@@ -142,6 +156,48 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                               borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
                                             ),
                                           )
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical:10),
+                                    child: Text("Hostel Type",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 50,
+                                    decoration: AppStyles.editTextBg,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      child: Obx(() => DropdownButtonFormField<String>(
+                                          value: selectedHostelType.value,
+                                          decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                          ),
+                                          icon: const Icon(Icons.keyboard_arrow_down),
+                                          style: TextStyle(
+                                            color: CustomColors.textColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16,
+                                          ),
+                                          hint: Text(
+                                            'Select Hostel Type',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          items: ['Boys','Girls','Couple'].map((gender) {
+                                            return DropdownMenuItem(
+                                              value: gender,
+                                              child: Text(gender),
+                                            );
+                                          }).toList(),
+                                          onChanged: (value) {
+                                            selectedHostelType.value = value ?? "";
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -321,7 +377,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                     Obx(() => authViewModel.registerHostelResponseObserver.value.maybeWhen(
                                         loading: () => const CustomProgressBar(),
                                         orElse: () => InkWell(
-                                        onTap: () => authViewModel.registerHostel(RegistrationRequestModel(hostelImage: authViewModel.companyImage.value,hostelLicence: authViewModel.companyLicence.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,gstIn:gstInController.text,location: authViewModel.locationDetails.value)),
+                                        onTap: () => authViewModel.registerHostel(RegistrationRequestModel(hostelId: rejected.value == true ? responseUserData?.primaryHostel?.id : "",hostelImage: authViewModel.hostelImage.value,hostelLicence: authViewModel.hostelLicence.value,hostelType: selectedHostelType.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,gstIn:gstInController.text,location: authViewModel.locationDetails.value)),
                                         child: ProgressButton(progress: double.parse(progress.value.toString()),text: "Submit",)))
                                     ),
                                     const SizedBox(height: 10),
@@ -347,13 +403,14 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
 
   void calculateProgress() {
     int filledFields = 0;
-    if (authViewModel.companyImage.value.trim().isNotEmpty) filledFields++;
-    if (authViewModel.companyLicence.value.trim().isNotEmpty) filledFields++;
+    if (authViewModel.hostelImage.value.trim().isNotEmpty) filledFields++;
+    if (authViewModel.hostelLicence.value.trim().isNotEmpty) filledFields++;
     if (hostelNameController.text.isNotEmpty) filledFields++;
     if (aboutHostelController.text.isNotEmpty) filledFields++;
+    if (gstInController.text.isNotEmpty) filledFields++;
     final location = authViewModel.locationDetails.value;
     if (location?.address1?.isNotEmpty == true && location?.city?.isNotEmpty == true && location?.state?.isNotEmpty == true && location?.pinCode.toString().isNotEmpty == true && location?.state?.isNotEmpty == true && location?.landMark?.isNotEmpty == true && location?.state?.isNotEmpty == true && location?.pinCode?.toString().isNotEmpty == true && location?.latitude != null && location?.longitude != null) filledFields++;
-    progress.value = (filledFields / 5 * 100);
+    progress.value = (filledFields / 6 * 100);
   }
 
 

@@ -14,5 +14,5 @@ class CustomColors {
   static Color gray = const  Color(0xFF636363);
   static Color lightGray =  const Color(0xFFD7D7D7);
   static Color darkGray = const  Color(0xFF918BA1);
-  static Color secondary = const  Color(0xFF272341);
+  static Color secondary = const  Color(0xFF6750A4);
 }

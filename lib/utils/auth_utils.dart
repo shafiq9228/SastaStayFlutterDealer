@@ -6,7 +6,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sasta_stay_dealer/pages/mobile_verification_page.dart';
 import 'package:sasta_stay_dealer/pages/register_hostel_page.dart';
+import 'package:sasta_stay_dealer/pages/registration_page.dart';
 import 'package:sasta_stay_dealer/pages/request_pending_page.dart';
+import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
 
 import '../pages/main_page.dart';
 
@@ -17,12 +19,12 @@ class AuthUtils {
   static String formatPrice(double price) => '\$${price.toStringAsFixed(2)}';
   static String formatDate(DateTime date) => DateFormat.yMd().format(date);
 
-  static void navigateFromPageName(String? page){
+  static void navigateFromPageName(String? page,HostelModel? hostel){
     switch(page){
-      case "registrationPage": Get.offAll(() => const RegisterHostelPage());
+      case "registrationPage": Get.offAll(() => const RegistrationPage());
       case "registerHostel": Get.offAll(() => const RegisterHostelPage());
       case "mainPage": Get.offAll(() =>  const MainPage());
-      case "pendingPage" : Get.offAll(() =>  const RequestPendingPage());
+      case "pendingPage" : Get.offAll(() =>  RequestPendingPage(hostelModel: hostel));
       case "mobileVerification" : Get.offAll(() =>  const MobileVerificationPage());
     }
   }

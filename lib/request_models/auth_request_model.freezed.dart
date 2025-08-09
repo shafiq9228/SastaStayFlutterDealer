@@ -21,9 +21,8 @@ PaginationRequestModel _$PaginationRequestModelFromJson(
 
 /// @nodoc
 mixin _$PaginationRequestModel {
-  String? get orderId => throw _privateConstructorUsedError;
-  String? get categoryId => throw _privateConstructorUsedError;
-  String? get subCategoryId => throw _privateConstructorUsedError;
+  String? get hostelId => throw _privateConstructorUsedError;
+  String? get roomId => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   int? get page => throw _privateConstructorUsedError;
 
@@ -39,12 +38,7 @@ abstract class $PaginationRequestModelCopyWith<$Res> {
           $Res Function(PaginationRequestModel) then) =
       _$PaginationRequestModelCopyWithImpl<$Res, PaginationRequestModel>;
   @useResult
-  $Res call(
-      {String? orderId,
-      String? categoryId,
-      String? subCategoryId,
-      String? type,
-      int? page});
+  $Res call({String? hostelId, String? roomId, String? type, int? page});
 }
 
 /// @nodoc
@@ -61,24 +55,19 @@ class _$PaginationRequestModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = freezed,
-    Object? categoryId = freezed,
-    Object? subCategoryId = freezed,
+    Object? hostelId = freezed,
+    Object? roomId = freezed,
     Object? type = freezed,
     Object? page = freezed,
   }) {
     return _then(_value.copyWith(
-      orderId: freezed == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subCategoryId: freezed == subCategoryId
-          ? _value.subCategoryId
-          : subCategoryId // ignore: cast_nullable_to_non_nullable
+      roomId: freezed == roomId
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
@@ -101,12 +90,7 @@ abstract class _$$PaginationRequestModelImplCopyWith<$Res>
       __$$PaginationRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? orderId,
-      String? categoryId,
-      String? subCategoryId,
-      String? type,
-      int? page});
+  $Res call({String? hostelId, String? roomId, String? type, int? page});
 }
 
 /// @nodoc
@@ -122,24 +106,19 @@ class __$$PaginationRequestModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderId = freezed,
-    Object? categoryId = freezed,
-    Object? subCategoryId = freezed,
+    Object? hostelId = freezed,
+    Object? roomId = freezed,
     Object? type = freezed,
     Object? page = freezed,
   }) {
     return _then(_$PaginationRequestModelImpl(
-      orderId: freezed == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subCategoryId: freezed == subCategoryId
-          ? _value.subCategoryId
-          : subCategoryId // ignore: cast_nullable_to_non_nullable
+      roomId: freezed == roomId
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
@@ -157,21 +136,15 @@ class __$$PaginationRequestModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PaginationRequestModelImpl implements _PaginationRequestModel {
   const _$PaginationRequestModelImpl(
-      {this.orderId,
-      this.categoryId,
-      this.subCategoryId,
-      this.type,
-      required this.page});
+      {this.hostelId, this.roomId, this.type, required this.page});
 
   factory _$PaginationRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaginationRequestModelImplFromJson(json);
 
   @override
-  final String? orderId;
+  final String? hostelId;
   @override
-  final String? categoryId;
-  @override
-  final String? subCategoryId;
+  final String? roomId;
   @override
   final String? type;
   @override
@@ -179,7 +152,7 @@ class _$PaginationRequestModelImpl implements _PaginationRequestModel {
 
   @override
   String toString() {
-    return 'PaginationRequestModel(orderId: $orderId, categoryId: $categoryId, subCategoryId: $subCategoryId, type: $type, page: $page)';
+    return 'PaginationRequestModel(hostelId: $hostelId, roomId: $roomId, type: $type, page: $page)';
   }
 
   @override
@@ -187,19 +160,16 @@ class _$PaginationRequestModelImpl implements _PaginationRequestModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PaginationRequestModelImpl &&
-            (identical(other.orderId, orderId) || other.orderId == orderId) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
-            (identical(other.subCategoryId, subCategoryId) ||
-                other.subCategoryId == subCategoryId) &&
+            (identical(other.hostelId, hostelId) ||
+                other.hostelId == hostelId) &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, orderId, categoryId, subCategoryId, type, page);
+  int get hashCode => Object.hash(runtimeType, hostelId, roomId, type, page);
 
   @JsonKey(ignore: true)
   @override
@@ -218,9 +188,8 @@ class _$PaginationRequestModelImpl implements _PaginationRequestModel {
 
 abstract class _PaginationRequestModel implements PaginationRequestModel {
   const factory _PaginationRequestModel(
-      {final String? orderId,
-      final String? categoryId,
-      final String? subCategoryId,
+      {final String? hostelId,
+      final String? roomId,
       final String? type,
       required final int? page}) = _$PaginationRequestModelImpl;
 
@@ -228,11 +197,9 @@ abstract class _PaginationRequestModel implements PaginationRequestModel {
       _$PaginationRequestModelImpl.fromJson;
 
   @override
-  String? get orderId;
+  String? get hostelId;
   @override
-  String? get categoryId;
-  @override
-  String? get subCategoryId;
+  String? get roomId;
   @override
   String? get type;
   @override
@@ -615,13 +582,18 @@ RegistrationRequestModel _$RegistrationRequestModelFromJson(
 
 /// @nodoc
 mixin _$RegistrationRequestModel {
+  String? get hostelId => throw _privateConstructorUsedError;
   String? get mobile => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get hostelImage => throw _privateConstructorUsedError;
+  String? get hostelType => throw _privateConstructorUsedError;
   String? get hostelLicence => throw _privateConstructorUsedError;
   String? get hostelName => throw _privateConstructorUsedError;
   String? get aboutHostel => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
+  List<String>? get amenities => throw _privateConstructorUsedError;
+  List<String>? get rules => throw _privateConstructorUsedError;
   String? get gstIn => throw _privateConstructorUsedError;
   LocationModel? get location => throw _privateConstructorUsedError;
 
@@ -638,13 +610,18 @@ abstract class $RegistrationRequestModelCopyWith<$Res> {
       _$RegistrationRequestModelCopyWithImpl<$Res, RegistrationRequestModel>;
   @useResult
   $Res call(
-      {String? mobile,
+      {String? hostelId,
+      String? mobile,
       String? name,
       String? email,
       String? hostelImage,
+      String? hostelType,
       String? hostelLicence,
       String? hostelName,
       String? aboutHostel,
+      List<String>? images,
+      List<String>? amenities,
+      List<String>? rules,
       String? gstIn,
       LocationModel? location});
 
@@ -665,17 +642,26 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? hostelId = freezed,
     Object? mobile = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? hostelImage = freezed,
+    Object? hostelType = freezed,
     Object? hostelLicence = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
+    Object? images = freezed,
+    Object? amenities = freezed,
+    Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
   }) {
     return _then(_value.copyWith(
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
+              as String?,
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
@@ -692,6 +678,10 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
           ? _value.hostelImage
           : hostelImage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hostelType: freezed == hostelType
+          ? _value.hostelType
+          : hostelType // ignore: cast_nullable_to_non_nullable
+              as String?,
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
@@ -704,6 +694,18 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
           ? _value.aboutHostel
           : aboutHostel // ignore: cast_nullable_to_non_nullable
               as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      amenities: freezed == amenities
+          ? _value.amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      rules: freezed == rules
+          ? _value.rules
+          : rules // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       gstIn: freezed == gstIn
           ? _value.gstIn
           : gstIn // ignore: cast_nullable_to_non_nullable
@@ -738,13 +740,18 @@ abstract class _$$RegistrationRequestModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? mobile,
+      {String? hostelId,
+      String? mobile,
       String? name,
       String? email,
       String? hostelImage,
+      String? hostelType,
       String? hostelLicence,
       String? hostelName,
       String? aboutHostel,
+      List<String>? images,
+      List<String>? amenities,
+      List<String>? rules,
       String? gstIn,
       LocationModel? location});
 
@@ -765,17 +772,26 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? hostelId = freezed,
     Object? mobile = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? hostelImage = freezed,
+    Object? hostelType = freezed,
     Object? hostelLicence = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
+    Object? images = freezed,
+    Object? amenities = freezed,
+    Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
   }) {
     return _then(_$RegistrationRequestModelImpl(
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
+              as String?,
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
@@ -792,6 +808,10 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
           ? _value.hostelImage
           : hostelImage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hostelType: freezed == hostelType
+          ? _value.hostelType
+          : hostelType // ignore: cast_nullable_to_non_nullable
+              as String?,
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
@@ -804,6 +824,18 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
           ? _value.aboutHostel
           : aboutHostel // ignore: cast_nullable_to_non_nullable
               as String?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      amenities: freezed == amenities
+          ? _value._amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      rules: freezed == rules
+          ? _value._rules
+          : rules // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       gstIn: freezed == gstIn
           ? _value.gstIn
           : gstIn // ignore: cast_nullable_to_non_nullable
@@ -820,19 +852,29 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   const _$RegistrationRequestModelImpl(
-      {this.mobile,
+      {this.hostelId,
+      this.mobile,
       this.name,
       this.email,
       this.hostelImage,
+      this.hostelType,
       this.hostelLicence,
       this.hostelName,
       this.aboutHostel,
+      final List<String>? images,
+      final List<String>? amenities,
+      final List<String>? rules,
       this.gstIn,
-      this.location});
+      this.location})
+      : _images = images,
+        _amenities = amenities,
+        _rules = rules;
 
   factory _$RegistrationRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegistrationRequestModelImplFromJson(json);
 
+  @override
+  final String? hostelId;
   @override
   final String? mobile;
   @override
@@ -842,11 +884,43 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   @override
   final String? hostelImage;
   @override
+  final String? hostelType;
+  @override
   final String? hostelLicence;
   @override
   final String? hostelName;
   @override
   final String? aboutHostel;
+  final List<String>? _images;
+  @override
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _amenities;
+  @override
+  List<String>? get amenities {
+    final value = _amenities;
+    if (value == null) return null;
+    if (_amenities is EqualUnmodifiableListView) return _amenities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _rules;
+  @override
+  List<String>? get rules {
+    final value = _rules;
+    if (value == null) return null;
+    if (_rules is EqualUnmodifiableListView) return _rules;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? gstIn;
   @override
@@ -854,7 +928,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @override
   String toString() {
-    return 'RegistrationRequestModel(mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, location: $location)';
+    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location)';
   }
 
   @override
@@ -862,17 +936,25 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegistrationRequestModelImpl &&
+            (identical(other.hostelId, hostelId) ||
+                other.hostelId == hostelId) &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.hostelImage, hostelImage) ||
                 other.hostelImage == hostelImage) &&
+            (identical(other.hostelType, hostelType) ||
+                other.hostelType == hostelType) &&
             (identical(other.hostelLicence, hostelLicence) ||
                 other.hostelLicence == hostelLicence) &&
             (identical(other.hostelName, hostelName) ||
                 other.hostelName == hostelName) &&
             (identical(other.aboutHostel, aboutHostel) ||
                 other.aboutHostel == aboutHostel) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality()
+                .equals(other._amenities, _amenities) &&
+            const DeepCollectionEquality().equals(other._rules, _rules) &&
             (identical(other.gstIn, gstIn) || other.gstIn == gstIn) &&
             (identical(other.location, location) ||
                 other.location == location));
@@ -880,8 +962,22 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, mobile, name, email, hostelImage,
-      hostelLicence, hostelName, aboutHostel, gstIn, location);
+  int get hashCode => Object.hash(
+      runtimeType,
+      hostelId,
+      mobile,
+      name,
+      email,
+      hostelImage,
+      hostelType,
+      hostelLicence,
+      hostelName,
+      aboutHostel,
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_amenities),
+      const DeepCollectionEquality().hash(_rules),
+      gstIn,
+      location);
 
   @JsonKey(ignore: true)
   @override
@@ -900,19 +996,26 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
 abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   const factory _RegistrationRequestModel(
-      {final String? mobile,
+      {final String? hostelId,
+      final String? mobile,
       final String? name,
       final String? email,
       final String? hostelImage,
+      final String? hostelType,
       final String? hostelLicence,
       final String? hostelName,
       final String? aboutHostel,
+      final List<String>? images,
+      final List<String>? amenities,
+      final List<String>? rules,
       final String? gstIn,
       final LocationModel? location}) = _$RegistrationRequestModelImpl;
 
   factory _RegistrationRequestModel.fromJson(Map<String, dynamic> json) =
       _$RegistrationRequestModelImpl.fromJson;
 
+  @override
+  String? get hostelId;
   @override
   String? get mobile;
   @override
@@ -922,11 +1025,19 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   @override
   String? get hostelImage;
   @override
+  String? get hostelType;
+  @override
   String? get hostelLicence;
   @override
   String? get hostelName;
   @override
   String? get aboutHostel;
+  @override
+  List<String>? get images;
+  @override
+  List<String>? get amenities;
+  @override
+  List<String>? get rules;
   @override
   String? get gstIn;
   @override

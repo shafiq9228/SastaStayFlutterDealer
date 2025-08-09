@@ -9,9 +9,8 @@ part of 'auth_request_model.dart';
 _$PaginationRequestModelImpl _$$PaginationRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PaginationRequestModelImpl(
-      orderId: json['orderId'] as String?,
-      categoryId: json['categoryId'] as String?,
-      subCategoryId: json['subCategoryId'] as String?,
+      hostelId: json['hostelId'] as String?,
+      roomId: json['roomId'] as String?,
       type: json['type'] as String?,
       page: json['page'] as int?,
     );
@@ -19,9 +18,8 @@ _$PaginationRequestModelImpl _$$PaginationRequestModelImplFromJson(
 Map<String, dynamic> _$$PaginationRequestModelImplToJson(
         _$PaginationRequestModelImpl instance) =>
     <String, dynamic>{
-      'orderId': instance.orderId,
-      'categoryId': instance.categoryId,
-      'subCategoryId': instance.subCategoryId,
+      'hostelId': instance.hostelId,
+      'roomId': instance.roomId,
       'type': instance.type,
       'page': instance.page,
     };
@@ -61,13 +59,22 @@ Map<String, dynamic> _$$VerifyOtpRequestModelImplToJson(
 _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$RegistrationRequestModelImpl(
+      hostelId: json['hostelId'] as String?,
       mobile: json['mobile'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
       hostelImage: json['hostelImage'] as String?,
+      hostelType: json['hostelType'] as String?,
       hostelLicence: json['hostelLicence'] as String?,
       hostelName: json['hostelName'] as String?,
       aboutHostel: json['aboutHostel'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      amenities: (json['amenities'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      rules:
+          (json['rules'] as List<dynamic>?)?.map((e) => e as String).toList(),
       gstIn: json['gstIn'] as String?,
       location: json['location'] == null
           ? null
@@ -77,13 +84,18 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
 Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
         _$RegistrationRequestModelImpl instance) =>
     <String, dynamic>{
+      'hostelId': instance.hostelId,
       'mobile': instance.mobile,
       'name': instance.name,
       'email': instance.email,
       'hostelImage': instance.hostelImage,
+      'hostelType': instance.hostelType,
       'hostelLicence': instance.hostelLicence,
       'hostelName': instance.hostelName,
       'aboutHostel': instance.aboutHostel,
+      'images': instance.images,
+      'amenities': instance.amenities,
+      'rules': instance.rules,
       'gstIn': instance.gstIn,
       'location': instance.location,
     };

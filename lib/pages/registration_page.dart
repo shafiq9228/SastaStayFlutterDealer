@@ -27,10 +27,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController emailIdController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
   RxBool registerByMobile = true.obs;
 
-  String? selectedGender;
 
 
   @override
@@ -181,99 +179,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical:10),
-                      child: Text("Enter Your Age",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      decoration: AppStyles.editTextBg,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: TextFormField(
-                            maxLength: 3,
-                            keyboardType: TextInputType.phone,
-                            controller: ageController,
-                            style: TextStyle(
-                                color:CustomColors.textColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16
-                            ),
-                            decoration: InputDecoration(
-                              counterText: '',
-                              hintText: 'Enter Your Age',
-                              hintStyle: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white), // Default color
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
-                              ),
-                            )
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        "Select Your Gender",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: CustomColors.textColor,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      decoration: AppStyles.editTextBg,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: DropdownButtonFormField<String>(
-                          value: selectedGender,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          style: TextStyle(
-                            color: CustomColors.textColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                          hint: Text(
-                            'Select Your Gender',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          items: ['Male', 'Female', 'Other'].map((gender) {
-                            return DropdownMenuItem(
-                              value: gender,
-                              child: Text(gender),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedGender = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 20),
                     Text(widget.dealer != null ? "Email And Mobile Can\'t Be Edited" : "${registerByMobile.value == true ? "Mobile" : "Email"} Can\'t Be Edited",style: TextStyle(fontWeight: FontWeight.w400,color: CustomColors.secondary,fontSize: 12),),
                     const SizedBox(height: 20),
                     Obx(() => authViewModel.registerDealerResponseObserver.value.maybeWhen(
                         loading: () => const CustomProgressBar(),
                         orElse: () => PrimaryButton(buttonTxt: "CONFIRM", buttonClick: () {
-                          if(selectedGender == "Other"){
-                            Get.snackbar("Error","Please Select Gender",backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
-                            return;
-                          }
                           authViewModel.registerUser(RegistrationRequestModel(mobile: mobileController.text,email: emailIdController.text,name: nameController.text));
                         },))
                     ),

@@ -23,23 +23,36 @@ class SplashScreen extends StatelessWidget {
         await authViewModel.fetchDealerStatus(version);
       },
       child: Scaffold(
-          backgroundColor: Colors.white,
-          body:Center(
-            child: IntrinsicHeight(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset("assets/images/accomodation.png"),
+        backgroundColor: CustomColors.white,
+        body: Center(
+          child:
+          IntrinsicHeight(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset("assets/images/splash.png"),
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Sasta',
+                        style: TextStyle(color: CustomColors.textColor, fontSize: 20, fontWeight: FontWeight.w900),
+                      ),
+                      TextSpan(
+                        text: 'Stays',
+                        style: TextStyle(color: CustomColors.primary, fontSize: 20, fontWeight: FontWeight.w900),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 30),
-                  SizedBox(height: 30,width: 30,child: CircularProgressIndicator(color: CustomColors.primary),),
-                ],
-              ),
+                )
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

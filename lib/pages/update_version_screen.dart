@@ -51,7 +51,7 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/update_version.png',width: 250,height: 250,),
+                        Image.asset('assets/images/update_version.png',width: 150,height: 150,),
                         const SizedBox(height: 30),
                          Text("Current Version $appVersion",textAlign: TextAlign.center,style: TextStyle(
                             fontSize: 16,
@@ -104,7 +104,7 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
               ),
               GestureDetector(
                 onTap: launchEmail,
-                child: Text("Contact admin for support \n kinz@gmail.com",textAlign: TextAlign.center,style: TextStyle(
+                child: Text("Contact admin for support \n SastaStay@gmail.com",textAlign: TextAlign.center,style: TextStyle(
                     fontSize: 18,
                     color: CustomColors.primary,
                     fontWeight: FontWeight.w800,
@@ -120,8 +120,8 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
   }
 
 
-  final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.kinz.dealerapp";
-  final String appStoreUrl = "https://apps.apple.com/us/search?term=KinzUrl";
+  final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.sastastay.dealerapp";
+  final String appStoreUrl = "https://apps.apple.com/us/search?term=SastaStayUrl";
 
   Future<void> _launchURL() async {
     final Uri url = Uri.parse(

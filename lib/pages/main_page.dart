@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
     _selectedPageIndex = 0;
     _pages = [
       const HomePage(),
-      const RoomsPage(),
+      RoomsPage(),
       const BookingsPage(),
       const ProfilePage(),
     ];
@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> {
           items: [
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/images/home.png',
+                _selectedIndex == 0 ? 'assets/images/home_1.png'  :'assets/images/home.png',
                 width: 20,
                 height: 20,
                 color: _selectedIndex == 0
@@ -97,29 +97,29 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/images/category.png',
+                _selectedIndex == 1 ? 'assets/images/bed_1.png' : 'assets/images/bed.png',
                 width: 20,
                 height: 20,
                 color: _selectedIndex == 1
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),
-              label: 'Inventory',
+              label: 'Rooms',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/images/orders.png',
+                _selectedIndex == 2 ? 'assets/images/order_1.png'  : 'assets/images/order.png',
                 width: 20,
                 height: 20,
                 color: _selectedIndex == 2
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),
-              label: 'Orders',
+              label: 'Bookings',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/images/profile.png',
+                _selectedIndex == 3 ? 'assets/images/profile_1.png' : 'assets/images/profile.png',
                 width: 20,
                 height: 20,
                 color: _selectedIndex == 3

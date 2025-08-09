@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image/image.dart' as img;
 
@@ -34,7 +35,7 @@ class AuthViewModel extends GetxController{
   final fetchUserDetailsObserver  = const ApiResult<FetchUserDetailsResponseModel>.init().obs;
   final dealerStatusObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final registerDealerResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
-  final registerHostelResponseObserver  = const ApiResult<PrimaryResponseModel>.init().obs;
+  final registerHostelResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final updateDealerDetailsResponseObserver  = const ApiResult<FetchUserDetailsResponseModel>.init().obs;
   final uploadFileObserver  = const ApiResult<UploadFileResponseModel>.init().obs;
 
@@ -44,10 +45,17 @@ class AuthViewModel extends GetxController{
   Rx<LocationModel?> locationDetails = Rx<LocationModel?>(null);
 
   Rx<File> uploadingFile = File('').obs;
-  Rx<String> companyImage = "".obs;
-  Rx<String> companyLicence = "".obs;
+  Rx<String> primaryHostelId = "".obs;
+  Rx<String> hostelImage = "".obs;
+  Rx<String> hostelLicence = "".obs;
+  RxList<String> rules = <String>[].obs;
+  RxList<String> images = <String>[].obs;
+  RxList<AmenitiesModel> amenities = <AmenitiesModel>[].obs;
 
 
+  String? getPrimaryId(){
+    return dealerStatusObserver.value.maybeWhen(success: (data) => (data as FormHelperDataResponseModel).data?.primaryHostel?.id ?? "",orElse: () => "");
+  }
 
   Future<Position?> fetchCurrentLocation() async {
     if (locationObserver.value == null) {
@@ -102,14 +110,14 @@ class AuthViewModel extends GetxController{
         if(responseData.status == 1){
           verifyOtpResponseObserver.value = ApiResult.success(responseData);
           final page = responseData.data?.page;
-          preferenceManager.setValue("page",page);
-          preferenceManager.setValue("registerValue",request.mobile.toString());
-          preferenceManager.setValue("token",responseData.data?.token);
+          await preferenceManager.setValue("page",page);
+          await preferenceManager.setValue("registerValue",request.mobile.toString());
+          await preferenceManager.setValue("token",responseData.data?.token);
 
           dealerStatusObserver.value = ApiResult.success(responseData);
 
           if(responseData.data?.validVersion == true){
-            AuthUtils.navigateFromPageName(page);
+            AuthUtils.navigateFromPageName(page,responseData.data?.primaryHostel);
           }else{
             Get.offAll(() => const UpdateVersionScreen());
           }
@@ -144,13 +152,10 @@ class AuthViewModel extends GetxController{
         final responseData = FormHelperDataResponseModel.fromJson(body);
         if(responseData.status == 1){
           final page = responseData.data?.page;
-          preferenceManager.setValue("page",page);
-          dealerStatusObserver.value = ApiResult.success(responseData);
-          fetchUserDetailsObserver.value = ApiResult.success(FetchUserDetailsResponseModel(status: 1,message:"Fetched User Details",data:responseData.data?.dealerDetails));
-          fetchUserDetailsObserver.refresh();
+          await preferenceManager.setValue("page",page);
           dealerStatusObserver.value = ApiResult.success(responseData);
           if(responseData.data?.validVersion == true){
-            AuthUtils.navigateFromPageName(page);
+            AuthUtils.navigateFromPageName(page,responseData.data?.primaryHostel);
           }else{
             Get.offAll(() => const UpdateVersionScreen());
           }
@@ -161,7 +166,6 @@ class AuthViewModel extends GetxController{
       throw "Response Body Null";
     }
     catch(e){
-      print("helloE");
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       dealerStatusObserver.value = ApiResult.error(e.toString());
     }
@@ -233,7 +237,12 @@ class AuthViewModel extends GetxController{
         final jsonData = UploadFileResponseModel.fromJson(json);
         if (jsonData.status == 1) {
           uploadFileObserver.value = ApiResult.success(jsonData);
-          companyImage.value = jsonData.data ?? "";
+          if(type == "hostelImage"){
+            hostelImage.value = jsonData.data ?? "";
+          }
+          else if(type == "hostelLicence"){
+            hostelLicence.value = jsonData.data ?? "";
+          }
           Get.close(1);
           return;
         }
@@ -279,7 +288,7 @@ class AuthViewModel extends GetxController{
           registerDealerResponseObserver.value = ApiResult.success(responseData);
           dealerStatusObserver.value = ApiResult.success(responseData);
           if(responseData.data?.validVersion == true){
-            AuthUtils.navigateFromPageName(responseData.data?.page);
+            AuthUtils.navigateFromPageName(responseData.data?.page,responseData.data?.primaryHostel);
           }else{
             Get.offAll(() => const UpdateVersionScreen());
           }
@@ -305,10 +314,11 @@ class AuthViewModel extends GetxController{
       final response = await apiProvider.post(EndPoints.registerHostel,request.toJson());
       final body = response.body;
       if(response.isOk && body != null){
-        final responseData = PrimaryResponseModel.fromJson(body);
+        final responseData = FormHelperDataResponseModel.fromJson(body);
         if(responseData.status == 1){
           registerHostelResponseObserver.value = ApiResult.success(responseData);
-          Get.offAll(() => const RequestPendingPage());
+          await preferenceManager.setValue("token",responseData.data?.token);
+          Get.offAll(() =>  RequestPendingPage(hostelModel: responseData.data?.primaryHostel));
           return;
         }
         throw "something went wrong${responseData.message}";
