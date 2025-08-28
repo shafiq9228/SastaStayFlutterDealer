@@ -27,7 +27,7 @@ class SideHeadingComponent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                 child: Row(
                   children: [
-                    Text("View",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16,color: CustomColors.black)),
+                    Text("View All",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16,color: CustomColors.black)),
                     const SizedBox(width: 5),
                     Container(
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(width: 0.5,color: CustomColors.darkGray)),

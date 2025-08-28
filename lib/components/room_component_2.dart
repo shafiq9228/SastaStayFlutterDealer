@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/components/primary_button.dart';
+import 'package:sasta_stay_dealer/pages/bookings_page.dart';
+import 'package:sasta_stay_dealer/pages/register_room_page.dart';
 
 
 import '../response_model/hostel_response_model.dart';
 import '../utils/app_styles.dart';
 import '../utils/custom_colors.dart';
 import 'custom_network_image.dart';
+import 'hostel_room_availability_bottom_sheet.dart';
 
 class RoomComponent2 extends StatelessWidget {
   final RoomModel? roomModel;
@@ -13,8 +17,11 @@ class RoomComponent2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final capacityCount = roomModel?.capacityCount ?? 0;
+    final occupiedCount = roomModel?.occupiedCount ?? 0;
+    final bannerText =   occupiedCount == capacityCount  ? "Occupied" : occupiedCount == 0 ? "Available" : "Partially Occupied";
     return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
       child: Container(
         decoration: AppStyles.categoryBg4,
         child: IntrinsicHeight(
@@ -32,26 +39,17 @@ class RoomComponent2 extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
-                          ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: 100),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(200),
-                                color: CustomColors.white,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10,vertical: 5),
-                                child: Text("Occupied",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14,color: Colors.green)),
-                              ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(200),
+                              color: CustomColors.white,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal:10,vertical: 5),
+                              child: Text(bannerText,maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14,color: Colors.green)),
                             ),
                           ),
-                          const Spacer(),
-                          Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(200),color: CustomColors.white),
-                            child: Center(child: Icon(Icons.favorite,color: CustomColors.red,size: 18)),
-                          ),
+                          const Spacer()
                         ],
                       ),
                     )
@@ -100,7 +98,7 @@ class RoomComponent2 extends StatelessWidget {
                         Text("₹${roomModel?.rent?.daily ?? ""}",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.black)),
                         Text("/Daily",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
                         Spacer(),
-                        Text("+₹600 taxes and fee",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
+                        Text("",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -109,9 +107,30 @@ class RoomComponent2 extends StatelessWidget {
                         Text("₹${roomModel?.rent?.monthly ?? ""}",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.black)),
                         Text("/Monthly",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
                         Spacer(),
-                        Text("+₹600 taxes and fee",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
+                        Text("",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
                       ],
                     ),
+                    const SizedBox(height: 10),
+                    PrimaryButton(buttonTxt: "Edit",buttonClick: (){
+                      Get.to(() => RegisterRoomPage(roomModel: roomModel));
+                    }),
+                    const SizedBox(height: 10),
+                    PrimaryButton(buttonTxt: "View Room Bookings",buttonClick: (){
+                      Get.to(() => BookingsPage(roomId: roomModel?.id ?? ""));
+                    }),
+                    const SizedBox(height: 10),
+                    PrimaryButton(buttonTxt: "Check Availability",buttonClick: (){
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true, // allows full height scroll
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                        ),
+                        builder: (context) {
+                          return HostelRoomAvailabilityBottomSheet(roomModel:roomModel);
+                        },
+                      );
+                    }),
                     const SizedBox(height: 10),
                   ],
                 ),

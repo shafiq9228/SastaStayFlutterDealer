@@ -22,6 +22,20 @@ class PaginationModel<T>{
   });
 }
 
+
+class OnBoardingDataModel<T>{
+  String image;
+  String title;
+  String message;
+
+  OnBoardingDataModel({
+    required this.image,
+    required this.title,
+    required this.message
+  });
+}
+
+
 @Freezed()
 class PrimaryResponseModel with _$PrimaryResponseModel{
   const factory PrimaryResponseModel({
@@ -81,6 +95,19 @@ class HelperDataModel with _$HelperDataModel{
   factory HelperDataModel.fromJson(Map<String, dynamic> json) => _$HelperDataModelFromJson(json);
 }
 
+
+@Freezed()
+class UserModel with _$UserModel{
+  const factory UserModel({
+    @JsonKey(name: '_id') String? id,
+    int? mobile,
+    String? name,
+    String? email,
+    String? profilePic
+  }) = _UserModel;
+
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+}
 
 @Freezed()
 class DealerModel with _$DealerModel{

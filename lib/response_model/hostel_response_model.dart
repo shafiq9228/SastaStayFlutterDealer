@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sasta_stay_dealer/response_model/bookings_response_model.dart';
 
 import '../request_models/auth_request_model.dart';
 
@@ -16,6 +17,7 @@ class FetchHostelsResponseModel with _$FetchHostelsResponseModel{
   factory FetchHostelsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchHostelsResponseModelFromJson(json);
 }
 
+
 @Freezed()
 class FetchHostelDetailsResponseModel with _$FetchHostelDetailsResponseModel{
   const factory FetchHostelDetailsResponseModel({
@@ -25,6 +27,30 @@ class FetchHostelDetailsResponseModel with _$FetchHostelDetailsResponseModel{
   }) = _FetchHostelDetailsResponseModel;
 
   factory FetchHostelDetailsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchHostelDetailsResponseModelFromJson(json);
+}
+
+@Freezed()
+class FetchRatingAndReviewsResponseModel with _$FetchRatingAndReviewsResponseModel{
+  const factory FetchRatingAndReviewsResponseModel({
+    int? status,
+    String? message,
+    List<RatingAndReviewModel>? data
+  }) = _FetchRatingAndReviewsResponseModel;
+
+  factory FetchRatingAndReviewsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchRatingAndReviewsResponseModelFromJson(json);
+}
+
+
+@Freezed()
+class RatingAndReviewModel with _$RatingAndReviewModel{
+  const factory RatingAndReviewModel({
+    dynamic userId,
+    dynamic hostelId,
+    dynamic rating,
+    String? review
+  }) = _RatingAndReviewModel;
+
+  factory RatingAndReviewModel.fromJson(Map<String, dynamic> json) => _$RatingAndReviewModelFromJson(json);
 }
 
 @Freezed()
@@ -42,6 +68,7 @@ class HostelModel with _$HostelModel{
     String? gstIn,
     String? hostelType,
     List<String>? images,
+    List<String>? amenityIds,
     List<AmenitiesModel>? amenities,
     int? amenitiesMore,
     RoomModel? room,
@@ -75,7 +102,8 @@ class FetchHostelRoomsResponseModel with _$FetchHostelRoomsResponseModel{
   const factory FetchHostelRoomsResponseModel({
     int? status,
     String? message,
-    List<RoomModel>? data
+    List<RoomModel>? data,
+    List<String>? roomTypes
   }) = _FetchHostelRoomsResponseModel;
 
   factory FetchHostelRoomsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchHostelRoomsResponseModelFromJson(json);
@@ -93,6 +121,17 @@ class AmenitiesModel with _$AmenitiesModel{
 }
 
 @Freezed()
+class RegisterRoomResponseModel with _$RegisterRoomResponseModel{
+  const factory RegisterRoomResponseModel({
+    int? status,
+    String? message,
+    RoomModel? data
+  }) = _RegisterRoomResponseModel;
+
+  factory RegisterRoomResponseModel.fromJson(Map<String, dynamic> json) => _$RegisterRoomResponseModelFromJson(json);
+}
+
+@Freezed()
 class RoomModel with _$RoomModel{
   const factory RoomModel({
     @JsonKey(name: '_id') String? id,
@@ -105,7 +144,10 @@ class RoomModel with _$RoomModel{
     int? capacityCount,
     int? occupiedCount,
     String? roomType,
-    RentModel? rent
+    RentModel? rent,
+    DateTime? checkInDate,
+    DateTime? checkOutDate,
+    int? guestCount
   }) = _RoomModel;
 
   factory RoomModel.fromJson(Map<String, dynamic> json) => _$RoomModelFromJson(json);

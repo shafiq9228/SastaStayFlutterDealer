@@ -11,6 +11,8 @@ _$PaginationRequestModelImpl _$$PaginationRequestModelImplFromJson(
     _$PaginationRequestModelImpl(
       hostelId: json['hostelId'] as String?,
       roomId: json['roomId'] as String?,
+      query: json['query'] as String?,
+      searchQuery: json['searchQuery'] as String?,
       type: json['type'] as String?,
       page: json['page'] as int?,
     );
@@ -20,6 +22,8 @@ Map<String, dynamic> _$$PaginationRequestModelImplToJson(
     <String, dynamic>{
       'hostelId': instance.hostelId,
       'roomId': instance.roomId,
+      'query': instance.query,
+      'searchQuery': instance.searchQuery,
       'type': instance.type,
       'page': instance.page,
     };

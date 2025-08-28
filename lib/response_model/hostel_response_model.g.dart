@@ -42,6 +42,44 @@ Map<String, dynamic> _$$FetchHostelDetailsResponseModelImplToJson(
       'data': instance.data,
     };
 
+_$FetchRatingAndReviewsResponseModelImpl
+    _$$FetchRatingAndReviewsResponseModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$FetchRatingAndReviewsResponseModelImpl(
+          status: json['status'] as int?,
+          message: json['message'] as String?,
+          data: (json['data'] as List<dynamic>?)
+              ?.map((e) =>
+                  RatingAndReviewModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$$FetchRatingAndReviewsResponseModelImplToJson(
+        _$FetchRatingAndReviewsResponseModelImpl instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$RatingAndReviewModelImpl _$$RatingAndReviewModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RatingAndReviewModelImpl(
+      userId: json['userId'],
+      hostelId: json['hostelId'],
+      rating: json['rating'],
+      review: json['review'] as String?,
+    );
+
+Map<String, dynamic> _$$RatingAndReviewModelImplToJson(
+        _$RatingAndReviewModelImpl instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'hostelId': instance.hostelId,
+      'rating': instance.rating,
+      'review': instance.review,
+    };
+
 _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
     _$HostelModelImpl(
       id: json['_id'] as String?,
@@ -59,6 +97,9 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       hostelType: json['hostelType'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      amenityIds: (json['amenityIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => AmenitiesModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -95,6 +136,7 @@ Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
       'gstIn': instance.gstIn,
       'hostelType': instance.hostelType,
       'images': instance.images,
+      'amenityIds': instance.amenityIds,
       'amenities': instance.amenities,
       'amenitiesMore': instance.amenitiesMore,
       'room': instance.room,
@@ -134,6 +176,9 @@ _$FetchHostelRoomsResponseModelImpl
           data: (json['data'] as List<dynamic>?)
               ?.map((e) => RoomModel.fromJson(e as Map<String, dynamic>))
               .toList(),
+          roomTypes: (json['roomTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
         );
 
 Map<String, dynamic> _$$FetchHostelRoomsResponseModelImplToJson(
@@ -142,6 +187,7 @@ Map<String, dynamic> _$$FetchHostelRoomsResponseModelImplToJson(
       'status': instance.status,
       'message': instance.message,
       'data': instance.data,
+      'roomTypes': instance.roomTypes,
     };
 
 _$AmenitiesModelImpl _$$AmenitiesModelImplFromJson(Map<String, dynamic> json) =>
@@ -157,6 +203,24 @@ Map<String, dynamic> _$$AmenitiesModelImplToJson(
       '_id': instance.id,
       'image': instance.image,
       'name': instance.name,
+    };
+
+_$RegisterRoomResponseModelImpl _$$RegisterRoomResponseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RegisterRoomResponseModelImpl(
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : RoomModel.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$RegisterRoomResponseModelImplToJson(
+        _$RegisterRoomResponseModelImpl instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
     };
 
 _$RoomModelImpl _$$RoomModelImplFromJson(Map<String, dynamic> json) =>
@@ -176,6 +240,13 @@ _$RoomModelImpl _$$RoomModelImplFromJson(Map<String, dynamic> json) =>
       rent: json['rent'] == null
           ? null
           : RentModel.fromJson(json['rent'] as Map<String, dynamic>),
+      checkInDate: json['checkInDate'] == null
+          ? null
+          : DateTime.parse(json['checkInDate'] as String),
+      checkOutDate: json['checkOutDate'] == null
+          ? null
+          : DateTime.parse(json['checkOutDate'] as String),
+      guestCount: json['guestCount'] as int?,
     );
 
 Map<String, dynamic> _$$RoomModelImplToJson(_$RoomModelImpl instance) =>
@@ -191,6 +262,9 @@ Map<String, dynamic> _$$RoomModelImplToJson(_$RoomModelImpl instance) =>
       'occupiedCount': instance.occupiedCount,
       'roomType': instance.roomType,
       'rent': instance.rent,
+      'checkInDate': instance.checkInDate?.toIso8601String(),
+      'checkOutDate': instance.checkOutDate?.toIso8601String(),
+      'guestCount': instance.guestCount,
     };
 
 _$RentModelImpl _$$RentModelImplFromJson(Map<String, dynamic> json) =>

@@ -96,6 +96,24 @@ Map<String, dynamic> _$$HelperDataModelImplToJson(
       'primaryHostel': instance.primaryHostel,
     };
 
+_$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
+    _$UserModelImpl(
+      id: json['_id'] as String?,
+      mobile: json['mobile'] as int?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      profilePic: json['profilePic'] as String?,
+    );
+
+Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'mobile': instance.mobile,
+      'name': instance.name,
+      'email': instance.email,
+      'profilePic': instance.profilePic,
+    };
+
 _$DealerModelImpl _$$DealerModelImplFromJson(Map<String, dynamic> json) =>
     _$DealerModelImpl(
       id: json['_id'] as String?,

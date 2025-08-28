@@ -7,6 +7,26 @@ class AppStyles {
 
       static  final  bottomBg = BoxDecoration(color: CustomColors.white,borderRadius: const BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)));
 
+      static final gradientColorDecoration1 = BoxDecoration(gradient: LinearGradient(
+          colors: [CustomColors.primary.withOpacity(0.2), CustomColors.white],
+          transform: GradientRotation(0.1), // rotates the gradient (in radians)
+          ),borderRadius: BorderRadius.circular(10));
+
+      static final gradientColorDecoration2 = BoxDecoration(gradient: LinearGradient(
+        colors: [CustomColors.green.withOpacity(0.2), CustomColors.white],
+        transform: GradientRotation(0.1), // rotates the gradient (in radians)
+      ),borderRadius: BorderRadius.circular(10));
+
+
+      static  final  primaryCircleBg = BoxDecoration(
+          color: CustomColors.primary
+          ,borderRadius: BorderRadius.circular(500),
+          border: Border.all(
+              width: 0.5,
+              color: const Color(0xFFD7D1D1)
+          )
+      );
+
       static  final  selectedCategoryBg = BoxDecoration(
           color: const  Color(0xFF8479F3).withOpacity(0.2)
           ,borderRadius: BorderRadius.circular(15),

@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:sasta_stay_dealer/components/amenity_component.dart';
 import 'package:sasta_stay_dealer/components/home_page_component.dart';
-import 'package:sasta_stay_dealer/pages/rooms_list_page.dart';
+import 'package:sasta_stay_dealer/pages/rating_reviews_page.dart';
+import 'package:sasta_stay_dealer/pages/rooms_page.dart';
+import 'package:sasta_stay_dealer/pages/update_hostel_details_page.dart';
 import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
 import 'package:sasta_stay_dealer/utils/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/view_models/auth_view_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:dotted_line/dotted_line.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../components/amenities_component.dart';
 import '../components/custom_network_image.dart';
 import '../components/custom_outlined_button.dart';
 import '../components/empty_data_view.dart';
+import '../components/error_text_component.dart';
+import '../components/rating_component.dart';
 import '../components/room_component_1.dart';
 import '../components/side_heading_component.dart';
 import '../request_models/auth_request_model.dart';
@@ -29,230 +34,235 @@ import 'hostel_images_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     final hostelViewModel = Get.put(HostelViewModel());
     final authViewModel = Get.put(AuthViewModel());
 
+
+    Future<void> refresh() async {
+      authViewModel.fetchUserDetails();
+      hostelViewModel.fetchHostelDetails(PaginationRequestModel(page: 1,hostelId:authViewModel.getPrimaryId()));
+    }
+
     return StatefulWrapper(
-      onInit: (){
-        authViewModel.fetchUserDetails();
-        hostelViewModel.fetchHostelDetails(PaginationRequestModel(page: 1,hostelId:authViewModel.getPrimaryId()));
-      },
+      onInit: refresh,
       child: Scaffold(
         backgroundColor: CustomColors.white,
         body: Obx(() => hostelViewModel.fetchHostelDetailsObserver.value.maybeWhen(
-            loading: () => HostelDetailsPageShimmer(),
+            loading: () => const HostelDetailsPageShimmer(),
             success: (data){
               final hostelData = (data as FetchHostelDetailsResponseModel).data;
-              return CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    expandedHeight: 400.0,
-                    floating: false,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Hero(
-                        tag: hostelData?.id ?? "",
-                        child: Column(
-                          children: [
-                            HomePageComponent(),
-                            InkWell(
-                              onTap: (){
-                                Get.to(() => HostelImagesPage(imageUrls: hostelData?.images ?? []));
-                              },
-                              child: Stack(
-                                alignment: Alignment.bottomCenter,
-                                children: [
-                                  CustomNetworkImage(imageUrl: hostelData?.hostelImage ??"",width: double.infinity,height: 300,fit: BoxFit.cover,),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                                    child: Visibility(
-                                      visible: hostelData?.images?.isNotEmpty == true,
-                                      child: Container(
-                                        height: 50,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: CustomColors.white,
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                          child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: (hostelData?.images?.length ?? 0) > 5
-                                                ? 5
-                                                : hostelData?.images?.length ?? 0,
-                                            itemBuilder: (context, index) {
-                                              final images = hostelData?.images ?? [];
-                                              final imageUrl = images[index];
-
-                                              // If last index and there are more than 5 images
-                                              if (index == 4 && images.length > 5) {
-                                                final remainingCount = images.length - 5;
-                                                return Padding(
-                                                  padding: const EdgeInsets.all(5),
-                                                  child: Stack(
-                                                    alignment: Alignment.center,
-                                                    children: [
-                                                      CustomNetworkImage(
-                                                        imageUrl: imageUrl,
-                                                        fit: BoxFit.cover,
-                                                        width: 40,
-                                                        height: 40,
-                                                      ),
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.black54,
-                                                          borderRadius: BorderRadius.circular(5),
-                                                        ),
-                                                        alignment: Alignment.center,
-                                                        child: Text(
-                                                          '+$remainingCount',
-                                                          style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              }
-
-                                              // Normal image item
-                                              return Padding(
-                                                padding: const EdgeInsets.all(5),
-                                                child: CustomNetworkImage(
-                                                  imageUrl: imageUrl,
-                                                  fit: BoxFit.cover,
-                                                  width: 40,
-                                                  height: 40,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(color: CustomColors.white,borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              return RefreshIndicator(
+                onRefresh: refresh,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const HomePageComponent(),
+                        InkWell(
+                      onTap: (){
+                        Get.to(() => const HostelImagesPage());
+                      },
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  hostelData?.hostelName ?? 'Hostel',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600,
+                          CustomNetworkImage(imageUrl: hostelData?.hostelImage ??"",width: double.infinity,height: 300,fit: BoxFit.cover,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                            child: Visibility(
+                              visible: hostelData?.images?.isNotEmpty == true,
+                              child: Container(
+                                height: 60,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: CustomColors.white,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: (hostelData?.images?.length ?? 0) > 5
+                                        ? 5
+                                        : hostelData?.images?.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                      final images = hostelData?.images ?? [];
+                                      final imageUrl = images[index];
+                                      // If last index and there are more than 5 images
+                                      if (index == 4 && images.length > 5) {
+                                        final remainingCount = images.length - 5;
+                                        return Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              CustomNetworkImage(
+                                                imageUrl: imageUrl,
+                                                fit: BoxFit.cover,
+                                                width: 40,
+                                                height: 40,
+                                              ),
+                                              Container(
+                                                width: 40,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black54,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  '+$remainingCount',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                      // Normal image item
+                                      return Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: CustomNetworkImage(
+                                          imageUrl: imageUrl,
+                                          fit: BoxFit.cover,
+                                          width: 50,
+                                          height: 50,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
-                              Image.asset("assets/images/star.png",width: 18,height: 18),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
-                                child: Text("${hostelData?.rating ?? 0}",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.black,decoration: TextDecoration.underline)),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Row(
-                              children: [
-                                Image.asset("assets/images/location.png",width: 10,height: 10,color: CustomColors.textColor),
-                                Expanded(child: Text(hostelData?.location?.address1 ?? "",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
-                                Text("${hostelData?.totalVotes ?? 0} reviews",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray))
-                              ],
                             ),
-                          ),
-                          Text(
-                            hostelData?.aboutHostel ?? 'No description available',
-                            style: TextStyle(color: CustomColors.darkGray,fontSize: 14,fontWeight: FontWeight.w600),
-                          ),
-                          // Chip(
-                          //   label: Text(hostelData?.hostelType ?? 'Type'),
-                          //   backgroundColor: _getHostelTypeColor(hostelData?.hostelType),
-                          // ),
-                          const SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
-                            ),
-                          ),
-                          SideHeadingComponent(title: "Amenities",
-                              viewVisible: true
-                              // viewVisible: (hostelData?.amenitiesMore ?? 0) > 0
-                              ,viewClick: (){
-                                Get.to(() =>  AmenitiesPage(hostelId: hostelData?.id ?? ""));
-                              },viewType: 2),
-                          _buildAmenitiesGrid(hostelData?.amenities,hostelData?.amenitiesMore),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
-                            ),
-                          ),
-                          SideHeadingComponent(title: "Room Types",
-                              viewVisible: true,
-                              // viewVisible: (hostelData?.roomsMore ?? 0) > 0,
-                              viewClick: (){
-                                Get.to(() => RoomsListPage(hostelId: hostelData?.id ?? ""));
-                              }),
-                          _buildHostelRoomsList(hostelData?.rooms,hostelData?.roomsMore),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
-                            ),
-                          ),
-                          const SideHeadingComponent(title: "Location",viewVisible:false),
-                          _buildLocationInfo(hostelData?.location),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
-                            ),
-                          ),
-                          const SideHeadingComponent(title: "Rules",viewVisible: false),
-                          _buildRulesList(hostelData?.rules ?? []),
+                          )
                         ],
                       ),
                     ),
+                        // StaggeredGridView.countBuilder(
+                        //   physics: NeverScrollableScrollPhysics(),
+                        //   shrinkWrap: true,
+                        //   crossAxisCount: 2,
+                        //   itemCount:trendingList.length,
+                        //   itemBuilder:(BuildContext context, int index) {
+                        //     final item = trendingList[index];
+                        //     return TrendingListComponent(trendingListDataModel: item);},
+                        //   mainAxisSpacing: 4.0,
+                        //   crossAxisSpacing: 4.0,
+                        //   staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+                        // ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                hostelData?.hostelName ?? 'Hostel',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Image.asset("assets/images/star.png",width: 18,height: 18),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 5),
+                              child: Text("${hostelData?.rating ?? 0}",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.black,decoration: TextDecoration.underline)),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Row(
+                            children: [
+                              Image.asset("assets/images/location.png",width: 10,height: 10,color: CustomColors.textColor),
+                              Expanded(child: Text(hostelData?.location?.address1 ?? "",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
+                              Text("${hostelData?.totalVotes ?? 0} reviews",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray))
+                            ],
+                          ),
+                        ),
+                        Text(
+                          hostelData?.aboutHostel ?? 'No description available',
+                          style: TextStyle(color: CustomColors.darkGray,fontSize: 14,fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 16),
+                        CustomOutlinedButton(buttonTxt: "Edit Hostel Details", buttonClick: (){
+                          Get.to(() => const UpdateHostelDetailsPage());
+                        }),
+                        // Chip(
+                        //   label: Text(hostelData?.hostelType ?? 'Type'),
+                        //   backgroundColor: _getHostelTypeColor(hostelData?.hostelType),
+                        // ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            width: double.infinity,
+                            color: CustomColors.lightGray,
+                            height: 5,
+                          ),
+                        ),
+                        SideHeadingComponent(title: "Amenities",
+                            viewVisible: true
+                            // viewVisible: (hostelData?.amenitiesMore ?? 0) > 0
+                            ,viewClick: (){
+                              authViewModel.amenityIds.clear();
+                              Get.to(() =>  AmenitiesPage(hostelId: hostelData?.id ?? ""));
+                            },viewType: 2),
+                        _buildAmenitiesGrid(hostelData?.amenities,hostelData?.amenitiesMore),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            width: double.infinity,
+                            color: CustomColors.lightGray,
+                            height: 5,
+                          ),
+                        ),
+                        SideHeadingComponent(title: "Room Types",
+                            viewVisible: true,
+                            // viewVisible: (hostelData?.roomsMore ?? 0) > 0,
+                            viewClick: (){
+                              Get.to(() =>  const RoomsPage(fromHomePage:true));
+                            }),
+                        _buildHostelRoomsList(hostelData),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            width: double.infinity,
+                            color: CustomColors.lightGray,
+                            height: 5,
+                          ),
+                        ),
+                        const SideHeadingComponent(title: "Location",viewVisible:false),
+                        _buildLocationInfo(hostelData?.location),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            width: double.infinity,
+                            color: CustomColors.lightGray,
+                            height: 5,
+                          ),
+                        ),
+                        const SideHeadingComponent(title: "Rules",viewVisible: false),
+                        _buildRulesList(hostelData?.rules ?? []),
+                        SideHeadingComponent(title: "Ratings",viewVisible: true,viewClick: (){
+                          Get.to(() => RatingReviewsPage(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0));
+                        }),
+                        RatingComponent(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               );
             },
-            orElse: () => Center(
+            orElse: () => const Center(
               child: EmptyDataView(text: "Something went wrong"),
             ))
         ),
@@ -280,7 +290,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Container(
           decoration: AppStyles.categoryBg4,
           child: Padding(
@@ -296,11 +306,11 @@ class HomePage extends StatelessWidget {
                   '${location?.city}, ${location?.state} - ${location?.pinCode}',
                   style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 16.0, color: Colors.blue),
-                    SizedBox(width: 4.0),
+                    const Icon(Icons.location_on, size: 16.0, color: Colors.blue),
+                    const SizedBox(width: 4.0),
                     Text(
                       'Landmark: ${location?.landMark}',
                       style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w600),
@@ -311,13 +321,26 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         CustomOutlinedButton(buttonTxt: "Open In Google Maps", buttonClick: (){
-
+          _openGoogleMaps(location?.latitude ?? 0.00,location?.longitude ?? 0.00);
         }),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ],
     );
+  }
+
+  Future<void> _openGoogleMaps(double latitude, double longitude) async {
+    if(latitude == 0.00 || latitude == 0.00) throw "Could not open Google Maps";
+    final Uri googleMapsUrl = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude',
+    );
+
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not open Google Maps';
+    }
   }
 
   Widget _buildAmenitiesGrid(List<AmenitiesModel>? amenities,int? amenitiesMore) {
@@ -327,31 +350,28 @@ class HomePage extends StatelessWidget {
         if ((amenitiesMore ?? 0) > 0) {
           displayList.add(
             AmenitiesModel(
-              image: "https://icon-library.com/images/add-icon-png/add-icon-png-0.jpg",
+              image: "https://firebasestorage.googleapis.com/v0/b/sastastay-1d420.firebasestorage.app/o/bannerImages%2F1755513864049.png?alt=media&token=b25f99c1-8dcc-44a7-a888-fc7bf4398426",
               name: "${amenitiesMore} More",
             ),
           );
         }
-        return GridView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 2.5,
-          ),
-          itemCount: displayList.length,
-          itemBuilder: (context, index) {
-            final amenityModel = displayList[index];
-            return AmenitiesComponent(amenitiesModel: amenityModel,view: 2);
-          },
+        return displayList.isEmpty ? const ErrorTextComponent(text: "No Amenities Available") :
+        Wrap(
+          spacing:8,
+          runSpacing:8,
+          children: displayList.map((amenityModel) {
+            return AmenitiesComponent(
+              amenitiesModel: amenityModel,
+              view: 2,
+            );
+          }).toList(),
         );
       },
     );
   }
 
   Widget _buildRulesList(List<String> rules) {
-    return Container(
+    return rules.isNotEmpty ? Container(
       decoration: AppStyles.categoryBg4,
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -381,17 +401,19 @@ class HomePage extends StatelessWidget {
           ).toList(),
         ),
       ),
-    );
+    ) : const ErrorTextComponent(text: "No Rules Attached");
   }
 
-  Widget _buildHostelRoomsList(List<RoomModel>? roomList, int? roomsMore) {
+  Widget _buildHostelRoomsList(HostelModel? hostelModel) {
+    final roomList = hostelModel?.rooms;
+    final roomsMore = hostelModel?.roomsMore;
     final safeList = roomList ?? [];
     final displayList = List<RoomModel>.from(safeList);
 
     if ((roomsMore ?? 0) > 0) {
       displayList.add(
         RoomModel(
-          image: "https://icon-library.com/images/add-icon-png/add-icon-png-0.jpg",
+          image: "https://firebasestorage.googleapis.com/v0/b/sastastay-1d420.firebasestorage.app/o/bannerImages%2F1755513864049.png?alt=media&token=b25f99c1-8dcc-44a7-a888-fc7bf4398426",
           roomType: "$roomsMore More",
         ),
       );
@@ -399,64 +421,24 @@ class HomePage extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: SizedBox(
+      child: displayList.isEmpty ? const ErrorTextComponent(text: "Currently Rooms Are Not Available") : SizedBox(
         height: 180,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: displayList.length,
           itemBuilder: (context, index) {
             final roomModel = displayList[index];
-            return RoomComponent1(roomModel: roomModel);
+            return InkWell(
+                onTap:(){
+                  Get.to(() => const RoomsPage());
+                },
+                child: RoomComponent1(roomModel: roomModel));
           },
         ),
       ),
     );
   }
 
-
-  Widget _buildBottomAppBar() {
-    return BottomAppBar(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        height: 70,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Starting from',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  '₹5,000/month',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              onPressed: () {
-                // Book now action
-              },
-              child: Text('Book Now'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Color _getHostelTypeColor(String? type) {
     switch (type?.toLowerCase()) {
@@ -469,3 +451,5 @@ class HomePage extends StatelessWidget {
     }
   }
 }
+
+

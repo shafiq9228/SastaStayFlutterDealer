@@ -7,11 +7,11 @@ import '../utils/custom_colors.dart';
 class ProfileMenu extends StatelessWidget {
   final String title;
   final String image;
+  final bool? logOutMenu;
   final VoidCallback onTapped;
 
-
   const ProfileMenu({super.key,required this.title,
-    required this.image, required this.onTapped});
+    required this.image, required this.onTapped, this.logOutMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +24,15 @@ class ProfileMenu extends StatelessWidget {
           width: 20,
           height: 20,
           child: Image.asset(
-              image,color: CustomColors.textColor,),
+            image,color: logOutMenu == true ?  CustomColors.red :CustomColors.textColor,),
         ),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18,color: Colors.black)),
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18,color: logOutMenu == true ? CustomColors.red :Colors.black)),
         trailing: SizedBox(
-          width: 25,
-          height: 25,
-          child: Image.asset(
-              'assets/images/right_arrow.png'
-          ),
+            width: 25,
+            height: 25,
+            child: Image.asset(
+              'assets/images/right_arrow.png',color: logOutMenu == true ?  CustomColors.red :CustomColors.textColor,
+            )
         ),
       ),
     );

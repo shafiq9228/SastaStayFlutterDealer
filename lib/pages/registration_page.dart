@@ -101,8 +101,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             decoration: InputDecoration(
                               counterText: '',
                               hintText: 'Enter Your Mobile Number',
-                              hintStyle: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w500),
-                              enabledBorder: UnderlineInputBorder(
+                              hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w500),
+                              enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white), // Default color
                               ),
                               focusedBorder: UnderlineInputBorder(
@@ -136,7 +136,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   counterText: '',
                                   hintText: 'Enter Your Email Id',
                                   hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w500),
-                                  enabledBorder: UnderlineInputBorder(
+                                  enabledBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white), // Default color
                                   ),
                                   focusedBorder: UnderlineInputBorder(
@@ -168,8 +168,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             decoration: InputDecoration(
                               counterText: '',
                               hintText: 'Enter Your Name',
-                              hintStyle: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
-                              enabledBorder: UnderlineInputBorder(
+                              hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
+                              enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white), // Default color
                               ),
                               focusedBorder: UnderlineInputBorder(

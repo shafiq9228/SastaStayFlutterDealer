@@ -1,11 +1,16 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/pages/hostels_page.dart';
 import 'package:sasta_stay_dealer/components/profile_menu.dart';
+import 'package:sasta_stay_dealer/pages/rating_reviews_page.dart';
 import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
+import 'package:sasta_stay_dealer/utils/auth_utils.dart';
 
 import '../components/custom_progress_bar.dart';
 import '../components/empty_data_view.dart';
+import '../components/helper_bottom_sheet.dart';
+import '../utils/app_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/preference_manager.dart';
 import '../utils/statefullwrapper.dart';
@@ -24,6 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final authViewModel = Get.put(AuthViewModel());
   RxBool logOuting = false.obs;
   RxString customerSupportNumber = "".obs;
+  RxString version = "".obs;
 
 
   void logOutConfirmationDialog(DealerModel? dealerModel){
@@ -131,7 +137,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     backgroundImage: NetworkImage('https://i.stack.imgur.com/l60Hf.png'),
                                     backgroundColor: Colors.grey, // You can set a background color for the avatar
                                   ),
-                                  Container(width: 30,height: 30,decoration: BoxDecoration(borderRadius: BorderRadius.circular(200),color: CustomColors.primary),child: Center(child: Icon(Icons.edit,color: CustomColors.white)),)
                                 ],
                               ),
                             ),
@@ -152,19 +157,59 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontWeight: FontWeight.w600,
                                     color: CustomColors.darkGray)),
                             SizedBox(height: 50),
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Container(
+                                decoration: AppStyles.categoryBg3,
+                                child:Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      ProfileMenu(title: "Helps", image: "assets/images/help.png", onTapped: (){
 
-                            ProfileMenu(title: "Helps", image: "assets/images/help.png", onTapped: (){
-
-                            }),
-                            const Divider(),
-                            ProfileMenu(title: "Swap Hostel", image: "assets/images/swap.png", onTapped: (){
-                                Get.to(() => const HostelsPage());
-                            }),
-                            const Divider(),
-                            Obx(() => logOuting.value == true ? CustomProgressBar() :
-                            ProfileMenu(title: "Log Out", image: "assets/images/log_out.png", onTapped: () {
-                              logOutConfirmationDialog(userModel);
-                            }),
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray,),
+                                      ProfileMenu(title: "Rating And Reviews", image: "assets/images/star.png", onTapped: (){
+                                         Get.to(() => RatingReviewsPage(rating: 0));
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray,),
+                                      ProfileMenu(title: "Swap Hostel", image: "assets/images/swap.png", onTapped: (){
+                                        Get.to(() => const HostelsPage());
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray,),
+                                      Obx(() => logOuting.value == true ? CustomProgressBar() :
+                                      ProfileMenu(title: "Log Out", image: "assets/images/log_out_icon.png", onTapped: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true, // allows full height scroll
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                                          ),
+                                          builder: (context) {
+                                            return HelperBottomSheet(assetImage: "assets/images/log_out.png",title: "Are you sure you want to log out?",message: "You will need to sign in again to access your account.",btn1Txt: "NO",btn1Click: (){
+                                              Get.back();
+                                            },btn2Txt: "Yes",btn2Click: ()async {
+                                              Get.back();
+                                              logOuting.value = true;
+                                              preferenceManager.clearAll();
+                                              logOuting.value = false;
+                                              Get.offAll(() =>  MobileVerificationPage());
+                                            });
+                                          },
+                                        );
+                                        // logOutConfirmationDialog(userModel);
+                                      },logOutMenu: true),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Obx(()=> Text("V ${version.value ?? ""}",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: CustomColors.textColor)),
                             ),
                             SizedBox(height: 100)
                           ],
@@ -182,5 +227,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _refreshData() async{
     authViewModel.fetchUserDetails();
+    version.value = await AuthUtils.getAppVersion() ?? "";
   }
 }

@@ -9,6 +9,8 @@ class PaginationRequestModel with _$PaginationRequestModel{
   const factory PaginationRequestModel({
     String? hostelId,
     String? roomId,
+    String? query,
+    String? searchQuery,
     String? type,
     required int? page
   }) = _PaginationRequestModel;

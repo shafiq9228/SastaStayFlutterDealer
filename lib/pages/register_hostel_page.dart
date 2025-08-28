@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
 
 
 import '../components/custom_progress_bar.dart';
@@ -19,7 +20,8 @@ import 'file_picker_page.dart';
 import 'location_picker_page.dart';
 
 class RegisterHostelPage extends StatefulWidget {
-  const RegisterHostelPage({super.key});
+  final bool? fromHostelListPage;
+  const RegisterHostelPage({super.key, this.fromHostelListPage});
 
   @override
   State<RegisterHostelPage> createState() => _RegisterHostelPageState();
@@ -52,7 +54,9 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
       onStart: (){
         calculateProgress();
       },
-      child: Scaffold(backgroundColor: CustomColors.secondaryWhite,body: SafeArea(
+      child: Scaffold(
+          backgroundColor: CustomColors.white,
+          body: SafeArea(
           top: true,
           child: Obx(() => authViewModel.dealerStatusObserver.value.maybeWhen(
               loading: () => Center(child: SizedBox(width: 40,height: 40,child: CircularProgressIndicator(color: CustomColors.primary,),),),
@@ -75,7 +79,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(color: CustomColors.white,child: Column(children: [
+                    widget.fromHostelListPage == true ? const SecondaryHeadingComponent(buttonTxt: "List New Hostel") :Container(color: CustomColors.white,child: Column(children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical:20,horizontal: 20),
                         child: Row(
@@ -83,7 +87,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                             GestureDetector(child: SizedBox(width:20,height:20)),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: Text("Registration",style: TextStyle(color: CustomColors.primary,fontWeight: FontWeight.w600,fontSize: 22),),
+                              child: Text("List Hostel",style: TextStyle(color: CustomColors.primary,fontWeight: FontWeight.w600,fontSize: 22),),
                             ),
                           ],
                         ),

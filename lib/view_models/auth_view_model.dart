@@ -5,6 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
+import 'package:sasta_stay_dealer/view_models/booking_view_model.dart';
+import 'package:sasta_stay_dealer/view_models/hostel_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image/image.dart' as img;
 
@@ -36,6 +38,8 @@ class AuthViewModel extends GetxController{
   final dealerStatusObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final registerDealerResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final registerHostelResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
+  final updateHostelDetailsResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
+
   final updateDealerDetailsResponseObserver  = const ApiResult<FetchUserDetailsResponseModel>.init().obs;
   final uploadFileObserver  = const ApiResult<UploadFileResponseModel>.init().obs;
 
@@ -50,7 +54,10 @@ class AuthViewModel extends GetxController{
   Rx<String> hostelLicence = "".obs;
   RxList<String> rules = <String>[].obs;
   RxList<String> images = <String>[].obs;
-  RxList<AmenitiesModel> amenities = <AmenitiesModel>[].obs;
+  RxList<String> amenityIds = <String>[].obs;
+
+  final hostelViewModel = Get.put(HostelViewModel());
+  final bookingViewModel = Get.put(BookingViewModel());
 
 
   String? getPrimaryId(){
@@ -240,6 +247,15 @@ class AuthViewModel extends GetxController{
           if(type == "hostelImage"){
             hostelImage.value = jsonData.data ?? "";
           }
+          else if(type == "hostelImages"){
+            images.add(jsonData.data ?? "");
+          }
+          else if(type == "aadhar"){
+            bookingViewModel.aadharImage.value = jsonData.data ?? "";
+          }
+          else if(type == "roomImage"){
+            hostelViewModel.roomImage.value = jsonData.data ?? "";
+          }
           else if(type == "hostelLicence"){
             hostelLicence.value = jsonData.data ?? "";
           }
@@ -258,14 +274,12 @@ class AuthViewModel extends GetxController{
   Future<File> compressImage(File file, int quality) async {
     try{
       final originalSize = file.lengthSync();
-      print('Original size: ${(originalSize / 1024).toStringAsFixed(2)} KB');
       final image = img.decodeImage(await file.readAsBytes());
       final tempDir = await getTemporaryDirectory();
       final targetPath = "${tempDir.path}/compressed_${file.path.split('/').last}";
       final compressedImage = File(targetPath)
         ..writeAsBytesSync(img.encodeJpg(image!, quality: quality));
       final compressedSize = compressedImage.lengthSync();
-      print('Compressed size: ${(compressedSize / 1024).toStringAsFixed(2)} KB');
       return compressedImage;
     }
     catch(error){
@@ -328,6 +342,32 @@ class AuthViewModel extends GetxController{
     catch(e){
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       registerHostelResponseObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+  Future<void> updateHostelDetails(RegistrationRequestModel request) async {
+    try{
+      updateHostelDetailsResponseObserver.value = const ApiResult.loading();
+      final String? validatorResponse = AuthUtils.validateRequestFields(['hostelId','hostelImage','hostelName','aboutHostel','location','amenities','rules','images'], request.toJson());
+      if(validatorResponse != null) throw validatorResponse;
+      final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landMark','pinCode','latitude','longitude'], request.location!.toJson());
+      if(locationValidation != null) throw locationValidation;
+      final response = await apiProvider.post(EndPoints.updateHostelDetails,request.toJson());
+      final body = response.body;
+      if(response.isOk && body != null){
+        final responseData = FormHelperDataResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          updateHostelDetailsResponseObserver.value = ApiResult.success(responseData);
+          Get.offAll(() => const MainPage());
+          return;
+        }
+        throw "something went wrong${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      updateHostelDetailsResponseObserver.value = ApiResult.error(e.toString());
     }
   }
 

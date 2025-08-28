@@ -11,10 +11,20 @@ class EndPoints {
   static const uploadFile = "uploadFile";
 
   static const registerHostel = "registerHostel";
+  static const updateHostelDetails = "updateHostelDetails";
   static const fetchHostels = "fetchHostels";
   static const fetchHostelDetails = "fetchHostelDetails";
   static const fetchHostelRooms = "fetchHostelRooms";
   static const fetchAmenities = "fetchAmenities";
   static const setAsPrimaryHostel = "setAsPrimaryHostel";
+
+  static const checkHostelRoomAvailability = "checkHostelRoomAvailability";
+  static const confirmBooking = "confirmBooking";
+  static const fetchBookings = "fetchBookings";
+  static const fetchBookingDetails = "fetchBookingDetails";
+
+  static const registerRoom = "registerRoom";
+
+  static const fetchRatingAndReviews = "fetchRatingAndReviews";
 
 }

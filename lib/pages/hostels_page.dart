@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:sasta_stay_dealer/components/hostel_details_component.dart';
 import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
+import 'package:sasta_stay_dealer/pages/register_hostel_page.dart';
 import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
 import 'package:sasta_stay_dealer/utils/statefullwrapper.dart';
 import 'package:sasta_stay_dealer/view_models/hostel_view_model.dart';
@@ -27,7 +28,9 @@ class _HostelsPageState extends State<HostelsPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(body: StatefulWrapper(
+    return Scaffold(
+      backgroundColor: CustomColors.white,
+      body: StatefulWrapper(
       onInit: _refreshData,
       child: SafeArea(
           top:true,
@@ -37,6 +40,8 @@ class _HostelsPageState extends State<HostelsPage> {
               children: [
                 SecondaryHeadingComponent(buttonTxt: "Hostels", buttonClick: (){
                      Get.back();
+                },extraBtnText: "List New Hostel",extraBtnClick: (){
+                  Get.to(() => const RegisterHostelPage(fromHostelListPage: true));
                 }),
                 Expanded(
                   child: RefreshIndicator(
@@ -50,7 +55,7 @@ class _HostelsPageState extends State<HostelsPage> {
                             success: (data){
                               final responseData = (data as FetchHostelsResponseModel).data;
                               final hostelList =  responseData;
-                              return (hostelList?.length ?? 0) == 0 ? SizedBox(width: double.infinity,height: double.infinity,child: Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: EmptyDataView(text: "No Orders Found"),)))))
+                              return (hostelList?.length ?? 0) == 0 ? const SizedBox(width: double.infinity,height: double.infinity,child: const Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: EmptyDataView(text: "No Hostels Found"),)))))
                                   :
                               NotificationListener(
                                 onNotification: (ScrollNotification scrollNotification) {
@@ -87,7 +92,7 @@ class _HostelsPageState extends State<HostelsPage> {
                 )
                       ],
                     ),
-              Obx(()=> hostelViewModel.setAsPrimaryHostelResponseObserver.value.maybeWhen(loading: () => Expanded(child: Container(color: CustomColors.black.withOpacity(0.2),child: Center(child: CircularProgressIndicator(color: CustomColors.white)),)),orElse: () => SizedBox()))
+              Obx(()=> hostelViewModel.setAsPrimaryHostelResponseObserver.value.maybeWhen(loading: () => Expanded(child: Container(color: CustomColors.black.withOpacity(0.4),child: Center(child: CircularProgressIndicator(color: CustomColors.white)),)),orElse: () => const SizedBox())),
             ],
           )),
     ),);

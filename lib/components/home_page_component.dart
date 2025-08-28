@@ -13,24 +13,20 @@ class HomePageComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Get.put(AuthViewModel());
-    return Container(
+    return  SizedBox(
       height: 100,
       width: double.infinity,
-      color: CustomColors.primary,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top:20,right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Obx(()=> Text(authViewModel.fetchUserDetailsObserver.value.maybeWhen(success: (data) => "Hi, ${(data as FetchUserDetailsResponseModel).data?.name ?? ""} 👋",orElse: () => ""),style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.white,fontSize: 18))),
-                const SizedBox(height: 5),
-                Text("Lets Find The Best Hostel",style: TextStyle(fontWeight: FontWeight.w800,color: CustomColors.white,fontSize: 20)),
-              ],
-            ),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(top:20,right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Obx(()=> Text(authViewModel.fetchUserDetailsObserver.value.maybeWhen(success: (data) => "Hi, ${(data as FetchUserDetailsResponseModel).data?.name ?? ""} 👋",orElse: () => ""),style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.textColor,fontSize: 18))),
+            const SizedBox(height: 5),
+            Text("Lets Find The Best Users",style: TextStyle(fontWeight: FontWeight.w800,color: CustomColors.textColor,fontSize: 20)),
+            const SizedBox(height: 5),
+          ],
+        ),
       )
     );
   }

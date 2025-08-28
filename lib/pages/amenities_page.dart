@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/components/primary_button.dart';
 
 import '../components/amenity_component.dart';
 import '../components/custom_progress_bar.dart';
@@ -13,8 +14,9 @@ import '../utils/statefullwrapper.dart';
 import '../view_models/hostel_view_model.dart';
 
 class AmenitiesPage extends StatefulWidget {
+  final bool? edit;
   final String? hostelId;
-  const AmenitiesPage({super.key, required this.hostelId});
+  const AmenitiesPage({super.key, this.edit,required this.hostelId});
 
   @override
   State<AmenitiesPage> createState() => _AmenitiesPageState();
@@ -49,7 +51,7 @@ class _AmenitiesPageState extends State<AmenitiesPage> {
                             success: (data){
                               final responseData = (data as FetchAmenitiesResponseModel).data;
                               final amenitieslList =  responseData;
-                              return (amenitieslList?.length ?? 0) == 0 ? SizedBox(width: double.infinity,height: double.infinity,child: Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: EmptyDataView(text: "No Amenities Found"),))))) :
+                              return (amenitieslList?.length ?? 0) == 0 ? const SizedBox(width: double.infinity,height: double.infinity,child: const Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: EmptyDataView(text: "No Amenities Found"),))))) :
                               NotificationListener(
                                 onNotification: (ScrollNotification scrollNotification) {
                                   if (scrollNotification.metrics.pixels >= scrollNotification.metrics.maxScrollExtent - 20) {
@@ -66,7 +68,7 @@ class _AmenitiesPageState extends State<AmenitiesPage> {
                                           itemCount: amenitieslList?.length ?? 0,
                                           itemBuilder: (context, index) {
                                             final amentityModel = amenitieslList?[index];
-                                            return AmenityComponent(amenitiesModel: amentityModel);
+                                            return AmenityComponent(amenitiesModel: amentityModel,edit:widget.edit ?? false);
                                           }),
                                       Obx(() => Visibility(
                                           visible: hostelViewModel.fetchHostelsObserver.value.isLoading,
@@ -77,10 +79,19 @@ class _AmenitiesPageState extends State<AmenitiesPage> {
                                 ),
                               );
                             },
-                            orElse: () => SizedBox(width: double.infinity,height: double.infinity,child: const Center(child: EmptyDataView(text: "No Amenities Found"))));
+                            orElse: () => const SizedBox(width: double.infinity,height: double.infinity,child: Center(child: EmptyDataView(text: "No Amenities Found"))));
                       }
                       ),
                     ),
+                  ),
+                ),
+                Visibility(
+                  visible: widget.edit == true,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PrimaryButton(buttonClick: (){
+                      Get.back();
+                    }, buttonTxt: 'Confirm'),
                   ),
                 )
               ],

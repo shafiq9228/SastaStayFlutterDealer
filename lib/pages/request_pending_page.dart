@@ -127,7 +127,7 @@ class _RequestPendingPageState extends State<RequestPendingPage> {
                         BoxDecoration(borderRadius: BorderRadius.circular(500),border: Border.all(width: 0.5,color: CustomColors.textColor))
                         ,child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Image.asset("assets/images/log_out.png",width: 20,height: 20,color: CustomColors.textColor),
+                      child: Image.asset("assets/images/log_out_icon.png",width: 20,height: 20,color: CustomColors.textColor),
                     )),
                   )
                 ],
@@ -135,7 +135,19 @@ class _RequestPendingPageState extends State<RequestPendingPage> {
               const SizedBox(height: 30),
               Text("Registration Submitted!",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 25,color: CustomColors.primary),),
               SizedBox(height: 20),
-              Text("Hostel Name : ${widget.hostelModel?.hostelName}",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18,color: CustomColors.textColor),),
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hostel Name : ${widget.hostelModel?.hostelName}",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18,color: CustomColors.textColor),),
+                    SizedBox(height: 5),
+                    Text("Branch : ${widget.hostelModel?.branch ?? 0}",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 12,color: CustomColors.darkGray),),
+                    SizedBox(height: 5),
+                    Text("Address : ${widget.hostelModel?.location?.address1 ?? ""}",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 12,color: CustomColors.darkGray),),
+                  ],
+                ),
+              ),
               SizedBox(height: 20),
               SizedBox(height: 350,width: 200,child: Image.asset("assets/images/pending.png")),
               SizedBox(height: 20),

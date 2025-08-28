@@ -10,21 +10,23 @@ class AmenitiesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Container(
-        decoration: view == 1 ? BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.grey.withOpacity(0.2)) : BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(width: 0.5,color: CustomColors.textColor)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomNetworkImage(imageUrl: amenitiesModel?.image ?? '',width: 20,height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text(amenitiesModel?.name ?? '',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor),),
-              )
-            ],
+    return IntrinsicWidth(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+          decoration: view == 1 ? BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.grey.withOpacity(0.2)) : BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(width: 0.5,color: CustomColors.textColor)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomNetworkImage(imageUrl: amenitiesModel?.image ?? '',width: 20,height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(amenitiesModel?.name ?? '',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor),),
+                )
+              ],
+            ),
           ),
         ),
       ),
