@@ -66,6 +66,7 @@ class HomePage extends StatelessWidget {
                         const HomePageComponent(),
                         InkWell(
                       onTap: (){
+                        authViewModel.images.value = hostelData?.images ?? [];
                         Get.to(() => const HostelImagesPage());
                       },
                       child: Stack(

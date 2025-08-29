@@ -38,18 +38,20 @@ class RatingAndReviewComponent extends StatelessWidget {
                     children: [
                       Text(userModel.name ?? "",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: CustomColors.textColor),),
                       SizedBox(height: 10),
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 15,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Image.asset("assets/images/star.png"),
-                        onRatingUpdate: (rating) {
+                      IgnorePointer(
+                          child: RatingBar.builder(
+                            initialRating: double.tryParse((ratingAndReviewModel?.rating ?? "0").toString()) ?? 0,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemSize: 15,
+                            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, _) => Image.asset("assets/images/star.png"),
+                            onRatingUpdate: (rating) {
 
-                        },
+                            },
+                          )
                       )
                     ],
                   ),

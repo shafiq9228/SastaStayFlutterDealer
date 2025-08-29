@@ -302,7 +302,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      Get.to(() => const LocationPickerPage());
+                                      Get.to(() =>  LocationPickerPage());
                                     },
                                     child: Container(
                                       width: double.infinity,
