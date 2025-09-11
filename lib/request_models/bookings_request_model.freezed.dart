@@ -28,6 +28,7 @@ mixin _$BookingRequestModel {
   int? get guestCount => throw _privateConstructorUsedError;
   List<GuestDetailsModel>? get guestDetailsList =>
       throw _privateConstructorUsedError;
+  String? get couponId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $BookingRequestModelCopyWith<$Res> {
       DateTime? checkInDate,
       DateTime? checkOutDate,
       int? guestCount,
-      List<GuestDetailsModel>? guestDetailsList});
+      List<GuestDetailsModel>? guestDetailsList,
+      String? couponId});
 
   $RoomModelCopyWith<$Res>? get roomModel;
 }
@@ -73,6 +75,7 @@ class _$BookingRequestModelCopyWithImpl<$Res, $Val extends BookingRequestModel>
     Object? checkOutDate = freezed,
     Object? guestCount = freezed,
     Object? guestDetailsList = freezed,
+    Object? couponId = freezed,
   }) {
     return _then(_value.copyWith(
       roomModel: freezed == roomModel
@@ -103,6 +106,10 @@ class _$BookingRequestModelCopyWithImpl<$Res, $Val extends BookingRequestModel>
           ? _value.guestDetailsList
           : guestDetailsList // ignore: cast_nullable_to_non_nullable
               as List<GuestDetailsModel>?,
+      couponId: freezed == couponId
+          ? _value.couponId
+          : couponId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -134,7 +141,8 @@ abstract class _$$BookingRequestModelImplCopyWith<$Res>
       DateTime? checkInDate,
       DateTime? checkOutDate,
       int? guestCount,
-      List<GuestDetailsModel>? guestDetailsList});
+      List<GuestDetailsModel>? guestDetailsList,
+      String? couponId});
 
   @override
   $RoomModelCopyWith<$Res>? get roomModel;
@@ -158,6 +166,7 @@ class __$$BookingRequestModelImplCopyWithImpl<$Res>
     Object? checkOutDate = freezed,
     Object? guestCount = freezed,
     Object? guestDetailsList = freezed,
+    Object? couponId = freezed,
   }) {
     return _then(_$BookingRequestModelImpl(
       roomModel: freezed == roomModel
@@ -188,6 +197,10 @@ class __$$BookingRequestModelImplCopyWithImpl<$Res>
           ? _value._guestDetailsList
           : guestDetailsList // ignore: cast_nullable_to_non_nullable
               as List<GuestDetailsModel>?,
+      couponId: freezed == couponId
+          ? _value.couponId
+          : couponId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -202,7 +215,8 @@ class _$BookingRequestModelImpl implements _BookingRequestModel {
       required this.checkInDate,
       required this.checkOutDate,
       required this.guestCount,
-      required final List<GuestDetailsModel>? guestDetailsList})
+      required final List<GuestDetailsModel>? guestDetailsList,
+      required this.couponId})
       : _guestDetailsList = guestDetailsList;
 
   factory _$BookingRequestModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -232,8 +246,11 @@ class _$BookingRequestModelImpl implements _BookingRequestModel {
   }
 
   @override
+  final String? couponId;
+
+  @override
   String toString() {
-    return 'BookingRequestModel(roomModel: $roomModel, hostelId: $hostelId, roomId: $roomId, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, guestDetailsList: $guestDetailsList)';
+    return 'BookingRequestModel(roomModel: $roomModel, hostelId: $hostelId, roomId: $roomId, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, guestDetailsList: $guestDetailsList, couponId: $couponId)';
   }
 
   @override
@@ -253,7 +270,9 @@ class _$BookingRequestModelImpl implements _BookingRequestModel {
             (identical(other.guestCount, guestCount) ||
                 other.guestCount == guestCount) &&
             const DeepCollectionEquality()
-                .equals(other._guestDetailsList, _guestDetailsList));
+                .equals(other._guestDetailsList, _guestDetailsList) &&
+            (identical(other.couponId, couponId) ||
+                other.couponId == couponId));
   }
 
   @JsonKey(ignore: true)
@@ -266,7 +285,8 @@ class _$BookingRequestModelImpl implements _BookingRequestModel {
       checkInDate,
       checkOutDate,
       guestCount,
-      const DeepCollectionEquality().hash(_guestDetailsList));
+      const DeepCollectionEquality().hash(_guestDetailsList),
+      couponId);
 
   @JsonKey(ignore: true)
   @override
@@ -285,14 +305,14 @@ class _$BookingRequestModelImpl implements _BookingRequestModel {
 
 abstract class _BookingRequestModel implements BookingRequestModel {
   const factory _BookingRequestModel(
-          {required final RoomModel? roomModel,
-          required final String? hostelId,
-          required final String? roomId,
-          required final DateTime? checkInDate,
-          required final DateTime? checkOutDate,
-          required final int? guestCount,
-          required final List<GuestDetailsModel>? guestDetailsList}) =
-      _$BookingRequestModelImpl;
+      {required final RoomModel? roomModel,
+      required final String? hostelId,
+      required final String? roomId,
+      required final DateTime? checkInDate,
+      required final DateTime? checkOutDate,
+      required final int? guestCount,
+      required final List<GuestDetailsModel>? guestDetailsList,
+      required final String? couponId}) = _$BookingRequestModelImpl;
 
   factory _BookingRequestModel.fromJson(Map<String, dynamic> json) =
       _$BookingRequestModelImpl.fromJson;
@@ -312,7 +332,152 @@ abstract class _BookingRequestModel implements BookingRequestModel {
   @override
   List<GuestDetailsModel>? get guestDetailsList;
   @override
+  String? get couponId;
+  @override
   @JsonKey(ignore: true)
   _$$BookingRequestModelImplCopyWith<_$BookingRequestModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+AddBalanceRequestModel _$AddBalanceRequestModelFromJson(
+    Map<String, dynamic> json) {
+  return _AddBalanceRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AddBalanceRequestModel {
+  double get amount => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AddBalanceRequestModelCopyWith<AddBalanceRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddBalanceRequestModelCopyWith<$Res> {
+  factory $AddBalanceRequestModelCopyWith(AddBalanceRequestModel value,
+          $Res Function(AddBalanceRequestModel) then) =
+      _$AddBalanceRequestModelCopyWithImpl<$Res, AddBalanceRequestModel>;
+  @useResult
+  $Res call({double amount});
+}
+
+/// @nodoc
+class _$AddBalanceRequestModelCopyWithImpl<$Res,
+        $Val extends AddBalanceRequestModel>
+    implements $AddBalanceRequestModelCopyWith<$Res> {
+  _$AddBalanceRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+  }) {
+    return _then(_value.copyWith(
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AddBalanceRequestModelImplCopyWith<$Res>
+    implements $AddBalanceRequestModelCopyWith<$Res> {
+  factory _$$AddBalanceRequestModelImplCopyWith(
+          _$AddBalanceRequestModelImpl value,
+          $Res Function(_$AddBalanceRequestModelImpl) then) =
+      __$$AddBalanceRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double amount});
+}
+
+/// @nodoc
+class __$$AddBalanceRequestModelImplCopyWithImpl<$Res>
+    extends _$AddBalanceRequestModelCopyWithImpl<$Res,
+        _$AddBalanceRequestModelImpl>
+    implements _$$AddBalanceRequestModelImplCopyWith<$Res> {
+  __$$AddBalanceRequestModelImplCopyWithImpl(
+      _$AddBalanceRequestModelImpl _value,
+      $Res Function(_$AddBalanceRequestModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+  }) {
+    return _then(_$AddBalanceRequestModelImpl(
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AddBalanceRequestModelImpl implements _AddBalanceRequestModel {
+  const _$AddBalanceRequestModelImpl({required this.amount});
+
+  factory _$AddBalanceRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddBalanceRequestModelImplFromJson(json);
+
+  @override
+  final double amount;
+
+  @override
+  String toString() {
+    return 'AddBalanceRequestModel(amount: $amount)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddBalanceRequestModelImpl &&
+            (identical(other.amount, amount) || other.amount == amount));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, amount);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddBalanceRequestModelImplCopyWith<_$AddBalanceRequestModelImpl>
+      get copyWith => __$$AddBalanceRequestModelImplCopyWithImpl<
+          _$AddBalanceRequestModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AddBalanceRequestModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AddBalanceRequestModel implements AddBalanceRequestModel {
+  const factory _AddBalanceRequestModel({required final double amount}) =
+      _$AddBalanceRequestModelImpl;
+
+  factory _AddBalanceRequestModel.fromJson(Map<String, dynamic> json) =
+      _$AddBalanceRequestModelImpl.fromJson;
+
+  @override
+  double get amount;
+  @override
+  @JsonKey(ignore: true)
+  _$$AddBalanceRequestModelImplCopyWith<_$AddBalanceRequestModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

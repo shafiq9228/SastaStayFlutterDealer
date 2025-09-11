@@ -123,8 +123,22 @@ class DealerModel with _$DealerModel{
     int? monthlyIncome,
     int? totalIncome,
     int? totalVotes,
-    dynamic rating
+    dynamic rating,
+    List<DocumentDataModel>? kycDocuments
   }) = _DealerModel;
 
   factory DealerModel.fromJson(Map<String, dynamic> json) => _$DealerModelFromJson(json);
+}
+
+
+@Freezed()
+class DocumentDataModel with _$DocumentDataModel{
+  const factory DocumentDataModel({
+    required String? documentType,
+    required String? documentStatus,
+    required String? uploadedUrl,
+    required String? errorTxt
+  }) = _DocumentDataModel;
+
+  factory DocumentDataModel.fromJson(Map<String, dynamic> json) => _$DocumentDataModelFromJson(json);
 }

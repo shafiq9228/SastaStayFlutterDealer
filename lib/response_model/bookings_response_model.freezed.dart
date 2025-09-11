@@ -420,6 +420,594 @@ abstract class _ConfirmBookingResponseModel
       get copyWith => throw _privateConstructorUsedError;
 }
 
+FetchTransactionsResponseModel _$FetchTransactionsResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _FetchTransactionsResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FetchTransactionsResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<TransactionDataModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FetchTransactionsResponseModelCopyWith<FetchTransactionsResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FetchTransactionsResponseModelCopyWith<$Res> {
+  factory $FetchTransactionsResponseModelCopyWith(
+          FetchTransactionsResponseModel value,
+          $Res Function(FetchTransactionsResponseModel) then) =
+      _$FetchTransactionsResponseModelCopyWithImpl<$Res,
+          FetchTransactionsResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, List<TransactionDataModel>? data});
+}
+
+/// @nodoc
+class _$FetchTransactionsResponseModelCopyWithImpl<$Res,
+        $Val extends FetchTransactionsResponseModel>
+    implements $FetchTransactionsResponseModelCopyWith<$Res> {
+  _$FetchTransactionsResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TransactionDataModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FetchTransactionsResponseModelImplCopyWith<$Res>
+    implements $FetchTransactionsResponseModelCopyWith<$Res> {
+  factory _$$FetchTransactionsResponseModelImplCopyWith(
+          _$FetchTransactionsResponseModelImpl value,
+          $Res Function(_$FetchTransactionsResponseModelImpl) then) =
+      __$$FetchTransactionsResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, List<TransactionDataModel>? data});
+}
+
+/// @nodoc
+class __$$FetchTransactionsResponseModelImplCopyWithImpl<$Res>
+    extends _$FetchTransactionsResponseModelCopyWithImpl<$Res,
+        _$FetchTransactionsResponseModelImpl>
+    implements _$$FetchTransactionsResponseModelImplCopyWith<$Res> {
+  __$$FetchTransactionsResponseModelImplCopyWithImpl(
+      _$FetchTransactionsResponseModelImpl _value,
+      $Res Function(_$FetchTransactionsResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$FetchTransactionsResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TransactionDataModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FetchTransactionsResponseModelImpl
+    implements _FetchTransactionsResponseModel {
+  const _$FetchTransactionsResponseModelImpl(
+      {this.status, this.message, final List<TransactionDataModel>? data})
+      : _data = data;
+
+  factory _$FetchTransactionsResponseModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$FetchTransactionsResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  final List<TransactionDataModel>? _data;
+  @override
+  List<TransactionDataModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'FetchTransactionsResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchTransactionsResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, status, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchTransactionsResponseModelImplCopyWith<
+          _$FetchTransactionsResponseModelImpl>
+      get copyWith => __$$FetchTransactionsResponseModelImplCopyWithImpl<
+          _$FetchTransactionsResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FetchTransactionsResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FetchTransactionsResponseModel
+    implements FetchTransactionsResponseModel {
+  const factory _FetchTransactionsResponseModel(
+          {final int? status,
+          final String? message,
+          final List<TransactionDataModel>? data}) =
+      _$FetchTransactionsResponseModelImpl;
+
+  factory _FetchTransactionsResponseModel.fromJson(Map<String, dynamic> json) =
+      _$FetchTransactionsResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  List<TransactionDataModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchTransactionsResponseModelImplCopyWith<
+          _$FetchTransactionsResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+TransactionDataModel _$TransactionDataModelFromJson(Map<String, dynamic> json) {
+  return _TransactionDataModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TransactionDataModel {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  String? get dealerTitle => throw _privateConstructorUsedError;
+  String? get transactionType => throw _privateConstructorUsedError;
+  String? get paymentStatus => throw _privateConstructorUsedError;
+  dynamic get userId => throw _privateConstructorUsedError;
+  dynamic get dealerId => throw _privateConstructorUsedError;
+  dynamic get bookingId => throw _privateConstructorUsedError;
+  String? get orderId => throw _privateConstructorUsedError;
+  String? get paymentId => throw _privateConstructorUsedError;
+  int? get amount => throw _privateConstructorUsedError;
+  List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TransactionDataModelCopyWith<TransactionDataModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TransactionDataModelCopyWith<$Res> {
+  factory $TransactionDataModelCopyWith(TransactionDataModel value,
+          $Res Function(TransactionDataModel) then) =
+      _$TransactionDataModelCopyWithImpl<$Res, TransactionDataModel>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? dealerTitle,
+      String? transactionType,
+      String? paymentStatus,
+      dynamic userId,
+      dynamic dealerId,
+      dynamic bookingId,
+      String? orderId,
+      String? paymentId,
+      int? amount,
+      List<AmountDetailsModel>? logs,
+      DateTime? createdAt});
+}
+
+/// @nodoc
+class _$TransactionDataModelCopyWithImpl<$Res,
+        $Val extends TransactionDataModel>
+    implements $TransactionDataModelCopyWith<$Res> {
+  _$TransactionDataModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? dealerTitle = freezed,
+    Object? transactionType = freezed,
+    Object? paymentStatus = freezed,
+    Object? userId = freezed,
+    Object? dealerId = freezed,
+    Object? bookingId = freezed,
+    Object? orderId = freezed,
+    Object? paymentId = freezed,
+    Object? amount = freezed,
+    Object? logs = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealerTitle: freezed == dealerTitle
+          ? _value.dealerTitle
+          : dealerTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transactionType: freezed == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      paymentStatus: freezed == paymentStatus
+          ? _value.paymentStatus
+          : paymentStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      dealerId: freezed == dealerId
+          ? _value.dealerId
+          : dealerId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      bookingId: freezed == bookingId
+          ? _value.bookingId
+          : bookingId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      orderId: freezed == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      paymentId: freezed == paymentId
+          ? _value.paymentId
+          : paymentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      logs: freezed == logs
+          ? _value.logs
+          : logs // ignore: cast_nullable_to_non_nullable
+              as List<AmountDetailsModel>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TransactionDataModelImplCopyWith<$Res>
+    implements $TransactionDataModelCopyWith<$Res> {
+  factory _$$TransactionDataModelImplCopyWith(_$TransactionDataModelImpl value,
+          $Res Function(_$TransactionDataModelImpl) then) =
+      __$$TransactionDataModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? dealerTitle,
+      String? transactionType,
+      String? paymentStatus,
+      dynamic userId,
+      dynamic dealerId,
+      dynamic bookingId,
+      String? orderId,
+      String? paymentId,
+      int? amount,
+      List<AmountDetailsModel>? logs,
+      DateTime? createdAt});
+}
+
+/// @nodoc
+class __$$TransactionDataModelImplCopyWithImpl<$Res>
+    extends _$TransactionDataModelCopyWithImpl<$Res, _$TransactionDataModelImpl>
+    implements _$$TransactionDataModelImplCopyWith<$Res> {
+  __$$TransactionDataModelImplCopyWithImpl(_$TransactionDataModelImpl _value,
+      $Res Function(_$TransactionDataModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? dealerTitle = freezed,
+    Object? transactionType = freezed,
+    Object? paymentStatus = freezed,
+    Object? userId = freezed,
+    Object? dealerId = freezed,
+    Object? bookingId = freezed,
+    Object? orderId = freezed,
+    Object? paymentId = freezed,
+    Object? amount = freezed,
+    Object? logs = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_$TransactionDataModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealerTitle: freezed == dealerTitle
+          ? _value.dealerTitle
+          : dealerTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transactionType: freezed == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      paymentStatus: freezed == paymentStatus
+          ? _value.paymentStatus
+          : paymentStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      dealerId: freezed == dealerId
+          ? _value.dealerId
+          : dealerId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      bookingId: freezed == bookingId
+          ? _value.bookingId
+          : bookingId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      orderId: freezed == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      paymentId: freezed == paymentId
+          ? _value.paymentId
+          : paymentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      logs: freezed == logs
+          ? _value._logs
+          : logs // ignore: cast_nullable_to_non_nullable
+              as List<AmountDetailsModel>?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TransactionDataModelImpl implements _TransactionDataModel {
+  const _$TransactionDataModelImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.dealerTitle,
+      this.transactionType,
+      this.paymentStatus,
+      this.userId,
+      this.dealerId,
+      this.bookingId,
+      this.orderId,
+      this.paymentId,
+      this.amount,
+      final List<AmountDetailsModel>? logs,
+      this.createdAt})
+      : _logs = logs;
+
+  factory _$TransactionDataModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionDataModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  final String? dealerTitle;
+  @override
+  final String? transactionType;
+  @override
+  final String? paymentStatus;
+  @override
+  final dynamic userId;
+  @override
+  final dynamic dealerId;
+  @override
+  final dynamic bookingId;
+  @override
+  final String? orderId;
+  @override
+  final String? paymentId;
+  @override
+  final int? amount;
+  final List<AmountDetailsModel>? _logs;
+  @override
+  List<AmountDetailsModel>? get logs {
+    final value = _logs;
+    if (value == null) return null;
+    if (_logs is EqualUnmodifiableListView) return _logs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final DateTime? createdAt;
+
+  @override
+  String toString() {
+    return 'TransactionDataModel(id: $id, dealerTitle: $dealerTitle, transactionType: $transactionType, paymentStatus: $paymentStatus, userId: $userId, dealerId: $dealerId, bookingId: $bookingId, orderId: $orderId, paymentId: $paymentId, amount: $amount, logs: $logs, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransactionDataModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.dealerTitle, dealerTitle) ||
+                other.dealerTitle == dealerTitle) &&
+            (identical(other.transactionType, transactionType) ||
+                other.transactionType == transactionType) &&
+            (identical(other.paymentStatus, paymentStatus) ||
+                other.paymentStatus == paymentStatus) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.dealerId, dealerId) &&
+            const DeepCollectionEquality().equals(other.bookingId, bookingId) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.paymentId, paymentId) ||
+                other.paymentId == paymentId) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            const DeepCollectionEquality().equals(other._logs, _logs) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      dealerTitle,
+      transactionType,
+      paymentStatus,
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(dealerId),
+      const DeepCollectionEquality().hash(bookingId),
+      orderId,
+      paymentId,
+      amount,
+      const DeepCollectionEquality().hash(_logs),
+      createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransactionDataModelImplCopyWith<_$TransactionDataModelImpl>
+      get copyWith =>
+          __$$TransactionDataModelImplCopyWithImpl<_$TransactionDataModelImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransactionDataModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TransactionDataModel implements TransactionDataModel {
+  const factory _TransactionDataModel(
+      {@JsonKey(name: '_id') final String? id,
+      final String? dealerTitle,
+      final String? transactionType,
+      final String? paymentStatus,
+      final dynamic userId,
+      final dynamic dealerId,
+      final dynamic bookingId,
+      final String? orderId,
+      final String? paymentId,
+      final int? amount,
+      final List<AmountDetailsModel>? logs,
+      final DateTime? createdAt}) = _$TransactionDataModelImpl;
+
+  factory _TransactionDataModel.fromJson(Map<String, dynamic> json) =
+      _$TransactionDataModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  String? get dealerTitle;
+  @override
+  String? get transactionType;
+  @override
+  String? get paymentStatus;
+  @override
+  dynamic get userId;
+  @override
+  dynamic get dealerId;
+  @override
+  dynamic get bookingId;
+  @override
+  String? get orderId;
+  @override
+  String? get paymentId;
+  @override
+  int? get amount;
+  @override
+  List<AmountDetailsModel>? get logs;
+  @override
+  DateTime? get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$TransactionDataModelImplCopyWith<_$TransactionDataModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 HostelRoomBookingDataModel _$HostelRoomBookingDataModelFromJson(
     Map<String, dynamic> json) {
   return _HostelRoomBookingDataModel.fromJson(json);
@@ -1265,6 +1853,7 @@ mixin _$BookingModel {
       throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
   String? get bookingStatus => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1293,7 +1882,8 @@ abstract class $BookingModelCopyWith<$Res> {
       int? discount,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
-      String? bookingStatus});
+      String? bookingStatus,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -1324,6 +1914,7 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
     Object? guestDetailsList = freezed,
     Object? logs = freezed,
     Object? bookingStatus = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -1386,6 +1977,10 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
           ? _value.bookingStatus
           : bookingStatus // ignore: cast_nullable_to_non_nullable
               as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -1413,7 +2008,8 @@ abstract class _$$BookingModelImplCopyWith<$Res>
       int? discount,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
-      String? bookingStatus});
+      String? bookingStatus,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -1442,6 +2038,7 @@ class __$$BookingModelImplCopyWithImpl<$Res>
     Object? guestDetailsList = freezed,
     Object? logs = freezed,
     Object? bookingStatus = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$BookingModelImpl(
       userId: freezed == userId
@@ -1504,6 +2101,10 @@ class __$$BookingModelImplCopyWithImpl<$Res>
           ? _value.bookingStatus
           : bookingStatus // ignore: cast_nullable_to_non_nullable
               as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -1526,7 +2127,8 @@ class _$BookingModelImpl implements _BookingModel {
       this.discount,
       final List<GuestDetailsModel>? guestDetailsList,
       final List<AmountDetailsModel>? logs,
-      this.bookingStatus})
+      this.bookingStatus,
+      this.createdAt})
       : _guestDetailsList = guestDetailsList,
         _logs = logs;
 
@@ -1580,10 +2182,12 @@ class _$BookingModelImpl implements _BookingModel {
 
   @override
   final String? bookingStatus;
+  @override
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'BookingModel(userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, total: $total, discount: $discount, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus)';
+    return 'BookingModel(userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, total: $total, discount: $discount, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
   }
 
   @override
@@ -1613,7 +2217,9 @@ class _$BookingModelImpl implements _BookingModel {
                 .equals(other._guestDetailsList, _guestDetailsList) &&
             const DeepCollectionEquality().equals(other._logs, _logs) &&
             (identical(other.bookingStatus, bookingStatus) ||
-                other.bookingStatus == bookingStatus));
+                other.bookingStatus == bookingStatus) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
@@ -1634,7 +2240,8 @@ class _$BookingModelImpl implements _BookingModel {
       discount,
       const DeepCollectionEquality().hash(_guestDetailsList),
       const DeepCollectionEquality().hash(_logs),
-      bookingStatus);
+      bookingStatus,
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -1666,7 +2273,8 @@ abstract class _BookingModel implements BookingModel {
       final int? discount,
       final List<GuestDetailsModel>? guestDetailsList,
       final List<AmountDetailsModel>? logs,
-      final String? bookingStatus}) = _$BookingModelImpl;
+      final String? bookingStatus,
+      final DateTime? createdAt}) = _$BookingModelImpl;
 
   factory _BookingModel.fromJson(Map<String, dynamic> json) =
       _$BookingModelImpl.fromJson;
@@ -1701,6 +2309,8 @@ abstract class _BookingModel implements BookingModel {
   List<AmountDetailsModel>? get logs;
   @override
   String? get bookingStatus;
+  @override
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$BookingModelImplCopyWith<_$BookingModelImpl> get copyWith =>

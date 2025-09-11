@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../api/api_result.dart';
 import '../components/custom_progress_bar.dart';
 import '../components/primary_button.dart';

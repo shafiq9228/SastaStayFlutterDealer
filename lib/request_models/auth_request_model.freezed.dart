@@ -644,11 +644,13 @@ mixin _$RegistrationRequestModel {
   String? get hostelLicence => throw _privateConstructorUsedError;
   String? get hostelName => throw _privateConstructorUsedError;
   String? get aboutHostel => throw _privateConstructorUsedError;
-  List<String>? get images => throw _privateConstructorUsedError;
+  List<ImageDataModel>? get images => throw _privateConstructorUsedError;
   List<String>? get amenities => throw _privateConstructorUsedError;
   List<String>? get rules => throw _privateConstructorUsedError;
   String? get gstIn => throw _privateConstructorUsedError;
   LocationModel? get location => throw _privateConstructorUsedError;
+  List<DocumentDataModel>? get kycDocuments =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -672,11 +674,12 @@ abstract class $RegistrationRequestModelCopyWith<$Res> {
       String? hostelLicence,
       String? hostelName,
       String? aboutHostel,
-      List<String>? images,
+      List<ImageDataModel>? images,
       List<String>? amenities,
       List<String>? rules,
       String? gstIn,
-      LocationModel? location});
+      LocationModel? location,
+      List<DocumentDataModel>? kycDocuments});
 
   $LocationModelCopyWith<$Res>? get location;
 }
@@ -709,6 +712,7 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
     Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
+    Object? kycDocuments = freezed,
   }) {
     return _then(_value.copyWith(
       hostelId: freezed == hostelId
@@ -750,7 +754,7 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<ImageDataModel>?,
       amenities: freezed == amenities
           ? _value.amenities
           : amenities // ignore: cast_nullable_to_non_nullable
@@ -767,6 +771,10 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as LocationModel?,
+      kycDocuments: freezed == kycDocuments
+          ? _value.kycDocuments
+          : kycDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DocumentDataModel>?,
     ) as $Val);
   }
 
@@ -802,11 +810,12 @@ abstract class _$$RegistrationRequestModelImplCopyWith<$Res>
       String? hostelLicence,
       String? hostelName,
       String? aboutHostel,
-      List<String>? images,
+      List<ImageDataModel>? images,
       List<String>? amenities,
       List<String>? rules,
       String? gstIn,
-      LocationModel? location});
+      LocationModel? location,
+      List<DocumentDataModel>? kycDocuments});
 
   @override
   $LocationModelCopyWith<$Res>? get location;
@@ -839,6 +848,7 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
+    Object? kycDocuments = freezed,
   }) {
     return _then(_$RegistrationRequestModelImpl(
       hostelId: freezed == hostelId
@@ -880,7 +890,7 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
       images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<ImageDataModel>?,
       amenities: freezed == amenities
           ? _value._amenities
           : amenities // ignore: cast_nullable_to_non_nullable
@@ -897,6 +907,10 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as LocationModel?,
+      kycDocuments: freezed == kycDocuments
+          ? _value._kycDocuments
+          : kycDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DocumentDataModel>?,
     ));
   }
 }
@@ -914,14 +928,16 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       this.hostelLicence,
       this.hostelName,
       this.aboutHostel,
-      final List<String>? images,
+      final List<ImageDataModel>? images,
       final List<String>? amenities,
       final List<String>? rules,
       this.gstIn,
-      this.location})
+      this.location,
+      final List<DocumentDataModel>? kycDocuments})
       : _images = images,
         _amenities = amenities,
-        _rules = rules;
+        _rules = rules,
+        _kycDocuments = kycDocuments;
 
   factory _$RegistrationRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegistrationRequestModelImplFromJson(json);
@@ -944,9 +960,9 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   final String? hostelName;
   @override
   final String? aboutHostel;
-  final List<String>? _images;
+  final List<ImageDataModel>? _images;
   @override
-  List<String>? get images {
+  List<ImageDataModel>? get images {
     final value = _images;
     if (value == null) return null;
     if (_images is EqualUnmodifiableListView) return _images;
@@ -978,10 +994,19 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   final String? gstIn;
   @override
   final LocationModel? location;
+  final List<DocumentDataModel>? _kycDocuments;
+  @override
+  List<DocumentDataModel>? get kycDocuments {
+    final value = _kycDocuments;
+    if (value == null) return null;
+    if (_kycDocuments is EqualUnmodifiableListView) return _kycDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location)';
+    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location, kycDocuments: $kycDocuments)';
   }
 
   @override
@@ -1010,7 +1035,9 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             (identical(other.gstIn, gstIn) || other.gstIn == gstIn) &&
             (identical(other.location, location) ||
-                other.location == location));
+                other.location == location) &&
+            const DeepCollectionEquality()
+                .equals(other._kycDocuments, _kycDocuments));
   }
 
   @JsonKey(ignore: true)
@@ -1030,7 +1057,8 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       const DeepCollectionEquality().hash(_amenities),
       const DeepCollectionEquality().hash(_rules),
       gstIn,
-      location);
+      location,
+      const DeepCollectionEquality().hash(_kycDocuments));
 
   @JsonKey(ignore: true)
   @override
@@ -1049,20 +1077,22 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
 abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   const factory _RegistrationRequestModel(
-      {final String? hostelId,
-      final String? mobile,
-      final String? name,
-      final String? email,
-      final String? hostelImage,
-      final String? hostelType,
-      final String? hostelLicence,
-      final String? hostelName,
-      final String? aboutHostel,
-      final List<String>? images,
-      final List<String>? amenities,
-      final List<String>? rules,
-      final String? gstIn,
-      final LocationModel? location}) = _$RegistrationRequestModelImpl;
+          {final String? hostelId,
+          final String? mobile,
+          final String? name,
+          final String? email,
+          final String? hostelImage,
+          final String? hostelType,
+          final String? hostelLicence,
+          final String? hostelName,
+          final String? aboutHostel,
+          final List<ImageDataModel>? images,
+          final List<String>? amenities,
+          final List<String>? rules,
+          final String? gstIn,
+          final LocationModel? location,
+          final List<DocumentDataModel>? kycDocuments}) =
+      _$RegistrationRequestModelImpl;
 
   factory _RegistrationRequestModel.fromJson(Map<String, dynamic> json) =
       _$RegistrationRequestModelImpl.fromJson;
@@ -1086,7 +1116,7 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   @override
   String? get aboutHostel;
   @override
-  List<String>? get images;
+  List<ImageDataModel>? get images;
   @override
   List<String>? get amenities;
   @override
@@ -1095,6 +1125,8 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   String? get gstIn;
   @override
   LocationModel? get location;
+  @override
+  List<DocumentDataModel>? get kycDocuments;
   @override
   @JsonKey(ignore: true)
   _$$RegistrationRequestModelImplCopyWith<_$RegistrationRequestModelImpl>

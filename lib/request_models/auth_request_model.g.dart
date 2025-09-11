@@ -72,8 +72,9 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
       hostelLicence: json['hostelLicence'] as String?,
       hostelName: json['hostelName'] as String?,
       aboutHostel: json['aboutHostel'] as String?,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => ImageDataModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       amenities: (json['amenities'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -83,6 +84,9 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
       location: json['location'] == null
           ? null
           : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
+      kycDocuments: (json['kycDocuments'] as List<dynamic>?)
+          ?.map((e) => DocumentDataModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
@@ -102,6 +106,7 @@ Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
       'rules': instance.rules,
       'gstIn': instance.gstIn,
       'location': instance.location,
+      'kycDocuments': instance.kycDocuments,
     };
 
 _$LocationModelImpl _$$LocationModelImplFromJson(Map<String, dynamic> json) =>

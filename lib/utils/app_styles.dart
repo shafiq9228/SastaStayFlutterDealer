@@ -7,7 +7,8 @@ class AppStyles {
 
       static  final  bottomBg = BoxDecoration(color: CustomColors.white,borderRadius: const BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)));
 
-      static final gradientColorDecoration1 = BoxDecoration(gradient: LinearGradient(
+
+  static final gradientColorDecoration1 = BoxDecoration(gradient: LinearGradient(
           colors: [CustomColors.primary.withOpacity(0.2), CustomColors.white],
           transform: GradientRotation(0.1), // rotates the gradient (in radians)
           ),borderRadius: BorderRadius.circular(10));

@@ -185,7 +185,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     Obx(() => authViewModel.registerDealerResponseObserver.value.maybeWhen(
                         loading: () => const CustomProgressBar(),
                         orElse: () => PrimaryButton(buttonTxt: "CONFIRM", buttonClick: () {
-                          authViewModel.registerUser(RegistrationRequestModel(mobile: mobileController.text,email: emailIdController.text,name: nameController.text));
+                          authViewModel.registerUser(RegistrationRequestModel(mobile: mobileController.text,email: emailIdController.text,name: nameController.text,kycDocuments:authViewModel.kysDocuments));
                         },))
                     ),
                     const SizedBox(height: 50),

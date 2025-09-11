@@ -1,9 +1,15 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/components/add_guest_item.dart';
+import 'package:sasta_stay_dealer/components/error_text_component.dart';
+import 'package:sasta_stay_dealer/components/icon_title_message_component.dart';
 import 'package:sasta_stay_dealer/pages/hostels_page.dart';
 import 'package:sasta_stay_dealer/components/profile_menu.dart';
+import 'package:sasta_stay_dealer/pages/money_withdraw_page.dart';
 import 'package:sasta_stay_dealer/pages/rating_reviews_page.dart';
+import 'package:sasta_stay_dealer/pages/registration_page.dart';
+import 'package:sasta_stay_dealer/pages/transactions_page.dart';
 import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
 import 'package:sasta_stay_dealer/utils/auth_utils.dart';
 
@@ -15,6 +21,7 @@ import '../utils/custom_colors.dart';
 import '../utils/preference_manager.dart';
 import '../utils/statefullwrapper.dart';
 import '../view_models/auth_view_model.dart';
+import 'kyc_page.dart';
 import 'mobile_verification_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -30,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
   RxBool logOuting = false.obs;
   RxString customerSupportNumber = "".obs;
   RxString version = "".obs;
-
 
   void logOutConfirmationDialog(DealerModel? dealerModel){
     showDialog(
@@ -156,6 +162,38 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: CustomColors.darkGray)),
+                            SizedBox(height: 20),
+                            InkWell(
+                              onTap: () {
+                                Get.to(() => RegistrationPage(dealer: userModel));
+                              },
+                              child: IntrinsicWidth(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(width: 0.5,color: CustomColors.darkGray),
+                                    color: CustomColors.white.withOpacity(0.3),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.mode_edit_outline_outlined,color: CustomColors.textColor,size: 15),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        child: Text(
+                                          "Edit Profile",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            color: CustomColors.textColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                             SizedBox(height: 50),
                             Padding(
                               padding: const EdgeInsets.all(15),
@@ -169,6 +207,28 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray,),
+                                      Obx(() =>
+                                          Visibility(
+                                          visible: (authViewModel.kysDocuments).any((edir) =>  edir.documentStatus == "pending") == true,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              ProfileMenu(title: "Kyc Verification", image: "assets/images/kyc.png", onTapped: (){
+                                                Get.to(() => KycPage(dealerModel: userModel));
+                                              }),
+                                              DottedLine(dashColor: CustomColors.darkGray),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      ProfileMenu(title: "Transaction History", image: "assets/images/wallet.png", onTapped: (){
+                                        Get.to(() => const TransactionsPage());
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray),
+                                      ProfileMenu(title: "Wallet", image: "assets/images/wallet.png", onTapped: (){
+                                        Get.to(() =>  MoneyWithdrawPage());
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray),
                                       ProfileMenu(title: "Rating And Reviews", image: "assets/images/star.png", onTapped: (){
                                          Get.to(() => RatingReviewsPage(rating: 0));
                                       }),

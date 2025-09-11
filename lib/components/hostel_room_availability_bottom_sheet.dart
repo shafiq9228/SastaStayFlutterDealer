@@ -554,8 +554,8 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                               checkInDate: _selectedDates.first,
                               checkOutDate: _selectedDates.last,
                               guestCount: _guestCount,
-                              guestDetailsList: [],
-                            ),widget.roomModel
+                              guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
+                            ),widget.roomModel,true
                           );
                         }),
                       ],
@@ -576,8 +576,8 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                             checkInDate: _selectedDates.first,
                             checkOutDate: _selectedDates.last,
                             guestCount: _guestCount,
-                            guestDetailsList: [],
-                          ),widget.roomModel
+                            guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
+                          ),widget.roomModel,true
                         );
                       },
                     );
@@ -599,8 +599,8 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                           checkInDate: _selectedDates.first,
                           checkOutDate: _selectedDates.last,
                           guestCount: _guestCount,
-                          guestDetailsList: [],
-                        ),widget.roomModel
+                          guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
+                        ),widget.roomModel,true
                       );
                     },
                   ),

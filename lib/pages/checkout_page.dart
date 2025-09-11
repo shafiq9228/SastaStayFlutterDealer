@@ -19,6 +19,7 @@ import '../utils/app_styles.dart';
 import '../utils/auth_utils.dart';
 import '../utils/custom_colors.dart';
 import '../view_models/booking_view_model.dart';
+import 'coupons_page.dart';
 
 
 class CheckoutPage extends StatelessWidget {
@@ -130,7 +131,7 @@ class CheckoutPage extends StatelessWidget {
                                       },
                                         child: AddGuestItem(guestDetailsModel:guestDetailsModel,index: index));
                                   },itemCount: bookingViewModel.guestDetailsList.length),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Visibility(visible: bookingViewModel.guestDetailsList.length < (bookingViewModel.bookingRequestModelObserver.value?.guestCount ?? 0),child:
                               InkWell(
                                 onTap: (){
@@ -169,6 +170,91 @@ class CheckoutPage extends StatelessWidget {
                           const SizedBox(height: 10),
                         ],
                       ) : const SizedBox(),
+                      ),
+                      Obx(() {
+                        return bookingViewModel.selectedCoupon.value != null ? InkWell(
+                          onTap: (){
+                            Get.to(() => const CouponsPage(selecting: true));
+                          },
+                          child: Container(
+                            decoration: AppStyles.editTextBg,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.local_offer,size: 15,color: CustomColors.primary),
+                                      SizedBox(width: 5),
+                                      Text(
+                                          '${bookingViewModel.selectedCoupon.value?.code ?? ""} ',
+                                          style:  TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 18,
+                                              color: CustomColors.textColor)),
+                                      Text(
+                                          ' Coupon applied',
+                                          style:  TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              color: CustomColors.textColor)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text('View all offers',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14,
+                                          decoration: TextDecoration.underline,
+                                          color: CustomColors.primary))
+                                ],
+                              ),
+                            ),
+                          ),
+                        ) :
+                        InkWell(
+                          onTap: (){
+                            Get.to(() => const CouponsPage(selecting: true));
+                          },
+                          child: Container(
+                            decoration: AppStyles.editTextBg,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.local_offer_outlined,size: 15,color: CustomColors.textColor),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                                        child: Text(
+                                            'Apply Coupon',
+                                            style:  TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 18,
+                                                color: CustomColors.textColor)),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text('View all offers',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14,
+                                          decoration: TextDecoration.underline,
+                                          color: CustomColors.primary))
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       ),
                       Obx(() => bookingViewModel.checkHostelRoomAvailabilityObserver.value.maybeWhen(
                           success: (response) {

@@ -25,6 +25,11 @@ class AuthUtils {
     return DateFormat("MMM d yyyy").format(date);
   }
 
+  static String formatDatetime(DateTime? date) {
+    if(date == null) return "";
+    return DateFormat("dd MMMM yyyy, hh:mm a").format(date);
+  }
+
   static void navigateFromPageName(String? page,HostelModel? hostel){
     switch(page){
       case "registrationPage": Get.offAll(() => const RegistrationPage());

@@ -211,9 +211,9 @@ class _AddGuestBottomSheetState extends State<AddGuestBottomSheet> {
                   child: Text("Upload Aadhar Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
                 ),
                 Obx(() => SizedBox(
-                  child: bookingViewModel.aadharImage.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: bookingViewModel.aadharImage.value, fileName: 'aadhar')  :
+                  child: bookingViewModel.aadharImage.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: bookingViewModel.aadharImage.value, fileName: 'guestDoc')  :
                   UploadingViewComponent(uploadingText: "Upload Image", onClick: (){
-                    Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'aadhar'));
+                    Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'guestDoc'));
                   }),
                 ),
                 ),

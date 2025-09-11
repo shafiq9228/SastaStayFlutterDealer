@@ -28,24 +28,29 @@ class BookingViewModel extends GetxController{
   final fetchOngoingBookingsObserver =  PaginationModel(data: const ApiResult<FetchBookingsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
   final fetchUpComingBookingsObserver =  PaginationModel(data: const ApiResult<FetchBookingsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
   final fetchPastBookingsObserver =  PaginationModel(data: const ApiResult<FetchBookingsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
+  final fetchCancelledBookingsObserver =  PaginationModel(data: const ApiResult<FetchBookingsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
 
   final fetchBookingDetailsObserver = const ApiResult<FetchBookingDetailsResponseModel>.init().obs;
 
   RxList<GuestDetailsModel> guestDetailsList = <GuestDetailsModel>[].obs;
   RxString aadharImage = "".obs;
 
+  Rx<CouponDataModel?> selectedCoupon = Rx<CouponDataModel?>(null);
 
-  Future<void> checkHostelRoomAvailability(BookingRequestModel request,RoomModel? roomModel) async {
+
+  Future<void> checkHostelRoomAvailability(BookingRequestModel? request,RoomModel? roomModel,bool? navigate) async {
     try{
       checkHostelRoomAvailabilityObserver.value = const ApiResult.loading();
-      final response = await apiProvider.post(EndPoints.checkHostelRoomAvailability,request.toJson());
+      final newRequest = request?.copyWith(couponId: selectedCoupon.value?.id ?? "");
+      final response = await apiProvider.post(EndPoints.checkHostelRoomAvailability,newRequest?.toJson());
       final body = response.body;
       if(response.isOk && body !=null){
         var responseData = HostelRoomAvailabilityResponseModel.fromJson(body);
         if(responseData.status == 1){
-          final updatedRequest = request.copyWith(roomModel: request.roomModel?.copyWith(checkInDate: request.checkInDate,checkOutDate: request.checkOutDate,guestCount: request.guestCount));
+          final updatedRequest = request?.copyWith(roomModel: request.roomModel?.copyWith(checkInDate: request.checkInDate,checkOutDate: request.checkOutDate,guestCount: request.guestCount));
           bookingRequestModelObserver.value = updatedRequest;
           checkHostelRoomAvailabilityObserver.value = ApiResult.success(responseData);
+          if(navigate == false) return;
           Get.to(() => CheckoutPage(roomModel: roomModel));
           return;
         }
@@ -62,8 +67,9 @@ class BookingViewModel extends GetxController{
   Future<void> performConfirmBooking(BookingRequestModel? request) async {
     try{
       if(request == null) throw "Invalid Booking Request";
+      final newRequest = request.copyWith(couponId: selectedCoupon.value?.id ?? "");
       confirmBookingObserver.value = const ApiResult.loading();
-      final response = await apiProvider.post(EndPoints.confirmBooking,request.toJson());
+      final response = await apiProvider.post(EndPoints.confirmBooking,newRequest.toJson());
       final body = response.body;
       if(response.isOk && body !=null){
         final responseData = ConfirmBookingResponseModel.fromJson(body);
@@ -84,7 +90,7 @@ class BookingViewModel extends GetxController{
 
 
   Future<void> fetchBookings(PaginationRequestModel request,bool refresh) async {
-    final observer = (request.searchQuery?? "").trim().isNotEmpty ? fetchSearchedBookingsObserver  : request.query == "Ongoing" ? fetchOngoingBookingsObserver : request.query == "Upcoming" ? fetchUpComingBookingsObserver : request.query == "Past" ? fetchPastBookingsObserver : fetchAllBookingsObserver;
+    final observer = (request.searchQuery?? "").trim().isNotEmpty ? fetchSearchedBookingsObserver  : request.query == "Ongoing" ? fetchOngoingBookingsObserver : request.query == "Upcoming" ? fetchUpComingBookingsObserver : request.query == "Past" ? fetchPastBookingsObserver : request.query == "Cancelled" ? fetchCancelledBookingsObserver : fetchAllBookingsObserver;
     try{
       if(refresh == true){
         observer.value = PaginationModel(data: const ApiResult<FetchBookingsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "");

@@ -1,4 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sasta_stay_dealer/components/kyc_document_component.dart';
+import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
+
+import '../response_model/hostel_response_model.dart';
 
 part 'auth_request_model.freezed.dart';
 part 'auth_request_model.g.dart';
@@ -55,11 +59,12 @@ class RegistrationRequestModel with _$RegistrationRequestModel{
     String? hostelLicence,
     String? hostelName,
     String? aboutHostel,
-    List<String>? images,
+    List<ImageDataModel>? images,
     List<String>? amenities,
     List<String>? rules,
     String? gstIn,
     LocationModel? location,
+    List<DocumentDataModel>? kycDocuments
   }) = _RegistrationRequestModel;
 
   factory RegistrationRequestModel.fromJson(Map<String, dynamic> json) => _$RegistrationRequestModelFromJson(json);

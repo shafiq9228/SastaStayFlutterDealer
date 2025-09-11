@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sasta_stay_dealer/components/amenity_component.dart';
 import 'package:sasta_stay_dealer/components/home_page_component.dart';
@@ -64,10 +66,42 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const HomePageComponent(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: SizedBox(
+                            height: 80,
+                            width: double.infinity,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context,index){
+                                  final statsModel =  hostelData?.stats?[index];
+                                  RxList<BoxDecoration> decorations = [AppStyles.categoryBg1,AppStyles.categoryBg2,AppStyles.categoryBg3,AppStyles.categoryBg4,AppStyles.categoryBg5].obs;
+                                  final random = Random();
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    child: Container(
+                                      decoration: decorations[random.nextInt(decorations.length)],
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(statsModel?.type ?? "",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 16,color: CustomColors.primary)),
+                                            const SizedBox(height: 5),
+                                            Text("₹${statsModel?.amount ?? "0"}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: CustomColors.textColor))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },itemCount: hostelData?.stats?.length ?? 0),
+                          ),
+                        ),
+                        SizedBox(height: 20),
                         InkWell(
                       onTap: (){
                         authViewModel.images.value = hostelData?.images ?? [];
-                        Get.to(() => const HostelImagesPage());
+                        Get.to(() => HostelImagesPage(hostelModel: hostelData));
                       },
                       child: Stack(
                         alignment: Alignment.bottomCenter,
@@ -88,11 +122,11 @@ class HomePage extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: (hostelData?.images?.length ?? 0) > 5
+                                    itemCount: (hostelData?.images?.first.images?.length ?? 0) > 5
                                         ? 5
-                                        : hostelData?.images?.length ?? 0,
+                                        : hostelData?.images?.first.images?.length ?? 0,
                                     itemBuilder: (context, index) {
-                                      final images = hostelData?.images ?? [];
+                                      final images = hostelData?.images?.first.images ?? [];
                                       final imageUrl = images[index];
                                       // If last index and there are more than 5 images
                                       if (index == 4 && images.length > 5) {
@@ -195,7 +229,7 @@ class HomePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         CustomOutlinedButton(buttonTxt: "Edit Hostel Details", buttonClick: (){
-                          Get.to(() => const UpdateHostelDetailsPage());
+                          Get.to(() =>  UpdateHostelDetailsPage(hostelModel: hostelData));
                         }),
                         // Chip(
                         //   label: Text(hostelData?.hostelType ?? 'Type'),

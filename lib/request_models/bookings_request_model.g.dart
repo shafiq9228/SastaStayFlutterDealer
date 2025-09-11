@@ -24,6 +24,7 @@ _$BookingRequestModelImpl _$$BookingRequestModelImplFromJson(
       guestDetailsList: (json['guestDetailsList'] as List<dynamic>?)
           ?.map((e) => GuestDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      couponId: json['couponId'] as String?,
     );
 
 Map<String, dynamic> _$$BookingRequestModelImplToJson(
@@ -36,4 +37,17 @@ Map<String, dynamic> _$$BookingRequestModelImplToJson(
       'checkOutDate': instance.checkOutDate?.toIso8601String(),
       'guestCount': instance.guestCount,
       'guestDetailsList': instance.guestDetailsList,
+      'couponId': instance.couponId,
+    };
+
+_$AddBalanceRequestModelImpl _$$AddBalanceRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AddBalanceRequestModelImpl(
+      amount: (json['amount'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$AddBalanceRequestModelImplToJson(
+        _$AddBalanceRequestModelImpl instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
     };

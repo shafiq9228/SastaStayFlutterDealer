@@ -95,8 +95,9 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       aboutHostel: json['aboutHostel'] as String?,
       gstIn: json['gstIn'] as String?,
       hostelType: json['hostelType'] as String?,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => ImageDataModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       amenityIds: (json['amenityIds'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -120,6 +121,12 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       totalIncome: json['totalIncome'] as int?,
       totalVotes: json['totalVotes'] as int?,
       rating: json['rating'],
+      imagesType: (json['imagesType'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      stats: (json['stats'] as List<dynamic>?)
+          ?.map((e) => StatsDataModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
@@ -148,6 +155,35 @@ Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
       'totalIncome': instance.totalIncome,
       'totalVotes': instance.totalVotes,
       'rating': instance.rating,
+      'imagesType': instance.imagesType,
+      'stats': instance.stats,
+    };
+
+_$ImageDataModelImpl _$$ImageDataModelImplFromJson(Map<String, dynamic> json) =>
+    _$ImageDataModelImpl(
+      imagesType: json['imagesType'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$$ImageDataModelImplToJson(
+        _$ImageDataModelImpl instance) =>
+    <String, dynamic>{
+      'imagesType': instance.imagesType,
+      'images': instance.images,
+    };
+
+_$StatsDataModelImpl _$$StatsDataModelImplFromJson(Map<String, dynamic> json) =>
+    _$StatsDataModelImpl(
+      type: json['type'] as String?,
+      amount: json['amount'] as int?,
+    );
+
+Map<String, dynamic> _$$StatsDataModelImplToJson(
+        _$StatsDataModelImpl instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'amount': instance.amount,
     };
 
 _$FetchAmenitiesResponseModelImpl _$$FetchAmenitiesResponseModelImplFromJson(

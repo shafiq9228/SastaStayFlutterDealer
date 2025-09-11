@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "161030257652",
+    "project_id": "sastastay-1d420",
+    "storage_bucket": "sastastay-1d420.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161030257652:android:06b7496e37e4163b0557a1",
+        "android_client_info": {
+          "package_name": "com.example.pg_hostel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161030257652-asleoefo2bop372c04dblmhfdampdvtv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pg_hostel",
+            "certificate_hash": "689f38dae86b0adf44e94ea85feee86e8bede255"
+          }
+        },
+        {
+          "client_id": "161030257652-hjpvmlhqe3sobegbiu370f4r9l7367j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5lweTY8XpatalR0knkkSHfXrVtJDJy4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161030257652-hjpvmlhqe3sobegbiu370f4r9l7367j5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "161030257652-ljlr7vb5ratffvlqekuss0va1jiot8pv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pgHostel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161030257652:android:3b51506f87fb7e020557a1",
+        "android_client_info": {
+          "package_name": "com.example.sasta_stay_dealer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161030257652-hjpvmlhqe3sobegbiu370f4r9l7367j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5lweTY8XpatalR0knkkSHfXrVtJDJy4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161030257652-hjpvmlhqe3sobegbiu370f4r9l7367j5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "161030257652-ljlr7vb5ratffvlqekuss0va1jiot8pv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pgHostel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,7 +26,7 @@ class BookingsPage extends StatefulWidget {
 
 class _BookingsPageState extends State<BookingsPage> {
   final bookingsViewModel = Get.put(BookingViewModel());
-  final displayList = ["All","Ongoing","Upcoming","Past"];
+  final displayList = ["All","Ongoing","Upcoming","Past","Cancelled"];
   RxString filterType = "All".obs;
 
   final TextEditingController searchController = TextEditingController();
@@ -183,7 +183,7 @@ class _BookingsPageState extends State<BookingsPage> {
                                           }),
                                       Visibility(
                                           visible: (bookingsList?.length ?? 0) < 5,
-                                          child: SizedBox(height: 500,width: double.infinity)),
+                                          child: const SizedBox(height: 500,width: double.infinity)),
                                       Obx(() => Visibility(
                                           visible: observer.value.isLoading,
                                           child: const BookingDetailsShimmer(index: 1)),
@@ -233,6 +233,8 @@ class _BookingsPageState extends State<BookingsPage> {
           return bookingsViewModel.fetchUpComingBookingsObserver;
         case "Past":
           return bookingsViewModel.fetchPastBookingsObserver;
+        case "Cancelled":
+          return bookingsViewModel.fetchCancelledBookingsObserver;
         default:
           return bookingsViewModel.fetchAllBookingsObserver;
       }
@@ -255,6 +257,8 @@ class _BookingsPageState extends State<BookingsPage> {
         return bookingsViewModel.fetchUpComingBookingsObserver.value.data.value.maybeWhen(success:(data) => (data as FetchBookingsResponseModel).data?.length ?? 0,orElse: () => 0);
       case "Past":
         return bookingsViewModel.fetchPastBookingsObserver.value.data.value.maybeWhen(success:(data) => (data as FetchBookingsResponseModel).data?.length ?? 0,orElse: () => 0);
+      case "Cancelled":
+        return bookingsViewModel.fetchCancelledBookingsObserver.value.data.value.maybeWhen(success:(data) => (data as FetchBookingsResponseModel).data?.length ?? 0,orElse: () => 0);
       default:
         return bookingsViewModel.fetchAllBookingsObserver.value.data.value.maybeWhen(success:(data) => (data as FetchBookingsResponseModel).data?.length ?? 0,orElse: () => 0);
     }

@@ -67,7 +67,7 @@ class HostelModel with _$HostelModel{
     String? aboutHostel,
     String? gstIn,
     String? hostelType,
-    List<String>? images,
+    List<ImageDataModel>? images,
     List<String>? amenityIds,
     List<AmenitiesModel>? amenities,
     int? amenitiesMore,
@@ -79,11 +79,34 @@ class HostelModel with _$HostelModel{
     int? monthlyIncome,
     int? totalIncome,
     int? totalVotes,
-    dynamic rating
+    dynamic rating,
+    List<String>? imagesType,
+    List<StatsDataModel>? stats
   }) = _HostelModel;
 
   factory HostelModel.fromJson(Map<String, dynamic> json) => _$HostelModelFromJson(json);
 }
+
+@Freezed()
+class ImageDataModel with _$ImageDataModel{
+  const factory ImageDataModel({
+    String? imagesType,
+    List<String>? images
+  }) = _ImageDataModel;
+
+  factory ImageDataModel.fromJson(Map<String, dynamic> json) => _$ImageDataModelFromJson(json);
+}
+
+@Freezed()
+class StatsDataModel with _$StatsDataModel{
+  const factory StatsDataModel({
+    String? type,
+    int? amount
+  }) = _StatsDataModel;
+
+  factory StatsDataModel.fromJson(Map<String, dynamic> json) => _$StatsDataModelFromJson(json);
+}
+
 
 
 @Freezed()

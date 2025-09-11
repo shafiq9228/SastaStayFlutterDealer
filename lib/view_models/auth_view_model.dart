@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -53,12 +54,26 @@ class AuthViewModel extends GetxController{
   Rx<String> hostelImage = "".obs;
   Rx<String> hostelLicence = "".obs;
   RxList<String> rules = <String>[].obs;
-  RxList<String> images = <String>[].obs;
+  RxList<ImageDataModel> images = <ImageDataModel>[].obs;
   RxList<String> amenityIds = <String>[].obs;
 
   final hostelViewModel = Get.put(HostelViewModel());
   final bookingViewModel = Get.put(BookingViewModel());
 
+  RxList<DocumentDataModel> kysDocuments = [
+    DocumentDataModel(
+      documentType: "aadhar",
+      documentStatus: "pending",
+      uploadedUrl: "",
+      errorTxt: '',
+    ),
+    DocumentDataModel(
+      documentType: "pan",
+      documentStatus: "pending",
+      uploadedUrl: "",
+      errorTxt: '',
+    )
+  ].obs;
 
   String? getPrimaryId(){
     return dealerStatusObserver.value.maybeWhen(success: (data) => (data as FormHelperDataResponseModel).data?.primaryHostel?.id ?? "",orElse: () => "");
@@ -195,12 +210,14 @@ class AuthViewModel extends GetxController{
         final responseData = FetchUserDetailsResponseModel.fromJson(body);
         if(responseData.status == 1){
           fetchUserDetailsObserver.value = ApiResult.success(responseData);
-          // await FirebaseMessaging.instance.subscribeToTopic(responseData.data?.id ?? "");
-          // await FirebaseMessaging.instance.subscribeToTopic("all");
-          // await FirebaseMessaging.instance.subscribeToTopic("dealer");
-          // final fcmToken = await FirebaseMessaging.instance.getToken();
-          // print("Fcm Token");
-          // print(fcmToken);
+          if((responseData.data?.kycDocuments ?? []).length == 2){
+            kysDocuments.value = responseData.data?.kycDocuments ??  kysDocuments;
+          }
+
+          await FirebaseMessaging.instance.subscribeToTopic(responseData.data?.id ?? "");
+          await FirebaseMessaging.instance.subscribeToTopic("all");
+          await FirebaseMessaging.instance.subscribeToTopic("dealers");
+
           return;
         }
         throw "something went wrong${responseData.message}";
@@ -216,6 +233,7 @@ class AuthViewModel extends GetxController{
   Future<void> performUploadFile(File selectedFile,String type) async {
     try {
       uploadFileObserver.value = const ApiResult.loadingCondition("dsx", false);
+      if(hostelViewModel.selectedHostelImageType.value == "" && type == "hostelImages") throw "ImagesType Is Required";
       File file = await compressImage(selectedFile,50);
       uploadFileObserver.value = const ApiResult.loading();
       var uri = Uri.parse(apiProvider.liveUrl + EndPoints.uploadFile);
@@ -247,11 +265,38 @@ class AuthViewModel extends GetxController{
           if(type == "hostelImage"){
             hostelImage.value = jsonData.data ?? "";
           }
-          else if(type == "hostelImages"){
-            images.add(jsonData.data ?? "");
+          else if (type == "hostelImages") {
+            final existIndex = images.indexWhere(
+                  (imageObj) => imageObj.imagesType == hostelViewModel.selectedHostelImageType.value,
+            );
+
+            if (existIndex == -1) {
+              images.add(
+                ImageDataModel(
+                  imagesType: hostelViewModel.selectedHostelImageType.value,
+                  images: [jsonData.data ?? ""],
+                ),
+              );
+            } else {
+              // Clone the list so it's mutable
+              final existingImages = images[existIndex].images ?? [];
+              final updatedImages = [...existingImages, jsonData.data ?? ""]; // spread operator creates a new list
+
+              images[existIndex] = images[existIndex].copyWith(images: updatedImages);
+            }
           }
-          else if(type == "aadhar"){
+          else if(type == "guestDoc"){
             bookingViewModel.aadharImage.value = jsonData.data ?? "";
+          }
+          else if(type == "aadhar" || type == "pan" || type == "selfie"){
+            final existingKycList = kysDocuments.toList() ?? List.empty();
+            final index = existingKycList.indexWhere((element) => element.documentType == type);
+            if(index != -1){
+              final updatedKycList = existingKycList[index].copyWith(uploadedUrl: jsonData.data ?? "",documentStatus: "pending");
+              existingKycList[index] = updatedKycList;
+              kysDocuments.value = existingKycList;
+              kysDocuments.refresh();
+            }
           }
           else if(type == "roomImage"){
             hostelViewModel.roomImage.value = jsonData.data ?? "";
@@ -266,6 +311,7 @@ class AuthViewModel extends GetxController{
     }
       throw "Body Null";
     } catch (e) {
+      print(e);
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       uploadFileObserver.value = ApiResult.error(e.toString());
     }
@@ -368,38 +414,6 @@ class AuthViewModel extends GetxController{
     catch(e){
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       updateHostelDetailsResponseObserver.value = ApiResult.error(e.toString());
-    }
-  }
-
-  Future<void> updateDealerDetails(RegistrationRequestModel request) async {
-    try{
-      updateDealerDetailsResponseObserver.value = const ApiResult.loading();
-      final String? validatorResponse = AuthUtils.validateRequestFields(['name','email'], request.toJson());
-      if(validatorResponse != null) throw validatorResponse;
-      final response = await apiProvider.post(EndPoints.updateDealerDetails,request.toJson());
-      final body = response.body;
-      if(response.isOk && body != null){
-        final updatedResponseData = FetchUserDetailsResponseModel.fromJson(body);
-        if(updatedResponseData.status == 1){
-          updateDealerDetailsResponseObserver.value = ApiResult.success(updatedResponseData);
-          final updatedDealerDetails = updatedResponseData.data;
-          fetchUserDetailsObserver.value.whenOrNull(success: (responseData){
-            var userResponse = (responseData as FetchUserDetailsResponseModel);
-            userResponse = userResponse.copyWith(data:updatedDealerDetails);
-            fetchUserDetailsObserver.value = ApiResult.success(userResponse);
-          });
-          Get.back();
-          Get.snackbar("Success","Details Updated Successfully",backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
-          return;
-        }
-
-        throw "something went wrong${updatedResponseData.message}";
-      }
-      throw "Response Body Null";
-    }
-    catch(e){
-      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
-      updateDealerDetailsResponseObserver.value = ApiResult.error(e.toString());
     }
   }
 

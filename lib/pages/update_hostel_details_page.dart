@@ -21,7 +21,8 @@ import '../view_models/auth_view_model.dart';
 import 'file_picker_page.dart';
 import 'location_picker_page.dart';
 class UpdateHostelDetailsPage extends StatefulWidget {
-  const UpdateHostelDetailsPage({super.key});
+  final HostelModel? hostelModel;
+  const UpdateHostelDetailsPage({super.key, required this.hostelModel});
 
   @override
   State<UpdateHostelDetailsPage> createState() => _UpdateHostelDetailsPageState();
@@ -103,7 +104,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                               ),
                               InkWell(
                                 onTap: (){
-                                  Get.to(() => const HostelImagesPage(edit:true));
+                                  Get.to(() => HostelImagesPage(edit:true, hostelModel:widget.hostelModel));
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -183,7 +184,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    items: ['Boys','Girls','Couple'].map((gender) {
+                                    items: ['Boys','Girls','Co-living','Luxury'].map((gender) {
                                       return DropdownMenuItem(
                                         value: gender,
                                         child: Text(gender),

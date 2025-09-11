@@ -30,13 +30,13 @@ class _HostelsPageState extends State<HostelsPage> {
 
     return Scaffold(
       backgroundColor: CustomColors.white,
-      body: StatefulWrapper(
-      onInit: _refreshData,
-      child: SafeArea(
-          top:true,
-          child: Stack(
-            children: [
-              Column(
+      body: Stack(
+        children: [
+          StatefulWrapper(
+          onInit: _refreshData,
+          child: SafeArea(
+              top:true,
+              child: Column(
               children: [
                 SecondaryHeadingComponent(buttonTxt: "Hostels", buttonClick: (){
                      Get.back();
@@ -91,11 +91,11 @@ class _HostelsPageState extends State<HostelsPage> {
                   ),
                 )
                       ],
-                    ),
-              Obx(()=> hostelViewModel.setAsPrimaryHostelResponseObserver.value.maybeWhen(loading: () => Expanded(child: Container(color: CustomColors.black.withOpacity(0.4),child: Center(child: CircularProgressIndicator(color: CustomColors.white)),)),orElse: () => const SizedBox())),
-            ],
-          )),
-    ),);
+                    )),
+              ),
+          Obx(()=> hostelViewModel.setAsPrimaryHostelResponseObserver.value.maybeWhen(loading: () => Container(width: double.infinity,height: double.infinity,color: CustomColors.black.withOpacity(0.4),child: Center(child: CircularProgressIndicator(color: CustomColors.white)),),orElse: () => const SizedBox())),
+        ],
+      ),);
   }
 
   Future<void> _refreshData() async{

@@ -7,7 +7,6 @@ class EndPoints {
   static const fetchDealerStatus = "fetchDealerStatus";
   static const fetchUserDetails = "fetchDealerDetails";
   static const registerDealer = "registerDealer";
-  static const updateDealerDetails = "updateDealerDetails";
   static const uploadFile = "uploadFile";
 
   static const registerHostel = "registerHostel";
@@ -26,5 +25,21 @@ class EndPoints {
   static const registerRoom = "registerRoom";
 
   static const fetchRatingAndReviews = "fetchRatingAndReviews";
+
+  static const fetchCoupons = "fetchCoupons";
+
+  static const fetchTransactions = "fetchTransactions";
+
+  static const fetchWithdrawalDetails = "fetchWithdrawalDetails";
+
+  //pay u withdraw
+  static const payUAddCustomer = "payUAddCustomer";
+  static const payUVerifyOtp = "payUVerifyOtp";
+
+  static const createAccount = "createAccount";
+  static const deleteAccount = "deleteAccount";
+  static const addBankAccount = "addBankAccount";
+  static const fetchAccounts = "fetchAccounts";
+
 
 }

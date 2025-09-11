@@ -36,6 +36,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
           child:Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -51,7 +52,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                               child: Row(
                                 children: [
                                   Icon(Icons.call_outlined,color: CustomColors.darkGray,size: 15),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Expanded(child: Text("${userModel.mobile ?? 0}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
                                 ],
                               ),
@@ -121,6 +122,10 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                       ) : Text(widget.bookingModel?.paymentStatus ?? '',style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.orange)),
                     )
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Text("Booked On : ${AuthUtils.formatDateToLong(widget.bookingModel?.createdAt)}",style: TextStyle(color: CustomColors.textColor,fontSize: 12,fontWeight: FontWeight.w400)),
                 )
               ],
             ),
