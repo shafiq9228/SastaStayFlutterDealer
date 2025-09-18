@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/pages/splash_screen.dart';
 import 'package:sasta_stay_dealer/utils/custom_colors.dart';
 import 'package:sasta_stay_dealer/utils/firebase_notification.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'firebase_options.dart';
 
 
@@ -16,6 +17,9 @@ Future<void> main() async {
   );
 
   await FireBaseNotification().initNotifications();
+
+  String signature = await SmsAutoFill().getAppSignature;
+  print("📩 App Signature: $signature");
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: CustomColors.primary,

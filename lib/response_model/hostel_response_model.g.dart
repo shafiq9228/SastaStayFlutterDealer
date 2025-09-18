@@ -173,6 +173,40 @@ Map<String, dynamic> _$$ImageDataModelImplToJson(
       'images': instance.images,
     };
 
+_$FetchLeadsResponseModelImpl _$$FetchLeadsResponseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$FetchLeadsResponseModelImpl(
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => LeadModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$FetchLeadsResponseModelImplToJson(
+        _$FetchLeadsResponseModelImpl instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$LeadModelImpl _$$LeadModelImplFromJson(Map<String, dynamic> json) =>
+    _$LeadModelImpl(
+      userId: json['userId'],
+      dealerId: json['dealerId'],
+      hostelId: json['hostelId'],
+      roomId: json['roomId'],
+    );
+
+Map<String, dynamic> _$$LeadModelImplToJson(_$LeadModelImpl instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'dealerId': instance.dealerId,
+      'hostelId': instance.hostelId,
+      'roomId': instance.roomId,
+    };
+
 _$StatsDataModelImpl _$$StatsDataModelImplFromJson(Map<String, dynamic> json) =>
     _$StatsDataModelImpl(
       type: json['type'] as String?,

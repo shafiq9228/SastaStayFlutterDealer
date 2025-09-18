@@ -25,8 +25,14 @@ class HostelViewModel extends GetxController{
   final fetchAmenitiesObserver =  PaginationModel(data: const ApiResult<FetchAmenitiesResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
   final fetchHostelRoomsObserver =  PaginationModel(data: const ApiResult<FetchHostelRoomsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
 
+
+  final fetchLeadsObserver =  PaginationModel(data: const ApiResult<FetchLeadsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
+
   final fetchRatingAndReviewsObserver =  PaginationModel(data: const ApiResult<FetchRatingAndReviewsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
   final fetchCouponsObserver =  PaginationModel(data: const ApiResult<FetchCouponsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
+  final deletedCouponObserver = const ApiResult<PrimaryResponseModel>.init().obs;
+  final createCouponObserver = const ApiResult<CreateCouponResponseModel>.init().obs;
+
 
   Rx<String> roomImage = "".obs;
   RxList<String> roomSpecialAmenities = <String>[].obs;
@@ -56,6 +62,65 @@ class HostelViewModel extends GetxController{
            observer.value = ApiResult.error(error.toString());
         }
   }
+
+  Future<void> createCoupon(CouponDataModel request) async {
+    try{
+      createCouponObserver.value = const ApiResult.loading();
+      final response = await apiProvider.post(EndPoints.createCoupon,request.toJson());
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = CreateCouponResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          fetchCouponsObserver.value.data.value.whenOrNull(success: (couponsResponseData){
+            var userResponse = (couponsResponseData as FetchCouponsResponseModel);
+            final coupons = userResponse.data?.toList() ?? List.empty();
+            coupons.insert(0, responseData.data!);
+            userResponse = userResponse.copyWith(data:coupons);
+            fetchCouponsObserver.value.data.value = ApiResult.success(userResponse);
+          });
+          createCouponObserver.value = ApiResult.success(responseData);
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      createCouponObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+  Future<void> deleteCoupon(String? couponId) async {
+    try{
+      if(couponId == null || couponId.trim().isEmpty) throw "couponId Is Required";
+      deletedCouponObserver.value = ApiResult.loadingCondition(couponId,true);
+      final response = await apiProvider.post(EndPoints.deleteCoupon,{"couponId":couponId});
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = PrimaryResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          fetchCouponsObserver.value.data.value.whenOrNull(success: (responseData){
+            var userResponse = (responseData as FetchCouponsResponseModel);
+            final coupons = userResponse.data?.toList() ?? List.empty();
+            coupons.removeWhere((coupon) => coupon.id == couponId);
+            userResponse = userResponse.copyWith(data:coupons);
+            fetchCouponsObserver.value.data.value = ApiResult.success(userResponse);
+          });
+          deletedCouponObserver.value = ApiResult.success(responseData);
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      deletedCouponObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+
 
   Future<void> fetchHostels(PaginationRequestModel request,bool refresh) async {
     final observer = fetchHostelsObserver;
@@ -112,6 +177,63 @@ class HostelViewModel extends GetxController{
       observer.refresh();
     }
   }
+
+  Future<void> fetchLeads(PaginationRequestModel request,bool refresh) async {
+    final observer = fetchLeadsObserver;
+    try{
+      if(refresh == true){
+        observer.value = PaginationModel(data: const ApiResult<FetchLeadsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "");
+      }
+
+      if (observer.value.isPaginationCompleted || observer.value.isLoading == true) return;
+
+      if(observer.value.page == 1){
+        observer.value.data.value = const ApiResult.loading();
+      }
+      else{
+        observer.value.isLoading = true;
+        observer.refresh();
+      }
+
+      const maxListApiReturns = 20;
+      observer.refresh();
+
+      final String? validatorResponse = AuthUtils.validateRequestFields(['page'], request.toJson());
+      if(validatorResponse != null) throw validatorResponse;
+
+      final response = await apiProvider.post(EndPoints.fetchLeads,request.toJson());
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = FetchLeadsResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          observer.value.data.value.maybeWhen(success: (data) {
+            final oldList = (data as FetchLeadsResponseModel?)?.data?.toList();
+            oldList?.addAll(responseData.data ?? List.empty());
+            observer.value.data.value = ApiResult.success(responseData.copyWith(data: oldList));
+          }, orElse: () {
+            observer.value.data.value = ApiResult.success(responseData);
+          });
+
+          observer.value.page = observer.value.page + 1;
+          if ((responseData.data?.length ?? 0) < maxListApiReturns) {
+            observer.value.isPaginationCompleted = true;
+          }
+          observer.value.isLoading = false;
+          observer.refresh();
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      observer.value.data.value = ApiResult.error(e.toString());
+      observer.value.isLoading = false;
+      observer.refresh();
+    }
+  }
+
 
   Future<void> registerRoomDetails(ListRoomRequestModel request) async {
     try{

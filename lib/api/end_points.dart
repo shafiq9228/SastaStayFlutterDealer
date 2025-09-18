@@ -11,6 +11,7 @@ class EndPoints {
 
   static const registerHostel = "registerHostel";
   static const updateHostelDetails = "updateHostelDetails";
+  static const fetchLeads = "fetchLeads";
   static const fetchHostels = "fetchHostels";
   static const fetchHostelDetails = "fetchHostelDetails";
   static const fetchHostelRooms = "fetchHostelRooms";
@@ -27,6 +28,8 @@ class EndPoints {
   static const fetchRatingAndReviews = "fetchRatingAndReviews";
 
   static const fetchCoupons = "fetchCoupons";
+  static const createCoupon = "createCoupon";
+  static const deleteCoupon = "deleteCoupon";
 
   static const fetchTransactions = "fetchTransactions";
 
@@ -41,5 +44,6 @@ class EndPoints {
   static const addBankAccount = "addBankAccount";
   static const fetchAccounts = "fetchAccounts";
 
+  static const withdrawAmount = "withdrawAmount";
 
 }

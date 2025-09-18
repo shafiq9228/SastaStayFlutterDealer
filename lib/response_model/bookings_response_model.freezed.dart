@@ -1837,6 +1837,8 @@ BookingModel _$BookingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BookingModel {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   dynamic get userId => throw _privateConstructorUsedError;
   dynamic get dealerId => throw _privateConstructorUsedError;
   dynamic get hostelId => throw _privateConstructorUsedError;
@@ -1847,8 +1849,10 @@ mixin _$BookingModel {
   DateTime? get checkInDate => throw _privateConstructorUsedError;
   DateTime? get checkOutDate => throw _privateConstructorUsedError;
   int? get guestCount => throw _privateConstructorUsedError;
-  int? get total => throw _privateConstructorUsedError;
+  int? get amount => throw _privateConstructorUsedError;
   int? get discount => throw _privateConstructorUsedError;
+  int? get walletDeduction => throw _privateConstructorUsedError;
+  int? get total => throw _privateConstructorUsedError;
   List<GuestDetailsModel>? get guestDetailsList =>
       throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
@@ -1868,7 +1872,8 @@ abstract class $BookingModelCopyWith<$Res> {
       _$BookingModelCopyWithImpl<$Res, BookingModel>;
   @useResult
   $Res call(
-      {dynamic userId,
+      {@JsonKey(name: '_id') String? id,
+      dynamic userId,
       dynamic dealerId,
       dynamic hostelId,
       dynamic roomId,
@@ -1878,8 +1883,10 @@ abstract class $BookingModelCopyWith<$Res> {
       DateTime? checkInDate,
       DateTime? checkOutDate,
       int? guestCount,
-      int? total,
+      int? amount,
       int? discount,
+      int? walletDeduction,
+      int? total,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
       String? bookingStatus,
@@ -1899,6 +1906,7 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? hostelId = freezed,
@@ -1909,14 +1917,20 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
     Object? checkInDate = freezed,
     Object? checkOutDate = freezed,
     Object? guestCount = freezed,
-    Object? total = freezed,
+    Object? amount = freezed,
     Object? discount = freezed,
+    Object? walletDeduction = freezed,
+    Object? total = freezed,
     Object? guestDetailsList = freezed,
     Object? logs = freezed,
     Object? bookingStatus = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -1957,13 +1971,21 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
           ? _value.guestCount
           : guestCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as int?,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      walletDeduction: freezed == walletDeduction
+          ? _value.walletDeduction
+          : walletDeduction // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
               as int?,
       guestDetailsList: freezed == guestDetailsList
           ? _value.guestDetailsList
@@ -1994,7 +2016,8 @@ abstract class _$$BookingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic userId,
+      {@JsonKey(name: '_id') String? id,
+      dynamic userId,
       dynamic dealerId,
       dynamic hostelId,
       dynamic roomId,
@@ -2004,8 +2027,10 @@ abstract class _$$BookingModelImplCopyWith<$Res>
       DateTime? checkInDate,
       DateTime? checkOutDate,
       int? guestCount,
-      int? total,
+      int? amount,
       int? discount,
+      int? walletDeduction,
+      int? total,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
       String? bookingStatus,
@@ -2023,6 +2048,7 @@ class __$$BookingModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? hostelId = freezed,
@@ -2033,14 +2059,20 @@ class __$$BookingModelImplCopyWithImpl<$Res>
     Object? checkInDate = freezed,
     Object? checkOutDate = freezed,
     Object? guestCount = freezed,
-    Object? total = freezed,
+    Object? amount = freezed,
     Object? discount = freezed,
+    Object? walletDeduction = freezed,
+    Object? total = freezed,
     Object? guestDetailsList = freezed,
     Object? logs = freezed,
     Object? bookingStatus = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$BookingModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -2081,13 +2113,21 @@ class __$$BookingModelImplCopyWithImpl<$Res>
           ? _value.guestCount
           : guestCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as int?,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      walletDeduction: freezed == walletDeduction
+          ? _value.walletDeduction
+          : walletDeduction // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
               as int?,
       guestDetailsList: freezed == guestDetailsList
           ? _value._guestDetailsList
@@ -2113,7 +2153,8 @@ class __$$BookingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BookingModelImpl implements _BookingModel {
   const _$BookingModelImpl(
-      {this.userId,
+      {@JsonKey(name: '_id') this.id,
+      this.userId,
       this.dealerId,
       this.hostelId,
       this.roomId,
@@ -2123,8 +2164,10 @@ class _$BookingModelImpl implements _BookingModel {
       this.checkInDate,
       this.checkOutDate,
       this.guestCount,
-      this.total,
+      this.amount,
       this.discount,
+      this.walletDeduction,
+      this.total,
       final List<GuestDetailsModel>? guestDetailsList,
       final List<AmountDetailsModel>? logs,
       this.bookingStatus,
@@ -2135,6 +2178,9 @@ class _$BookingModelImpl implements _BookingModel {
   factory _$BookingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BookingModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
   @override
   final dynamic userId;
   @override
@@ -2156,9 +2202,13 @@ class _$BookingModelImpl implements _BookingModel {
   @override
   final int? guestCount;
   @override
-  final int? total;
+  final int? amount;
   @override
   final int? discount;
+  @override
+  final int? walletDeduction;
+  @override
+  final int? total;
   final List<GuestDetailsModel>? _guestDetailsList;
   @override
   List<GuestDetailsModel>? get guestDetailsList {
@@ -2187,7 +2237,7 @@ class _$BookingModelImpl implements _BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel(userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, total: $total, discount: $discount, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
+    return 'BookingModel(id: $id, userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, amount: $amount, discount: $discount, walletDeduction: $walletDeduction, total: $total, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
   }
 
   @override
@@ -2195,6 +2245,7 @@ class _$BookingModelImpl implements _BookingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookingModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.dealerId, dealerId) &&
             const DeepCollectionEquality().equals(other.hostelId, hostelId) &&
@@ -2210,9 +2261,12 @@ class _$BookingModelImpl implements _BookingModel {
                 other.checkOutDate == checkOutDate) &&
             (identical(other.guestCount, guestCount) ||
                 other.guestCount == guestCount) &&
-            (identical(other.total, total) || other.total == total) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.discount, discount) ||
                 other.discount == discount) &&
+            (identical(other.walletDeduction, walletDeduction) ||
+                other.walletDeduction == walletDeduction) &&
+            (identical(other.total, total) || other.total == total) &&
             const DeepCollectionEquality()
                 .equals(other._guestDetailsList, _guestDetailsList) &&
             const DeepCollectionEquality().equals(other._logs, _logs) &&
@@ -2224,24 +2278,28 @@ class _$BookingModelImpl implements _BookingModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(dealerId),
-      const DeepCollectionEquality().hash(hostelId),
-      const DeepCollectionEquality().hash(roomId),
-      orderId,
-      paymentId,
-      paymentStatus,
-      checkInDate,
-      checkOutDate,
-      guestCount,
-      total,
-      discount,
-      const DeepCollectionEquality().hash(_guestDetailsList),
-      const DeepCollectionEquality().hash(_logs),
-      bookingStatus,
-      createdAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        const DeepCollectionEquality().hash(userId),
+        const DeepCollectionEquality().hash(dealerId),
+        const DeepCollectionEquality().hash(hostelId),
+        const DeepCollectionEquality().hash(roomId),
+        orderId,
+        paymentId,
+        paymentStatus,
+        checkInDate,
+        checkOutDate,
+        guestCount,
+        amount,
+        discount,
+        walletDeduction,
+        total,
+        const DeepCollectionEquality().hash(_guestDetailsList),
+        const DeepCollectionEquality().hash(_logs),
+        bookingStatus,
+        createdAt
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -2259,7 +2317,8 @@ class _$BookingModelImpl implements _BookingModel {
 
 abstract class _BookingModel implements BookingModel {
   const factory _BookingModel(
-      {final dynamic userId,
+      {@JsonKey(name: '_id') final String? id,
+      final dynamic userId,
       final dynamic dealerId,
       final dynamic hostelId,
       final dynamic roomId,
@@ -2269,8 +2328,10 @@ abstract class _BookingModel implements BookingModel {
       final DateTime? checkInDate,
       final DateTime? checkOutDate,
       final int? guestCount,
-      final int? total,
+      final int? amount,
       final int? discount,
+      final int? walletDeduction,
+      final int? total,
       final List<GuestDetailsModel>? guestDetailsList,
       final List<AmountDetailsModel>? logs,
       final String? bookingStatus,
@@ -2279,6 +2340,9 @@ abstract class _BookingModel implements BookingModel {
   factory _BookingModel.fromJson(Map<String, dynamic> json) =
       _$BookingModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
   @override
   dynamic get userId;
   @override
@@ -2300,9 +2364,13 @@ abstract class _BookingModel implements BookingModel {
   @override
   int? get guestCount;
   @override
-  int? get total;
+  int? get amount;
   @override
   int? get discount;
+  @override
+  int? get walletDeduction;
+  @override
+  int? get total;
   @override
   List<GuestDetailsModel>? get guestDetailsList;
   @override
@@ -2745,6 +2813,200 @@ abstract class _FetchCouponsResponseModel implements FetchCouponsResponseModel {
   @override
   @JsonKey(ignore: true)
   _$$FetchCouponsResponseModelImplCopyWith<_$FetchCouponsResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+CreateCouponResponseModel _$CreateCouponResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _CreateCouponResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateCouponResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  CouponDataModel? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateCouponResponseModelCopyWith<CreateCouponResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateCouponResponseModelCopyWith<$Res> {
+  factory $CreateCouponResponseModelCopyWith(CreateCouponResponseModel value,
+          $Res Function(CreateCouponResponseModel) then) =
+      _$CreateCouponResponseModelCopyWithImpl<$Res, CreateCouponResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, CouponDataModel? data});
+
+  $CouponDataModelCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class _$CreateCouponResponseModelCopyWithImpl<$Res,
+        $Val extends CreateCouponResponseModel>
+    implements $CreateCouponResponseModelCopyWith<$Res> {
+  _$CreateCouponResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as CouponDataModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CouponDataModelCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $CouponDataModelCopyWith<$Res>(_value.data!, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$CreateCouponResponseModelImplCopyWith<$Res>
+    implements $CreateCouponResponseModelCopyWith<$Res> {
+  factory _$$CreateCouponResponseModelImplCopyWith(
+          _$CreateCouponResponseModelImpl value,
+          $Res Function(_$CreateCouponResponseModelImpl) then) =
+      __$$CreateCouponResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, CouponDataModel? data});
+
+  @override
+  $CouponDataModelCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$CreateCouponResponseModelImplCopyWithImpl<$Res>
+    extends _$CreateCouponResponseModelCopyWithImpl<$Res,
+        _$CreateCouponResponseModelImpl>
+    implements _$$CreateCouponResponseModelImplCopyWith<$Res> {
+  __$$CreateCouponResponseModelImplCopyWithImpl(
+      _$CreateCouponResponseModelImpl _value,
+      $Res Function(_$CreateCouponResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$CreateCouponResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as CouponDataModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateCouponResponseModelImpl implements _CreateCouponResponseModel {
+  const _$CreateCouponResponseModelImpl({this.status, this.message, this.data});
+
+  factory _$CreateCouponResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateCouponResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  @override
+  final CouponDataModel? data;
+
+  @override
+  String toString() {
+    return 'CreateCouponResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateCouponResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, status, message, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateCouponResponseModelImplCopyWith<_$CreateCouponResponseModelImpl>
+      get copyWith => __$$CreateCouponResponseModelImplCopyWithImpl<
+          _$CreateCouponResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateCouponResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CreateCouponResponseModel implements CreateCouponResponseModel {
+  const factory _CreateCouponResponseModel(
+      {final int? status,
+      final String? message,
+      final CouponDataModel? data}) = _$CreateCouponResponseModelImpl;
+
+  factory _CreateCouponResponseModel.fromJson(Map<String, dynamic> json) =
+      _$CreateCouponResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  CouponDataModel? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateCouponResponseModelImplCopyWith<_$CreateCouponResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

@@ -1752,6 +1752,388 @@ abstract class _ImageDataModel implements ImageDataModel {
       throw _privateConstructorUsedError;
 }
 
+FetchLeadsResponseModel _$FetchLeadsResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _FetchLeadsResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FetchLeadsResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<LeadModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FetchLeadsResponseModelCopyWith<FetchLeadsResponseModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FetchLeadsResponseModelCopyWith<$Res> {
+  factory $FetchLeadsResponseModelCopyWith(FetchLeadsResponseModel value,
+          $Res Function(FetchLeadsResponseModel) then) =
+      _$FetchLeadsResponseModelCopyWithImpl<$Res, FetchLeadsResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, List<LeadModel>? data});
+}
+
+/// @nodoc
+class _$FetchLeadsResponseModelCopyWithImpl<$Res,
+        $Val extends FetchLeadsResponseModel>
+    implements $FetchLeadsResponseModelCopyWith<$Res> {
+  _$FetchLeadsResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LeadModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FetchLeadsResponseModelImplCopyWith<$Res>
+    implements $FetchLeadsResponseModelCopyWith<$Res> {
+  factory _$$FetchLeadsResponseModelImplCopyWith(
+          _$FetchLeadsResponseModelImpl value,
+          $Res Function(_$FetchLeadsResponseModelImpl) then) =
+      __$$FetchLeadsResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, List<LeadModel>? data});
+}
+
+/// @nodoc
+class __$$FetchLeadsResponseModelImplCopyWithImpl<$Res>
+    extends _$FetchLeadsResponseModelCopyWithImpl<$Res,
+        _$FetchLeadsResponseModelImpl>
+    implements _$$FetchLeadsResponseModelImplCopyWith<$Res> {
+  __$$FetchLeadsResponseModelImplCopyWithImpl(
+      _$FetchLeadsResponseModelImpl _value,
+      $Res Function(_$FetchLeadsResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$FetchLeadsResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LeadModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FetchLeadsResponseModelImpl implements _FetchLeadsResponseModel {
+  const _$FetchLeadsResponseModelImpl(
+      {this.status, this.message, final List<LeadModel>? data})
+      : _data = data;
+
+  factory _$FetchLeadsResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FetchLeadsResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  final List<LeadModel>? _data;
+  @override
+  List<LeadModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'FetchLeadsResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchLeadsResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, status, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchLeadsResponseModelImplCopyWith<_$FetchLeadsResponseModelImpl>
+      get copyWith => __$$FetchLeadsResponseModelImplCopyWithImpl<
+          _$FetchLeadsResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FetchLeadsResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FetchLeadsResponseModel implements FetchLeadsResponseModel {
+  const factory _FetchLeadsResponseModel(
+      {final int? status,
+      final String? message,
+      final List<LeadModel>? data}) = _$FetchLeadsResponseModelImpl;
+
+  factory _FetchLeadsResponseModel.fromJson(Map<String, dynamic> json) =
+      _$FetchLeadsResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  List<LeadModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchLeadsResponseModelImplCopyWith<_$FetchLeadsResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+LeadModel _$LeadModelFromJson(Map<String, dynamic> json) {
+  return _LeadModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LeadModel {
+  dynamic get userId => throw _privateConstructorUsedError;
+  dynamic get dealerId => throw _privateConstructorUsedError;
+  dynamic get hostelId => throw _privateConstructorUsedError;
+  dynamic get roomId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LeadModelCopyWith<LeadModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LeadModelCopyWith<$Res> {
+  factory $LeadModelCopyWith(LeadModel value, $Res Function(LeadModel) then) =
+      _$LeadModelCopyWithImpl<$Res, LeadModel>;
+  @useResult
+  $Res call(
+      {dynamic userId, dynamic dealerId, dynamic hostelId, dynamic roomId});
+}
+
+/// @nodoc
+class _$LeadModelCopyWithImpl<$Res, $Val extends LeadModel>
+    implements $LeadModelCopyWith<$Res> {
+  _$LeadModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? dealerId = freezed,
+    Object? hostelId = freezed,
+    Object? roomId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      dealerId: freezed == dealerId
+          ? _value.dealerId
+          : dealerId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      roomId: freezed == roomId
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$LeadModelImplCopyWith<$Res>
+    implements $LeadModelCopyWith<$Res> {
+  factory _$$LeadModelImplCopyWith(
+          _$LeadModelImpl value, $Res Function(_$LeadModelImpl) then) =
+      __$$LeadModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {dynamic userId, dynamic dealerId, dynamic hostelId, dynamic roomId});
+}
+
+/// @nodoc
+class __$$LeadModelImplCopyWithImpl<$Res>
+    extends _$LeadModelCopyWithImpl<$Res, _$LeadModelImpl>
+    implements _$$LeadModelImplCopyWith<$Res> {
+  __$$LeadModelImplCopyWithImpl(
+      _$LeadModelImpl _value, $Res Function(_$LeadModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? dealerId = freezed,
+    Object? hostelId = freezed,
+    Object? roomId = freezed,
+  }) {
+    return _then(_$LeadModelImpl(
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      dealerId: freezed == dealerId
+          ? _value.dealerId
+          : dealerId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      hostelId: freezed == hostelId
+          ? _value.hostelId
+          : hostelId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      roomId: freezed == roomId
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LeadModelImpl implements _LeadModel {
+  const _$LeadModelImpl(
+      {this.userId, this.dealerId, this.hostelId, this.roomId});
+
+  factory _$LeadModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LeadModelImplFromJson(json);
+
+  @override
+  final dynamic userId;
+  @override
+  final dynamic dealerId;
+  @override
+  final dynamic hostelId;
+  @override
+  final dynamic roomId;
+
+  @override
+  String toString() {
+    return 'LeadModel(userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LeadModelImpl &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.dealerId, dealerId) &&
+            const DeepCollectionEquality().equals(other.hostelId, hostelId) &&
+            const DeepCollectionEquality().equals(other.roomId, roomId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(dealerId),
+      const DeepCollectionEquality().hash(hostelId),
+      const DeepCollectionEquality().hash(roomId));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LeadModelImplCopyWith<_$LeadModelImpl> get copyWith =>
+      __$$LeadModelImplCopyWithImpl<_$LeadModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LeadModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LeadModel implements LeadModel {
+  const factory _LeadModel(
+      {final dynamic userId,
+      final dynamic dealerId,
+      final dynamic hostelId,
+      final dynamic roomId}) = _$LeadModelImpl;
+
+  factory _LeadModel.fromJson(Map<String, dynamic> json) =
+      _$LeadModelImpl.fromJson;
+
+  @override
+  dynamic get userId;
+  @override
+  dynamic get dealerId;
+  @override
+  dynamic get hostelId;
+  @override
+  dynamic get roomId;
+  @override
+  @JsonKey(ignore: true)
+  _$$LeadModelImplCopyWith<_$LeadModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 StatsDataModel _$StatsDataModelFromJson(Map<String, dynamic> json) {
   return _StatsDataModel.fromJson(json);
 }

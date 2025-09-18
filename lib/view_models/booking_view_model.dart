@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/pages/booking_details_page.dart';
 import 'package:sasta_stay_dealer/pages/checkout_page.dart';
+import 'package:sasta_stay_dealer/view_models/hostel_view_model.dart';
 import '../api/api_provides.dart';
 import '../api/api_result.dart';
 import '../api/end_points.dart';
@@ -17,6 +18,7 @@ class BookingViewModel extends GetxController{
 
   final apiProvider = Get.put(ApiProvider());
   final preferenceManager = Get.put(PreferenceManager());
+  final hostelViewModel = Get.put(HostelViewModel());
   Rx<BookingRequestModel?> bookingRequestModelObserver = Rx<BookingRequestModel?>(null);
 
 
@@ -38,20 +40,32 @@ class BookingViewModel extends GetxController{
   Rx<CouponDataModel?> selectedCoupon = Rx<CouponDataModel?>(null);
 
 
-  Future<void> checkHostelRoomAvailability(BookingRequestModel? request,RoomModel? roomModel,bool? navigate) async {
+  Future<void> checkHostelRoomAvailability(BookingRequestModel? request,int navigate) async {
     try{
       checkHostelRoomAvailabilityObserver.value = const ApiResult.loading();
+
       final newRequest = request?.copyWith(couponId: selectedCoupon.value?.id ?? "");
       final response = await apiProvider.post(EndPoints.checkHostelRoomAvailability,newRequest?.toJson());
       final body = response.body;
+
       if(response.isOk && body !=null){
         var responseData = HostelRoomAvailabilityResponseModel.fromJson(body);
         if(responseData.status == 1){
           final updatedRequest = request?.copyWith(roomModel: request.roomModel?.copyWith(checkInDate: request.checkInDate,checkOutDate: request.checkOutDate,guestCount: request.guestCount));
           bookingRequestModelObserver.value = updatedRequest;
+
+          if(navigate == 2){
+            Get.close(2);
+            Get.to(() => CheckoutPage(roomModel: request?.roomModel));
+          }
+          else if(navigate == 1){
+            Get.close(1);
+          }
           checkHostelRoomAvailabilityObserver.value = ApiResult.success(responseData);
-          if(navigate == false) return;
-          Get.to(() => CheckoutPage(roomModel: roomModel));
+          return;
+        }
+        else if(responseData.status == 2 || responseData.status == 3){
+          checkHostelRoomAvailabilityObserver.value = ApiResult.success(responseData);
           return;
         }
         throw "${responseData.message}";
@@ -59,10 +73,12 @@ class BookingViewModel extends GetxController{
       throw "Response Body Null";
     }
     catch(e){
+      selectedCoupon.value = null;
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       checkHostelRoomAvailabilityObserver.value = ApiResult.error(e.toString());
     }
   }
+
 
   Future<void> performConfirmBooking(BookingRequestModel? request) async {
     try{
@@ -75,7 +91,7 @@ class BookingViewModel extends GetxController{
         final responseData = ConfirmBookingResponseModel.fromJson(body);
         if(responseData.status == 1){
           confirmBookingObserver.value = ApiResult.success(responseData);
-          Get.to(() => BookingDetailsPage(orderId: responseData.data?.bookingResponse?.orderId ?? "",fromBooking: true));
+          Get.to(() => BookingDetailsPage(bookingId: responseData.data?.bookingResponse?.id ?? "",fromBooking: true));
           return;
         }
         throw "${responseData.message}";
@@ -145,10 +161,10 @@ class BookingViewModel extends GetxController{
     }
   }
 
-  Future<void> fetchBookingDetails(String orderId) async{
+  Future<void> fetchBookingDetails(String bookingId) async{
     try{
       fetchBookingDetailsObserver.value = const ApiResult.loading();
-      final response = await apiProvider.post(EndPoints.fetchBookingDetails,{"orderId":orderId});
+      final response = await apiProvider.post(EndPoints.fetchBookingDetails,{"bookingId":bookingId});
       final body = response.body;
       if(response.isOk && body !=null){
         final responseData = FetchBookingDetailsResponseModel.fromJson(body);

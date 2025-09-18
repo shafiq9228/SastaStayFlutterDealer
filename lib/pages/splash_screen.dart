@@ -19,6 +19,7 @@ class SplashScreen extends StatelessWidget {
 
     return StatefulWrapper(
       onInit: () async {
+        await  authViewModel.fetchCurrentLocation();
         final version = await AuthUtils.getAppVersion();
         await authViewModel.fetchDealerStatus(version);
       },

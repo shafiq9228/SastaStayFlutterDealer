@@ -27,7 +27,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
 
     return GestureDetector(
       onTap: (){
-         Get.to(() => BookingDetailsPage(orderId: widget.bookingModel?.orderId ?? ""));
+         Get.to(() => BookingDetailsPage(bookingId: widget.bookingModel?.id ?? ""));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
@@ -87,7 +87,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Booking ID",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray),),
-                          Text(widget.bookingModel?.orderId ?? "",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
+                          Text(widget.bookingModel?.id ?? "",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
                         ],
                       ),
                     ),

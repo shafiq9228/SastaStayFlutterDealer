@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:sasta_stay_dealer/components/custom_edit_text_component.dart';
 import 'package:sasta_stay_dealer/components/primary_button.dart';
 import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
 import 'package:sasta_stay_dealer/pages/amenities_page.dart';
@@ -35,6 +37,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
 
   final TextEditingController hostelNameController = TextEditingController();
   final TextEditingController aboutHostelController = TextEditingController();
+  final TextEditingController hostelCommissionController = TextEditingController();
   Rx<String> selectedHostelType = "Boys".obs;
 
 
@@ -54,6 +57,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
           hostelNameController.text = primaryHostel?.hostelName ?? "";
           aboutHostelController.text = primaryHostel?.aboutHostel ?? "";
           selectedHostelType.value = primaryHostel?.hostelType ?? "Boys";
+
 
           authViewModel.images.clear();
           authViewModel.amenityIds.clear();
@@ -388,6 +392,8 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(height: 20),
+                              CustomEditTextComponent(controller: hostelCommissionController, title: "Hostel Commission (In Rupees)", hint: "0",keyboardType: TextInputType.phone,),
                               const SizedBox(height: 120),
                             ],
                           ),
@@ -401,7 +407,11 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                             child:Obx(() => authViewModel.updateHostelDetailsResponseObserver.value.maybeWhen(
                                 loading: () => const CustomProgressBar(),
                                 orElse: () => PrimaryButton(buttonClick: (){
-                                  authViewModel.updateHostelDetails(RegistrationRequestModel(hostelId:authViewModel.getPrimaryId(),hostelImage: authViewModel.hostelImage.value,hostelType: selectedHostelType.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,location: authViewModel.locationDetails.value,images: authViewModel.images,rules: authViewModel.rules,amenities: authViewModel.amenityIds));
+                                  try {
+                                    authViewModel.updateHostelDetails(RegistrationRequestModel(hostelId:authViewModel.getPrimaryId(),hostelImage: authViewModel.hostelImage.value,hostelType: selectedHostelType.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,location: authViewModel.locationDetails.value,images: authViewModel.images,rules: authViewModel.rules,amenities: authViewModel.amenityIds,commission: int.tryParse(hostelCommissionController.text) ?? 0));
+                                  } catch (e, s) {
+                                    print(s);
+                                  }
                                 },buttonTxt: "Confirm And Update",))
                             ),
                           ),

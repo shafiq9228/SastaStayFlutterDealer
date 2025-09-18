@@ -33,6 +33,7 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
   final List<DateTime> _selectedDates = [];
 
   Future<void> _selectDate(BuildContext context) async {
+    bookingViewModel.checkHostelRoomAvailabilityObserver.value = const ApiResult.init();
     final DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime.now(),
@@ -555,7 +556,7 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                               checkOutDate: _selectedDates.last,
                               guestCount: _guestCount,
                               guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
-                            ),widget.roomModel,true
+                            ),2
                           );
                         }),
                       ],
@@ -577,7 +578,7 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                             checkOutDate: _selectedDates.last,
                             guestCount: _guestCount,
                             guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
-                          ),widget.roomModel,true
+                          ),2
                         );
                       },
                     );
@@ -600,7 +601,7 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                           checkOutDate: _selectedDates.last,
                           guestCount: _guestCount,
                           guestDetailsList: [],couponId:bookingViewModel.selectedCoupon.value?.id ?? ""
-                        ),widget.roomModel,true
+                        ),2
                       );
                     },
                   ),

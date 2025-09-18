@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sasta_stay_dealer/pages/kyc_page.dart';
 
+import '../request_models/bookings_request_model.dart';
 import '../response_model/auth_response_model.dart';
 import '../response_model/transaction_response_model.dart';
 import '../utils/custom_colors.dart';
@@ -33,7 +34,8 @@ class _SelectingTimeBottomSheetState extends State<WithdrawalDetailsBottomSheet>
           success: (data){
             final response = (data as FetchWithdrawalDetailsResponseModel).data;
             final mobile = authViewModel.fetchUserDetailsObserver.value.maybeWhen(success:(data) => (data as FetchUserDetailsResponseModel).data?.mobile ?? "",orElse: () => 0);
-            return response?.isDocumentApproved == true && response?.payUAuthetication == false ?
+
+            return response?.isDocumentApproved == true && response?.payUAuthetication == true ?
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -146,7 +148,7 @@ class _SelectingTimeBottomSheetState extends State<WithdrawalDetailsBottomSheet>
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  // transactionViewModel.performWithDrawBalanceAction(WithdrawBalanceRequestModel(amount: widget.amount ?? 00.00, accountType: widget.accountType??"" , accountNumber: widget.accountNumber??"",accountId:accountViewModel.accountId.value));
+                                  transactionViewModel.performWithDrawBalanceAction(WithdrawBalanceRequestModel(amount: widget.amount ?? 00.00,accountId:transactionViewModel.accountId.value),context);
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentMethodPage()));
                                 },
                                 child: const Text(
@@ -167,7 +169,7 @@ class _SelectingTimeBottomSheetState extends State<WithdrawalDetailsBottomSheet>
                 ],
               ),
             )
-                : response?.payUAuthetication == true ?
+                : response?.isDocumentApproved == true && response?.payUAuthetication == false ?
             SingleChildScrollView(
               reverse: true,
               child: Padding(

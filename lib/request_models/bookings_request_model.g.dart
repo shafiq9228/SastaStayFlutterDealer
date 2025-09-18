@@ -51,3 +51,17 @@ Map<String, dynamic> _$$AddBalanceRequestModelImplToJson(
     <String, dynamic>{
       'amount': instance.amount,
     };
+
+_$WithdrawBalanceRequestModelImpl _$$WithdrawBalanceRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WithdrawBalanceRequestModelImpl(
+      amount: (json['amount'] as num).toDouble(),
+      accountId: json['accountId'] as String,
+    );
+
+Map<String, dynamic> _$$WithdrawBalanceRequestModelImplToJson(
+        _$WithdrawBalanceRequestModelImpl instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'accountId': instance.accountId,
+    };

@@ -64,6 +64,7 @@ class RegistrationRequestModel with _$RegistrationRequestModel{
     List<String>? rules,
     String? gstIn,
     LocationModel? location,
+    int? commission,
     List<DocumentDataModel>? kycDocuments
   }) = _RegistrationRequestModel;
 

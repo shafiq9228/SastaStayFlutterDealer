@@ -13,3 +13,6 @@
 -dontwarn io.fotoapparat.**
 -dontwarn com.getx.**
 -dontwarn com.github.getx.**
+
+-keep class me.carda.awesome_notifications.** { *; }
+-dontwarn me.carda.awesome_notifications.**

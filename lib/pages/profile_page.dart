@@ -21,6 +21,7 @@ import '../utils/custom_colors.dart';
 import '../utils/preference_manager.dart';
 import '../utils/statefullwrapper.dart';
 import '../view_models/auth_view_model.dart';
+import 'coupons_page.dart';
 import 'kyc_page.dart';
 import 'mobile_verification_page.dart';
 
@@ -237,6 +238,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Get.to(() => const HostelsPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray,),
+                                      ProfileMenu(title: "Coupons", image: "assets/images/couponv.png", onTapped: (){
+                                        Get.to(() => const CouponsPage(selecting: false));
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray),
                                       Obx(() => logOuting.value == true ? CustomProgressBar() :
                                       ProfileMenu(title: "Log Out", image: "assets/images/log_out_icon.png", onTapped: () {
                                         showModalBottomSheet(

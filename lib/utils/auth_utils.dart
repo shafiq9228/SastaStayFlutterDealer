@@ -20,6 +20,14 @@ class AuthUtils {
   static String formatPrice(double price) => '\$${price.toStringAsFixed(2)}';
   static String formatDate(DateTime date) => DateFormat.yMd().format(date);
 
+
+  static int parseToInt(String value) {
+    double? numValue = double.tryParse(value);
+    if (numValue == null) return 0;
+    final integer = numValue.toInt();
+    return integer;
+  }
+
   static String formatDateToLong(DateTime? date) {
     if(date == null) return "";
     return DateFormat("MMM d yyyy").format(date);

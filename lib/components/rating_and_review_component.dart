@@ -13,7 +13,7 @@ class RatingAndReviewComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = UserModel.fromJson(ratingAndReviewModel?.userId ?? '');
+    UserModel? userModel = ratingAndReviewModel?.userId == null ? null : UserModel.fromJson(ratingAndReviewModel?.userId ?? '');
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
       child: Container(
@@ -26,7 +26,7 @@ class RatingAndReviewComponent extends StatelessWidget {
                 CircleAvatar(
                   radius: 30,
                   backgroundImage: NetworkImage(
-                    userModel.profilePic ??
+                    userModel?.profilePic ??
                         'https://i.stack.imgur.com/l60Hf.png',
                   ),
                   backgroundColor: Colors.grey,
@@ -36,7 +36,7 @@ class RatingAndReviewComponent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(userModel.name ?? "",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: CustomColors.textColor),),
+                      Text(userModel?.name ?? "",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,color: CustomColors.textColor),),
                       SizedBox(height: 10),
                       IgnorePointer(
                           child: RatingBar.builder(

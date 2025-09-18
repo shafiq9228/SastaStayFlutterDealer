@@ -182,6 +182,7 @@ Map<String, dynamic> _$$FetchBookingDetailsResponseModelImplToJson(
 
 _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
     _$BookingModelImpl(
+      id: json['_id'] as String?,
       userId: json['userId'],
       dealerId: json['dealerId'],
       hostelId: json['hostelId'],
@@ -196,8 +197,10 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['checkOutDate'] as String),
       guestCount: json['guestCount'] as int?,
-      total: json['total'] as int?,
+      amount: json['amount'] as int?,
       discount: json['discount'] as int?,
+      walletDeduction: json['walletDeduction'] as int?,
+      total: json['total'] as int?,
       guestDetailsList: (json['guestDetailsList'] as List<dynamic>?)
           ?.map((e) => GuestDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -212,6 +215,7 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$BookingModelImplToJson(_$BookingModelImpl instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'userId': instance.userId,
       'dealerId': instance.dealerId,
       'hostelId': instance.hostelId,
@@ -222,8 +226,10 @@ Map<String, dynamic> _$$BookingModelImplToJson(_$BookingModelImpl instance) =>
       'checkInDate': instance.checkInDate?.toIso8601String(),
       'checkOutDate': instance.checkOutDate?.toIso8601String(),
       'guestCount': instance.guestCount,
-      'total': instance.total,
+      'amount': instance.amount,
       'discount': instance.discount,
+      'walletDeduction': instance.walletDeduction,
+      'total': instance.total,
       'guestDetailsList': instance.guestDetailsList,
       'logs': instance.logs,
       'bookingStatus': instance.bookingStatus,
@@ -264,6 +270,24 @@ _$FetchCouponsResponseModelImpl _$$FetchCouponsResponseModelImplFromJson(
 
 Map<String, dynamic> _$$FetchCouponsResponseModelImplToJson(
         _$FetchCouponsResponseModelImpl instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$CreateCouponResponseModelImpl _$$CreateCouponResponseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateCouponResponseModelImpl(
+      status: json['status'] as int?,
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : CouponDataModel.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$CreateCouponResponseModelImplToJson(
+        _$CreateCouponResponseModelImpl instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,

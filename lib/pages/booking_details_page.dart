@@ -30,9 +30,9 @@ import 'hostel_images_page.dart';
 
 
 class BookingDetailsPage extends StatefulWidget {
-  final String orderId;
+  final String bookingId;
   final bool? fromBooking;
-  const BookingDetailsPage({super.key, required this.orderId, this.fromBooking});
+  const BookingDetailsPage({super.key, required this.bookingId, this.fromBooking});
 
   @override
   State<BookingDetailsPage> createState() => _BookingDetailsPageState();
@@ -46,7 +46,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
 
     return StatefulWrapper(
       onInit: (){
-        bookingViewModel.fetchBookingDetails(widget.orderId ?? "");
+        bookingViewModel.fetchBookingDetails(widget.bookingId ?? "");
       },
       child: Scaffold(
         backgroundColor: CustomColors.white,

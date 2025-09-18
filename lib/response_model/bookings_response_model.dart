@@ -111,6 +111,7 @@ class FetchBookingDetailsResponseModel with _$FetchBookingDetailsResponseModel{
 @Freezed()
 class BookingModel with _$BookingModel {
   const factory BookingModel({
+    @JsonKey(name:'_id') String? id,
     dynamic userId,
     dynamic dealerId,
     dynamic hostelId,
@@ -121,8 +122,10 @@ class BookingModel with _$BookingModel {
     DateTime? checkInDate,
     DateTime? checkOutDate,
     int? guestCount,
-    int? total,
+    int? amount,
     int? discount,
+    int? walletDeduction,
+    int? total,
     List<GuestDetailsModel>? guestDetailsList,
     List<AmountDetailsModel>? logs,
     String? bookingStatus,
@@ -156,6 +159,17 @@ class FetchCouponsResponseModel with _$FetchCouponsResponseModel{
   }) = _FetchCouponsResponseModel;
 
   factory FetchCouponsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchCouponsResponseModelFromJson(json);
+}
+
+@Freezed()
+class CreateCouponResponseModel with _$CreateCouponResponseModel{
+  const factory CreateCouponResponseModel({
+    int? status,
+    String? message,
+    CouponDataModel? data
+  }) = _CreateCouponResponseModel;
+
+  factory CreateCouponResponseModel.fromJson(Map<String, dynamic> json) => _$CreateCouponResponseModelFromJson(json);
 }
 
 @Freezed()

@@ -32,3 +32,15 @@ class AddBalanceRequestModel with _$AddBalanceRequestModel{
   factory AddBalanceRequestModel.fromJson(Map<String,dynamic> json) => _$AddBalanceRequestModelFromJson(json);
 }
 
+
+@Freezed()
+class WithdrawBalanceRequestModel with _$WithdrawBalanceRequestModel{
+
+  const factory WithdrawBalanceRequestModel({
+    required double amount,
+    required String accountId
+  }) = _WithdrawBalanceRequestModel;
+
+  factory WithdrawBalanceRequestModel.fromJson(Map<String,dynamic> json) => _$WithdrawBalanceRequestModelFromJson(json);
+}
+

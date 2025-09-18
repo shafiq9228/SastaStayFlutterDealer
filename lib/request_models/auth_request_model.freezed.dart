@@ -649,6 +649,7 @@ mixin _$RegistrationRequestModel {
   List<String>? get rules => throw _privateConstructorUsedError;
   String? get gstIn => throw _privateConstructorUsedError;
   LocationModel? get location => throw _privateConstructorUsedError;
+  int? get commission => throw _privateConstructorUsedError;
   List<DocumentDataModel>? get kycDocuments =>
       throw _privateConstructorUsedError;
 
@@ -679,6 +680,7 @@ abstract class $RegistrationRequestModelCopyWith<$Res> {
       List<String>? rules,
       String? gstIn,
       LocationModel? location,
+      int? commission,
       List<DocumentDataModel>? kycDocuments});
 
   $LocationModelCopyWith<$Res>? get location;
@@ -712,6 +714,7 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
     Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
+    Object? commission = freezed,
     Object? kycDocuments = freezed,
   }) {
     return _then(_value.copyWith(
@@ -771,6 +774,10 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as LocationModel?,
+      commission: freezed == commission
+          ? _value.commission
+          : commission // ignore: cast_nullable_to_non_nullable
+              as int?,
       kycDocuments: freezed == kycDocuments
           ? _value.kycDocuments
           : kycDocuments // ignore: cast_nullable_to_non_nullable
@@ -815,6 +822,7 @@ abstract class _$$RegistrationRequestModelImplCopyWith<$Res>
       List<String>? rules,
       String? gstIn,
       LocationModel? location,
+      int? commission,
       List<DocumentDataModel>? kycDocuments});
 
   @override
@@ -848,6 +856,7 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
+    Object? commission = freezed,
     Object? kycDocuments = freezed,
   }) {
     return _then(_$RegistrationRequestModelImpl(
@@ -907,6 +916,10 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as LocationModel?,
+      commission: freezed == commission
+          ? _value.commission
+          : commission // ignore: cast_nullable_to_non_nullable
+              as int?,
       kycDocuments: freezed == kycDocuments
           ? _value._kycDocuments
           : kycDocuments // ignore: cast_nullable_to_non_nullable
@@ -933,6 +946,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       final List<String>? rules,
       this.gstIn,
       this.location,
+      this.commission,
       final List<DocumentDataModel>? kycDocuments})
       : _images = images,
         _amenities = amenities,
@@ -994,6 +1008,8 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   final String? gstIn;
   @override
   final LocationModel? location;
+  @override
+  final int? commission;
   final List<DocumentDataModel>? _kycDocuments;
   @override
   List<DocumentDataModel>? get kycDocuments {
@@ -1006,7 +1022,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @override
   String toString() {
-    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location, kycDocuments: $kycDocuments)';
+    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location, commission: $commission, kycDocuments: $kycDocuments)';
   }
 
   @override
@@ -1036,6 +1052,8 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
             (identical(other.gstIn, gstIn) || other.gstIn == gstIn) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.commission, commission) ||
+                other.commission == commission) &&
             const DeepCollectionEquality()
                 .equals(other._kycDocuments, _kycDocuments));
   }
@@ -1058,6 +1076,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       const DeepCollectionEquality().hash(_rules),
       gstIn,
       location,
+      commission,
       const DeepCollectionEquality().hash(_kycDocuments));
 
   @JsonKey(ignore: true)
@@ -1091,6 +1110,7 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
           final List<String>? rules,
           final String? gstIn,
           final LocationModel? location,
+          final int? commission,
           final List<DocumentDataModel>? kycDocuments}) =
       _$RegistrationRequestModelImpl;
 
@@ -1125,6 +1145,8 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   String? get gstIn;
   @override
   LocationModel? get location;
+  @override
+  int? get commission;
   @override
   List<DocumentDataModel>? get kycDocuments;
   @override

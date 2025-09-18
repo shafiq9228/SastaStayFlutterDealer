@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../api/api_provides.dart';
 import '../api/api_result.dart';
 import '../api/end_points.dart';
+import '../components/helper_bottom_sheet.dart';
+import '../pages/profile_page.dart';
 import '../request_models/account_request_models.dart';
 import '../request_models/auth_request_model.dart';
 import '../request_models/bookings_request_model.dart';
@@ -163,7 +165,17 @@ class TransactionViewModel extends GetxController {
         final responseData = PayUAddCustomerResponseModel.fromJson(body);
         if (responseData.status == 1) {
           payUAddCustomerObserver.value = ApiResult.success(responseData);
-        } else {
+        }
+        else if(responseData.status == 2){
+          payUAddCustomerObserver.value = const ApiResult.init();
+          fetchWithdrawalDetailsObserver.value.whenOrNull(success: (fetchWithDraw) {
+            final fetchWithDrawDataModel = (fetchWithDraw  as FetchWithdrawalDetailsResponseModel).data;
+            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAuthetication: true);
+            final modifiedData = FetchWithdrawalDetailsResponseModel(data: modifiedDataModel);
+            fetchWithdrawalDetailsObserver.value = ApiResult.success(modifiedData);
+          });
+        }
+        else {
           payUAddCustomerObserver.value = ApiResult.error(responseData.message ?? "");
           Get.snackbar(responseData.message ?? '', responseData.message ?? '', snackPosition: SnackPosition.BOTTOM, backgroundColor: CustomColors.primary,colorText: Colors.white,);
         }
@@ -191,7 +203,7 @@ class TransactionViewModel extends GetxController {
           payUVerifyOtpObserver.value = ApiResult.success(responseData);
           fetchWithdrawalDetailsObserver.value.whenOrNull(success: (fetchWithDraw) {
             final fetchWithDrawDataModel = (fetchWithDraw  as FetchWithdrawalDetailsResponseModel).data;
-            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAuthetication: false);
+            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAuthetication: true);
             final modifiedData = FetchWithdrawalDetailsResponseModel(data: modifiedDataModel);
             fetchWithdrawalDetailsObserver.value = ApiResult.success(modifiedData);
           });
@@ -291,6 +303,46 @@ class TransactionViewModel extends GetxController {
       }
     } catch (e) {
       fetchWithdrawalDetailsObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+
+  void performWithDrawBalanceAction(WithdrawBalanceRequestModel request,BuildContext context) async {
+    try {
+      withdrawBalanceObserver.value = const ApiResult.loading();
+      final response = await apiProvider.post(EndPoints.withdrawAmount, request.toJson());
+      final body = response.body;
+      if (response.isOk && body != null) {
+        final responseData = AddBalanceResponseModel.fromJson(body);
+        if (responseData.status == 1) {
+          withdrawBalanceObserver.value = ApiResult.success(responseData);
+          showModalBottomSheet(
+            context: context,
+            isDismissible: false,
+            enableDrag: false,
+            isScrollControlled: true, // allows full height scroll
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            builder: (context) {
+              return HelperBottomSheet(assetImage: "assets/images/success.png",title:"Withdraw Request Successfully",
+                  message: "Your Withdrawal Request Send To Admin,Money Directly Added To Your Account After Admin Acceptance"
+                  ,btn1Txt: "Done", btn1Click: () {
+                    Get.offAll(() => const ProfilePage());
+                  });
+            },
+          );
+        } else {
+          withdrawBalanceObserver.value = ApiResult.error(responseData.message ?? "");
+          Get.snackbar(responseData.message ?? '', responseData.message ?? '', snackPosition: SnackPosition.BOTTOM, backgroundColor: CustomColors.primary,colorText: Colors.white,);
+        }
+      } else {
+        Get.snackbar('${response.statusCode ?? 0}','something went wrong+${response.statusText ?? 0}', snackPosition: SnackPosition.BOTTOM, backgroundColor: CustomColors.primary,colorText: Colors.white,);
+        withdrawBalanceObserver.value = ApiResult.error("something went wrong. ${response.statusCode ?? 0}");
+      }
+    } catch (e) {
+      Get.snackbar('Exception',e.toString(),snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red,colorText: Colors.white,);
+      withdrawBalanceObserver.value = ApiResult.error(e.toString());
     }
   }
 

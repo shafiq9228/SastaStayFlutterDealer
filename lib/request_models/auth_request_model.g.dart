@@ -84,6 +84,7 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
       location: json['location'] == null
           ? null
           : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
+      commission: json['commission'] as int?,
       kycDocuments: (json['kycDocuments'] as List<dynamic>?)
           ?.map((e) => DocumentDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -106,6 +107,7 @@ Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
       'rules': instance.rules,
       'gstIn': instance.gstIn,
       'location': instance.location,
+      'commission': instance.commission,
       'kycDocuments': instance.kycDocuments,
     };
 

@@ -98,6 +98,29 @@ class ImageDataModel with _$ImageDataModel{
 }
 
 @Freezed()
+class FetchLeadsResponseModel with _$FetchLeadsResponseModel{
+  const factory FetchLeadsResponseModel({
+    int? status,
+    String? message,
+    List<LeadModel>? data
+  }) = _FetchLeadsResponseModel;
+
+  factory FetchLeadsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchLeadsResponseModelFromJson(json);
+}
+
+@Freezed()
+class LeadModel with _$LeadModel{
+  const factory LeadModel({
+    dynamic userId,
+    dynamic dealerId,
+    dynamic hostelId,
+    dynamic roomId
+  }) = _LeadModel;
+
+  factory LeadModel.fromJson(Map<String, dynamic> json) => _$LeadModelFromJson(json);
+}
+
+@Freezed()
 class StatsDataModel with _$StatsDataModel{
   const factory StatsDataModel({
     String? type,

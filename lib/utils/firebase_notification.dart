@@ -1,83 +1,77 @@
-import 'dart:async';
 import 'dart:convert';
-
+import 'dart:ui';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+
 
 class FireBaseNotification {
-
   final _firebaseMessaging = FirebaseMessaging.instance;
 
-  final _androidChannel = const AndroidNotificationChannel(
-    'channel_id',
-    'Channel Name',
-    importance: Importance.high,
-  );
-  final _locationNotification = FlutterLocalNotificationsPlugin();
-
-  void handleMessage(RemoteMessage? message) {
-    if (message == null) return;
-  }
-
-  Future<void> initLocalNotification() async {
-    final List<DarwinNotificationCategory> darwinNotificationCategories =
-    <DarwinNotificationCategory>[
-      DarwinNotificationCategory(
-        'darwinNotificationCategoryText',
-        actions: <DarwinNotificationAction>[
-          DarwinNotificationAction.text(
-            'text_1',
-            'Action 1',
-            buttonTitle: 'Send',
-            placeholder: 'Placeholder',
+  /// Initialize Awesome Notifications
+  Future<void> initAwesomeNotification() async {
+    AwesomeNotifications().initialize(
+        null, // app icon
+        [
+          NotificationChannel(
+              channelKey: 'basic_channel',
+              channelName: 'Basic Notifications',
+              channelDescription: 'Notification channel for basic tests',
+              importance: NotificationImportance.Max
           ),
         ],
-      )
-    ];
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const settings = InitializationSettings(
-        android: android, iOS: DarwinInitializationSettings());
-    await _locationNotification.initialize(
-      settings,
+        debug: true
     );
-    await _locationNotification
-        .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(_androidChannel);
+
+    // Request notification permissions
+    await _firebaseMessaging.requestPermission();
+    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
   }
 
-  Future<void> initPushNotification() async {
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+  /// Handle notification click (when user taps the notification)
+  void setListeners(){
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print("Notification clicked: ${message.data}");
+      // TODO: Navigate to page using message.data
+    });
 
-    FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-    FirebaseMessaging.onMessage.listen((message) {
+    // AwesomeNotifications().actionStream.listen((receivedAction) {
+    //   print("User tapped notification: ${receivedAction.payload}");
+    // });
+  }
+
+
+  void initPushNotification() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       final notification = message.notification;
       if (notification == null) return;
 
-      _locationNotification.show(
-        notification.hashCode,
-        notification.title ?? '',
-        notification.body ?? '',
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            _androidChannel.id,
-            _androidChannel.name,
-            icon: '@mipmap/ic_launcher',
-          ),
+      final imageUrl = notification.android?.imageUrl ?? notification.apple?.imageUrl;
+      print("📷 Notification image URL: $imageUrl");
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+          channelKey: 'basic_channel',
+          title: notification.title,
+          body: notification.body,
+          bigPicture: imageUrl,
+          largeIcon: imageUrl,
+          notificationLayout:((imageUrl != null) || (imageUrl != ""))? NotificationLayout.BigPicture : NotificationLayout.Default,
         ),
-        payload: jsonEncode(message.data),
       );
     });
   }
 
+  /// Call this in main.dart
   Future<void> initNotifications() async {
-    await _firebaseMessaging.requestPermission();
+    await initAwesomeNotification();
     initPushNotification();
-    initLocalNotification();
+    setListeners();
   }
 }
+
+

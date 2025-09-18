@@ -51,7 +51,7 @@ class TransactionComponent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Booking ID",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray),),
-                        Text(transactionModel?.orderId ?? "",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
+                        Text(transactionModel?.id ?? "",maxLines: 1,overflow: TextOverflow.ellipsis ,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
                       ],
                     ),
                   ),
@@ -75,7 +75,7 @@ class TransactionComponent extends StatelessWidget {
                     CustomColors.darkGray,height: 10,width: 1),
                   ),
                   Expanded(
-                    child: Text(transactionModel?.paymentStatus ?? '',style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.orange)),
+                    child: Text(transactionModel?.paymentStatus ?? '',style: TextStyle(fontWeight: FontWeight.w600,color: ((transactionModel?.paymentStatus ?? '') == "success") ? CustomColors.green : CustomColors.orange)),
                   )
                 ],
               )
