@@ -119,7 +119,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                               Text(
                                 "Room Number : ${roomModelData.roomNo ?? ''}",
                                 style: const TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -261,10 +261,10 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                           Row(
                             children: [
                               Expanded(child: Text("Total Amount",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.textColor,fontSize: 18))),
-                              Visibility(visible: (bookingDataModel?.discount ?? 0) != 0 ,child: Text("₹${(bookingDataModel?.total ?? 0) + (bookingDataModel?.discount ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
+                              Visibility(visible: (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)  != 0 ,child: Text("₹${(bookingDataModel?.subTotal ?? 0) + (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
                                   decorationThickness: 2,
                                   decorationColor: Colors.black))),
-                              Text("₹${(bookingDataModel?.total ?? 0) - (bookingDataModel?.discount ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
+                              Text("₹${(bookingDataModel?.subTotal ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
                             ],
                           ),
                           const SizedBox(height: 30),

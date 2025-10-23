@@ -21,11 +21,11 @@ class OnBoardingScreenComponent extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: 'Sasta',
-                      style: TextStyle(color: CustomColors.textColor, fontSize: 20, fontWeight: FontWeight.w900),
+                      style: TextStyle(color: CustomColors.textColor, fontSize: 18, fontWeight: FontWeight.w900),
                     ),
                     TextSpan(
                       text: 'Stays',
-                      style: TextStyle(color: CustomColors.primary, fontSize: 20, fontWeight: FontWeight.w900),
+                      style: TextStyle(color: CustomColors.primary, fontSize: 18, fontWeight: FontWeight.w900),
                     ),
                   ],
                 ),

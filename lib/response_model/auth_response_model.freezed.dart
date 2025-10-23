@@ -347,6 +347,159 @@ abstract class _UploadFileResponseModel implements UploadFileResponseModel {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+FaqModel _$FaqModelFromJson(Map<String, dynamic> json) {
+  return _FaqModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FaqModel {
+  String? get question => throw _privateConstructorUsedError;
+  String? get answer => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FaqModelCopyWith<FaqModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FaqModelCopyWith<$Res> {
+  factory $FaqModelCopyWith(FaqModel value, $Res Function(FaqModel) then) =
+      _$FaqModelCopyWithImpl<$Res, FaqModel>;
+  @useResult
+  $Res call({String? question, String? answer});
+}
+
+/// @nodoc
+class _$FaqModelCopyWithImpl<$Res, $Val extends FaqModel>
+    implements $FaqModelCopyWith<$Res> {
+  _$FaqModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? question = freezed,
+    Object? answer = freezed,
+  }) {
+    return _then(_value.copyWith(
+      question: freezed == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String?,
+      answer: freezed == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FaqModelImplCopyWith<$Res>
+    implements $FaqModelCopyWith<$Res> {
+  factory _$$FaqModelImplCopyWith(
+          _$FaqModelImpl value, $Res Function(_$FaqModelImpl) then) =
+      __$$FaqModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? question, String? answer});
+}
+
+/// @nodoc
+class __$$FaqModelImplCopyWithImpl<$Res>
+    extends _$FaqModelCopyWithImpl<$Res, _$FaqModelImpl>
+    implements _$$FaqModelImplCopyWith<$Res> {
+  __$$FaqModelImplCopyWithImpl(
+      _$FaqModelImpl _value, $Res Function(_$FaqModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? question = freezed,
+    Object? answer = freezed,
+  }) {
+    return _then(_$FaqModelImpl(
+      question: freezed == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String?,
+      answer: freezed == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FaqModelImpl implements _FaqModel {
+  const _$FaqModelImpl({this.question, this.answer});
+
+  factory _$FaqModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FaqModelImplFromJson(json);
+
+  @override
+  final String? question;
+  @override
+  final String? answer;
+
+  @override
+  String toString() {
+    return 'FaqModel(question: $question, answer: $answer)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FaqModelImpl &&
+            (identical(other.question, question) ||
+                other.question == question) &&
+            (identical(other.answer, answer) || other.answer == answer));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, question, answer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FaqModelImplCopyWith<_$FaqModelImpl> get copyWith =>
+      __$$FaqModelImplCopyWithImpl<_$FaqModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FaqModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FaqModel implements FaqModel {
+  const factory _FaqModel({final String? question, final String? answer}) =
+      _$FaqModelImpl;
+
+  factory _FaqModel.fromJson(Map<String, dynamic> json) =
+      _$FaqModelImpl.fromJson;
+
+  @override
+  String? get question;
+  @override
+  String? get answer;
+  @override
+  @JsonKey(ignore: true)
+  _$$FaqModelImplCopyWith<_$FaqModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 FetchUserDetailsResponseModel _$FetchUserDetailsResponseModelFromJson(
     Map<String, dynamic> json) {
   return _FetchUserDetailsResponseModel.fromJson(json);

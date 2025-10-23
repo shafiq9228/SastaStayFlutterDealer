@@ -88,7 +88,7 @@ class CheckoutPage extends StatelessWidget {
                                 const SizedBox(height: 20),
                                 Row(
                                   children: [
-                                    Expanded(child: Text("Your Booking Details",style:TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: CustomColors.black))),
+                                    Expanded(child: Text("Your Booking Details",style:TextStyle(fontWeight: FontWeight.w600,fontSize: 18,color: CustomColors.black))),
                                     const SizedBox(width: 20),
                                     InkWell(
                                         onTap: (){
@@ -302,10 +302,10 @@ class CheckoutPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Expanded(child: Text("Total Amount",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.textColor,fontSize: 18))),
-                                          Visibility(visible: (availabilityResponse?.discount ?? 0) != 0 ,child: Text("₹${(availabilityResponse?.amount ?? 0) + (availabilityResponse?.discount ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
+                                          Visibility(visible: (availabilityResponse?.discount ?? 0) != 0 ,child: Text("₹${(availabilityResponse?.subTotal ?? 0) + (availabilityResponse?.discount ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
                                             decorationThickness: 2,
                                             decorationColor: Colors.black))),
-                                          Text("₹${(availabilityResponse?.amount ?? 0) - (availabilityResponse?.discount ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
+                                          Text("₹${(availabilityResponse?.subTotal ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
                                         ],
                                       ),
                                       const SizedBox(height: 10),

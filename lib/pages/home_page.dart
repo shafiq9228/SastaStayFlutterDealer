@@ -97,16 +97,16 @@ class HomePage extends StatelessWidget {
                                 },itemCount: hostelData?.stats?.length ?? 0),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         InkWell(
-                      onTap: (){
-                        authViewModel.images.value = hostelData?.images ?? [];
-                        Get.to(() => HostelImagesPage(hostelModel: hostelData));
-                      },
+                        onTap: (){
+                          authViewModel.images.value = hostelData?.images ?? [];
+                          Get.to(() => HostelImagesPage(hostelModel: hostelData));
+                        },
                       child: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          CustomNetworkImage(imageUrl: hostelData?.hostelImage ??"",width: double.infinity,height: 300,fit: BoxFit.cover,),
+                          CustomNetworkImage(imageUrl: hostelData?.hostelImage ?? "",width: double.infinity,height: 300,fit: BoxFit.cover,),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                             child: Visibility(
@@ -122,13 +122,21 @@ class HomePage extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: (hostelData?.images?.first.images?.length ?? 0) > 5
+                                    itemCount: (hostelData?.images?.isNotEmpty == true)
+                                        ? ((hostelData!.images!.first.images?.length ?? 0) > 5
                                         ? 5
-                                        : hostelData?.images?.first.images?.length ?? 0,
+                                        : hostelData.images!.first.images?.length ?? 0)
+                                        : 0,
                                     itemBuilder: (context, index) {
-                                      final images = hostelData?.images?.first.images ?? [];
+                                      final images = hostelData?.images?.isNotEmpty == true
+                                          ? hostelData!.images!.first.images ?? []
+                                          : [];
+
+                                      if (images.isEmpty) return const SizedBox.shrink();
+
                                       final imageUrl = images[index];
-                                      // If last index and there are more than 5 images
+
+                                      // If last index and more than 5 images
                                       if (index == 4 && images.length > 5) {
                                         final remainingCount = images.length - 5;
                                         return Padding(
@@ -162,6 +170,7 @@ class HomePage extends StatelessWidget {
                                           ),
                                         );
                                       }
+
                                       // Normal image item
                                       return Padding(
                                         padding: const EdgeInsets.all(5),
@@ -201,7 +210,7 @@ class HomePage extends StatelessWidget {
                               child: Text(
                                 hostelData?.hostelName ?? 'Hostel',
                                 style: const TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -228,9 +237,9 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(color: CustomColors.darkGray,fontSize: 14,fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 16),
-                        CustomOutlinedButton(buttonTxt: "Edit Hostel Details", buttonClick: (){
-                          Get.to(() =>  UpdateHostelDetailsPage(hostelModel: hostelData));
-                        }),
+                        // CustomOutlinedButton(buttonTxt: "Edit Hostel Details", buttonClick: (){
+                        //   Get.to(() =>  UpdateHostelDetailsPage(hostelModel: hostelData));
+                        // }),
                         // Chip(
                         //   label: Text(hostelData?.hostelType ?? 'Type'),
                         //   backgroundColor: _getHostelTypeColor(hostelData?.hostelType),

@@ -72,7 +72,7 @@ class _AddGuestBottomSheetState extends State<AddGuestBottomSheet> {
               children: [
                 Row(
                   children: [
-                    Expanded(child: Text("Add Guest Details",textAlign: TextAlign.start,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 20,color: CustomColors.textColor),)),
+                    Expanded(child: Text("Add Guest Details",textAlign: TextAlign.start,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.textColor),)),
                     IconButton(onPressed: (){
                       Get.back();
                     }, icon: Icon(Icons.cancel,size: 30,color: CustomColors.primary,))

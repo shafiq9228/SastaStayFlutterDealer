@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get.dart';
+import 'package:sasta_stay_dealer/pages/register_hostel_page.dart';
 import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
 import 'package:sasta_stay_dealer/view_models/booking_view_model.dart';
 import 'package:sasta_stay_dealer/view_models/hostel_view_model.dart';
@@ -52,9 +53,12 @@ class AuthViewModel extends GetxController{
   Rx<File> uploadingFile = File('').obs;
   Rx<String> primaryHostelId = "".obs;
   Rx<String> hostelImage = "".obs;
+  Rx<String> checkInTime = "".obs;
+  Rx<String> checkOutTime = "".obs;
   Rx<String> hostelLicence = "".obs;
   RxList<String> rules = <String>[].obs;
   RxList<ImageDataModel> images = <ImageDataModel>[].obs;
+  RxList<FaqModel> faqs = <FaqModel>[].obs;
   RxList<String> amenityIds = <String>[].obs;
 
   final hostelViewModel = Get.put(HostelViewModel());
@@ -367,7 +371,7 @@ class AuthViewModel extends GetxController{
   Future<void> registerHostel(RegistrationRequestModel request) async {
     try{
       registerHostelResponseObserver.value = const ApiResult.loading();
-      final String? validatorResponse = AuthUtils.validateRequestFields(['hostelImage','hostelLicence','hostelName','aboutHostel','gstIn','location'], request.toJson());
+      final String? validatorResponse = AuthUtils.validateRequestFields(['hostelImage','hostelLicence','hostelName','aboutHostel','gstIn','location','faq','amenities','images','rules','checkInTime','checkOutTime'], request.toJson());
       if(validatorResponse != null) throw validatorResponse;
       final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landMark','pinCode','latitude','longitude'], request.location!.toJson());
       if(locationValidation != null) throw locationValidation;
@@ -394,10 +398,6 @@ class AuthViewModel extends GetxController{
   Future<void> updateHostelDetails(RegistrationRequestModel request) async {
     try{
       updateHostelDetailsResponseObserver.value = const ApiResult.loading();
-      final String? validatorResponse = AuthUtils.validateRequestFields(['hostelId','hostelImage','hostelName','aboutHostel','location','amenities','rules','images'], request.toJson());
-      if(validatorResponse != null) throw validatorResponse;
-      final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landMark','pinCode','latitude','longitude'], request.location!.toJson());
-      if(locationValidation != null) throw locationValidation;
       final response = await apiProvider.post(EndPoints.updateHostelDetails,request.toJson());
       final body = response.body;
       if(response.isOk && body != null){

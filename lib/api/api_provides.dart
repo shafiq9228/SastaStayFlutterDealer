@@ -24,5 +24,4 @@ class ApiProvider<T> extends GetConnect{
     });
     super.onInit();
   }
-
 }

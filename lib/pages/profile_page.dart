@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/components/add_guest_item.dart';
 import 'package:sasta_stay_dealer/components/error_text_component.dart';
 import 'package:sasta_stay_dealer/components/icon_title_message_component.dart';
+import 'package:sasta_stay_dealer/pages/help_support_page.dart';
 import 'package:sasta_stay_dealer/pages/hostels_page.dart';
 import 'package:sasta_stay_dealer/components/profile_menu.dart';
 import 'package:sasta_stay_dealer/pages/money_withdraw_page.dart';
@@ -195,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 50),
+                            const SizedBox(height: 50),
                             Padding(
                               padding: const EdgeInsets.all(15),
                               child: Container(
@@ -205,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Column(
                                     children: [
                                       ProfileMenu(title: "Helps", image: "assets/images/help.png", onTapped: (){
-
+                                        Get.to(() =>  HelpSupportPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray,),
                                       Obx(() =>

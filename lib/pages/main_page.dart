@@ -29,7 +29,7 @@ class _MainPageState extends State<MainPage> {
     _selectedPageIndex = 0;
     _pages = [
       const HomePage(),
-      const LeadsPage(),
+      // const LeadsPage(),
       const RoomsPage(),
       const BookingsPage(),
       const ProfilePage(),
@@ -95,25 +95,25 @@ class _MainPageState extends State<MainPage> {
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),
-              label: 'Home',
+              label: 'My Hostel',
             ),
+            // BottomNavigationBarItem(
+            //   icon: Image.asset(
+            //     _selectedIndex == 1 ? 'assets/images/lead_1.png' : 'assets/images/lead.png',
+            //     width: 20,
+            //     height: 20,
+            //     color: _selectedIndex == 1
+            //         ? CustomColors.primary
+            //         : Colors.black.withOpacity(0.5),
+            //   ),
+            //   label: 'Leads',
+            // ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                _selectedIndex == 1 ? 'assets/images/lead_1.png' : 'assets/images/lead.png',
+                _selectedIndex == 1 ? 'assets/images/bed_1.png' : 'assets/images/bed.png',
                 width: 20,
                 height: 20,
                 color: _selectedIndex == 1
-                    ? CustomColors.primary
-                    : Colors.black.withOpacity(0.5),
-              ),
-              label: 'Leads',
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                _selectedIndex == 2 ? 'assets/images/bed_1.png' : 'assets/images/bed.png',
-                width: 20,
-                height: 20,
-                color: _selectedIndex == 2
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),
@@ -121,10 +121,10 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                _selectedIndex == 3 ? 'assets/images/order_1.png'  : 'assets/images/order.png',
+                _selectedIndex == 2 ? 'assets/images/order_1.png'  : 'assets/images/order.png',
                 width: 20,
                 height: 20,
-                color: _selectedIndex == 3
+                color: _selectedIndex == 2
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),
@@ -132,10 +132,10 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                _selectedIndex == 4 ? 'assets/images/profile_1.png' : 'assets/images/profile.png',
+                _selectedIndex == 3 ? 'assets/images/profile_1.png' : 'assets/images/profile.png',
                 width: 20,
                 height: 20,
-                color: _selectedIndex == 4
+                color: _selectedIndex == 3
                     ? CustomColors.primary
                     : Colors.black.withOpacity(0.5),
               ),

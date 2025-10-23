@@ -33,7 +33,7 @@ class SecondaryHeadingComponent extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(right: 20,top: 10,bottom: 10),
-            child: SizedBox(width:200,child: Text(buttonTxt,textAlign: TextAlign.start,style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 22),)),
+            child: SizedBox(width:200,child: Text(buttonTxt,textAlign: TextAlign.start,style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 18),)),
           ),
         ),
         Visibility(

@@ -30,6 +30,13 @@ class _CouponsPageState extends State<CouponsPage> {
   final hostelViewModel = Get.put(HostelViewModel());
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
+  List<String> options = ["FLAT","PERCENT"];
+
+  RxString selectedDiscountOption = "FLAT".obs;
+
+  RxBool singleUse = true.obs;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -160,9 +167,19 @@ class _CouponsPageState extends State<CouponsPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 12),
-                  Text("Create Coupon",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: CustomColors.textColor)),
+                  Text(
+                    "Create Coupon",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: CustomColors.textColor),
+                  ),
                   const SizedBox(height: 12),
-                  Text("Code",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+                  Text("Code",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: CustomColors.textColor)),
                   Container(
                     width: double.infinity,
                     height: 50,
@@ -170,31 +187,94 @@ class _CouponsPageState extends State<CouponsPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextFormField(
-                          controller: codeController,
-                          style: TextStyle(
-                              color:CustomColors.textColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16
-                          ),
-                          decoration: InputDecoration(
-                            counterText: '',
-                            hintText: 'Enter New Coupon Code',
-                            hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white), // Default color
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
-                            ),
-                          )
+                        controller: codeController,
+                        style: TextStyle(
+                          color: CustomColors.textColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                        decoration: const InputDecoration(
+                          counterText: '',
+                          hintText: 'Enter New Coupon Code',
+                          hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16),
+
+                  // 💰 Discount Type Radio (FLAT or PERCENT)
+                  const Text(
+                    'Discount Type',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                  ),
+                  Obx(
+                        () => Row(
+                      children: [
+                        Expanded(
+                          child: RadioListTile<String>(
+                            title: const Text("FLAT"),
+                            value: "FLAT",
+                            groupValue: selectedDiscountOption.value,
+                            onChanged: (value) {
+                              selectedDiscountOption.value = value!;
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: RadioListTile<String>(
+                            title: const Text("PERCENT"),
+                            value: "PERCENT",
+                            groupValue: selectedDiscountOption.value,
+                            onChanged: (value) {
+                              selectedDiscountOption.value = value!;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Discount Value',
+                    style:
+                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: AppStyles.editTextBg,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        controller: discountController,
+                        keyboardType: TextInputType.phone,
+                        style: TextStyle(
+                            color: CustomColors.textColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16),
+                        decoration: const InputDecoration(
+                          counterText: '',
+                          hintText: 'Enter Discount',
+                          hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   const SizedBox(height: 12),
                   const Text(
                     'Minimum Order Value In Rupees',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.w600),
+                    style:
+                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
                   ),
                   Container(
                     width: double.infinity,
@@ -203,62 +283,63 @@ class _CouponsPageState extends State<CouponsPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextFormField(
-                          controller: orderValueController,
-                          keyboardType: TextInputType.phone,
-                          style: TextStyle(
-                              color:CustomColors.textColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16
-                          ),
-                          decoration: InputDecoration(
-                            counterText: '',
-                            hintText: 'Enter Minimum Order Value',
-                            hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white), // Default color
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
-                            ),
-                          )
+                        controller: orderValueController,
+                        keyboardType: TextInputType.phone,
+                        style: TextStyle(
+                            color: CustomColors.textColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16),
+                        decoration: const InputDecoration(
+                          counterText: '',
+                          hintText: 'Enter Minimum Order Value',
+                          hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+
+                  const SizedBox(height: 16),
+
+                  // 🧾 Single / Multiple Use Radio
                   const Text(
-                    'Discount In Rupees',
-                    style: TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.w600),
+                    'Coupon Usage Type',
+                    style:
+                    TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: AppStyles.editTextBg,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: TextFormField(
-                          controller: discountController,
-                          keyboardType: TextInputType.phone,
-                          style: TextStyle(
-                              color:CustomColors.textColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16
+                  Obx(
+                        () => Row(
+                      children: [
+                        Expanded(
+                          child: RadioListTile<bool>(
+                            title: const Text("Single Use"),
+                            value: true,
+                            groupValue: singleUse.value,
+                            onChanged: (value) {
+                              singleUse.value = value!;
+                            },
                           ),
-                          decoration: InputDecoration(
-                            counterText: '',
-                            hintText: 'Enter Discount',
-                            hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white), // Default color
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
-                            ),
-                          )
-                      ),
+                        ),
+                        Expanded(
+                          child: RadioListTile<bool>(
+                            title: const Text("Multiple Use"),
+                            value: false,
+                            groupValue: singleUse.value,
+                            onChanged: (value) {
+                              singleUse.value = value!;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 12),
+
+                  const SizedBox(height: 16),
+
+                  // 📅 Expiry Date Section
                   Container(
                     width: double.infinity,
                     decoration: AppStyles.editTextBg,
@@ -271,64 +352,86 @@ class _CouponsPageState extends State<CouponsPage> {
                             style: TextStyle(
                                 fontSize: 18.0, fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(height: 10),
-                          Obx(() => Text(
-                            selectedDate.value == null ? "No date selected" : "Selected Date: ${AuthUtils.convertDate(selectedDate.toString())}",
+                          const SizedBox(height: 10),
+                          Obx(
+                                () => Text(
+                              selectedDate.value == null
+                                  ? "No date selected"
+                                  : "Selected Date: ${AuthUtils.convertDate(selectedDate.toString())}",
+                            ),
                           ),
-                          ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           PrimaryButton(
                             buttonClick: () => _selectDate(context),
                             buttonTxt: "Pick a Date",
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Obx(() => hostelViewModel.createCouponObserver.value.maybeWhen(
+                  const SizedBox(height: 16),
+
+                  // 🪄 Create Button
+                  Obx(
+                        () => hostelViewModel.createCouponObserver.value.maybeWhen(
                       loading: () => const CustomProgressBar(),
                       orElse: () => PrimaryButton(
-                          buttonTxt: 'Create',
-                          buttonClick: () {
-                            if(codeController.text.toString().trim().isEmpty){
-                              Get.snackbar(
-                                "Error",
-                                "Code Should No Empty",
+                        buttonTxt: 'Create',
+                        buttonClick: () {
+                          if (codeController.text.trim().isEmpty) {
+                            Get.snackbar("Error", "Code should not be empty",
                                 backgroundColor: CustomColors.primary,
                                 colorText: CustomColors.white,
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                              return;
-                            }
-                            if((AuthUtils.parseToInt(discountController.text.trim()) ?? 0) == 0 || (AuthUtils.parseToInt(orderValueController.text.trim()) ?? 0) == 0){
-                              Get.snackbar(
-                                "Error",
-                                (AuthUtils.parseToInt(orderValueController.text.trim()) ?? 0) == 0 ? "Order Value should not be zero" :"Discount should not be zero",
+                                snackPosition: SnackPosition.BOTTOM);
+                            return;
+                          }
+                          if ((AuthUtils.parseToInt(
+                              discountController.text.trim()) ??
+                              0) ==
+                              0) {
+                            Get.snackbar("Error", "Discount should not be zero",
                                 backgroundColor: CustomColors.primary,
                                 colorText: CustomColors.white,
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                              return;
-                            }
-                            if(selectedDate.value == null) {
-                              Get.snackbar(
-                                "Error",
-                                "Select Expiry Date",
+                                snackPosition: SnackPosition.BOTTOM);
+                            return;
+                          }
+                          if ((AuthUtils.parseToInt(
+                              orderValueController.text.trim()) ??
+                              0) ==
+                              0) {
+                            Get.snackbar("Error", "Order value should not be zero",
                                 backgroundColor: CustomColors.primary,
                                 colorText: CustomColors.white,
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                              return;
-                            }
-                            hostelViewModel.createCoupon(CouponDataModel(code: codeController.text.trim(),expiryDate: selectedDate.value,orderValue:AuthUtils.parseToInt(orderValueController.text.trim()) ?? 0,discount:AuthUtils.parseToInt(orderValueController.text.trim()) ?? 0));
-                            Get.back();
-                          })),
+                                snackPosition: SnackPosition.BOTTOM);
+                            return;
+                          }
+                          if (selectedDate.value == null) {
+                            Get.snackbar("Error", "Select expiry date",
+                                backgroundColor: CustomColors.primary,
+                                colorText: CustomColors.white,
+                                snackPosition: SnackPosition.BOTTOM);
+                            return;
+                          }
+
+                          hostelViewModel.createCoupon(
+                            CouponDataModel(
+                              discountType: selectedDiscountOption.value,
+                              singleUse: singleUse.value,
+                              code: codeController.text.trim(),
+                              expiryDate: selectedDate.value,
+                              orderValue: AuthUtils.parseToInt(
+                                  orderValueController.text.trim()) ??
+                                  0,
+                              discount: AuthUtils.parseToInt(
+                                  discountController.text.trim()) ??
+                                  0,
+                            ),
+                          );
+                          Get.back();
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -338,6 +441,7 @@ class _CouponsPageState extends State<CouponsPage> {
       },
     );
   }
+
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(

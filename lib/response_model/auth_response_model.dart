@@ -58,6 +58,16 @@ class UploadFileResponseModel with _$UploadFileResponseModel{
   factory UploadFileResponseModel.fromJson(Map<String, dynamic> json) => _$UploadFileResponseModelFromJson(json);
 }
 
+@Freezed()
+class FaqModel with _$FaqModel{
+  const factory FaqModel({
+    String? question,
+    String? answer
+  }) = _FaqModel;
+
+  factory FaqModel.fromJson(Map<String, dynamic> json) => _$FaqModelFromJson(json);
+}
+
 
 
 @Freezed()

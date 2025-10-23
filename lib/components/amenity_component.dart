@@ -52,11 +52,11 @@ class _AmenityComponentState extends State<AmenityComponent> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomNetworkImage(imageUrl: widget.amenitiesModel?.image ?? "", width: 30, height: 30,color: authViewModel.amenityIds.contains(widget.amenitiesModel?.id ?? "") ? CustomColors.white : CustomColors.textColor),
+                  CustomNetworkImage(imageUrl: widget.amenitiesModel?.image ?? "", width: 20, height: 20,color: authViewModel.amenityIds.contains(widget.amenitiesModel?.id ?? "") ? CustomColors.white : CustomColors.textColor),
                   const SizedBox(width: 10),
                   Expanded(child: Text(
                     widget.amenitiesModel?.name ?? "", textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 16,
+                    style: TextStyle(fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color:  authViewModel.amenityIds.contains(widget.amenitiesModel?.id ?? "") ? CustomColors.white : CustomColors.textColor),))
                 ],

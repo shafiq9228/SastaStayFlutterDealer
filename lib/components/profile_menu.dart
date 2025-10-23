@@ -26,10 +26,10 @@ class ProfileMenu extends StatelessWidget {
           child: Image.asset(
             image,color: logOutMenu == true ?  CustomColors.red :CustomColors.textColor,),
         ),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18,color: logOutMenu == true ? CustomColors.red :Colors.black)),
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: logOutMenu == true ? CustomColors.red :Colors.black)),
         trailing: SizedBox(
-            width: 25,
-            height: 25,
+            width: 20,
+            height: 20,
             child: Image.asset(
               'assets/images/right_arrow.png',color: logOutMenu == true ?  CustomColors.red :CustomColors.textColor,
             )

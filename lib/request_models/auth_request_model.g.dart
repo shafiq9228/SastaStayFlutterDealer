@@ -80,6 +80,11 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
           .toList(),
       rules:
           (json['rules'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      faq: (json['faq'] as List<dynamic>?)
+          ?.map((e) => FaqModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      checkInTime: json['checkInTime'] as String?,
+      checkOutTime: json['checkOutTime'] as String?,
       gstIn: json['gstIn'] as String?,
       location: json['location'] == null
           ? null
@@ -105,6 +110,9 @@ Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
       'images': instance.images,
       'amenities': instance.amenities,
       'rules': instance.rules,
+      'faq': instance.faq,
+      'checkInTime': instance.checkInTime,
+      'checkOutTime': instance.checkOutTime,
       'gstIn': instance.gstIn,
       'location': instance.location,
       'commission': instance.commission,

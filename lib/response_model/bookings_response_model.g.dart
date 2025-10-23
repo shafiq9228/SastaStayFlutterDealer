@@ -107,6 +107,7 @@ _$HostelRoomBookingDataModelImpl _$$HostelRoomBookingDataModelImplFromJson(
     _$HostelRoomBookingDataModelImpl(
       amount: json['amount'] as int?,
       discount: json['discount'] as int?,
+      subTotal: json['subTotal'] as int?,
       paymentDetailLogs: (json['paymentDetailLogs'] as List<dynamic>?)
           ?.map((e) => AmountDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -124,6 +125,7 @@ Map<String, dynamic> _$$HostelRoomBookingDataModelImplToJson(
     <String, dynamic>{
       'amount': instance.amount,
       'discount': instance.discount,
+      'subTotal': instance.subTotal,
       'paymentDetailLogs': instance.paymentDetailLogs,
       'bookingResponse': instance.bookingResponse,
       'onGoingBookings': instance.onGoingBookings,
@@ -134,6 +136,7 @@ _$AmountDetailsModelImpl _$$AmountDetailsModelImplFromJson(
     _$AmountDetailsModelImpl(
       message: json['message'] as String?,
       amount: json['amount'] as String?,
+      extraData: json['extraData'] as String?,
     );
 
 Map<String, dynamic> _$$AmountDetailsModelImplToJson(
@@ -141,6 +144,7 @@ Map<String, dynamic> _$$AmountDetailsModelImplToJson(
     <String, dynamic>{
       'message': instance.message,
       'amount': instance.amount,
+      'extraData': instance.extraData,
     };
 
 _$FetchBookingsResponseModelImpl _$$FetchBookingsResponseModelImplFromJson(
@@ -200,7 +204,7 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
       amount: json['amount'] as int?,
       discount: json['discount'] as int?,
       walletDeduction: json['walletDeduction'] as int?,
-      total: json['total'] as int?,
+      subTotal: json['subTotal'] as int?,
       guestDetailsList: (json['guestDetailsList'] as List<dynamic>?)
           ?.map((e) => GuestDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -229,7 +233,7 @@ Map<String, dynamic> _$$BookingModelImplToJson(_$BookingModelImpl instance) =>
       'amount': instance.amount,
       'discount': instance.discount,
       'walletDeduction': instance.walletDeduction,
-      'total': instance.total,
+      'subTotal': instance.subTotal,
       'guestDetailsList': instance.guestDetailsList,
       'logs': instance.logs,
       'bookingStatus': instance.bookingStatus,
@@ -298,6 +302,9 @@ _$CouponDataModelImpl _$$CouponDataModelImplFromJson(
         Map<String, dynamic> json) =>
     _$CouponDataModelImpl(
       id: json['_id'] as String?,
+      discountType: json['discountType'] as String?,
+      isActive: json['isActive'] as bool?,
+      singleUse: json['singleUse'] as bool?,
       createdBy: json['createdBy'] as String?,
       expiryDate: json['expiryDate'] == null
           ? null
@@ -311,6 +318,9 @@ Map<String, dynamic> _$$CouponDataModelImplToJson(
         _$CouponDataModelImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'discountType': instance.discountType,
+      'isActive': instance.isActive,
+      'singleUse': instance.singleUse,
       'createdBy': instance.createdBy,
       'expiryDate': instance.expiryDate?.toIso8601String(),
       'code': instance.code,

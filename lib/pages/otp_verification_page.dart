@@ -79,7 +79,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> with CodeAuto
                 style: TextStyle(
                   color: CustomColors.textColor,
                   fontWeight: FontWeight.w500,
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
               ),
             ),
@@ -107,7 +107,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> with CodeAuto
                       autoFocus: true,
                       decoration: UnderlineDecoration(
                         textStyle: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           color: CustomColors.textColor,
                           fontWeight: FontWeight.w600,
                         ),

@@ -23,7 +23,7 @@ class HomePageComponent extends StatelessWidget {
           children: [
             Obx(()=> Text(authViewModel.fetchUserDetailsObserver.value.maybeWhen(success: (data) => "Hi, ${(data as FetchUserDetailsResponseModel).data?.name ?? ""} 👋",orElse: () => ""),style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.textColor,fontSize: 18))),
             const SizedBox(height: 5),
-            Text("Lets Find The Best Users",style: TextStyle(fontWeight: FontWeight.w800,color: CustomColors.textColor,fontSize: 20)),
+            Text("Lets Find The Best Users",style: TextStyle(fontWeight: FontWeight.w800,color: CustomColors.textColor,fontSize: 18)),
             const SizedBox(height: 5),
           ],
         ),

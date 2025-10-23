@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sasta_stay_dealer/response_model/bookings_response_model.dart';
 
 import '../request_models/auth_request_model.dart';
+import 'auth_response_model.dart';
 
 part 'hostel_response_model.freezed.dart';
 part 'hostel_response_model.g.dart';
@@ -68,6 +69,7 @@ class HostelModel with _$HostelModel{
     String? gstIn,
     String? hostelType,
     List<ImageDataModel>? images,
+    List<FaqModel>? faq,
     List<String>? amenityIds,
     List<AmenitiesModel>? amenities,
     int? amenitiesMore,
@@ -79,9 +81,12 @@ class HostelModel with _$HostelModel{
     int? monthlyIncome,
     int? totalIncome,
     int? totalVotes,
+    int? commission,
     dynamic rating,
     List<String>? imagesType,
-    List<StatsDataModel>? stats
+    List<StatsDataModel>? stats,
+    String? checkInTime,
+    String? checkOutTime
   }) = _HostelModel;
 
   factory HostelModel.fromJson(Map<String, dynamic> json) => _$HostelModelFromJson(json);

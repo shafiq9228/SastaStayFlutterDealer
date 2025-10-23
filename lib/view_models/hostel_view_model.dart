@@ -49,6 +49,7 @@ class HostelViewModel extends GetxController{
            if(response.isOk && body != null){
              final responseData = FormHelperDataResponseModel.fromJson(body);
              if(responseData.status == 1){
+               preferenceManager.clearAll();
                await preferenceManager.setValue("token",responseData.data?.token);
                observer.value = ApiResult.success(responseData);
                Get.to(() => const SplashScreen());

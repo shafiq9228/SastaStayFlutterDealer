@@ -20,10 +20,10 @@ class AmenitiesComponent extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CustomNetworkImage(imageUrl: amenitiesModel?.image ?? '',width: 20,height: 20),
+                CustomNetworkImage(imageUrl: amenitiesModel?.image ?? '',width: 15,height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(amenitiesModel?.name ?? '',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor),),
+                  child: Text(amenitiesModel?.name ?? '',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor),),
                 )
               ],
             ),

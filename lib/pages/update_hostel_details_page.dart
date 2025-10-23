@@ -6,6 +6,7 @@ import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
 import 'package:sasta_stay_dealer/pages/amenities_page.dart';
 import 'package:sasta_stay_dealer/pages/hostel_images_page.dart';
 import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
+import 'package:sasta_stay_dealer/utils/auth_utils.dart';
 import 'package:sasta_stay_dealer/utils/custom_colors.dart';
 
 import 'package:get/get.dart';
@@ -57,6 +58,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
           hostelNameController.text = primaryHostel?.hostelName ?? "";
           aboutHostelController.text = primaryHostel?.aboutHostel ?? "";
           selectedHostelType.value = primaryHostel?.hostelType ?? "Boys";
+          hostelCommissionController.text = "${primaryHostel?.commission ?? 0}";
 
 
           authViewModel.images.clear();
@@ -90,7 +92,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Enter Your Hostel Details",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 24),),
+                              Text("Enter Your Hostel Details",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 20),),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical:10),
                                 child: Text("Hostel Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
@@ -260,7 +262,7 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                                                       child: Row(
                                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                         children: [
-                                                          Text(rule,style: TextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+                                                          Expanded(child: Text(rule,style: TextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: CustomColors.textColor))),
                                                           GestureDetector(
                                                               onTap:(){
                                                                 final rulesList = authViewModel.rules.toList();
@@ -392,8 +394,8 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              CustomEditTextComponent(controller: hostelCommissionController, title: "Hostel Commission (In Rupees)", hint: "0",keyboardType: TextInputType.phone,),
+                              // const SizedBox(height: 20),
+                              // CustomEditTextComponent(controller: hostelCommissionController, title: "Hostel Commission (In Rupees)", hint: "0",keyboardType: TextInputType.phone,),
                               const SizedBox(height: 120),
                             ],
                           ),
@@ -408,7 +410,19 @@ class _UpdateHostelDetailsPageState extends State<UpdateHostelDetailsPage> {
                                 loading: () => const CustomProgressBar(),
                                 orElse: () => PrimaryButton(buttonClick: (){
                                   try {
-                                    authViewModel.updateHostelDetails(RegistrationRequestModel(hostelId:authViewModel.getPrimaryId(),hostelImage: authViewModel.hostelImage.value,hostelType: selectedHostelType.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,location: authViewModel.locationDetails.value,images: authViewModel.images,rules: authViewModel.rules,amenities: authViewModel.amenityIds,commission: int.tryParse(hostelCommissionController.text) ?? 0));
+                                    final request = RegistrationRequestModel(hostelId:authViewModel.getPrimaryId(),hostelImage: authViewModel.hostelImage.value,hostelType: selectedHostelType.value,hostelName: hostelNameController.text,aboutHostel: aboutHostelController.text,location: authViewModel.locationDetails.value,images: authViewModel.images,rules: authViewModel.rules,amenities: authViewModel.amenityIds,commission: int.tryParse(hostelCommissionController.text) ?? 0);
+                                    final String? validatorResponse = AuthUtils.validateRequestFields(['hostelId','hostelImage','hostelName','aboutHostel','location','amenities','rules','images'], request.toJson());
+                                    if(validatorResponse != null) {
+                                      Get.snackbar("Error", validatorResponse,backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+                                       return;
+                                    };
+                                    final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landMark','pinCode','latitude','longitude'], request.location!.toJson());
+                                    if(locationValidation != null) {
+                                      Get.to(() => LocationPickerPage());
+                                      Get.snackbar("Error", locationValidation,backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+                                      return;
+                                    };
+                                    authViewModel.updateHostelDetails(request);
                                   } catch (e, s) {
                                     print(s);
                                   }

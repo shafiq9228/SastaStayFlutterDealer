@@ -647,6 +647,9 @@ mixin _$RegistrationRequestModel {
   List<ImageDataModel>? get images => throw _privateConstructorUsedError;
   List<String>? get amenities => throw _privateConstructorUsedError;
   List<String>? get rules => throw _privateConstructorUsedError;
+  List<FaqModel>? get faq => throw _privateConstructorUsedError;
+  String? get checkInTime => throw _privateConstructorUsedError;
+  String? get checkOutTime => throw _privateConstructorUsedError;
   String? get gstIn => throw _privateConstructorUsedError;
   LocationModel? get location => throw _privateConstructorUsedError;
   int? get commission => throw _privateConstructorUsedError;
@@ -678,6 +681,9 @@ abstract class $RegistrationRequestModelCopyWith<$Res> {
       List<ImageDataModel>? images,
       List<String>? amenities,
       List<String>? rules,
+      List<FaqModel>? faq,
+      String? checkInTime,
+      String? checkOutTime,
       String? gstIn,
       LocationModel? location,
       int? commission,
@@ -712,6 +718,9 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
     Object? images = freezed,
     Object? amenities = freezed,
     Object? rules = freezed,
+    Object? faq = freezed,
+    Object? checkInTime = freezed,
+    Object? checkOutTime = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
     Object? commission = freezed,
@@ -766,6 +775,18 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
           ? _value.rules
           : rules // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      faq: freezed == faq
+          ? _value.faq
+          : faq // ignore: cast_nullable_to_non_nullable
+              as List<FaqModel>?,
+      checkInTime: freezed == checkInTime
+          ? _value.checkInTime
+          : checkInTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutTime: freezed == checkOutTime
+          ? _value.checkOutTime
+          : checkOutTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       gstIn: freezed == gstIn
           ? _value.gstIn
           : gstIn // ignore: cast_nullable_to_non_nullable
@@ -820,6 +841,9 @@ abstract class _$$RegistrationRequestModelImplCopyWith<$Res>
       List<ImageDataModel>? images,
       List<String>? amenities,
       List<String>? rules,
+      List<FaqModel>? faq,
+      String? checkInTime,
+      String? checkOutTime,
       String? gstIn,
       LocationModel? location,
       int? commission,
@@ -854,6 +878,9 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
     Object? images = freezed,
     Object? amenities = freezed,
     Object? rules = freezed,
+    Object? faq = freezed,
+    Object? checkInTime = freezed,
+    Object? checkOutTime = freezed,
     Object? gstIn = freezed,
     Object? location = freezed,
     Object? commission = freezed,
@@ -908,6 +935,18 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
           ? _value._rules
           : rules // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      faq: freezed == faq
+          ? _value._faq
+          : faq // ignore: cast_nullable_to_non_nullable
+              as List<FaqModel>?,
+      checkInTime: freezed == checkInTime
+          ? _value.checkInTime
+          : checkInTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutTime: freezed == checkOutTime
+          ? _value.checkOutTime
+          : checkOutTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       gstIn: freezed == gstIn
           ? _value.gstIn
           : gstIn // ignore: cast_nullable_to_non_nullable
@@ -944,6 +983,9 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       final List<ImageDataModel>? images,
       final List<String>? amenities,
       final List<String>? rules,
+      final List<FaqModel>? faq,
+      this.checkInTime,
+      this.checkOutTime,
       this.gstIn,
       this.location,
       this.commission,
@@ -951,6 +993,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       : _images = images,
         _amenities = amenities,
         _rules = rules,
+        _faq = faq,
         _kycDocuments = kycDocuments;
 
   factory _$RegistrationRequestModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -1004,6 +1047,20 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<FaqModel>? _faq;
+  @override
+  List<FaqModel>? get faq {
+    final value = _faq;
+    if (value == null) return null;
+    if (_faq is EqualUnmodifiableListView) return _faq;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? checkInTime;
+  @override
+  final String? checkOutTime;
   @override
   final String? gstIn;
   @override
@@ -1022,7 +1079,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @override
   String toString() {
-    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, gstIn: $gstIn, location: $location, commission: $commission, kycDocuments: $kycDocuments)';
+    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, faq: $faq, checkInTime: $checkInTime, checkOutTime: $checkOutTime, gstIn: $gstIn, location: $location, commission: $commission, kycDocuments: $kycDocuments)';
   }
 
   @override
@@ -1049,6 +1106,11 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
             const DeepCollectionEquality()
                 .equals(other._amenities, _amenities) &&
             const DeepCollectionEquality().equals(other._rules, _rules) &&
+            const DeepCollectionEquality().equals(other._faq, _faq) &&
+            (identical(other.checkInTime, checkInTime) ||
+                other.checkInTime == checkInTime) &&
+            (identical(other.checkOutTime, checkOutTime) ||
+                other.checkOutTime == checkOutTime) &&
             (identical(other.gstIn, gstIn) || other.gstIn == gstIn) &&
             (identical(other.location, location) ||
                 other.location == location) &&
@@ -1060,24 +1122,28 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      hostelId,
-      mobile,
-      name,
-      email,
-      hostelImage,
-      hostelType,
-      hostelLicence,
-      hostelName,
-      aboutHostel,
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(_amenities),
-      const DeepCollectionEquality().hash(_rules),
-      gstIn,
-      location,
-      commission,
-      const DeepCollectionEquality().hash(_kycDocuments));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        hostelId,
+        mobile,
+        name,
+        email,
+        hostelImage,
+        hostelType,
+        hostelLicence,
+        hostelName,
+        aboutHostel,
+        const DeepCollectionEquality().hash(_images),
+        const DeepCollectionEquality().hash(_amenities),
+        const DeepCollectionEquality().hash(_rules),
+        const DeepCollectionEquality().hash(_faq),
+        checkInTime,
+        checkOutTime,
+        gstIn,
+        location,
+        commission,
+        const DeepCollectionEquality().hash(_kycDocuments)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -1108,6 +1174,9 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
           final List<ImageDataModel>? images,
           final List<String>? amenities,
           final List<String>? rules,
+          final List<FaqModel>? faq,
+          final String? checkInTime,
+          final String? checkOutTime,
           final String? gstIn,
           final LocationModel? location,
           final int? commission,
@@ -1141,6 +1210,12 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   List<String>? get amenities;
   @override
   List<String>? get rules;
+  @override
+  List<FaqModel>? get faq;
+  @override
+  String? get checkInTime;
+  @override
+  String? get checkOutTime;
   @override
   String? get gstIn;
   @override

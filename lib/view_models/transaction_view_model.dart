@@ -328,7 +328,7 @@ class TransactionViewModel extends GetxController {
               return HelperBottomSheet(assetImage: "assets/images/success.png",title:"Withdraw Request Successfully",
                   message: "Your Withdrawal Request Send To Admin,Money Directly Added To Your Account After Admin Acceptance"
                   ,btn1Txt: "Done", btn1Click: () {
-                    Get.offAll(() => const ProfilePage());
+                    Get.close(2);
                   });
             },
           );

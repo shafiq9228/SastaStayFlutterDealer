@@ -816,6 +816,7 @@ mixin _$HostelModel {
   String? get gstIn => throw _privateConstructorUsedError;
   String? get hostelType => throw _privateConstructorUsedError;
   List<ImageDataModel>? get images => throw _privateConstructorUsedError;
+  List<FaqModel>? get faq => throw _privateConstructorUsedError;
   List<String>? get amenityIds => throw _privateConstructorUsedError;
   List<AmenitiesModel>? get amenities => throw _privateConstructorUsedError;
   int? get amenitiesMore => throw _privateConstructorUsedError;
@@ -827,9 +828,12 @@ mixin _$HostelModel {
   int? get monthlyIncome => throw _privateConstructorUsedError;
   int? get totalIncome => throw _privateConstructorUsedError;
   int? get totalVotes => throw _privateConstructorUsedError;
+  int? get commission => throw _privateConstructorUsedError;
   dynamic get rating => throw _privateConstructorUsedError;
   List<String>? get imagesType => throw _privateConstructorUsedError;
   List<StatsDataModel>? get stats => throw _privateConstructorUsedError;
+  String? get checkInTime => throw _privateConstructorUsedError;
+  String? get checkOutTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -856,6 +860,7 @@ abstract class $HostelModelCopyWith<$Res> {
       String? gstIn,
       String? hostelType,
       List<ImageDataModel>? images,
+      List<FaqModel>? faq,
       List<String>? amenityIds,
       List<AmenitiesModel>? amenities,
       int? amenitiesMore,
@@ -867,9 +872,12 @@ abstract class $HostelModelCopyWith<$Res> {
       int? monthlyIncome,
       int? totalIncome,
       int? totalVotes,
+      int? commission,
       dynamic rating,
       List<String>? imagesType,
-      List<StatsDataModel>? stats});
+      List<StatsDataModel>? stats,
+      String? checkInTime,
+      String? checkOutTime});
 
   $RoomModelCopyWith<$Res>? get room;
   $LocationModelCopyWith<$Res>? get location;
@@ -900,6 +908,7 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
     Object? gstIn = freezed,
     Object? hostelType = freezed,
     Object? images = freezed,
+    Object? faq = freezed,
     Object? amenityIds = freezed,
     Object? amenities = freezed,
     Object? amenitiesMore = freezed,
@@ -911,9 +920,12 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
     Object? monthlyIncome = freezed,
     Object? totalIncome = freezed,
     Object? totalVotes = freezed,
+    Object? commission = freezed,
     Object? rating = freezed,
     Object? imagesType = freezed,
     Object? stats = freezed,
+    Object? checkInTime = freezed,
+    Object? checkOutTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -964,6 +976,10 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<ImageDataModel>?,
+      faq: freezed == faq
+          ? _value.faq
+          : faq // ignore: cast_nullable_to_non_nullable
+              as List<FaqModel>?,
       amenityIds: freezed == amenityIds
           ? _value.amenityIds
           : amenityIds // ignore: cast_nullable_to_non_nullable
@@ -1008,6 +1024,10 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
               as int?,
+      commission: freezed == commission
+          ? _value.commission
+          : commission // ignore: cast_nullable_to_non_nullable
+              as int?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -1020,6 +1040,14 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           ? _value.stats
           : stats // ignore: cast_nullable_to_non_nullable
               as List<StatsDataModel>?,
+      checkInTime: freezed == checkInTime
+          ? _value.checkInTime
+          : checkInTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutTime: freezed == checkOutTime
+          ? _value.checkOutTime
+          : checkOutTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -1069,6 +1097,7 @@ abstract class _$$HostelModelImplCopyWith<$Res>
       String? gstIn,
       String? hostelType,
       List<ImageDataModel>? images,
+      List<FaqModel>? faq,
       List<String>? amenityIds,
       List<AmenitiesModel>? amenities,
       int? amenitiesMore,
@@ -1080,9 +1109,12 @@ abstract class _$$HostelModelImplCopyWith<$Res>
       int? monthlyIncome,
       int? totalIncome,
       int? totalVotes,
+      int? commission,
       dynamic rating,
       List<String>? imagesType,
-      List<StatsDataModel>? stats});
+      List<StatsDataModel>? stats,
+      String? checkInTime,
+      String? checkOutTime});
 
   @override
   $RoomModelCopyWith<$Res>? get room;
@@ -1113,6 +1145,7 @@ class __$$HostelModelImplCopyWithImpl<$Res>
     Object? gstIn = freezed,
     Object? hostelType = freezed,
     Object? images = freezed,
+    Object? faq = freezed,
     Object? amenityIds = freezed,
     Object? amenities = freezed,
     Object? amenitiesMore = freezed,
@@ -1124,9 +1157,12 @@ class __$$HostelModelImplCopyWithImpl<$Res>
     Object? monthlyIncome = freezed,
     Object? totalIncome = freezed,
     Object? totalVotes = freezed,
+    Object? commission = freezed,
     Object? rating = freezed,
     Object? imagesType = freezed,
     Object? stats = freezed,
+    Object? checkInTime = freezed,
+    Object? checkOutTime = freezed,
   }) {
     return _then(_$HostelModelImpl(
       id: freezed == id
@@ -1177,6 +1213,10 @@ class __$$HostelModelImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<ImageDataModel>?,
+      faq: freezed == faq
+          ? _value._faq
+          : faq // ignore: cast_nullable_to_non_nullable
+              as List<FaqModel>?,
       amenityIds: freezed == amenityIds
           ? _value._amenityIds
           : amenityIds // ignore: cast_nullable_to_non_nullable
@@ -1221,6 +1261,10 @@ class __$$HostelModelImplCopyWithImpl<$Res>
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
               as int?,
+      commission: freezed == commission
+          ? _value.commission
+          : commission // ignore: cast_nullable_to_non_nullable
+              as int?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -1233,6 +1277,14 @@ class __$$HostelModelImplCopyWithImpl<$Res>
           ? _value._stats
           : stats // ignore: cast_nullable_to_non_nullable
               as List<StatsDataModel>?,
+      checkInTime: freezed == checkInTime
+          ? _value.checkInTime
+          : checkInTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutTime: freezed == checkOutTime
+          ? _value.checkOutTime
+          : checkOutTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1253,6 +1305,7 @@ class _$HostelModelImpl implements _HostelModel {
       this.gstIn,
       this.hostelType,
       final List<ImageDataModel>? images,
+      final List<FaqModel>? faq,
       final List<String>? amenityIds,
       final List<AmenitiesModel>? amenities,
       this.amenitiesMore,
@@ -1264,11 +1317,15 @@ class _$HostelModelImpl implements _HostelModel {
       this.monthlyIncome,
       this.totalIncome,
       this.totalVotes,
+      this.commission,
       this.rating,
       final List<String>? imagesType,
-      final List<StatsDataModel>? stats})
+      final List<StatsDataModel>? stats,
+      this.checkInTime,
+      this.checkOutTime})
       : _rejectedFields = rejectedFields,
         _images = images,
+        _faq = faq,
         _amenityIds = amenityIds,
         _amenities = amenities,
         _rooms = rooms,
@@ -1316,6 +1373,16 @@ class _$HostelModelImpl implements _HostelModel {
     final value = _images;
     if (value == null) return null;
     if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<FaqModel>? _faq;
+  @override
+  List<FaqModel>? get faq {
+    final value = _faq;
+    if (value == null) return null;
+    if (_faq is EqualUnmodifiableListView) return _faq;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1375,6 +1442,8 @@ class _$HostelModelImpl implements _HostelModel {
   @override
   final int? totalVotes;
   @override
+  final int? commission;
+  @override
   final dynamic rating;
   final List<String>? _imagesType;
   @override
@@ -1397,8 +1466,13 @@ class _$HostelModelImpl implements _HostelModel {
   }
 
   @override
+  final String? checkInTime;
+  @override
+  final String? checkOutTime;
+
+  @override
   String toString() {
-    return 'HostelModel(id: $id, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, rating: $rating, imagesType: $imagesType, stats: $stats)';
+    return 'HostelModel(id: $id, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, faq: $faq, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, commission: $commission, rating: $rating, imagesType: $imagesType, stats: $stats, checkInTime: $checkInTime, checkOutTime: $checkOutTime)';
   }
 
   @override
@@ -1425,6 +1499,7 @@ class _$HostelModelImpl implements _HostelModel {
             (identical(other.hostelType, hostelType) ||
                 other.hostelType == hostelType) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._faq, _faq) &&
             const DeepCollectionEquality()
                 .equals(other._amenityIds, _amenityIds) &&
             const DeepCollectionEquality()
@@ -1444,10 +1519,16 @@ class _$HostelModelImpl implements _HostelModel {
                 other.totalIncome == totalIncome) &&
             (identical(other.totalVotes, totalVotes) ||
                 other.totalVotes == totalVotes) &&
+            (identical(other.commission, commission) ||
+                other.commission == commission) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality()
                 .equals(other._imagesType, _imagesType) &&
-            const DeepCollectionEquality().equals(other._stats, _stats));
+            const DeepCollectionEquality().equals(other._stats, _stats) &&
+            (identical(other.checkInTime, checkInTime) ||
+                other.checkInTime == checkInTime) &&
+            (identical(other.checkOutTime, checkOutTime) ||
+                other.checkOutTime == checkOutTime));
   }
 
   @JsonKey(ignore: true)
@@ -1466,6 +1547,7 @@ class _$HostelModelImpl implements _HostelModel {
         gstIn,
         hostelType,
         const DeepCollectionEquality().hash(_images),
+        const DeepCollectionEquality().hash(_faq),
         const DeepCollectionEquality().hash(_amenityIds),
         const DeepCollectionEquality().hash(_amenities),
         amenitiesMore,
@@ -1477,9 +1559,12 @@ class _$HostelModelImpl implements _HostelModel {
         monthlyIncome,
         totalIncome,
         totalVotes,
+        commission,
         const DeepCollectionEquality().hash(rating),
         const DeepCollectionEquality().hash(_imagesType),
-        const DeepCollectionEquality().hash(_stats)
+        const DeepCollectionEquality().hash(_stats),
+        checkInTime,
+        checkOutTime
       ]);
 
   @JsonKey(ignore: true)
@@ -1510,6 +1595,7 @@ abstract class _HostelModel implements HostelModel {
       final String? gstIn,
       final String? hostelType,
       final List<ImageDataModel>? images,
+      final List<FaqModel>? faq,
       final List<String>? amenityIds,
       final List<AmenitiesModel>? amenities,
       final int? amenitiesMore,
@@ -1521,9 +1607,12 @@ abstract class _HostelModel implements HostelModel {
       final int? monthlyIncome,
       final int? totalIncome,
       final int? totalVotes,
+      final int? commission,
       final dynamic rating,
       final List<String>? imagesType,
-      final List<StatsDataModel>? stats}) = _$HostelModelImpl;
+      final List<StatsDataModel>? stats,
+      final String? checkInTime,
+      final String? checkOutTime}) = _$HostelModelImpl;
 
   factory _HostelModel.fromJson(Map<String, dynamic> json) =
       _$HostelModelImpl.fromJson;
@@ -1554,6 +1643,8 @@ abstract class _HostelModel implements HostelModel {
   @override
   List<ImageDataModel>? get images;
   @override
+  List<FaqModel>? get faq;
+  @override
   List<String>? get amenityIds;
   @override
   List<AmenitiesModel>? get amenities;
@@ -1576,11 +1667,17 @@ abstract class _HostelModel implements HostelModel {
   @override
   int? get totalVotes;
   @override
+  int? get commission;
+  @override
   dynamic get rating;
   @override
   List<String>? get imagesType;
   @override
   List<StatsDataModel>? get stats;
+  @override
+  String? get checkInTime;
+  @override
+  String? get checkOutTime;
   @override
   @JsonKey(ignore: true)
   _$$HostelModelImplCopyWith<_$HostelModelImpl> get copyWith =>

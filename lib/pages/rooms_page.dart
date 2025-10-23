@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sasta_stay_dealer/pages/register_room_page.dart';
@@ -192,8 +193,12 @@ class _RoomsPageState extends State<RoomsPage> {
                                             return RoomComponent2(roomModel: roomModel);
                                           }),
                                       Visibility(
-                                          visible: (roomsList?.length ?? 0) < 5,
-                                          child: SizedBox(height: 500,width: double.infinity)),
+                                        visible: (roomsList?.length ?? 0) < 2,
+                                        child: SizedBox(
+                                          height: max(0, (2 - (roomsList?.length ?? 0)) * 200),
+                                          width: double.infinity,
+                                        ),
+                                      ),
                                       Obx(() => Visibility(
                                           visible: hostelViewModel.fetchHostelRoomsObserver.value.isLoading,
                                           child: const RoomDetailsShimmer(index: 0)),

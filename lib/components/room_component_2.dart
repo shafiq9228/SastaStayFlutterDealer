@@ -63,7 +63,7 @@ class RoomComponent2 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const SizedBox(height: 10),
-                    Text(roomModel?.roomType ?? "",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20,color: CustomColors.black)),
+                    Text(roomModel?.roomType ?? "",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18,color: CustomColors.black)),
                     const SizedBox(height: 5),
                     Row(
                       children: [
@@ -106,14 +106,14 @@ class RoomComponent2 extends StatelessWidget {
                       children: [
                         Text("₹${roomModel?.rent?.monthly ?? ""}",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: CustomColors.black)),
                         Text("/Monthly",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
-                        Spacer(),
+                        const Spacer(),
                         Text("",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray)),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    PrimaryButton(buttonTxt: "Edit",buttonClick: (){
-                      Get.to(() => RegisterRoomPage(roomModel: roomModel));
-                    }),
+                    // const SizedBox(height: 10),
+                    // PrimaryButton(buttonTxt: "Edit",buttonClick: (){
+                    //   Get.to(() => RegisterRoomPage(roomModel: roomModel));
+                    // }),
                     const SizedBox(height: 10),
                     PrimaryButton(buttonTxt: "View Room Bookings",buttonClick: (){
                       Get.to(() => BookingsPage(roomId: roomModel?.id ?? ""));

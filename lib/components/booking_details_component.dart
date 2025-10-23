@@ -21,8 +21,8 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel userModel = UserModel.fromJson(widget.bookingModel?.userId);
-    RoomModel roomModel = RoomModel.fromJson(widget.bookingModel?.roomId);
+    UserModel? userModel = widget.bookingModel?.userId != null ? UserModel.fromJson(widget.bookingModel?.userId) : null;
+    RoomModel? roomModel = widget.bookingModel?.roomId != null  ? RoomModel.fromJson(widget.bookingModel?.roomId) : null;
 
 
     return GestureDetector(
@@ -46,14 +46,14 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(userModel.name ?? "",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.black,fontSize: 20)),
+                            Text(userModel?.name ?? "",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.black,fontSize: 18)),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Row(
                                 children: [
                                   Icon(Icons.call_outlined,color: CustomColors.darkGray,size: 15),
                                   const SizedBox(width: 5),
-                                  Expanded(child: Text("${userModel.mobile ?? 0}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
+                                  Expanded(child: Text("${userModel?.mobile ?? 0}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
                                 ],
                               ),
                             ),
@@ -63,7 +63,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                                 children: [
                                   Icon(Icons.bed,color: CustomColors.darkGray,size: 15),
                                   SizedBox(width: 5),
-                                  Expanded(child: Text("${roomModel.roomNo ?? 0} | ${roomModel.floor ?? ""} | ${roomModel.roomType ?? ""}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
+                                  Expanded(child: Text("${roomModel?.roomNo ?? 0} | ${roomModel?.floor ?? ""} | ${roomModel?.roomType ?? ""}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
                                 ],
                               ),
                             ),
@@ -101,7 +101,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Amount Paid",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray)),
-                          Text("${widget.bookingModel?.total ?? 0}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
+                          Text("${widget.bookingModel?.subTotal ?? 0}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.textColor)),
                         ],
                       ),
                     ),

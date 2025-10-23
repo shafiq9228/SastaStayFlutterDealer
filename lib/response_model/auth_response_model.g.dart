@@ -36,6 +36,18 @@ Map<String, dynamic> _$$UploadFileResponseModelImplToJson(
       'data': instance.data,
     };
 
+_$FaqModelImpl _$$FaqModelImplFromJson(Map<String, dynamic> json) =>
+    _$FaqModelImpl(
+      question: json['question'] as String?,
+      answer: json['answer'] as String?,
+    );
+
+Map<String, dynamic> _$$FaqModelImplToJson(_$FaqModelImpl instance) =>
+    <String, dynamic>{
+      'question': instance.question,
+      'answer': instance.answer,
+    };
+
 _$FetchUserDetailsResponseModelImpl
     _$$FetchUserDetailsResponseModelImplFromJson(Map<String, dynamic> json) =>
         _$FetchUserDetailsResponseModelImpl(

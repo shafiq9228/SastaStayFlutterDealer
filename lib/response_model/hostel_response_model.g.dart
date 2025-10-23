@@ -98,6 +98,9 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       images: (json['images'] as List<dynamic>?)
           ?.map((e) => ImageDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      faq: (json['faq'] as List<dynamic>?)
+          ?.map((e) => FaqModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       amenityIds: (json['amenityIds'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -120,6 +123,7 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       monthlyIncome: json['monthlyIncome'] as int?,
       totalIncome: json['totalIncome'] as int?,
       totalVotes: json['totalVotes'] as int?,
+      commission: json['commission'] as int?,
       rating: json['rating'],
       imagesType: (json['imagesType'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -127,6 +131,8 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       stats: (json['stats'] as List<dynamic>?)
           ?.map((e) => StatsDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      checkInTime: json['checkInTime'] as String?,
+      checkOutTime: json['checkOutTime'] as String?,
     );
 
 Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
@@ -143,6 +149,7 @@ Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
       'gstIn': instance.gstIn,
       'hostelType': instance.hostelType,
       'images': instance.images,
+      'faq': instance.faq,
       'amenityIds': instance.amenityIds,
       'amenities': instance.amenities,
       'amenitiesMore': instance.amenitiesMore,
@@ -154,9 +161,12 @@ Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
       'monthlyIncome': instance.monthlyIncome,
       'totalIncome': instance.totalIncome,
       'totalVotes': instance.totalVotes,
+      'commission': instance.commission,
       'rating': instance.rating,
       'imagesType': instance.imagesType,
       'stats': instance.stats,
+      'checkInTime': instance.checkInTime,
+      'checkOutTime': instance.checkOutTime,
     };
 
 _$ImageDataModelImpl _$$ImageDataModelImplFromJson(Map<String, dynamic> json) =>

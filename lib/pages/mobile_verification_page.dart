@@ -27,48 +27,57 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
     final TextEditingController mobileNumberText = TextEditingController();
     return Scaffold(
       backgroundColor: CustomColors.white,
-      body: SafeArea(top: true,child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical:20,horizontal: 20),
-        child: Text("Login / SignUp",style: TextStyle(color: CustomColors.primary,fontWeight: FontWeight.w500,fontSize: 22),),
-      ),
-      Container(width: double.infinity,height: 1,color: CustomColors.primary,),
-          const SizedBox(height:30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text("Enter Your Mobile Number",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w500,fontSize: 24),),
-          ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: SafeArea(top: true,child: Padding(
+        padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: TextFormField(
-                  maxLength: 10,
-                  keyboardType: TextInputType.phone,
-                  controller: mobileNumberText,
-                  style: TextStyle(
-                      color:CustomColors.textColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16
-                  ),
-                decoration: InputDecoration(
-                  counterText: '',
-                  hintText: 'Enter Your Mobile Number',
-                  hintStyle: TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w500),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey), // Default color
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: CustomColors.darkGray, width: 2.0), // Focus color
-                  ),
-                )
+            const SizedBox(height:20),
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Login",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w800,fontSize: 20),),
+                  Text("Enter your Login Information",style: TextStyle(color: CustomColors.gray,fontWeight: FontWeight.w500,fontSize: 12))
+                ],
               ),
             ),
+            const SizedBox(height:30),
+            Text("Phone Number",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w500,fontSize: 16),),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                decoration: AppStyles.editTextBg,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextFormField(
+                      maxLength: 10,
+                      keyboardType: TextInputType.phone,
+                      controller: mobileNumberText,
+                      style: TextStyle(
+                          color:CustomColors.textColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16
+                      ),
+                      decoration: InputDecoration(
+                        counterText: '',
+                        hintText: 'Enter Your Mobile Number',
+                        hintStyle: const TextStyle(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.w500),
+                        enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white), // Default color
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: CustomColors.white, width: 2.0), // Focus color
+                        ),
+                      )
+                  ),
+                ),
+              ),
+            ),
+            Spacer(),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
@@ -82,8 +91,9 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
-                    TextSpan(text:
-                    ' Terms & Conditions', style:TextStyle(
+                    TextSpan(
+                        text:
+                        ' Terms & Conditions', style:TextStyle(
                       fontFamily: 'Montserrat',
                       color: CustomColors.primary,
                       fontSize: 10,
@@ -94,16 +104,14 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
             ),
             const SizedBox(height: 20),
             Obx(() => authViewModel.sendOtpResponseObserver.value.maybeWhen(
-                loading: () => const CustomProgressBar(),
-                orElse: () => PrimaryButton(buttonTxt: "SEND OTP", buttonClick: () {
-                  authViewModel.sendOtp(SendOtpRequestModel(mobile: int.parse((mobileNumberText.text.trim().isEmpty) ? "0" : mobileNumberText.text.trim().toString())));
-                },))
+                loading: () =>  const CustomProgressBar(),
+                orElse: () => PrimaryButton(buttonTxt: "Log In", buttonClick: () {
+                  authViewModel.sendOtp(SendOtpRequestModel(mobile: mobileNumberText.text.trim().isEmpty ? null : int.parse(mobileNumberText.text)));
+                }))
             ),
-
-          ],
-        ),
-      )
-    ],)),);
+            const SizedBox(height: 20)
+          ],),
+      )),);
   }
 
 }

@@ -65,6 +65,7 @@ class HostelRoomBookingDataModel with _$HostelRoomBookingDataModel {
   const factory HostelRoomBookingDataModel({
     int? amount,
     int? discount,
+    int? subTotal,
     List<AmountDetailsModel>? paymentDetailLogs,
     BookingModel? bookingResponse,
     List<BookingModel>? onGoingBookings,
@@ -78,6 +79,7 @@ class AmountDetailsModel with _$AmountDetailsModel {
   const factory AmountDetailsModel({
     String? message,
     String? amount,
+    String? extraData
   }) = _AmountDetailsModel;
 
   factory AmountDetailsModel.fromJson(Map<String, dynamic> json) => _$AmountDetailsModelFromJson(json);
@@ -125,7 +127,7 @@ class BookingModel with _$BookingModel {
     int? amount,
     int? discount,
     int? walletDeduction,
-    int? total,
+    int? subTotal,
     List<GuestDetailsModel>? guestDetailsList,
     List<AmountDetailsModel>? logs,
     String? bookingStatus,
@@ -176,6 +178,9 @@ class CreateCouponResponseModel with _$CreateCouponResponseModel{
 class CouponDataModel with _$CouponDataModel{
   const factory CouponDataModel({
     @JsonKey(name:'_id') String? id,
+    String? discountType,
+    bool? isActive,
+    bool? singleUse,
     String? createdBy,
     DateTime? expiryDate,
     String? code,

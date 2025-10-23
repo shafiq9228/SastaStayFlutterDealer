@@ -87,7 +87,7 @@ class _RegisterRoomPageState extends State<RegisterRoomPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Enter Your Room Details",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 24),),
+                            Text("Enter Your Room Details",style: TextStyle(color: CustomColors.textColor,fontWeight: FontWeight.w600,fontSize: 20),),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical:10),
                               child: Text("Room Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
