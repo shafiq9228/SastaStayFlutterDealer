@@ -311,7 +311,9 @@ class CheckoutPage extends StatelessWidget {
                                       const SizedBox(height: 10),
                                       Obx(()=> bookingViewModel.confirmBookingObserver.value.maybeWhen(
                                           loading: () => CircularProgressIndicator(),
-                                          orElse: () => (bookingViewModel.guestDetailsList.length < (bookingViewModel.bookingRequestModelObserver.value?.guestCount ?? 0)) ?
+                                          orElse: () =>
+                                  // (bookingViewModel.guestDetailsList.length < (bookingViewModel.bookingRequestModelObserver.value?.guestCount ?? 0))
+                                  bookingViewModel.guestDetailsList.length == 0 ?
                                               PrimaryButton(buttonTxt: "Add Guest Details", buttonClick: (){
                                                 showModalBottomSheet(
                                                   context: context,

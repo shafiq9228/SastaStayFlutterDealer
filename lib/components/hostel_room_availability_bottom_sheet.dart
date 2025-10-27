@@ -15,6 +15,7 @@ import '../utils/app_styles.dart';
 import '../utils/auth_utils.dart';
 import '../utils/custom_colors.dart';
 import '../view_models/booking_view_model.dart';
+import 'colored_availability_calendar.dart';
 import 'custom_network_image.dart';
 import 'custom_outlined_button.dart';
 
@@ -33,27 +34,60 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
   final List<DateTime> _selectedDates = [];
 
   Future<void> _selectDate(BuildContext context) async {
-    bookingViewModel.checkHostelRoomAvailabilityObserver.value = const ApiResult.init();
-    final DateTimeRange? picked = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
-      initialDateRange: _selectedDates.length >= 2
-          ? DateTimeRange(start: _selectedDates.first, end: _selectedDates.last)
-          : null,
-    );
+    await bookingViewModel.checkAvailabilityDates(widget.roomModel?.hostelId ?? "",widget.roomModel?.id ?? "",_guestCount);
 
-    if (picked != null) {
-      setState(() {
-        _selectedDates.clear();
-        DateTime current = picked.start;
-        while (current.isBefore(picked.end) || current.isAtSameMomentAs(picked.end)) {
-          _selectedDates.add(current);
-          current = current.add(const Duration(days: 1));
-        }
-      });
-    }
+    bookingViewModel.checkAvailabilityDatesObserver.value.whenOrNull(success: (data){
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder: (_) => ColoredAvailabilityCalendar(
+            bookingViewModel: bookingViewModel,
+            onRangeSelected: (DateTime start, DateTime end) {
+              setState(() {
+                _selectedDates.clear();
+                DateTime current = start;
+                if(start ==  end){
+                  _selectedDates.add(current);
+                }
+                else{
+                  while (current.isBefore(end) || current.isAtSameMomentAs(end)) {
+                    _selectedDates.add(current);
+                    current = current.add(const Duration(days: 1));
+                  }
+                }
+              });
+            }
+        ),
+      );
+    });
   }
+
+
+  // Future<void> _selectDate(BuildContext context) async {
+  //   bookingViewModel.checkHostelRoomAvailabilityObserver.value = const ApiResult.init();
+  //   final DateTimeRange? picked = await showDateRangePicker(
+  //     context: context,
+  //     firstDate: DateTime.now(),
+  //     lastDate: DateTime(DateTime.now().year + 1),
+  //     initialDateRange: _selectedDates.length >= 2
+  //         ? DateTimeRange(start: _selectedDates.first, end: _selectedDates.last)
+  //         : null,
+  //   );
+  //
+  //   if (picked != null) {
+  //     setState(() {
+  //       _selectedDates.clear();
+  //       DateTime current = picked.start;
+  //       while (current.isBefore(picked.end) || current.isAtSameMomentAs(picked.end)) {
+  //         _selectedDates.add(current);
+  //         current = current.add(const Duration(days: 1));
+  //       }
+  //     });
+  //   }
+  // }
 
   void _incrementGuests() {
     setState(() {

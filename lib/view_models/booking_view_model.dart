@@ -21,6 +21,8 @@ class BookingViewModel extends GetxController{
   final hostelViewModel = Get.put(HostelViewModel());
   Rx<BookingRequestModel?> bookingRequestModelObserver = Rx<BookingRequestModel?>(null);
 
+  final checkAvailabilityDatesObserver = const ApiResult<HostelRoomAvailabilityDatesResponseModel>.init().obs;
+
 
   final checkHostelRoomAvailabilityObserver = const ApiResult<HostelRoomAvailabilityResponseModel>.init().obs;
   final confirmBookingObserver = const ApiResult<ConfirmBookingResponseModel>.init().obs;
@@ -40,6 +42,30 @@ class BookingViewModel extends GetxController{
   Rx<CouponDataModel?> selectedCoupon = Rx<CouponDataModel?>(null);
 
 
+  Future<void> checkAvailabilityDates(String? hostelId,String? roomId,int? guestCount) async {
+    try{
+      checkAvailabilityDatesObserver.value = const ApiResult.loading();
+
+      final response = await apiProvider.post(EndPoints.checkHostelRoomAvailabilityDates,{"hostelId":hostelId,"roomId":roomId,"guestCount":guestCount});
+      final body = response.body;
+
+      if(response.isOk && body !=null){
+        var responseData = HostelRoomAvailabilityDatesResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          checkAvailabilityDatesObserver.value = ApiResult.success(responseData);
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      checkAvailabilityDatesObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+
   Future<void> checkHostelRoomAvailability(BookingRequestModel? request,int navigate) async {
     try{
       checkHostelRoomAvailabilityObserver.value = const ApiResult.loading();
@@ -55,7 +81,7 @@ class BookingViewModel extends GetxController{
           bookingRequestModelObserver.value = updatedRequest;
 
           if(navigate == 2){
-            Get.close(2);
+            Get.close(1);
             Get.to(() => CheckoutPage(roomModel: request?.roomModel));
           }
           else if(navigate == 1){

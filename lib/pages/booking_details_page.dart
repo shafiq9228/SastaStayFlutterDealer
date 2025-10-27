@@ -2,6 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/pages/main_page.dart';
+import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../api/api_result.dart';
@@ -44,240 +45,274 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
   @override
   Widget build(BuildContext context) {
 
-    return StatefulWrapper(
-      onInit: (){
-        bookingViewModel.fetchBookingDetails(widget.bookingId ?? "");
+    return WillPopScope(
+      onWillPop: ()async {
+        if(widget.fromBooking == true){
+          Get.offAll(() => const MainPage());
+        }else{
+          Get.back();
+        }
+        return false;
       },
-      child: Scaffold(
-        backgroundColor: CustomColors.white,
-        body: Obx(() => bookingViewModel.fetchBookingDetailsObserver.value.maybeWhen(
-            loading: () => const HostelDetailsPageShimmer(),
-            success: (data){
-              final bookingDataModel = (data as FetchBookingDetailsResponseModel).data;
-              final hostelData = HostelModel.fromJson(bookingDataModel?.hostelId);
-              final roomModelData = RoomModel.fromJson(bookingDataModel?.roomId);
-              return CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                      expandedHeight: 250.0,
-                      floating: false,
-                      pinned: true,
-                leading: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: (){
-                      if(widget.fromBooking == true){
-                        Get.offAll(() => const MainPage());
-                      }else{
-                        Get.back();
-                      }
-                    },
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white, // Circle background color
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          const BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Center(child: Image.asset("assets/images/back_btn.png",width: 10,height: 10,)),
-                    ),
-                  ),
-                ),
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Hero(
-                        tag: hostelData.id ?? "",
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            CustomNetworkImage(imageUrl: roomModelData.image ??"",width: double.infinity,height: 300,fit: BoxFit.cover,),
-                            Container(
-                              height: 30,
-                              width: double.infinity,
-                              decoration: BoxDecoration(color: CustomColors.white,borderRadius: const BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
-                            )
+      child: StatefulWrapper(
+        onInit: (){
+          bookingViewModel.fetchBookingDetails(widget.bookingId ?? "");
+        },
+        child: Scaffold(
+          backgroundColor: CustomColors.white,
+          body: Obx(() => bookingViewModel.fetchBookingDetailsObserver.value.maybeWhen(
+              loading: () => const HostelDetailsPageShimmer(),
+              success: (data){
+                final bookingDataModel = (data as FetchBookingDetailsResponseModel).data;
+                final hostelData = HostelModel.fromJson(bookingDataModel?.hostelId);
+                final roomModelData = RoomModel.fromJson(bookingDataModel?.roomId);
+                final userDataModel = UserModel.fromJson(bookingDataModel?.userId);
+                return CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                        expandedHeight: 250.0,
+                        floating: false,
+                        pinned: true,
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: (){
+                        if(widget.fromBooking == true){
+                          Get.offAll(() => const MainPage());
+                        }else{
+                          Get.back();
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white, // Circle background color
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            const BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
                           ],
                         ),
+                        child: Center(child: Image.asset("assets/images/back_btn.png",width: 10,height: 10,)),
                       ),
-                    )
+                    ),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
-                      child:
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment:CrossAxisAlignment.start,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Hero(
+                          tag: hostelData.id ?? "",
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
                             children: [
-                              Text(
-                                "Room Number : ${roomModelData.roomNo ?? ''}",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5),
-                                child: Row(
-                                  children: [
-                                    Image.asset("assets/images/bed.png",width: 10,height: 10,color: CustomColors.textColor),
-                                    Expanded(child: Text(" Floor Number : ${roomModelData.floor ?? ''}",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
-                                  ],
-                                ),
-                              ),
-                              Text("Room Type : ${roomModelData.roomType ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor)),
-                              const SizedBox(height: 10),
+                              CustomNetworkImage(imageUrl: roomModelData.image ??"",width: double.infinity,height: 300,fit: BoxFit.cover,),
                               Container(
-                                decoration:  AppStyles.gradientColorDecoration2,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      Expanded(child: Text("Order Id : ${bookingDataModel?.orderId ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
-                                      Icon(Icons.copy_rounded,color: CustomColors.textColor,size: 15)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Container(
-                                decoration:  AppStyles.categoryBg4,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-                                  child: Text("Payment Status : ${bookingDataModel?.paymentStatus ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Container(
-                                decoration: bookingDataModel?.bookingStatus == "Ongoing" ? AppStyles.categoryBg2 : bookingDataModel?.bookingStatus == "Upcoming" ? AppStyles.categoryBg4 : AppStyles.categoryBg1,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-                                  child: Text("Booking Status : ${bookingDataModel?.bookingStatus ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
-                                ),
+                                height: 30,
+                                width: double.infinity,
+                                decoration: BoxDecoration(color: CustomColors.white,borderRadius: const BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
                               )
                             ],
                           ),
-                          // Chip(
-                          //   label: Text(hostelData?.hostelType ?? 'Type'),
-                          //   backgroundColor: _getHostelTypeColor(hostelData?.hostelType),
-                          // ),
-                          const SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
+                        ),
+                      )
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
+                        child:
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment:CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Room Number : ${roomModelData.roomNo ?? ''}",
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5),
+                                  child: Row(
+                                    children: [
+                                      Image.asset("assets/images/bed.png",width: 10,height: 10,color: CustomColors.textColor),
+                                      Expanded(child: Text(" Floor Number : ${roomModelData.floor ?? ''}",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
+                                    ],
+                                  ),
+                                ),
+                                Text("Room Type : ${roomModelData.roomType ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor)),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration:  AppStyles.gradientColorDecoration2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        Expanded(child: Text("Order Id : ${bookingDataModel?.orderId ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
+                                        Icon(Icons.copy_rounded,color: CustomColors.textColor,size: 15)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration:  AppStyles.categoryBg4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Text("Payment Status : ${bookingDataModel?.paymentStatus ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration: bookingDataModel?.bookingStatus == "Ongoing" ? AppStyles.categoryBg2 : bookingDataModel?.bookingStatus == "Upcoming" ? AppStyles.categoryBg4 : AppStyles.categoryBg1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Text("Booking Status : ${bookingDataModel?.bookingStatus ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration:  AppStyles.categoryBg4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Text("Booked By ${(bookingDataModel?.bookedBy ?? '') == "dealer" ? "You" : "User" }",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration:  AppStyles.categoryBg4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Booking ${(bookingDataModel?.bookedBy ?? '') == "dealer" ? "For" : "By" } : ${userDataModel.name ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
+                                        const SizedBox(height: 2),
+                                        Text("User Id : ${userDataModel.id ?? ''}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor)),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          const SideHeadingComponent(title: "Your Booking Details",viewVisible: false),
-                          const SizedBox(height: 10),
-                          TitleMessageComponent(asset: 'assets/images/profile.png', title: 'Total Guests', message: "${bookingDataModel?.guestCount ?? 0}",),
-                          Visibility(
-                            visible: bookingDataModel?.guestDetailsList?.isNotEmpty == true,
-                            child: MediaQuery.removePadding(
-                              context: context,
-                              removeTop: true,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                itemCount: bookingDataModel?.guestDetailsList?.length ?? 0,
-                                itemBuilder: (context, index) {
-                                  final guestDetailsModel = bookingDataModel?.guestDetailsList?[index];
-                                  return AddGuestItem(
-                                    guestDetailsModel: guestDetailsModel,
-                                    index: index,
-                                    deleteView: false,
-                                  );
-                                },
+                            // Chip(
+                            //   label: Text(hostelData?.hostelType ?? 'Type'),
+                            //   backgroundColor: _getHostelTypeColor(hostelData?.hostelType),
+                            // ),
+                            const SizedBox(height: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Container(
+                                width: double.infinity,
+                                color: CustomColors.lightGray,
+                                height: 5,
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          DottedLine(
-                            dashColor: CustomColors.darkGray,
-                          ),
-                          TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.formatDateToLong(bookingDataModel?.checkInDate)}" +" - " + "${AuthUtils.formatDateToLong(bookingDataModel?.checkOutDate)}",),
-                          DottedLine(
-                            dashColor: CustomColors.darkGray,
-                          ),
-                          TitleMessageComponent(asset: 'assets/images/bed.png', title: 'Room Type', message: "${roomModelData?.roomType ?? ""} | ${roomModelData?.roomNo ?? ""} | ${roomModelData?.floor ?? ""}"),
-                          const SizedBox(height: 10),
-                          // SideHeadingComponent(title: "Amenities",
-                          //     viewVisible: true
-                          //     // viewVisible: (hostelData?.amenitiesMore ?? 0) > 0
-                          //     ,viewClick: (){
-                          //       Get.to(() =>  AmenitiesPage(hostelId: hostelData.id ?? ""));
-                          //     },viewType: 2),
-                          // _buildAmenitiesGrid(hostelData.amenities,hostelData.amenitiesMore),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              width: double.infinity,
-                              color: CustomColors.lightGray,
-                              height: 5,
-                            ),
-                          ),
-
-                          const SideHeadingComponent(title: "Pricing Details",viewVisible: false),
-                          const SizedBox(height: 10),
-                          Container(
-                            decoration: AppStyles.categoryBg4,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                right: 20,
-                                bottom: 20, // keep bottom if you want
-                                top: 0,     // remove upper padding
-                              ),
-                              child: ListView.builder(
+                            const SideHeadingComponent(title: "Booking Details",viewVisible: false),
+                            const SizedBox(height: 10),
+                            TitleMessageComponent(asset: 'assets/images/profile.png', title: 'Total Guests', message: "${bookingDataModel?.guestCount ?? 0}",),
+                            Visibility(
+                              visible: bookingDataModel?.guestDetailsList?.isNotEmpty == true,
+                              child: MediaQuery.removePadding(
+                                context: context,
+                                removeTop: true,
+                                child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   scrollDirection: Axis.vertical,
-                                  itemBuilder: (context,index){
-                                    final hostelModel =  bookingDataModel?.logs?[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 2),
-                                      child: Row(
-                                        children: [
-                                          Expanded(child: Text(hostelModel?.message ?? "",style: TextStyle(fontWeight: FontWeight.w400,color: CustomColors.darkGray,fontSize: 14))),
-                                          Text("₹${hostelModel?.amount}",style: TextStyle(fontWeight: FontWeight.w400,color: CustomColors.primary,fontSize: 14)),
-                                        ],
-                                      ),
+                                  itemCount: bookingDataModel?.guestDetailsList?.length ?? 0,
+                                  itemBuilder: (context, index) {
+                                    final guestDetailsModel = bookingDataModel?.guestDetailsList?[index];
+                                    return AddGuestItem(
+                                      guestDetailsModel: guestDetailsModel,
+                                      index: index,
+                                      deleteView: false,
                                     );
-                                  },itemCount: bookingDataModel?.logs?.length ?? 0),
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(child: Text("Total Amount",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.textColor,fontSize: 18))),
-                              Visibility(visible: (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)  != 0 ,child: Text("₹${(bookingDataModel?.subTotal ?? 0) + (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
-                                  decorationThickness: 2,
-                                  decorationColor: Colors.black))),
-                              Text("₹${(bookingDataModel?.subTotal ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                        ],
+                            const SizedBox(height: 10),
+                            DottedLine(
+                              dashColor: CustomColors.darkGray,
+                            ),
+                            TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.formatDateToLong(bookingDataModel?.checkInDate)}" +" - " + "${AuthUtils.formatDateToLong(bookingDataModel?.checkOutDate)}",),
+                            DottedLine(
+                              dashColor: CustomColors.darkGray,
+                            ),
+                            TitleMessageComponent(asset: 'assets/images/bed.png', title: 'Room Type', message: "${roomModelData?.roomType ?? ""} | ${roomModelData?.roomNo ?? ""} | ${roomModelData?.floor ?? ""}"),
+                            const SizedBox(height: 10),
+                            // SideHeadingComponent(title: "Amenities",
+                            //     viewVisible: true
+                            //     // viewVisible: (hostelData?.amenitiesMore ?? 0) > 0
+                            //     ,viewClick: (){
+                            //       Get.to(() =>  AmenitiesPage(hostelId: hostelData.id ?? ""));
+                            //     },viewType: 2),
+                            // _buildAmenitiesGrid(hostelData.amenities,hostelData.amenitiesMore),
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Container(
+                                width: double.infinity,
+                                color: CustomColors.lightGray,
+                                height: 5,
+                              ),
+                            ),
+
+                            const SideHeadingComponent(title: "Pricing Details",viewVisible: false),
+                            const SizedBox(height: 10),
+                            Container(
+                              decoration: AppStyles.categoryBg4,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                  bottom: 20, // keep bottom if you want
+                                  top: 0,     // remove upper padding
+                                ),
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context,index){
+                                      final hostelModel =  bookingDataModel?.logs?[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 2),
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text(hostelModel?.message ?? "",style: TextStyle(fontWeight: FontWeight.w400,color: CustomColors.darkGray,fontSize: 14))),
+                                            Text("₹${hostelModel?.amount}",style: TextStyle(fontWeight: FontWeight.w400,color: CustomColors.primary,fontSize: 14)),
+                                          ],
+                                        ),
+                                      );
+                                    },itemCount: bookingDataModel?.logs?.length ?? 0),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(child: Text("Total Amount",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.textColor,fontSize: 18))),
+                                Visibility(visible: (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)  != 0 ,child: Text("₹${(bookingDataModel?.subTotal ?? 0) + (bookingDataModel?.discount ?? 0) + (bookingDataModel?.walletDeduction ?? 0)}",style: TextStyle(fontWeight: FontWeight.w500,color: CustomColors.textColor,fontSize: 18,decoration: TextDecoration.lineThrough, // 👈 strike-through
+                                    decorationThickness: 2,
+                                    decorationColor: Colors.black))),
+                                Text("₹${(bookingDataModel?.subTotal ?? 0)}",style: TextStyle(fontWeight: FontWeight.w700,color: CustomColors.primary,fontSize: 18)),
+                              ],
+                            ),
+                            const SizedBox(height: 30),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
-            orElse: () => const Center(
-              child: EmptyDataView(text: "Something went wrong"),
-            ))
+                  ],
+                );
+              },
+              orElse: () => const Center(
+                child: EmptyDataView(text: "Something went wrong"),
+              ))
+          ),
         ),
       ),
     );

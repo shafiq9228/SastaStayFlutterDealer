@@ -114,6 +114,7 @@ class FetchBookingDetailsResponseModel with _$FetchBookingDetailsResponseModel{
 class BookingModel with _$BookingModel {
   const factory BookingModel({
     @JsonKey(name:'_id') String? id,
+    String? bookedBy,
     dynamic userId,
     dynamic dealerId,
     dynamic hostelId,

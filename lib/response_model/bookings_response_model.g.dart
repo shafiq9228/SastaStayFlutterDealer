@@ -187,6 +187,7 @@ Map<String, dynamic> _$$FetchBookingDetailsResponseModelImplToJson(
 _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
     _$BookingModelImpl(
       id: json['_id'] as String?,
+      bookedBy: json['bookedBy'] as String?,
       userId: json['userId'],
       dealerId: json['dealerId'],
       hostelId: json['hostelId'],
@@ -220,6 +221,7 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$BookingModelImplToJson(_$BookingModelImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'bookedBy': instance.bookedBy,
       'userId': instance.userId,
       'dealerId': instance.dealerId,
       'hostelId': instance.hostelId,

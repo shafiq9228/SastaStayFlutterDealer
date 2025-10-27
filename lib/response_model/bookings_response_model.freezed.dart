@@ -1880,6 +1880,7 @@ BookingModel _$BookingModelFromJson(Map<String, dynamic> json) {
 mixin _$BookingModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
+  String? get bookedBy => throw _privateConstructorUsedError;
   dynamic get userId => throw _privateConstructorUsedError;
   dynamic get dealerId => throw _privateConstructorUsedError;
   dynamic get hostelId => throw _privateConstructorUsedError;
@@ -1914,6 +1915,7 @@ abstract class $BookingModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
+      String? bookedBy,
       dynamic userId,
       dynamic dealerId,
       dynamic hostelId,
@@ -1948,6 +1950,7 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
   @override
   $Res call({
     Object? id = freezed,
+    Object? bookedBy = freezed,
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? hostelId = freezed,
@@ -1971,6 +1974,10 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bookedBy: freezed == bookedBy
+          ? _value.bookedBy
+          : bookedBy // ignore: cast_nullable_to_non_nullable
               as String?,
       userId: freezed == userId
           ? _value.userId
@@ -2058,6 +2065,7 @@ abstract class _$$BookingModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
+      String? bookedBy,
       dynamic userId,
       dynamic dealerId,
       dynamic hostelId,
@@ -2090,6 +2098,7 @@ class __$$BookingModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? bookedBy = freezed,
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? hostelId = freezed,
@@ -2113,6 +2122,10 @@ class __$$BookingModelImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bookedBy: freezed == bookedBy
+          ? _value.bookedBy
+          : bookedBy // ignore: cast_nullable_to_non_nullable
               as String?,
       userId: freezed == userId
           ? _value.userId
@@ -2195,6 +2208,7 @@ class __$$BookingModelImplCopyWithImpl<$Res>
 class _$BookingModelImpl implements _BookingModel {
   const _$BookingModelImpl(
       {@JsonKey(name: '_id') this.id,
+      this.bookedBy,
       this.userId,
       this.dealerId,
       this.hostelId,
@@ -2222,6 +2236,8 @@ class _$BookingModelImpl implements _BookingModel {
   @override
   @JsonKey(name: '_id')
   final String? id;
+  @override
+  final String? bookedBy;
   @override
   final dynamic userId;
   @override
@@ -2278,7 +2294,7 @@ class _$BookingModelImpl implements _BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel(id: $id, userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, amount: $amount, discount: $discount, walletDeduction: $walletDeduction, subTotal: $subTotal, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
+    return 'BookingModel(id: $id, bookedBy: $bookedBy, userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, amount: $amount, discount: $discount, walletDeduction: $walletDeduction, subTotal: $subTotal, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
   }
 
   @override
@@ -2287,6 +2303,8 @@ class _$BookingModelImpl implements _BookingModel {
         (other.runtimeType == runtimeType &&
             other is _$BookingModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.bookedBy, bookedBy) ||
+                other.bookedBy == bookedBy) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.dealerId, dealerId) &&
             const DeepCollectionEquality().equals(other.hostelId, hostelId) &&
@@ -2323,6 +2341,7 @@ class _$BookingModelImpl implements _BookingModel {
   int get hashCode => Object.hashAll([
         runtimeType,
         id,
+        bookedBy,
         const DeepCollectionEquality().hash(userId),
         const DeepCollectionEquality().hash(dealerId),
         const DeepCollectionEquality().hash(hostelId),
@@ -2360,6 +2379,7 @@ class _$BookingModelImpl implements _BookingModel {
 abstract class _BookingModel implements BookingModel {
   const factory _BookingModel(
       {@JsonKey(name: '_id') final String? id,
+      final String? bookedBy,
       final dynamic userId,
       final dynamic dealerId,
       final dynamic hostelId,
@@ -2385,6 +2405,8 @@ abstract class _BookingModel implements BookingModel {
   @override
   @JsonKey(name: '_id')
   String? get id;
+  @override
+  String? get bookedBy;
   @override
   dynamic get userId;
   @override

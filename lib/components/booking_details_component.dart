@@ -49,6 +49,16 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                             Text(userModel?.name ?? "",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,color: CustomColors.black,fontSize: 18)),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Container(
+                                decoration:  AppStyles.categoryBg4,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                                  child: Text("Booked By ${(widget.bookingModel?.bookedBy ?? '') == "dealer" ? "You" : "User" }",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 8,color: CustomColors.textColor)),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Row(
                                 children: [
                                   Icon(Icons.call_outlined,color: CustomColors.darkGray,size: 15),

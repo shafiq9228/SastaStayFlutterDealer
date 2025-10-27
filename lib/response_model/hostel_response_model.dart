@@ -92,6 +92,29 @@ class HostelModel with _$HostelModel{
   factory HostelModel.fromJson(Map<String, dynamic> json) => _$HostelModelFromJson(json);
 }
 
+
+@Freezed()
+class HostelRoomAvailabilityDatesResponseModel with _$HostelRoomAvailabilityDatesResponseModel {
+  const factory HostelRoomAvailabilityDatesResponseModel({
+    int? status,
+    String? message,
+    List<AvailabilityDataModel>? data
+  }) = _HostelRoomAvailabilityDatesResponseModel;
+
+  factory HostelRoomAvailabilityDatesResponseModel.fromJson(Map<String, dynamic> json) => _$HostelRoomAvailabilityDatesResponseModelFromJson(json);
+}
+
+
+@Freezed()
+class AvailabilityDataModel with _$AvailabilityDataModel {
+  const factory AvailabilityDataModel({
+    String? date,
+    String? status,
+  }) = _AvailabilityDataModel;
+
+  factory AvailabilityDataModel.fromJson(Map<String, dynamic> json) => _$AvailabilityDataModelFromJson(json);
+}
+
 @Freezed()
 class ImageDataModel with _$ImageDataModel{
   const factory ImageDataModel({

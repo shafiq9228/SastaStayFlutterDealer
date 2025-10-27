@@ -1684,6 +1684,364 @@ abstract class _HostelModel implements HostelModel {
       throw _privateConstructorUsedError;
 }
 
+HostelRoomAvailabilityDatesResponseModel
+    _$HostelRoomAvailabilityDatesResponseModelFromJson(
+        Map<String, dynamic> json) {
+  return _HostelRoomAvailabilityDatesResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$HostelRoomAvailabilityDatesResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<AvailabilityDataModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $HostelRoomAvailabilityDatesResponseModelCopyWith<
+          HostelRoomAvailabilityDatesResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HostelRoomAvailabilityDatesResponseModelCopyWith<$Res> {
+  factory $HostelRoomAvailabilityDatesResponseModelCopyWith(
+          HostelRoomAvailabilityDatesResponseModel value,
+          $Res Function(HostelRoomAvailabilityDatesResponseModel) then) =
+      _$HostelRoomAvailabilityDatesResponseModelCopyWithImpl<$Res,
+          HostelRoomAvailabilityDatesResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, List<AvailabilityDataModel>? data});
+}
+
+/// @nodoc
+class _$HostelRoomAvailabilityDatesResponseModelCopyWithImpl<$Res,
+        $Val extends HostelRoomAvailabilityDatesResponseModel>
+    implements $HostelRoomAvailabilityDatesResponseModelCopyWith<$Res> {
+  _$HostelRoomAvailabilityDatesResponseModelCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilityDataModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$HostelRoomAvailabilityDatesResponseModelImplCopyWith<$Res>
+    implements $HostelRoomAvailabilityDatesResponseModelCopyWith<$Res> {
+  factory _$$HostelRoomAvailabilityDatesResponseModelImplCopyWith(
+          _$HostelRoomAvailabilityDatesResponseModelImpl value,
+          $Res Function(_$HostelRoomAvailabilityDatesResponseModelImpl) then) =
+      __$$HostelRoomAvailabilityDatesResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, List<AvailabilityDataModel>? data});
+}
+
+/// @nodoc
+class __$$HostelRoomAvailabilityDatesResponseModelImplCopyWithImpl<$Res>
+    extends _$HostelRoomAvailabilityDatesResponseModelCopyWithImpl<$Res,
+        _$HostelRoomAvailabilityDatesResponseModelImpl>
+    implements _$$HostelRoomAvailabilityDatesResponseModelImplCopyWith<$Res> {
+  __$$HostelRoomAvailabilityDatesResponseModelImplCopyWithImpl(
+      _$HostelRoomAvailabilityDatesResponseModelImpl _value,
+      $Res Function(_$HostelRoomAvailabilityDatesResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$HostelRoomAvailabilityDatesResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilityDataModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$HostelRoomAvailabilityDatesResponseModelImpl
+    implements _HostelRoomAvailabilityDatesResponseModel {
+  const _$HostelRoomAvailabilityDatesResponseModelImpl(
+      {this.status, this.message, final List<AvailabilityDataModel>? data})
+      : _data = data;
+
+  factory _$HostelRoomAvailabilityDatesResponseModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$HostelRoomAvailabilityDatesResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  final List<AvailabilityDataModel>? _data;
+  @override
+  List<AvailabilityDataModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'HostelRoomAvailabilityDatesResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HostelRoomAvailabilityDatesResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, status, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HostelRoomAvailabilityDatesResponseModelImplCopyWith<
+          _$HostelRoomAvailabilityDatesResponseModelImpl>
+      get copyWith =>
+          __$$HostelRoomAvailabilityDatesResponseModelImplCopyWithImpl<
+              _$HostelRoomAvailabilityDatesResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$HostelRoomAvailabilityDatesResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _HostelRoomAvailabilityDatesResponseModel
+    implements HostelRoomAvailabilityDatesResponseModel {
+  const factory _HostelRoomAvailabilityDatesResponseModel(
+          {final int? status,
+          final String? message,
+          final List<AvailabilityDataModel>? data}) =
+      _$HostelRoomAvailabilityDatesResponseModelImpl;
+
+  factory _HostelRoomAvailabilityDatesResponseModel.fromJson(
+          Map<String, dynamic> json) =
+      _$HostelRoomAvailabilityDatesResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  List<AvailabilityDataModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$HostelRoomAvailabilityDatesResponseModelImplCopyWith<
+          _$HostelRoomAvailabilityDatesResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+AvailabilityDataModel _$AvailabilityDataModelFromJson(
+    Map<String, dynamic> json) {
+  return _AvailabilityDataModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AvailabilityDataModel {
+  String? get date => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AvailabilityDataModelCopyWith<AvailabilityDataModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AvailabilityDataModelCopyWith<$Res> {
+  factory $AvailabilityDataModelCopyWith(AvailabilityDataModel value,
+          $Res Function(AvailabilityDataModel) then) =
+      _$AvailabilityDataModelCopyWithImpl<$Res, AvailabilityDataModel>;
+  @useResult
+  $Res call({String? date, String? status});
+}
+
+/// @nodoc
+class _$AvailabilityDataModelCopyWithImpl<$Res,
+        $Val extends AvailabilityDataModel>
+    implements $AvailabilityDataModelCopyWith<$Res> {
+  _$AvailabilityDataModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AvailabilityDataModelImplCopyWith<$Res>
+    implements $AvailabilityDataModelCopyWith<$Res> {
+  factory _$$AvailabilityDataModelImplCopyWith(
+          _$AvailabilityDataModelImpl value,
+          $Res Function(_$AvailabilityDataModelImpl) then) =
+      __$$AvailabilityDataModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? date, String? status});
+}
+
+/// @nodoc
+class __$$AvailabilityDataModelImplCopyWithImpl<$Res>
+    extends _$AvailabilityDataModelCopyWithImpl<$Res,
+        _$AvailabilityDataModelImpl>
+    implements _$$AvailabilityDataModelImplCopyWith<$Res> {
+  __$$AvailabilityDataModelImplCopyWithImpl(_$AvailabilityDataModelImpl _value,
+      $Res Function(_$AvailabilityDataModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_$AvailabilityDataModelImpl(
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AvailabilityDataModelImpl implements _AvailabilityDataModel {
+  const _$AvailabilityDataModelImpl({this.date, this.status});
+
+  factory _$AvailabilityDataModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AvailabilityDataModelImplFromJson(json);
+
+  @override
+  final String? date;
+  @override
+  final String? status;
+
+  @override
+  String toString() {
+    return 'AvailabilityDataModel(date: $date, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AvailabilityDataModelImpl &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, date, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AvailabilityDataModelImplCopyWith<_$AvailabilityDataModelImpl>
+      get copyWith => __$$AvailabilityDataModelImplCopyWithImpl<
+          _$AvailabilityDataModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AvailabilityDataModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AvailabilityDataModel implements AvailabilityDataModel {
+  const factory _AvailabilityDataModel(
+      {final String? date, final String? status}) = _$AvailabilityDataModelImpl;
+
+  factory _AvailabilityDataModel.fromJson(Map<String, dynamic> json) =
+      _$AvailabilityDataModelImpl.fromJson;
+
+  @override
+  String? get date;
+  @override
+  String? get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$AvailabilityDataModelImplCopyWith<_$AvailabilityDataModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ImageDataModel _$ImageDataModelFromJson(Map<String, dynamic> json) {
   return _ImageDataModel.fromJson(json);
 }
