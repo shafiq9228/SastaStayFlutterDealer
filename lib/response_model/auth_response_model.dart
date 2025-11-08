@@ -22,6 +22,17 @@ class PaginationModel<T>{
   });
 }
 
+class GetImagesTypeModel<T>{
+  T data;
+  bool isLoading;
+
+
+  GetImagesTypeModel({
+    required this.data,
+    required this.isLoading
+  });
+}
+
 
 class OnBoardingDataModel<T>{
   String image;
@@ -134,6 +145,7 @@ class DealerModel with _$DealerModel{
     int? totalIncome,
     int? totalVotes,
     dynamic rating,
+    String? dealingType,
     List<DocumentDataModel>? kycDocuments
   }) = _DealerModel;
 

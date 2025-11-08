@@ -140,6 +140,7 @@ _$DealerModelImpl _$$DealerModelImplFromJson(Map<String, dynamic> json) =>
       totalIncome: json['totalIncome'] as int?,
       totalVotes: json['totalVotes'] as int?,
       rating: json['rating'],
+      dealingType: json['dealingType'] as String?,
       kycDocuments: (json['kycDocuments'] as List<dynamic>?)
           ?.map((e) => DocumentDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -159,6 +160,7 @@ Map<String, dynamic> _$$DealerModelImplToJson(_$DealerModelImpl instance) =>
       'totalIncome': instance.totalIncome,
       'totalVotes': instance.totalVotes,
       'rating': instance.rating,
+      'dealingType': instance.dealingType,
       'kycDocuments': instance.kycDocuments,
     };
 

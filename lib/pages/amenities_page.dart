@@ -36,7 +36,7 @@ class _AmenitiesPageState extends State<AmenitiesPage> {
             top:true,
             child: Column(
               children: [
-                SecondaryHeadingComponent(buttonTxt: "Amenities", buttonClick: (){
+                SecondaryHeadingComponent(buttonTxt: widget.edit == true ? "Select Amenities" :"Amenities", buttonClick: (){
                   Get.back();
                 }),
                 Expanded(

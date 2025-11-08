@@ -5,8 +5,10 @@ import 'package:sasta_stay_dealer/components/amenity_component.dart';
 import 'package:sasta_stay_dealer/components/home_page_component.dart';
 import 'package:sasta_stay_dealer/pages/rating_reviews_page.dart';
 import 'package:sasta_stay_dealer/pages/rooms_page.dart';
+import 'package:sasta_stay_dealer/pages/stats_dashboard_page.dart';
 import 'package:sasta_stay_dealer/pages/update_hostel_details_page.dart';
 import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
+import 'package:sasta_stay_dealer/utils/auth_utils.dart';
 import 'package:sasta_stay_dealer/utils/custom_colors.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/view_models/auth_view_model.dart';
@@ -66,37 +68,52 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const HomePageComponent(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: SizedBox(
-                            height: 80,
-                            width: double.infinity,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context,index){
-                                  final statsModel =  hostelData?.stats?[index];
-                                  RxList<BoxDecoration> decorations = [AppStyles.categoryBg1,AppStyles.categoryBg2,AppStyles.categoryBg3,AppStyles.categoryBg4,AppStyles.categoryBg5].obs;
-                                  final random = Random();
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Container(
-                                      decoration: decorations[random.nextInt(decorations.length)],
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(statsModel?.type ?? "",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 16,color: CustomColors.primary)),
-                                            const SizedBox(height: 5),
-                                            Text("₹${statsModel?.amount ?? "0"}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: CustomColors.textColor))
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },itemCount: hostelData?.stats?.length ?? 0),
+                        // Add this in your main page's body
+                        Card(
+                          color: CustomColors.white,
+                          elevation: 4,
+                          child: ListTile(
+                            leading: Icon(Icons.analytics, color: CustomColors.primary),
+                            title: Text('View Statistics',style: TextStyle(fontSize: 16,color: CustomColors.textColor,fontWeight: FontWeight.w600)),
+                            subtitle: Text('Check your earnings and bookings',style: TextStyle(fontSize: 14,color: CustomColors.textColor,fontWeight: FontWeight.w500)),
+                            trailing: Icon(Icons.arrow_forward_ios,size: 15,color: CustomColors.black),
+                            onTap: () {
+                               Get.to(() => const StatsDashboardPage());
+                            },
                           ),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                        //   child: SizedBox(
+                        //     height: 80,
+                        //     width: double.infinity,
+                        //     child: ListView.builder(
+                        //         scrollDirection: Axis.horizontal,
+                        //         itemBuilder: (context,index){
+                        //           final statsModel =  hostelData?.stats?[index];
+                        //           RxList<BoxDecoration> decorations = [AppStyles.categoryBg1,AppStyles.categoryBg2,AppStyles.categoryBg3,AppStyles.categoryBg4,AppStyles.categoryBg5].obs;
+                        //           final random = Random();
+                        //           final randomDecoration = decorations[random.nextInt(decorations.length)];
+                        //           return Padding(
+                        //             padding: const EdgeInsets.symmetric(horizontal: 5),
+                        //             child: Container(
+                        //               decoration: randomDecoration,
+                        //               child: Padding(
+                        //                 padding: const EdgeInsets.all(15),
+                        //                 child: Column(
+                        //                   crossAxisAlignment: CrossAxisAlignment.start,
+                        //                   children: [
+                        //                     Text(statsModel?.type ?? "",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 16,color: CustomColors.primary)),
+                        //                     const SizedBox(height: 5),
+                        //                     Text("₹${statsModel?.amount ?? "0"}",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: CustomColors.textColor))
+                        //                   ],
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           );
+                        //         },itemCount: hostelData?.stats?.length ?? 0),
+                        //   ),
+                        // ),
                         const SizedBox(height: 20),
                         InkWell(
                         onTap: (){
@@ -228,7 +245,7 @@ class HomePage extends StatelessWidget {
                             children: [
                               Image.asset("assets/images/location.png",width: 10,height: 10,color: CustomColors.textColor),
                               Expanded(child: Text(hostelData?.location?.address1 ?? "",maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
-                              Text("${hostelData?.totalVotes ?? 0} reviews",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray))
+                              Text("${AuthUtils.formatNumber(hostelData?.totalVotes ?? 0)} reviews",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.darkGray))
                             ],
                           ),
                         ),
@@ -296,10 +313,20 @@ class HomePage extends StatelessWidget {
                         ),
                         const SideHeadingComponent(title: "Rules",viewVisible: false),
                         _buildRulesList(hostelData?.rules ?? []),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            width: double.infinity,
+                            color: CustomColors.lightGray,
+                            height: 5,
+                          ),
+                        ),
+                        const SideHeadingComponent(title: "Faqs",viewVisible: false),
+                        _buildFaqsList(hostelData?.faq ?? []),
                         SideHeadingComponent(title: "Ratings",viewVisible: true,viewClick: (){
-                          Get.to(() => RatingReviewsPage(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0));
+                          Get.to(() => RatingReviewsPage(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0, categoryRating: hostelData?.categoryRatings ?? []));
                         }),
-                        RatingComponent(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0),
+                        RatingComponent(rating: double.tryParse((hostelData?.rating ?? "0").toString()) ?? 0,categoryRatings: hostelData?.categoryRatings ?? []),
                       ],
                     ),
                   ),
@@ -447,6 +474,47 @@ class HomePage extends StatelessWidget {
       ),
     ) : const ErrorTextComponent(text: "No Rules Attached");
   }
+
+  Widget _buildFaqsList(List<FaqModel> faqs) {
+    return faqs.isNotEmpty ? Container(
+      decoration: AppStyles.categoryBg4,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: faqs.map((faq) =>
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(width: 40,height:40,decoration: BoxDecoration(borderRadius: BorderRadius.circular(200),color: CustomColors.white),child: Icon(Icons.question_answer,color: CustomColors.textColor,size: 20)),
+                        const SizedBox(width: 10),
+                        Expanded(child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text((faq.question ?? "" )+ "?",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16,color: CustomColors.textColor)),
+                            Text(faq.answer ?? "",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor)),
+                          ],
+                        ))
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Visibility(
+                      visible: faqs.length > 1,
+                      child: DottedLine(
+                        dashColor: Colors.black.withOpacity(0.8),
+                      ),
+                    )
+                  ],
+                ),
+              )
+          ).toList(),
+        ),
+      ),
+    ) : const ErrorTextComponent(text: "No Faq's Attached");
+  }
+
 
   Widget _buildHostelRoomsList(HostelModel? hostelModel) {
     final roomList = hostelModel?.rooms;

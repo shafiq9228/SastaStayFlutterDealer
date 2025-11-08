@@ -161,7 +161,7 @@ class CheckoutPage extends StatelessWidget {
                                 DottedLine(
                                   dashColor: CustomColors.darkGray,
                                 ),
-                                TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.formatDateToLong(bookingViewModel.bookingRequestModelObserver.value?.checkInDate)}" +" - " + "${AuthUtils.formatDateToLong(bookingViewModel.bookingRequestModelObserver.value?.checkOutDate)}",),
+                                TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.dateFormatToCheckInCheckOut(bookingViewModel.bookingRequestModelObserver.value?.checkInDate,bookingViewModel.bookingRequestModelObserver.value?.checkOutDate)}",),
                                 DottedLine(
                                   dashColor: CustomColors.darkGray,
                                 ),

@@ -74,7 +74,7 @@ class BookingViewModel extends GetxController{
       final response = await apiProvider.post(EndPoints.checkHostelRoomAvailability,newRequest?.toJson());
       final body = response.body;
 
-      if(response.isOk && body !=null){
+      if(response.isOk && body != null){
         var responseData = HostelRoomAvailabilityResponseModel.fromJson(body);
         if(responseData.status == 1){
           final updatedRequest = request?.copyWith(roomModel: request.roomModel?.copyWith(checkInDate: request.checkInDate,checkOutDate: request.checkOutDate,guestCount: request.guestCount));
@@ -115,6 +115,7 @@ class BookingViewModel extends GetxController{
       final body = response.body;
       if(response.isOk && body !=null){
         final responseData = ConfirmBookingResponseModel.fromJson(body);
+        guestDetailsList.clear();
         if(responseData.status == 1){
           confirmBookingObserver.value = ApiResult.success(responseData);
           Get.to(() => BookingDetailsPage(bookingId: responseData.data?.bookingResponse?.id ?? "",fromBooking: true));

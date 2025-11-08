@@ -797,6 +797,359 @@ abstract class _RatingAndReviewModel implements RatingAndReviewModel {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+CategoryRating _$CategoryRatingFromJson(Map<String, dynamic> json) {
+  return _CategoryRating.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CategoryRating {
+  dynamic get rating => throw _privateConstructorUsedError;
+  String? get ratedFor => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CategoryRatingCopyWith<CategoryRating> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CategoryRatingCopyWith<$Res> {
+  factory $CategoryRatingCopyWith(
+          CategoryRating value, $Res Function(CategoryRating) then) =
+      _$CategoryRatingCopyWithImpl<$Res, CategoryRating>;
+  @useResult
+  $Res call({dynamic rating, String? ratedFor});
+}
+
+/// @nodoc
+class _$CategoryRatingCopyWithImpl<$Res, $Val extends CategoryRating>
+    implements $CategoryRatingCopyWith<$Res> {
+  _$CategoryRatingCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = freezed,
+    Object? ratedFor = freezed,
+  }) {
+    return _then(_value.copyWith(
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      ratedFor: freezed == ratedFor
+          ? _value.ratedFor
+          : ratedFor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CategoryRatingImplCopyWith<$Res>
+    implements $CategoryRatingCopyWith<$Res> {
+  factory _$$CategoryRatingImplCopyWith(_$CategoryRatingImpl value,
+          $Res Function(_$CategoryRatingImpl) then) =
+      __$$CategoryRatingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({dynamic rating, String? ratedFor});
+}
+
+/// @nodoc
+class __$$CategoryRatingImplCopyWithImpl<$Res>
+    extends _$CategoryRatingCopyWithImpl<$Res, _$CategoryRatingImpl>
+    implements _$$CategoryRatingImplCopyWith<$Res> {
+  __$$CategoryRatingImplCopyWithImpl(
+      _$CategoryRatingImpl _value, $Res Function(_$CategoryRatingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = freezed,
+    Object? ratedFor = freezed,
+  }) {
+    return _then(_$CategoryRatingImpl(
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      ratedFor: freezed == ratedFor
+          ? _value.ratedFor
+          : ratedFor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CategoryRatingImpl implements _CategoryRating {
+  const _$CategoryRatingImpl({this.rating, this.ratedFor});
+
+  factory _$CategoryRatingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CategoryRatingImplFromJson(json);
+
+  @override
+  final dynamic rating;
+  @override
+  final String? ratedFor;
+
+  @override
+  String toString() {
+    return 'CategoryRating(rating: $rating, ratedFor: $ratedFor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CategoryRatingImpl &&
+            const DeepCollectionEquality().equals(other.rating, rating) &&
+            (identical(other.ratedFor, ratedFor) ||
+                other.ratedFor == ratedFor));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(rating), ratedFor);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CategoryRatingImplCopyWith<_$CategoryRatingImpl> get copyWith =>
+      __$$CategoryRatingImplCopyWithImpl<_$CategoryRatingImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CategoryRatingImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CategoryRating implements CategoryRating {
+  const factory _CategoryRating(
+      {final dynamic rating, final String? ratedFor}) = _$CategoryRatingImpl;
+
+  factory _CategoryRating.fromJson(Map<String, dynamic> json) =
+      _$CategoryRatingImpl.fromJson;
+
+  @override
+  dynamic get rating;
+  @override
+  String? get ratedFor;
+  @override
+  @JsonKey(ignore: true)
+  _$$CategoryRatingImplCopyWith<_$CategoryRatingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+FetchHostelStatisticsResponseModel _$FetchHostelStatisticsResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _FetchHostelStatisticsResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FetchHostelStatisticsResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<StatsDataModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FetchHostelStatisticsResponseModelCopyWith<
+          FetchHostelStatisticsResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FetchHostelStatisticsResponseModelCopyWith<$Res> {
+  factory $FetchHostelStatisticsResponseModelCopyWith(
+          FetchHostelStatisticsResponseModel value,
+          $Res Function(FetchHostelStatisticsResponseModel) then) =
+      _$FetchHostelStatisticsResponseModelCopyWithImpl<$Res,
+          FetchHostelStatisticsResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, List<StatsDataModel>? data});
+}
+
+/// @nodoc
+class _$FetchHostelStatisticsResponseModelCopyWithImpl<$Res,
+        $Val extends FetchHostelStatisticsResponseModel>
+    implements $FetchHostelStatisticsResponseModelCopyWith<$Res> {
+  _$FetchHostelStatisticsResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<StatsDataModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FetchHostelStatisticsResponseModelImplCopyWith<$Res>
+    implements $FetchHostelStatisticsResponseModelCopyWith<$Res> {
+  factory _$$FetchHostelStatisticsResponseModelImplCopyWith(
+          _$FetchHostelStatisticsResponseModelImpl value,
+          $Res Function(_$FetchHostelStatisticsResponseModelImpl) then) =
+      __$$FetchHostelStatisticsResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, List<StatsDataModel>? data});
+}
+
+/// @nodoc
+class __$$FetchHostelStatisticsResponseModelImplCopyWithImpl<$Res>
+    extends _$FetchHostelStatisticsResponseModelCopyWithImpl<$Res,
+        _$FetchHostelStatisticsResponseModelImpl>
+    implements _$$FetchHostelStatisticsResponseModelImplCopyWith<$Res> {
+  __$$FetchHostelStatisticsResponseModelImplCopyWithImpl(
+      _$FetchHostelStatisticsResponseModelImpl _value,
+      $Res Function(_$FetchHostelStatisticsResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$FetchHostelStatisticsResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<StatsDataModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FetchHostelStatisticsResponseModelImpl
+    implements _FetchHostelStatisticsResponseModel {
+  const _$FetchHostelStatisticsResponseModelImpl(
+      {this.status, this.message, final List<StatsDataModel>? data})
+      : _data = data;
+
+  factory _$FetchHostelStatisticsResponseModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$FetchHostelStatisticsResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  final List<StatsDataModel>? _data;
+  @override
+  List<StatsDataModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'FetchHostelStatisticsResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchHostelStatisticsResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, status, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchHostelStatisticsResponseModelImplCopyWith<
+          _$FetchHostelStatisticsResponseModelImpl>
+      get copyWith => __$$FetchHostelStatisticsResponseModelImplCopyWithImpl<
+          _$FetchHostelStatisticsResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FetchHostelStatisticsResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FetchHostelStatisticsResponseModel
+    implements FetchHostelStatisticsResponseModel {
+  const factory _FetchHostelStatisticsResponseModel(
+          {final int? status,
+          final String? message,
+          final List<StatsDataModel>? data}) =
+      _$FetchHostelStatisticsResponseModelImpl;
+
+  factory _FetchHostelStatisticsResponseModel.fromJson(
+          Map<String, dynamic> json) =
+      _$FetchHostelStatisticsResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  List<StatsDataModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchHostelStatisticsResponseModelImplCopyWith<
+          _$FetchHostelStatisticsResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 HostelModel _$HostelModelFromJson(Map<String, dynamic> json) {
   return _HostelModel.fromJson(json);
 }
@@ -805,6 +1158,7 @@ HostelModel _$HostelModelFromJson(Map<String, dynamic> json) {
 mixin _$HostelModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
+  DealerModel? get manager => throw _privateConstructorUsedError;
   String? get approvalStatus => throw _privateConstructorUsedError;
   List<String>? get rejectedFields => throw _privateConstructorUsedError;
   String? get reason => throw _privateConstructorUsedError;
@@ -830,8 +1184,9 @@ mixin _$HostelModel {
   int? get totalVotes => throw _privateConstructorUsedError;
   int? get commission => throw _privateConstructorUsedError;
   dynamic get rating => throw _privateConstructorUsedError;
+  List<CategoryRating>? get categoryRatings =>
+      throw _privateConstructorUsedError;
   List<String>? get imagesType => throw _privateConstructorUsedError;
-  List<StatsDataModel>? get stats => throw _privateConstructorUsedError;
   String? get checkInTime => throw _privateConstructorUsedError;
   String? get checkOutTime => throw _privateConstructorUsedError;
 
@@ -849,6 +1204,7 @@ abstract class $HostelModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
+      DealerModel? manager,
       String? approvalStatus,
       List<String>? rejectedFields,
       String? reason,
@@ -874,11 +1230,12 @@ abstract class $HostelModelCopyWith<$Res> {
       int? totalVotes,
       int? commission,
       dynamic rating,
+      List<CategoryRating>? categoryRatings,
       List<String>? imagesType,
-      List<StatsDataModel>? stats,
       String? checkInTime,
       String? checkOutTime});
 
+  $DealerModelCopyWith<$Res>? get manager;
   $RoomModelCopyWith<$Res>? get room;
   $LocationModelCopyWith<$Res>? get location;
 }
@@ -897,6 +1254,7 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
   @override
   $Res call({
     Object? id = freezed,
+    Object? manager = freezed,
     Object? approvalStatus = freezed,
     Object? rejectedFields = freezed,
     Object? reason = freezed,
@@ -922,8 +1280,8 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
     Object? totalVotes = freezed,
     Object? commission = freezed,
     Object? rating = freezed,
+    Object? categoryRatings = freezed,
     Object? imagesType = freezed,
-    Object? stats = freezed,
     Object? checkInTime = freezed,
     Object? checkOutTime = freezed,
   }) {
@@ -932,6 +1290,10 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      manager: freezed == manager
+          ? _value.manager
+          : manager // ignore: cast_nullable_to_non_nullable
+              as DealerModel?,
       approvalStatus: freezed == approvalStatus
           ? _value.approvalStatus
           : approvalStatus // ignore: cast_nullable_to_non_nullable
@@ -1032,14 +1394,14 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      categoryRatings: freezed == categoryRatings
+          ? _value.categoryRatings
+          : categoryRatings // ignore: cast_nullable_to_non_nullable
+              as List<CategoryRating>?,
       imagesType: freezed == imagesType
           ? _value.imagesType
           : imagesType // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      stats: freezed == stats
-          ? _value.stats
-          : stats // ignore: cast_nullable_to_non_nullable
-              as List<StatsDataModel>?,
       checkInTime: freezed == checkInTime
           ? _value.checkInTime
           : checkInTime // ignore: cast_nullable_to_non_nullable
@@ -1049,6 +1411,18 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
           : checkOutTime // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DealerModelCopyWith<$Res>? get manager {
+    if (_value.manager == null) {
+      return null;
+    }
+
+    return $DealerModelCopyWith<$Res>(_value.manager!, (value) {
+      return _then(_value.copyWith(manager: value) as $Val);
+    });
   }
 
   @override
@@ -1086,6 +1460,7 @@ abstract class _$$HostelModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
+      DealerModel? manager,
       String? approvalStatus,
       List<String>? rejectedFields,
       String? reason,
@@ -1111,11 +1486,13 @@ abstract class _$$HostelModelImplCopyWith<$Res>
       int? totalVotes,
       int? commission,
       dynamic rating,
+      List<CategoryRating>? categoryRatings,
       List<String>? imagesType,
-      List<StatsDataModel>? stats,
       String? checkInTime,
       String? checkOutTime});
 
+  @override
+  $DealerModelCopyWith<$Res>? get manager;
   @override
   $RoomModelCopyWith<$Res>? get room;
   @override
@@ -1134,6 +1511,7 @@ class __$$HostelModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? manager = freezed,
     Object? approvalStatus = freezed,
     Object? rejectedFields = freezed,
     Object? reason = freezed,
@@ -1159,8 +1537,8 @@ class __$$HostelModelImplCopyWithImpl<$Res>
     Object? totalVotes = freezed,
     Object? commission = freezed,
     Object? rating = freezed,
+    Object? categoryRatings = freezed,
     Object? imagesType = freezed,
-    Object? stats = freezed,
     Object? checkInTime = freezed,
     Object? checkOutTime = freezed,
   }) {
@@ -1169,6 +1547,10 @@ class __$$HostelModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      manager: freezed == manager
+          ? _value.manager
+          : manager // ignore: cast_nullable_to_non_nullable
+              as DealerModel?,
       approvalStatus: freezed == approvalStatus
           ? _value.approvalStatus
           : approvalStatus // ignore: cast_nullable_to_non_nullable
@@ -1269,14 +1651,14 @@ class __$$HostelModelImplCopyWithImpl<$Res>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      categoryRatings: freezed == categoryRatings
+          ? _value._categoryRatings
+          : categoryRatings // ignore: cast_nullable_to_non_nullable
+              as List<CategoryRating>?,
       imagesType: freezed == imagesType
           ? _value._imagesType
           : imagesType // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      stats: freezed == stats
-          ? _value._stats
-          : stats // ignore: cast_nullable_to_non_nullable
-              as List<StatsDataModel>?,
       checkInTime: freezed == checkInTime
           ? _value.checkInTime
           : checkInTime // ignore: cast_nullable_to_non_nullable
@@ -1294,6 +1676,7 @@ class __$$HostelModelImplCopyWithImpl<$Res>
 class _$HostelModelImpl implements _HostelModel {
   const _$HostelModelImpl(
       {@JsonKey(name: '_id') this.id,
+      this.manager,
       this.approvalStatus,
       final List<String>? rejectedFields,
       this.reason,
@@ -1319,8 +1702,8 @@ class _$HostelModelImpl implements _HostelModel {
       this.totalVotes,
       this.commission,
       this.rating,
+      final List<CategoryRating>? categoryRatings,
       final List<String>? imagesType,
-      final List<StatsDataModel>? stats,
       this.checkInTime,
       this.checkOutTime})
       : _rejectedFields = rejectedFields,
@@ -1330,8 +1713,8 @@ class _$HostelModelImpl implements _HostelModel {
         _amenities = amenities,
         _rooms = rooms,
         _rules = rules,
-        _imagesType = imagesType,
-        _stats = stats;
+        _categoryRatings = categoryRatings,
+        _imagesType = imagesType;
 
   factory _$HostelModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$HostelModelImplFromJson(json);
@@ -1339,6 +1722,8 @@ class _$HostelModelImpl implements _HostelModel {
   @override
   @JsonKey(name: '_id')
   final String? id;
+  @override
+  final DealerModel? manager;
   @override
   final String? approvalStatus;
   final List<String>? _rejectedFields;
@@ -1445,22 +1830,22 @@ class _$HostelModelImpl implements _HostelModel {
   final int? commission;
   @override
   final dynamic rating;
+  final List<CategoryRating>? _categoryRatings;
+  @override
+  List<CategoryRating>? get categoryRatings {
+    final value = _categoryRatings;
+    if (value == null) return null;
+    if (_categoryRatings is EqualUnmodifiableListView) return _categoryRatings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<String>? _imagesType;
   @override
   List<String>? get imagesType {
     final value = _imagesType;
     if (value == null) return null;
     if (_imagesType is EqualUnmodifiableListView) return _imagesType;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<StatsDataModel>? _stats;
-  @override
-  List<StatsDataModel>? get stats {
-    final value = _stats;
-    if (value == null) return null;
-    if (_stats is EqualUnmodifiableListView) return _stats;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1472,7 +1857,7 @@ class _$HostelModelImpl implements _HostelModel {
 
   @override
   String toString() {
-    return 'HostelModel(id: $id, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, faq: $faq, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, commission: $commission, rating: $rating, imagesType: $imagesType, stats: $stats, checkInTime: $checkInTime, checkOutTime: $checkOutTime)';
+    return 'HostelModel(id: $id, manager: $manager, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, faq: $faq, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, commission: $commission, rating: $rating, categoryRatings: $categoryRatings, imagesType: $imagesType, checkInTime: $checkInTime, checkOutTime: $checkOutTime)';
   }
 
   @override
@@ -1481,6 +1866,7 @@ class _$HostelModelImpl implements _HostelModel {
         (other.runtimeType == runtimeType &&
             other is _$HostelModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.manager, manager) || other.manager == manager) &&
             (identical(other.approvalStatus, approvalStatus) ||
                 other.approvalStatus == approvalStatus) &&
             const DeepCollectionEquality()
@@ -1523,8 +1909,9 @@ class _$HostelModelImpl implements _HostelModel {
                 other.commission == commission) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality()
+                .equals(other._categoryRatings, _categoryRatings) &&
+            const DeepCollectionEquality()
                 .equals(other._imagesType, _imagesType) &&
-            const DeepCollectionEquality().equals(other._stats, _stats) &&
             (identical(other.checkInTime, checkInTime) ||
                 other.checkInTime == checkInTime) &&
             (identical(other.checkOutTime, checkOutTime) ||
@@ -1536,6 +1923,7 @@ class _$HostelModelImpl implements _HostelModel {
   int get hashCode => Object.hashAll([
         runtimeType,
         id,
+        manager,
         approvalStatus,
         const DeepCollectionEquality().hash(_rejectedFields),
         reason,
@@ -1561,8 +1949,8 @@ class _$HostelModelImpl implements _HostelModel {
         totalVotes,
         commission,
         const DeepCollectionEquality().hash(rating),
+        const DeepCollectionEquality().hash(_categoryRatings),
         const DeepCollectionEquality().hash(_imagesType),
-        const DeepCollectionEquality().hash(_stats),
         checkInTime,
         checkOutTime
       ]);
@@ -1584,6 +1972,7 @@ class _$HostelModelImpl implements _HostelModel {
 abstract class _HostelModel implements HostelModel {
   const factory _HostelModel(
       {@JsonKey(name: '_id') final String? id,
+      final DealerModel? manager,
       final String? approvalStatus,
       final List<String>? rejectedFields,
       final String? reason,
@@ -1609,8 +1998,8 @@ abstract class _HostelModel implements HostelModel {
       final int? totalVotes,
       final int? commission,
       final dynamic rating,
+      final List<CategoryRating>? categoryRatings,
       final List<String>? imagesType,
-      final List<StatsDataModel>? stats,
       final String? checkInTime,
       final String? checkOutTime}) = _$HostelModelImpl;
 
@@ -1620,6 +2009,8 @@ abstract class _HostelModel implements HostelModel {
   @override
   @JsonKey(name: '_id')
   String? get id;
+  @override
+  DealerModel? get manager;
   @override
   String? get approvalStatus;
   @override
@@ -1671,9 +2062,9 @@ abstract class _HostelModel implements HostelModel {
   @override
   dynamic get rating;
   @override
-  List<String>? get imagesType;
+  List<CategoryRating>? get categoryRatings;
   @override
-  List<StatsDataModel>? get stats;
+  List<String>? get imagesType;
   @override
   String? get checkInTime;
   @override

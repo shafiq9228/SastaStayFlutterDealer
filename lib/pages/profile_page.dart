@@ -122,7 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   loading: () => SizedBox(width: double.infinity,height: double.infinity,child: Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: SizedBox(height: 30,width: 30,child: CircularProgressIndicator(color: CustomColors.primary)),))))),
                   success: (data){
                     final userModel = (data as FetchUserDetailsResponseModel).data;
-
                     return SizedBox(
                       width: double.infinity,
                       height: double.infinity,
@@ -226,16 +225,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ProfileMenu(title: "Transaction History", image: "assets/images/wallet.png", onTapped: (){
                                         Get.to(() => const TransactionsPage());
                                       }),
-                                      DottedLine(dashColor: CustomColors.darkGray),
-                                      ProfileMenu(title: "Wallet", image: "assets/images/wallet.png", onTapped: (){
+                                      if(userModel?.dealingType != "manager") DottedLine(dashColor: CustomColors.darkGray),
+                                      if(userModel?.dealingType != "manager") ProfileMenu(title: "Wallet", image: "assets/images/wallet.png", onTapped: (){
                                         Get.to(() =>  MoneyWithdrawPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray),
                                       ProfileMenu(title: "Rating And Reviews", image: "assets/images/star.png", onTapped: (){
-                                         Get.to(() => RatingReviewsPage(rating: 0));
+                                         Get.to(() => RatingReviewsPage(rating: 0,categoryRating: []));
                                       }),
-                                      DottedLine(dashColor: CustomColors.darkGray,),
-                                      ProfileMenu(title: "Swap Hostel", image: "assets/images/swap.png", onTapped: (){
+                                      if(userModel?.dealingType != "manager") DottedLine(dashColor: CustomColors.darkGray,),
+                                      if(userModel?.dealingType != "manager") ProfileMenu(title: "Swap Hostel", image: "assets/images/swap.png", onTapped: (){
                                         Get.to(() => const HostelsPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray,),

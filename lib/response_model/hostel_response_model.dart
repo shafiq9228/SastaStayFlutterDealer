@@ -55,9 +55,35 @@ class RatingAndReviewModel with _$RatingAndReviewModel{
 }
 
 @Freezed()
+class CategoryRating with _$CategoryRating{
+  const factory CategoryRating({
+    dynamic rating,
+    String? ratedFor
+  }) = _CategoryRating;
+
+  factory CategoryRating.fromJson(Map<String, dynamic> json) => _$CategoryRatingFromJson(json);
+}
+
+
+@Freezed()
+class FetchHostelStatisticsResponseModel with _$FetchHostelStatisticsResponseModel{
+  const factory FetchHostelStatisticsResponseModel({
+    int? status,
+    String? message,
+    List<StatsDataModel>? data
+  }) = _FetchHostelStatisticsResponseModel;
+
+  factory FetchHostelStatisticsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchHostelStatisticsResponseModelFromJson(json);
+}
+
+
+
+
+@Freezed()
 class HostelModel with _$HostelModel{
   const factory HostelModel({
     @JsonKey(name: '_id') String? id,
+    DealerModel? manager,
     String? approvalStatus,
     List<String>? rejectedFields,
     String? reason,
@@ -83,8 +109,8 @@ class HostelModel with _$HostelModel{
     int? totalVotes,
     int? commission,
     dynamic rating,
+    List<CategoryRating>? categoryRatings,
     List<String>? imagesType,
-    List<StatsDataModel>? stats,
     String? checkInTime,
     String? checkOutTime
   }) = _HostelModel;

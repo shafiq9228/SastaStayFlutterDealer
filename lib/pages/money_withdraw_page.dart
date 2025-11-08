@@ -116,7 +116,7 @@ class MoneyWithdrawPage extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.only(top: 20.0),
                                           child:
-                                          Obx(() => Text( 'Your Earning : ₹ ${hostelViewModel.fetchHostelDetailsObserver.value.maybeWhen(success: (data) => ((data as FetchHostelDetailsResponseModel).data?.stats?.first.amount ?? 0).toString() ,orElse: () => "0")}',style: TextStyle(fontSize: 16,color: CustomColors.white,fontWeight: FontWeight.w600))),
+                                          Obx(() => Text( 'Your Earning : ₹ ${hostelViewModel.fetchHostelStatisticsObserver.value.maybeWhen(success: (data) => ((data as FetchHostelStatisticsResponseModel).data?.first.amount ?? 0).toString() ,orElse: () => "0")}',style: TextStyle(fontSize: 16,color: CustomColors.white,fontWeight: FontWeight.w600))),
                                         )
                                       ],
                                     ),

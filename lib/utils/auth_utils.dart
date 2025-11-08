@@ -17,8 +17,52 @@ class AuthUtils {
 
   AuthUtils._();
 
+  static DateTime _toIndianTime(DateTime date) {
+    return date.toUtc().add(const Duration(hours: 5, minutes: 30));
+  }
+
   static String formatPrice(double price) => '\$${price.toStringAsFixed(2)}';
-  static String formatDate(DateTime date) => DateFormat.yMd().format(date);
+
+  static String formatDate(DateTime date) {
+    final indiaTime = _toIndianTime(date);
+    return DateFormat.yMd().format(indiaTime);
+  }
+
+  static String dateFormatToCheckInCheckOut1(DateTime? checkInDate, DateTime? checkOutDate) {
+    if (checkInDate == null || checkOutDate == null) return "";
+
+    final indiaCheckIn = _toIndianTime(checkInDate);
+    final indiaCheckOut = _toIndianTime(checkOutDate);
+
+    bool isSameDate = indiaCheckIn.year == indiaCheckOut.year &&
+        indiaCheckIn.month == indiaCheckOut.month &&
+        indiaCheckIn.day == indiaCheckOut.day;
+
+    if (isSameDate) {
+      return formatDateToLong(indiaCheckIn);
+    }
+    return "${formatDateToLong(indiaCheckIn)} - ${formatDateToLong(indiaCheckOut)}";
+
+  }
+
+  static String dateFormatToCheckInCheckOut(DateTime? checkInDate, DateTime? checkOutDate) {
+    if (checkInDate == null || checkOutDate == null) return "";
+
+    final indiaCheckIn = _toIndianTime(checkInDate);
+    final indiaCheckOut = _toIndianTime(checkOutDate);
+
+    bool isSameDate = indiaCheckIn.year == indiaCheckOut.year &&
+        indiaCheckIn.month == indiaCheckOut.month &&
+        indiaCheckIn.day == indiaCheckOut.day;
+
+    if (isSameDate) {
+      return "${formatDateToLong(indiaCheckIn)}\nCheck In : ${formatDateToLong(indiaCheckIn)}\nCheck Out : ${formatDateToLong(indiaCheckOut.add(Duration(days: 1)))}";
+    }
+    return "${formatDateToLong(indiaCheckIn)} - ${formatDateToLong(indiaCheckOut)}\nCheck In : ${formatDateToLong(indiaCheckIn)}\nCheck Out : ${formatDateToLong(indiaCheckOut.add(Duration(days: 1)))}";
+  }
+
+
+
 
 
   static int parseToInt(String value) {
@@ -28,15 +72,7 @@ class AuthUtils {
     return integer;
   }
 
-  static String formatDateToLong(DateTime? date) {
-    if(date == null) return "";
-    return DateFormat("MMM d yyyy").format(date);
-  }
 
-  static String formatDatetime(DateTime? date) {
-    if(date == null) return "";
-    return DateFormat("dd MMMM yyyy, hh:mm a").format(date);
-  }
 
   static void navigateFromPageName(String? page,HostelModel? hostel){
     switch(page){
@@ -47,6 +83,27 @@ class AuthUtils {
       case "mobileVerification" : Get.offAll(() =>  const OnBoardingScreens());
       default: Get.offAll(() =>  const OnBoardingScreens());
     }
+  }
+
+
+  static String formatNumber(num? number) {
+    if (number == null) return '';
+    if (number < 1000) return number.toString();
+    if (number < 1000000) return "${(number / 1000).toStringAsFixed(number % 1000 < 100 ? 1 : 0)}K";
+    if (number < 1000000000) return "${(number / 1000000).toStringAsFixed(number % 1000000 < 100000 ? 1 : 0)}M";
+    return "${(number / 1000000000).toStringAsFixed(number % 1000000000 < 100000000 ? 1 : 0)}B";
+  }
+
+  static String formatDateToLong(DateTime? date) {
+    if (date == null) return "";
+    final indiaTime = date.toUtc().add(const Duration(hours: 5, minutes: 30));
+    return DateFormat("MMM d yyyy").format(indiaTime);
+  }
+
+  static String formatDatetime(DateTime? date) {
+    if (date == null) return "";
+    final indiaTime = date.toUtc().add(const Duration(hours: 5, minutes: 30));
+    return DateFormat("dd MMMM yyyy, hh:mm a").format(indiaTime);
   }
 
 

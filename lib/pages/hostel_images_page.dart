@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/components/custom_network_image.dart';
+import 'package:sasta_stay_dealer/components/custom_progress_bar.dart';
 import 'package:sasta_stay_dealer/response_model/bookings_response_model.dart';
 import 'package:sasta_stay_dealer/response_model/hostel_response_model.dart';
 import 'package:sasta_stay_dealer/view_models/auth_view_model.dart';
@@ -163,6 +164,7 @@ class HostelImagesPage extends StatelessWidget {
                           ),
                           child: TextButton(
                             onPressed: () {
+                              hostelViewModel.getImagesType();
                               hostelViewModel.selectedHostelImageType.value = "";
                               showModalBottomSheet(
                                 backgroundColor: Colors.white,
@@ -191,19 +193,20 @@ class HostelImagesPage extends StatelessWidget {
                                                   fontWeight: FontWeight.w700,
                                                 ),
                                               ),
-                                              Wrap(
-                                                  spacing: 8,
-                                                  children: (hostelModel?.imagesType ?? []).map((item) {
-                                                    return InkWell(
-                                                        onTap: (){
-                                                          hostelViewModel.selectedHostelImageType.value = item;
-                                                          Get.to(() => const FilePickerPage(
-                                                            fileView: false,
-                                                            fileType: 'image',
-                                                            fileName: 'hostelImages',
-                                                          ));
-                                                        }, child: Obx(() => CustomChip(label: item,isSelected:hostelViewModel.selectedHostelImageType.value == item))
-                                                    );}).toList()
+                                              Obx(() => hostelViewModel.getImagesObserver.value.isLoading ==  true ? const CustomProgressBar() :  Wrap(
+                                                    spacing: 8,
+                                                    children: (hostelViewModel.getImagesObserver.value.data).map((item) {
+                                                      return InkWell(
+                                                          onTap: (){
+                                                            hostelViewModel.selectedHostelImageType.value = item;
+                                                            Get.to(() => const FilePickerPage(
+                                                              fileView: false,
+                                                              fileType: 'image',
+                                                              fileName: 'hostelImages',
+                                                            ));
+                                                          }, child: Obx(() => CustomChip(label: item,isSelected:hostelViewModel.selectedHostelImageType.value == item))
+                                                      );}).toList()
+                                                ),
                                               ),
                                             ],
                                           ),

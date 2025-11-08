@@ -239,7 +239,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                             DottedLine(
                               dashColor: CustomColors.darkGray,
                             ),
-                            TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.formatDateToLong(bookingDataModel?.checkInDate)}" +" - " + "${AuthUtils.formatDateToLong(bookingDataModel?.checkOutDate)}",),
+                            TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Dates', message: "${AuthUtils.dateFormatToCheckInCheckOut(bookingDataModel?.checkInDate,bookingDataModel?.checkOutDate)}",),
                             DottedLine(
                               dashColor: CustomColors.darkGray,
                             ),

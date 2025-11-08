@@ -18,14 +18,16 @@ class TitleMessageComponent extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(asset,width: 20,height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.darkGray)),
-                    Text(message,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.black)),
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.darkGray)),
+                      Text(message,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.black)),
+                    ],
+                  ),
                 ),
               )
             ],

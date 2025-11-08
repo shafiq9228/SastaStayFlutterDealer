@@ -270,6 +270,7 @@ SendOtpRequestModel _$SendOtpRequestModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SendOtpRequestModel {
   int? get mobile => throw _privateConstructorUsedError;
+  String? get primaryHostelId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -283,7 +284,7 @@ abstract class $SendOtpRequestModelCopyWith<$Res> {
           SendOtpRequestModel value, $Res Function(SendOtpRequestModel) then) =
       _$SendOtpRequestModelCopyWithImpl<$Res, SendOtpRequestModel>;
   @useResult
-  $Res call({int? mobile});
+  $Res call({int? mobile, String? primaryHostelId});
 }
 
 /// @nodoc
@@ -300,12 +301,17 @@ class _$SendOtpRequestModelCopyWithImpl<$Res, $Val extends SendOtpRequestModel>
   @override
   $Res call({
     Object? mobile = freezed,
+    Object? primaryHostelId = freezed,
   }) {
     return _then(_value.copyWith(
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
               as int?,
+      primaryHostelId: freezed == primaryHostelId
+          ? _value.primaryHostelId
+          : primaryHostelId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -318,7 +324,7 @@ abstract class _$$SendOtpRequestModelImplCopyWith<$Res>
       __$$SendOtpRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? mobile});
+  $Res call({int? mobile, String? primaryHostelId});
 }
 
 /// @nodoc
@@ -333,12 +339,17 @@ class __$$SendOtpRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mobile = freezed,
+    Object? primaryHostelId = freezed,
   }) {
     return _then(_$SendOtpRequestModelImpl(
       mobile: freezed == mobile
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
               as int?,
+      primaryHostelId: freezed == primaryHostelId
+          ? _value.primaryHostelId
+          : primaryHostelId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -346,17 +357,19 @@ class __$$SendOtpRequestModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
-  const _$SendOtpRequestModelImpl({required this.mobile});
+  const _$SendOtpRequestModelImpl({required this.mobile, this.primaryHostelId});
 
   factory _$SendOtpRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SendOtpRequestModelImplFromJson(json);
 
   @override
   final int? mobile;
+  @override
+  final String? primaryHostelId;
 
   @override
   String toString() {
-    return 'SendOtpRequestModel(mobile: $mobile)';
+    return 'SendOtpRequestModel(mobile: $mobile, primaryHostelId: $primaryHostelId)';
   }
 
   @override
@@ -364,12 +377,14 @@ class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SendOtpRequestModelImpl &&
-            (identical(other.mobile, mobile) || other.mobile == mobile));
+            (identical(other.mobile, mobile) || other.mobile == mobile) &&
+            (identical(other.primaryHostelId, primaryHostelId) ||
+                other.primaryHostelId == primaryHostelId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, mobile);
+  int get hashCode => Object.hash(runtimeType, mobile, primaryHostelId);
 
   @JsonKey(ignore: true)
   @override
@@ -387,14 +402,17 @@ class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
 }
 
 abstract class _SendOtpRequestModel implements SendOtpRequestModel {
-  const factory _SendOtpRequestModel({required final int? mobile}) =
-      _$SendOtpRequestModelImpl;
+  const factory _SendOtpRequestModel(
+      {required final int? mobile,
+      final String? primaryHostelId}) = _$SendOtpRequestModelImpl;
 
   factory _SendOtpRequestModel.fromJson(Map<String, dynamic> json) =
       _$SendOtpRequestModelImpl.fromJson;
 
   @override
   int? get mobile;
+  @override
+  String? get primaryHostelId;
   @override
   @JsonKey(ignore: true)
   _$$SendOtpRequestModelImplCopyWith<_$SendOtpRequestModelImpl> get copyWith =>

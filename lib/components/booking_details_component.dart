@@ -72,7 +72,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                               child: Row(
                                 children: [
                                   Icon(Icons.bed,color: CustomColors.darkGray,size: 15),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Expanded(child: Text("${roomModel?.roomNo ?? 0} | ${roomModel?.floor ?? ""} | ${roomModel?.roomType ?? ""}",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14,color: CustomColors.darkGray))),
                                 ],
                               ),
@@ -80,7 +80,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                             Container(decoration: AppStyles.gradientColorDecoration1,
                                 child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                              child: Text("${AuthUtils.formatDateToLong(widget.bookingModel?.checkInDate)} To ${AuthUtils.formatDateToLong(widget.bookingModel?.checkOutDate)}",style: TextStyle(color: CustomColors.primary,fontSize: 12,fontWeight: FontWeight.w400)),
+                              child: Text("${AuthUtils.dateFormatToCheckInCheckOut1(widget.bookingModel?.checkInDate,widget.bookingModel?.checkOutDate)}",style: TextStyle(color: CustomColors.primary,fontSize: 12,fontWeight: FontWeight.w400)),
                             ))
                           ],
                         ),

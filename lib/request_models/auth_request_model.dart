@@ -25,7 +25,8 @@ class PaginationRequestModel with _$PaginationRequestModel{
 @Freezed()
 class SendOtpRequestModel with _$SendOtpRequestModel{
   const factory SendOtpRequestModel({
-    required int? mobile
+    required int? mobile,
+    String? primaryHostelId
   }) = _SendOtpRequestModel;
 
   factory SendOtpRequestModel.fromJson(Map<String, dynamic> json) => _$SendOtpRequestModelFromJson(json);

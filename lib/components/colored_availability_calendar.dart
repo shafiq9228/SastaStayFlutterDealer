@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sasta_stay_dealer/components/primary_button.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../response_model/bookings_response_model.dart';
 import 'package:get/get.dart';
 
 import '../response_model/hostel_response_model.dart';
@@ -35,11 +34,14 @@ class _ColoredAvailabilityCalendarState extends State<ColoredAvailabilityCalenda
     return Obx(() => widget.bookingViewModel.checkAvailabilityDatesObserver.value.maybeWhen(
       success: (data){
         final bookingData = (data as HostelRoomAvailabilityDatesResponseModel).data;
+
         _dateStatusMap.clear();
+
         _dateStatusMap.value = {
           for (var d in bookingData ?? [])
             normalizeDate(DateTime.parse(d.date ?? "")) : d.status ?? "available"
         };
+
         return Container(
           height: MediaQuery.of(context).size.height * 0.7,
           padding: const EdgeInsets.all(16),

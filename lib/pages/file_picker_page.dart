@@ -199,8 +199,8 @@ class _FilePickerPageState extends State<FilePickerPage> {
                             Get.back();
                           }
                         },
-                        child: Container(height: 45,decoration: BoxDecoration(border:Border.all(width: 0.5,color: CustomColors.secondary),borderRadius: BorderRadius.circular(200)),
-                            child: Center(child: Obx(() => authViewModel.uploadFileObserver.value.maybeWhen(loading: () => SizedBox(width: 20,height: 20,child: CircularProgressIndicator(color: CustomColors.secondary,),),loadingCondition: (_,__) => Text("Compressing..",style: TextStyle(fontSize: 14,color: CustomColors.secondary,fontWeight: FontWeight.w600)),orElse: () => Text("Confirm",style: TextStyle(fontSize: 14,color: CustomColors.secondary,fontWeight: FontWeight.w600))) ))),
+                        child: Container(height: 45,decoration: BoxDecoration(color: CustomColors.primary,border:Border.all(width: 0.5,color: CustomColors.primary),borderRadius: BorderRadius.circular(200)),
+                            child: Center(child: Obx(() => authViewModel.uploadFileObserver.value.maybeWhen(loading: () => SizedBox(width: 20,height: 20,child: CircularProgressIndicator(color: CustomColors.white,),),loadingCondition: (_,__) => Text("Compressing..",style: TextStyle(fontSize: 14,color: CustomColors.white,fontWeight: FontWeight.w600)),orElse: () => Text("Confirm",style: TextStyle(fontSize: 14,color: CustomColors.white,fontWeight: FontWeight.w600))) ))),
                       ),
                     )
                   ],

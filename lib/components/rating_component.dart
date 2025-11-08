@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../response_model/hostel_response_model.dart';
 import '../utils/custom_colors.dart';
 
 class RatingComponent extends StatefulWidget {
   final double? rating;
-  final bool? editable;
-  const RatingComponent({super.key, this.rating, this.editable});
+  final List<CategoryRating>? categoryRatings;
+  const RatingComponent({super.key, this.rating,this.categoryRatings});
 
   @override
   State<RatingComponent> createState() => _RatingConponentState();
@@ -56,6 +57,63 @@ class _RatingConponentState extends State<RatingComponent> {
           const SizedBox(height: 5),
           Text("Based On Overall Rating",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: CustomColors.darkGray)),
           const SizedBox(height: 10),
+          ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final categoryRating = widget.categoryRatings?[index];
+              double progress = (categoryRating?.rating / 5).clamp(0.0, 1.0);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text(
+                          categoryRating?.ratedFor ?? "",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: CustomColors.textColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: LinearProgressIndicator(
+                              value: progress,
+                              minHeight: 5,
+                              backgroundColor: CustomColors.lightGray,
+                              valueColor: AlwaysStoppedAnimation(CustomColors.textColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        categoryRating?.rating.toStringAsFixed(1),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: CustomColors.textColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15)
+                ],
+              );
+            },
+            itemCount: widget.categoryRatings?.length ?? 0,
+          )
         ],
       ),
     );

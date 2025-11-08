@@ -9,11 +9,14 @@ class EndPoints {
   static const registerDealer = "registerDealer";
   static const uploadFile = "uploadFile";
 
+  static const getImageTypes = "getImageTypes";
+
   static const registerHostel = "registerHostel";
   static const updateHostelDetails = "updateHostelDetails";
   static const fetchLeads = "fetchLeads";
   static const fetchHostels = "fetchHostels";
   static const fetchHostelDetails = "fetchHostelDetails";
+  static const fetchHostelStatistics = "fetchHostelStatistics";
   static const fetchHostelRooms = "fetchHostelRooms";
   static const fetchAmenities = "fetchAmenities";
   static const setAsPrimaryHostel = "setAsPrimaryHostel";

@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +22,8 @@ import '../view_models/hostel_view_model.dart';
 
 class RatingReviewsPage extends StatefulWidget {
   final double? rating;
-  const RatingReviewsPage({super.key,required this.rating});
+  final List<CategoryRating>? categoryRating;
+  const RatingReviewsPage({super.key,required this.rating,this.categoryRating});
 
   @override
   State<RatingReviewsPage> createState() => _RatingReviewsPageState();
@@ -43,32 +46,6 @@ class _RatingReviewsPageState extends State<RatingReviewsPage> {
                 SecondaryHeadingComponent(buttonTxt: "Rating And Reviews", buttonClick: (){
                   Get.back();
                 }),
-                Visibility(
-                  visible: widget.rating != 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RatingComponent(rating: widget.rating),
-                      const SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Container(
-                          width: double.infinity,
-                          color: CustomColors.lightGray,
-                          height: 5,
-                        ),
-                      ),
-                      const Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          children: [
-                            SideHeadingComponent(title: "Rating And Reviews", viewVisible: false),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () => _refreshData(),
@@ -101,6 +78,27 @@ class _RatingReviewsPageState extends State<RatingReviewsPage> {
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                                        child: RatingComponent(rating: widget.rating,categoryRatings:widget.categoryRating),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: Container(
+                                          width: double.infinity,
+                                          color: CustomColors.lightGray,
+                                          height: 5,
+                                        ),
+                                      ),
+                                      const Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                                        child: Column(
+                                          children: [
+                                            SideHeadingComponent(title: "Rating And Reviews", viewVisible: false),
+                                          ],
+                                        ),
+                                      ),
                                       ListView.builder(
                                           shrinkWrap: true,
                                           physics: const NeverScrollableScrollPhysics(),
@@ -109,6 +107,13 @@ class _RatingReviewsPageState extends State<RatingReviewsPage> {
                                             final ratingAndReviewModel = ratingAndReviewsList?[index];
                                             return RatingAndReviewComponent(ratingAndReviewModel: ratingAndReviewModel);
                                           }),
+                                      Visibility(
+                                        visible: (ratingAndReviewsList?.length ?? 0) < 5,
+                                        child: SizedBox(
+                                          height: max(0, (5 - (ratingAndReviewsList?.length ?? 0)) * 100),
+                                          width: double.infinity,
+                                        ),
+                                      ),
                                       Obx(() => Visibility(
                                           visible: hostelViewModel.fetchRatingAndReviewsObserver.value.isLoading,
                                           child: Padding(

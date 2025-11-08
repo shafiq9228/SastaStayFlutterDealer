@@ -279,12 +279,13 @@ class _HostelRoomAvailabilityBottomSheetState extends State<HostelRoomAvailabili
                 buttonTxt: "Choose Dates",
                 buttonClick: () => _selectDate(context),
               ) : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text("${_selectedDates.length} Nights",textAlign: TextAlign.center,style: TextStyle(fontSize: 12,color: CustomColors.textColor),),
                   Row(
                     children: [
-                      TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Check In', message: "${AuthUtils.formatDateToLong(_selectedDates.first)}",),
-                      Expanded(child: Text("${_selectedDates.length} Nights",textAlign: TextAlign.center,style: TextStyle(fontSize: 12,color: CustomColors.textColor),)),
-                      TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Check Out', message: "${AuthUtils.formatDateToLong(_selectedDates.last)}",),
+                      Expanded(child: TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Check In', message: AuthUtils.formatDateToLong(_selectedDates.first),)),
+                      Expanded(child: TitleMessageComponent(asset: 'assets/images/booking.png', title: 'Check Out', message: AuthUtils.formatDateToLong(_selectedDates.last.add(const Duration(days: 1))),)),
                     ],
                   ),
                   CustomOutlinedButton(

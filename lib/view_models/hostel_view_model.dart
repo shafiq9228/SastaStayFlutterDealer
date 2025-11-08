@@ -20,6 +20,9 @@ class HostelViewModel extends GetxController{
   final registerRoomObserver = const ApiResult<RegisterRoomResponseModel>.init().obs;
 
   final fetchHostelDetailsObserver = const ApiResult<FetchHostelDetailsResponseModel>.init().obs;
+  final fetchHostelStatisticsObserver = const ApiResult<FetchHostelStatisticsResponseModel>.init().obs;
+
+
   final setAsPrimaryHostelResponseObserver = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final fetchHostelsObserver =  PaginationModel(data: const ApiResult<FetchHostelsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
   final fetchAmenitiesObserver =  PaginationModel(data: const ApiResult<FetchAmenitiesResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
@@ -36,8 +39,29 @@ class HostelViewModel extends GetxController{
 
   Rx<String> roomImage = "".obs;
   RxList<String> roomSpecialAmenities = <String>[].obs;
+
   Rx<String> selectedHostelImageType = "".obs;
+  final getImagesObserver = GetImagesTypeModel(data:[],isLoading: false).obs;
+
   RxList<String> roomTypeDropList = <String>[].obs;
+
+  Future<void> getImagesType() async{
+    try{
+      getImagesObserver.value = GetImagesTypeModel(data:[],isLoading: true);
+      final response = await apiProvider.get(EndPoints.getImageTypes);
+      final body = response.body;
+      print(body);
+      if(response.isOk && body != null && response.statusCode == 200){
+        final types = response.body;
+        getImagesObserver.value = GetImagesTypeModel(data:types,isLoading: false);
+        return;
+      }
+      throw "error";
+    }
+    catch(error){
+      getImagesObserver.value = GetImagesTypeModel(data:[],isLoading: false);
+    }
+  }
 
 
   Future<void> setAsPrimaryHostel(PaginationRequestModel request) async {
@@ -350,6 +374,28 @@ class HostelViewModel extends GetxController{
     catch(e){
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       fetchHostelDetailsObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+
+  Future<void> fetchHostelStatistics(DateTime? date) async {
+    try{
+      fetchHostelStatisticsObserver.value = const ApiResult.loading();
+      final response = await apiProvider.post(EndPoints.fetchHostelStatistics,{"date":(date ?? "").toString()});
+      final body = response.body;
+      if(response.isOk && body !=null){
+        var responseData = FetchHostelStatisticsResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          fetchHostelStatisticsObserver.value = ApiResult.success(responseData);
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      fetchHostelStatisticsObserver.value = ApiResult.error(e.toString());
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import '../utils/custom_colors.dart';
 
@@ -12,19 +13,19 @@ class CustomNetworkImage extends StatelessWidget {
   final bool showProgress;
   const CustomNetworkImage(
       {super.key,
-      required this.imageUrl,
-      this.fit = BoxFit.contain,
-      this.width,
-      this.height,
-      this.color,
-      this.borderRadius,
-      this.showProgress = true,
+        required this.imageUrl,
+        this.fit = BoxFit.contain,
+        this.width,
+        this.height,
+        this.color,
+        this.borderRadius,
+        this.showProgress = true,
       });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(borderRadius ?? 8),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: fit,
@@ -34,13 +35,20 @@ class CustomNetworkImage extends StatelessWidget {
         color: color,
         progressIndicatorBuilder: (context, url, loadingProgress) => Center(
             child: Visibility(
-          visible: showProgress,
-          child: CircularProgressIndicator(
-            color: CustomColors.secondary,
-            backgroundColor: CustomColors.primary,
-            value: loadingProgress.progress,
-          ),
-        )),
+              visible: showProgress,
+              child: width == null || height == null ? CircularProgressIndicator(
+                color: CustomColors.secondary,
+                backgroundColor: CustomColors.primary,
+                value: loadingProgress.progress,
+              ) : FadeShimmer(
+                height: height ?? 10,
+                width: width ?? 10,
+                radius: borderRadius ?? 0,
+                millisecondsDelay: 100,
+                highlightColor: Colors.grey.shade200,
+                baseColor:Colors.white,
+              ),
+            )),
         errorWidget: (context, url, error) =>  Icon(
           Icons.error,
           color: CustomColors.primary,

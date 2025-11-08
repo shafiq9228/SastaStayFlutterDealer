@@ -32,12 +32,14 @@ _$SendOtpRequestModelImpl _$$SendOtpRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SendOtpRequestModelImpl(
       mobile: json['mobile'] as int?,
+      primaryHostelId: json['primaryHostelId'] as String?,
     );
 
 Map<String, dynamic> _$$SendOtpRequestModelImplToJson(
         _$SendOtpRequestModelImpl instance) =>
     <String, dynamic>{
       'mobile': instance.mobile,
+      'primaryHostelId': instance.primaryHostelId,
     };
 
 _$VerifyOtpRequestModelImpl _$$VerifyOtpRequestModelImplFromJson(
