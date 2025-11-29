@@ -39,7 +39,7 @@ class _HostelsPageState extends State<HostelsPage> {
               child: Column(
               children: [
                 SecondaryHeadingComponent(buttonTxt: "Hostels", buttonClick: (){
-                     Get.back();
+                  Get.back();
                 },extraBtnText: "List New Hostel",extraBtnClick: (){
                   Get.to(() => const RegisterHostelPage(fromHostelListPage: true));
                 }),

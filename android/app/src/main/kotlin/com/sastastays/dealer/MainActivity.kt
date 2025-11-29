@@ -1,4 +1,4 @@
-package com.example.sasta_stay_dealer
+package com.sastastays.dealer
 
 import io.flutter.embedding.android.FlutterActivity
 
