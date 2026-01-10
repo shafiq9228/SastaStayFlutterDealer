@@ -23,6 +23,19 @@ class PaginationRequestModel with _$PaginationRequestModel{
 }
 
 @Freezed()
+class TrueCallerRequestModel with _$TrueCallerRequestModel{
+  const factory TrueCallerRequestModel({
+    required String? authorizationCode,
+    required String? codeVerifier,
+    required String? source,
+    required String? version,
+    required String? deviceId,
+  }) = _TrueCallerRequestModel;
+
+  factory TrueCallerRequestModel.fromJson(Map<String, dynamic> json) => _$TrueCallerRequestModelFromJson(json);
+}
+
+@Freezed()
 class SendOtpRequestModel with _$SendOtpRequestModel{
   const factory SendOtpRequestModel({
     required int? mobile,

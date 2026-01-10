@@ -28,6 +28,26 @@ Map<String, dynamic> _$$PaginationRequestModelImplToJson(
       'page': instance.page,
     };
 
+_$TrueCallerRequestModelImpl _$$TrueCallerRequestModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TrueCallerRequestModelImpl(
+      authorizationCode: json['authorizationCode'] as String?,
+      codeVerifier: json['codeVerifier'] as String?,
+      source: json['source'] as String?,
+      version: json['version'] as String?,
+      deviceId: json['deviceId'] as String?,
+    );
+
+Map<String, dynamic> _$$TrueCallerRequestModelImplToJson(
+        _$TrueCallerRequestModelImpl instance) =>
+    <String, dynamic>{
+      'authorizationCode': instance.authorizationCode,
+      'codeVerifier': instance.codeVerifier,
+      'source': instance.source,
+      'version': instance.version,
+      'deviceId': instance.deviceId,
+    };
+
 _$SendOtpRequestModelImpl _$$SendOtpRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SendOtpRequestModelImpl(

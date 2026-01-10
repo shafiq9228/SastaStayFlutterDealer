@@ -41,6 +41,8 @@ class AuthViewModel extends GetxController{
   final registerDealerResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final registerHostelResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
   final updateHostelDetailsResponseObserver  = const ApiResult<FormHelperDataResponseModel>.init().obs;
+  final trueCallerVerificationObserver = const ApiResult<FormHelperDataResponseModel>.init().obs;
+
 
   final updateDealerDetailsResponseObserver  = const ApiResult<FetchUserDetailsResponseModel>.init().obs;
   final uploadFileObserver  = const ApiResult<UploadFileResponseModel>.init().obs;
@@ -84,20 +86,40 @@ class AuthViewModel extends GetxController{
   }
 
   Future<Position?> fetchCurrentLocation() async {
-    if (locationObserver.value == null) {
-      await Geolocator.requestPermission();
-      LocationPermission locationPermission =
-      await Geolocator.checkPermission();
-      if (locationPermission == LocationPermission.denied) return null;
-      final position = await Geolocator.getCurrentPosition();
-      final geoAddress = await GeoUtil().getApiAddress(position.latitude, position.longitude);
-      locationObserver.value = position;
-      locationDetails.value = geoAddress;
-      return position;
-    } else {
+    if (locationObserver.value != null) {
       return locationObserver.value;
     }
+
+    // Check service
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return null;
+
+    // Check permission
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      return null;
+    }
+
+    // ✅ COARSE location only
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.low,
+    );
+
+    final geoAddress = await GeoUtil()
+        .getApiAddress(position.latitude, position.longitude);
+
+    locationObserver.value = position;
+    locationDetails.value = geoAddress;
+
+    return position;
   }
+
 
 
   Future<void> sendOtp(SendOtpRequestModel request) async {
@@ -157,6 +179,43 @@ class AuthViewModel extends GetxController{
     catch(e){
       Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
       verifyOtpResponseObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
+  Future<void> trueCallerLogin(TrueCallerRequestModel request) async {
+    try{
+      trueCallerVerificationObserver.value = const ApiResult.loading();
+      final String? validatorResponse = AuthUtils.validateRequestFields(['authorizationCode','codeVerifier','source','version','deviceId'], request.toJson());
+      if(validatorResponse != null) throw validatorResponse;
+      print(request.toString());
+      final response = await apiProvider.post(EndPoints.trueCallerLogin,request.toJson());
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = FormHelperDataResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          trueCallerVerificationObserver.value = ApiResult.success(responseData);
+          final page = responseData.data?.page;
+          await preferenceManager.setValue("page",page);
+          await preferenceManager.setValue("registerValue",responseData.data?.registerValue);
+          await preferenceManager.setValue("token",responseData.data?.token);
+
+          dealerStatusObserver.value = ApiResult.success(responseData);
+
+          if(responseData.data?.validVersion == true){
+            AuthUtils.navigateFromPageName(page,responseData.data?.primaryHostel);
+          }else{
+            Get.offAll(() => const UpdateVersionScreen());
+          }
+
+          return;
+        }
+        throw "something went wrong${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      trueCallerVerificationObserver.value = ApiResult.error(e.toString());
     }
   }
 

@@ -88,6 +88,7 @@ _$HelperDataModelImpl _$$HelperDataModelImplFromJson(
         Map<String, dynamic> json) =>
     _$HelperDataModelImpl(
       validVersion: json['validVersion'] as bool?,
+      registerValue: json['registerValue'],
       page: json['page'] as String?,
       token: json['token'] as String?,
       dealerDetails: json['dealerDetails'] == null
@@ -102,6 +103,7 @@ Map<String, dynamic> _$$HelperDataModelImplToJson(
         _$HelperDataModelImpl instance) =>
     <String, dynamic>{
       'validVersion': instance.validVersion,
+      'registerValue': instance.registerValue,
       'page': instance.page,
       'token': instance.token,
       'dealerDetails': instance.dealerDetails,

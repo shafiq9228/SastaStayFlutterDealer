@@ -1,13 +1,18 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
+import 'package:truecaller_sdk/truecaller_sdk.dart';
 import '../api/api_result.dart';
 import '../components/custom_progress_bar.dart';
 import '../components/primary_button.dart';
 import '../request_models/auth_request_model.dart';
 import '../utils/app_styles.dart';
+import '../utils/auth_utils.dart';
 import '../utils/custom_colors.dart';
 import '../view_models/auth_view_model.dart';
 
@@ -22,6 +27,100 @@ class MobileVerificationPage extends StatefulWidget {
 
 class _MobileVerificationPageState extends State<MobileVerificationPage> {
   final authViewModel = Get.put(AuthViewModel());
+
+
+
+  StreamSubscription? _tcStreamSub;
+
+  String? _codeVerifier;
+  String? _oAuthState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    TcSdk.initializeSDK(
+      sdkOption: TcSdkOptions.OPTION_VERIFY_ALL_USERS,
+    );
+
+    _tcStreamSub = TcSdk.streamCallbackData.listen(_onTruecallerCallback);
+  }
+
+  @override
+  void dispose() {
+    _tcStreamSub?.cancel();
+    super.dispose();
+  }
+
+  // ===================== TRUECALLER LOGIN =====================
+  Future<void> signInWithTrueCaller() async {
+    try {
+
+      final isUsable = await TcSdk.isOAuthFlowUsable;
+      if (!isUsable) {
+        Get.snackbar(
+            "Not Supported",
+            "Truecaller not available on this device",backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM
+        );
+        return;
+      }
+
+      _oAuthState = DateTime.now().millisecondsSinceEpoch.toString();
+      TcSdk.setOAuthState(_oAuthState!);
+      TcSdk.setOAuthScopes(['profile','phone', 'openid','email']);
+
+      _codeVerifier = await TcSdk.generateRandomCodeVerifier;
+      final codeChallenge = await TcSdk.generateCodeChallenge(_codeVerifier!);
+
+
+      if (codeChallenge == null) {
+        Get.snackbar("Error", "Truecaller not supported",backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+        return;
+      }
+
+      TcSdk.setCodeChallenge(codeChallenge);
+      TcSdk.getAuthorizationCode;
+    } catch (e) {
+
+      debugPrint("Truecaller Login Error: $e");
+    }
+  }
+
+  void _onTruecallerCallback(TcSdkCallback tcSdkCallback) {
+    switch (tcSdkCallback.result) {
+      case TcSdkCallbackResult.success:
+        final TcOAuthData data = tcSdkCallback.tcOAuthData!;
+        debugPrint("Authorization Code: ${data.authorizationCode}");
+        print("_codeVerifier ${_codeVerifier}");
+
+        AuthUtils.getAppVersion().then((version) async {
+          String? deviceId = await AuthUtils.getDeviceId();
+          String source = await AuthUtils.getSource();
+          authViewModel.trueCallerLogin(TrueCallerRequestModel(authorizationCode: data.authorizationCode, codeVerifier:_codeVerifier, source: source, version: version, deviceId:deviceId));
+        });
+
+        break;
+      case TcSdkCallbackResult.failure:
+        debugPrint("Truecaller Error: ${tcSdkCallback.error?.message}");
+        Get.snackbar(
+            "Error",
+            tcSdkCallback.error?.message ?? "Truecaller authentication failed", backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM
+        );
+        break;
+
+      case TcSdkCallbackResult.verification:
+        debugPrint("Truecaller verification required");
+        Get.snackbar(
+            "Verification Required",
+            "Please verify your Truecaller account", backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM
+        );
+        break;
+
+      default:
+        break;
+    }
+  }
+
 
 
   @override
@@ -84,7 +183,53 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
                       ),
                     ),
                   ),
+                  /// OR DIVIDER
+                  if(Platform.isAndroid && widget.primaryHostelId == null)  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Container(
+                                height: 1,
+                                color: CustomColors.darkGray)),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 30, horizontal: 20),
+                          child: Text("Or"),
+                        ),
+                        Expanded(
+                            child: Container(
+                                height: 1,
+                                color: CustomColors.darkGray)),
+                      ],
+                    ),
+                  ),
+
+                  if(Platform.isAndroid && widget.primaryHostelId == null) Obx(() => authViewModel.trueCallerVerificationObserver.value.maybeWhen(
+                      loading: () => Center(child: CircularProgressIndicator()),
+                      orElse: () => GestureDetector(
+                        onTap: signInWithTrueCaller,
+                        child: Container(
+                          height: 40,
+                          decoration: AppStyles.trueCallerContainerStyle,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: Image.asset(
+                                      "assets/images/truecaller.webp")),
+                              SizedBox(width: 10),
+                              Text("Continue With Truecaller",style: TextStyle(fontSize: 16,color: CustomColors.black),),
+                            ],
+                          ),
+                        ),
+                      ))
+                  ),
                   Spacer(),
+
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(

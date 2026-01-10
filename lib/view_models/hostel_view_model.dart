@@ -146,7 +146,6 @@ class HostelViewModel extends GetxController{
   }
 
 
-
   Future<void> fetchHostels(PaginationRequestModel request,bool refresh) async {
     final observer = fetchHostelsObserver;
     try{
@@ -259,7 +258,6 @@ class HostelViewModel extends GetxController{
     }
   }
 
-
   Future<void> registerRoomDetails(ListRoomRequestModel request) async {
     try{
       registerRoomObserver.value = const ApiResult.loading();
@@ -355,7 +353,6 @@ class HostelViewModel extends GetxController{
     }
   }
 
-
   Future<void> fetchHostelDetails(PaginationRequestModel request) async {
     try{
       fetchHostelDetailsObserver.value = const ApiResult.loading();
@@ -376,7 +373,6 @@ class HostelViewModel extends GetxController{
       fetchHostelDetailsObserver.value = ApiResult.error(e.toString());
     }
   }
-
 
   Future<void> fetchHostelStatistics(DateTime? date) async {
     try{
@@ -454,7 +450,6 @@ class HostelViewModel extends GetxController{
       observer.refresh();
     }
   }
-
 
   Future<void> fetchAmenities(PaginationRequestModel request,bool refresh) async {
     final observer = fetchAmenitiesObserver;

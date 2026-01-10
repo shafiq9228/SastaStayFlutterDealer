@@ -107,6 +107,7 @@ class FormHelperDataResponseModel with _$FormHelperDataResponseModel{
 class HelperDataModel with _$HelperDataModel{
   const factory HelperDataModel({
     bool? validVersion,
+    dynamic registerValue,
     String? page,
     String? token,
     DealerModel? dealerDetails,

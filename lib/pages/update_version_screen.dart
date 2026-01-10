@@ -131,7 +131,6 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
     );
 
     if (await canLaunchUrl(url) == true) {
-      print("url");
       await launchUrl(url);
     } else {
       Get.snackbar(
@@ -168,5 +167,4 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
     }
   }
 
-  canLaunchUrl(Uri url) {}
 }

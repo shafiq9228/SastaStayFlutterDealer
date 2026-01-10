@@ -92,7 +92,8 @@ class _RequestPendingPageState extends State<RequestPendingPage> {
       );
     }
 
-    return Scaffold(backgroundColor: CustomColors.white,body: SizedBox(
+    return Scaffold(backgroundColor: CustomColors.white,body:
+    SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Padding(

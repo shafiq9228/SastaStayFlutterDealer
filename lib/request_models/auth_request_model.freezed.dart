@@ -263,6 +263,236 @@ abstract class _PaginationRequestModel implements PaginationRequestModel {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+TrueCallerRequestModel _$TrueCallerRequestModelFromJson(
+    Map<String, dynamic> json) {
+  return _TrueCallerRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TrueCallerRequestModel {
+  String? get authorizationCode => throw _privateConstructorUsedError;
+  String? get codeVerifier => throw _privateConstructorUsedError;
+  String? get source => throw _privateConstructorUsedError;
+  String? get version => throw _privateConstructorUsedError;
+  String? get deviceId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TrueCallerRequestModelCopyWith<TrueCallerRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TrueCallerRequestModelCopyWith<$Res> {
+  factory $TrueCallerRequestModelCopyWith(TrueCallerRequestModel value,
+          $Res Function(TrueCallerRequestModel) then) =
+      _$TrueCallerRequestModelCopyWithImpl<$Res, TrueCallerRequestModel>;
+  @useResult
+  $Res call(
+      {String? authorizationCode,
+      String? codeVerifier,
+      String? source,
+      String? version,
+      String? deviceId});
+}
+
+/// @nodoc
+class _$TrueCallerRequestModelCopyWithImpl<$Res,
+        $Val extends TrueCallerRequestModel>
+    implements $TrueCallerRequestModelCopyWith<$Res> {
+  _$TrueCallerRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? authorizationCode = freezed,
+    Object? codeVerifier = freezed,
+    Object? source = freezed,
+    Object? version = freezed,
+    Object? deviceId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      authorizationCode: freezed == authorizationCode
+          ? _value.authorizationCode
+          : authorizationCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codeVerifier: freezed == codeVerifier
+          ? _value.codeVerifier
+          : codeVerifier // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceId: freezed == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TrueCallerRequestModelImplCopyWith<$Res>
+    implements $TrueCallerRequestModelCopyWith<$Res> {
+  factory _$$TrueCallerRequestModelImplCopyWith(
+          _$TrueCallerRequestModelImpl value,
+          $Res Function(_$TrueCallerRequestModelImpl) then) =
+      __$$TrueCallerRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? authorizationCode,
+      String? codeVerifier,
+      String? source,
+      String? version,
+      String? deviceId});
+}
+
+/// @nodoc
+class __$$TrueCallerRequestModelImplCopyWithImpl<$Res>
+    extends _$TrueCallerRequestModelCopyWithImpl<$Res,
+        _$TrueCallerRequestModelImpl>
+    implements _$$TrueCallerRequestModelImplCopyWith<$Res> {
+  __$$TrueCallerRequestModelImplCopyWithImpl(
+      _$TrueCallerRequestModelImpl _value,
+      $Res Function(_$TrueCallerRequestModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? authorizationCode = freezed,
+    Object? codeVerifier = freezed,
+    Object? source = freezed,
+    Object? version = freezed,
+    Object? deviceId = freezed,
+  }) {
+    return _then(_$TrueCallerRequestModelImpl(
+      authorizationCode: freezed == authorizationCode
+          ? _value.authorizationCode
+          : authorizationCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codeVerifier: freezed == codeVerifier
+          ? _value.codeVerifier
+          : codeVerifier // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceId: freezed == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TrueCallerRequestModelImpl implements _TrueCallerRequestModel {
+  const _$TrueCallerRequestModelImpl(
+      {required this.authorizationCode,
+      required this.codeVerifier,
+      required this.source,
+      required this.version,
+      required this.deviceId});
+
+  factory _$TrueCallerRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TrueCallerRequestModelImplFromJson(json);
+
+  @override
+  final String? authorizationCode;
+  @override
+  final String? codeVerifier;
+  @override
+  final String? source;
+  @override
+  final String? version;
+  @override
+  final String? deviceId;
+
+  @override
+  String toString() {
+    return 'TrueCallerRequestModel(authorizationCode: $authorizationCode, codeVerifier: $codeVerifier, source: $source, version: $version, deviceId: $deviceId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TrueCallerRequestModelImpl &&
+            (identical(other.authorizationCode, authorizationCode) ||
+                other.authorizationCode == authorizationCode) &&
+            (identical(other.codeVerifier, codeVerifier) ||
+                other.codeVerifier == codeVerifier) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.deviceId, deviceId) ||
+                other.deviceId == deviceId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, authorizationCode, codeVerifier, source, version, deviceId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TrueCallerRequestModelImplCopyWith<_$TrueCallerRequestModelImpl>
+      get copyWith => __$$TrueCallerRequestModelImplCopyWithImpl<
+          _$TrueCallerRequestModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TrueCallerRequestModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TrueCallerRequestModel implements TrueCallerRequestModel {
+  const factory _TrueCallerRequestModel(
+      {required final String? authorizationCode,
+      required final String? codeVerifier,
+      required final String? source,
+      required final String? version,
+      required final String? deviceId}) = _$TrueCallerRequestModelImpl;
+
+  factory _TrueCallerRequestModel.fromJson(Map<String, dynamic> json) =
+      _$TrueCallerRequestModelImpl.fromJson;
+
+  @override
+  String? get authorizationCode;
+  @override
+  String? get codeVerifier;
+  @override
+  String? get source;
+  @override
+  String? get version;
+  @override
+  String? get deviceId;
+  @override
+  @JsonKey(ignore: true)
+  _$$TrueCallerRequestModelImplCopyWith<_$TrueCallerRequestModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 SendOtpRequestModel _$SendOtpRequestModelFromJson(Map<String, dynamic> json) {
   return _SendOtpRequestModel.fromJson(json);
 }

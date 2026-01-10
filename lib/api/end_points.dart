@@ -3,6 +3,7 @@ class EndPoints {
 
   static const sendOtp = "sendOtp";
   static const verifyOtp = "verifyOtp";
+  static const trueCallerLogin = "trueCallerLogin";
   static const googleAuth = "googleAuth";
   static const fetchDealerStatus = "fetchDealerStatus";
   static const fetchUserDetails = "fetchDealerDetails";

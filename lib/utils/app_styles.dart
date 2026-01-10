@@ -7,6 +7,19 @@ class AppStyles {
 
       static  final  bottomBg = BoxDecoration(color: CustomColors.white,borderRadius: const BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)));
 
+  static  final  trueCallerContainerStyle = BoxDecoration(
+    color: Colors.white
+    ,borderRadius: BorderRadius.circular(15),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.2),
+        spreadRadius: 2,
+        blurRadius: 2,
+        offset: const Offset(0, 3),
+      ),
+    ],
+  );
+
 
   static final gradientColorDecoration1 = BoxDecoration(gradient: LinearGradient(
           colors: [CustomColors.primary.withOpacity(0.2), CustomColors.white],

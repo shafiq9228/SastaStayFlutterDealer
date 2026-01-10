@@ -909,6 +909,7 @@ HelperDataModel _$HelperDataModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$HelperDataModel {
   bool? get validVersion => throw _privateConstructorUsedError;
+  dynamic get registerValue => throw _privateConstructorUsedError;
   String? get page => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   DealerModel? get dealerDetails => throw _privateConstructorUsedError;
@@ -928,6 +929,7 @@ abstract class $HelperDataModelCopyWith<$Res> {
   @useResult
   $Res call(
       {bool? validVersion,
+      dynamic registerValue,
       String? page,
       String? token,
       DealerModel? dealerDetails,
@@ -951,6 +953,7 @@ class _$HelperDataModelCopyWithImpl<$Res, $Val extends HelperDataModel>
   @override
   $Res call({
     Object? validVersion = freezed,
+    Object? registerValue = freezed,
     Object? page = freezed,
     Object? token = freezed,
     Object? dealerDetails = freezed,
@@ -961,6 +964,10 @@ class _$HelperDataModelCopyWithImpl<$Res, $Val extends HelperDataModel>
           ? _value.validVersion
           : validVersion // ignore: cast_nullable_to_non_nullable
               as bool?,
+      registerValue: freezed == registerValue
+          ? _value.registerValue
+          : registerValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -1015,6 +1022,7 @@ abstract class _$$HelperDataModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool? validVersion,
+      dynamic registerValue,
       String? page,
       String? token,
       DealerModel? dealerDetails,
@@ -1038,6 +1046,7 @@ class __$$HelperDataModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? validVersion = freezed,
+    Object? registerValue = freezed,
     Object? page = freezed,
     Object? token = freezed,
     Object? dealerDetails = freezed,
@@ -1048,6 +1057,10 @@ class __$$HelperDataModelImplCopyWithImpl<$Res>
           ? _value.validVersion
           : validVersion // ignore: cast_nullable_to_non_nullable
               as bool?,
+      registerValue: freezed == registerValue
+          ? _value.registerValue
+          : registerValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -1073,6 +1086,7 @@ class __$$HelperDataModelImplCopyWithImpl<$Res>
 class _$HelperDataModelImpl implements _HelperDataModel {
   const _$HelperDataModelImpl(
       {this.validVersion,
+      this.registerValue,
       this.page,
       this.token,
       this.dealerDetails,
@@ -1084,6 +1098,8 @@ class _$HelperDataModelImpl implements _HelperDataModel {
   @override
   final bool? validVersion;
   @override
+  final dynamic registerValue;
+  @override
   final String? page;
   @override
   final String? token;
@@ -1094,7 +1110,7 @@ class _$HelperDataModelImpl implements _HelperDataModel {
 
   @override
   String toString() {
-    return 'HelperDataModel(validVersion: $validVersion, page: $page, token: $token, dealerDetails: $dealerDetails, primaryHostel: $primaryHostel)';
+    return 'HelperDataModel(validVersion: $validVersion, registerValue: $registerValue, page: $page, token: $token, dealerDetails: $dealerDetails, primaryHostel: $primaryHostel)';
   }
 
   @override
@@ -1104,6 +1120,8 @@ class _$HelperDataModelImpl implements _HelperDataModel {
             other is _$HelperDataModelImpl &&
             (identical(other.validVersion, validVersion) ||
                 other.validVersion == validVersion) &&
+            const DeepCollectionEquality()
+                .equals(other.registerValue, registerValue) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.dealerDetails, dealerDetails) ||
@@ -1115,7 +1133,13 @@ class _$HelperDataModelImpl implements _HelperDataModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, validVersion, page, token, dealerDetails, primaryHostel);
+      runtimeType,
+      validVersion,
+      const DeepCollectionEquality().hash(registerValue),
+      page,
+      token,
+      dealerDetails,
+      primaryHostel);
 
   @JsonKey(ignore: true)
   @override
@@ -1135,6 +1159,7 @@ class _$HelperDataModelImpl implements _HelperDataModel {
 abstract class _HelperDataModel implements HelperDataModel {
   const factory _HelperDataModel(
       {final bool? validVersion,
+      final dynamic registerValue,
       final String? page,
       final String? token,
       final DealerModel? dealerDetails,
@@ -1145,6 +1170,8 @@ abstract class _HelperDataModel implements HelperDataModel {
 
   @override
   bool? get validVersion;
+  @override
+  dynamic get registerValue;
   @override
   String? get page;
   @override
