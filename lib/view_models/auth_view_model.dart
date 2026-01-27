@@ -49,7 +49,7 @@ class AuthViewModel extends GetxController{
 
   final preferenceManager = Get.put(PreferenceManager());
 
-  Rx<Position?> locationObserver = Rx<Position?>(null);
+  Rx<Position?> locationPosition = Rx<Position?>(null);
   Rx<LocationModel?> locationDetails = Rx<LocationModel?>(null);
 
   Rx<File> uploadingFile = File('').obs;
@@ -58,6 +58,7 @@ class AuthViewModel extends GetxController{
   Rx<String> checkInTime = "".obs;
   Rx<String> checkOutTime = "".obs;
   Rx<String> hostelLicence = "".obs;
+  Rx<String> hostelGstDocument = "".obs;
   RxList<String> rules = <String>[].obs;
   RxList<ImageDataModel> images = <ImageDataModel>[].obs;
   RxList<FaqModel> faqs = <FaqModel>[].obs;
@@ -86,38 +87,31 @@ class AuthViewModel extends GetxController{
   }
 
   Future<Position?> fetchCurrentLocation() async {
-    if (locationObserver.value != null) {
-      return locationObserver.value;
+    if (locationPosition.value == null) {
+      await Geolocator.requestPermission();
+
+      LocationPermission locationPermission =
+      await Geolocator.checkPermission();
+
+      if (locationPermission == LocationPermission.denied ||
+          locationPermission == LocationPermission.deniedForever) {
+        return null;
+      }
+
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low,
+      );
+
+      final geoAddress = await GeoUtil()
+          .getApiAddress(position.latitude, position.longitude);
+
+      locationPosition.value = position;
+      locationDetails.value = geoAddress;
+
+      return position;
+    } else {
+      return locationPosition.value;
     }
-
-    // Check service
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) return null;
-
-    // Check permission
-    LocationPermission permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      return null;
-    }
-
-    // ✅ COARSE location only
-    final position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low,
-    );
-
-    final geoAddress = await GeoUtil()
-        .getApiAddress(position.latitude, position.longitude);
-
-    locationObserver.value = position;
-    locationDetails.value = geoAddress;
-
-    return position;
   }
 
 
@@ -328,6 +322,9 @@ class AuthViewModel extends GetxController{
           if(type == "hostelImage"){
             hostelImage.value = jsonData.data ?? "";
           }
+          if(type == "gst"){
+            hostelGstDocument.value = jsonData.data ?? "";
+          }
           else if (type == "hostelImages") {
             final existIndex = images.indexWhere(
                   (imageObj) => imageObj.imagesType == hostelViewModel.selectedHostelImageType.value,
@@ -401,7 +398,7 @@ class AuthViewModel extends GetxController{
       registerDealerResponseObserver.value = const ApiResult.loading();
       final String? validatorResponse = AuthUtils.validateRequestFields(['mobile','name','email'], request.toJson());
       if(validatorResponse != null) throw validatorResponse;
-      // final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landmark','pinCode','latitude','longitude'], request.location!.toJson());
+      // final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','pinCode','latitude','longitude'], request.location!.toJson());
       // if(locationValidation != null) throw locationValidation;
       final response = await apiProvider.post(EndPoints.registerDealer,request.toJson());
       final body = response.body;
@@ -432,7 +429,7 @@ class AuthViewModel extends GetxController{
       registerHostelResponseObserver.value = const ApiResult.loading();
       final String? validatorResponse = AuthUtils.validateRequestFields(['hostelImage','hostelLicence','hostelName','aboutHostel','gstIn','location','faq','amenities','images','rules','checkInTime','checkOutTime'], request.toJson());
       if(validatorResponse != null) throw validatorResponse;
-      final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','landMark','pinCode','latitude','longitude'], request.location!.toJson());
+      final String? locationValidation = AuthUtils.validateRequestFields(['address1','address2','city','state','pinCode','latitude','longitude'], request.location!.toJson());
       if(locationValidation != null) throw locationValidation;
       final response = await apiProvider.post(EndPoints.registerHostel,request.toJson());
       final body = response.body;

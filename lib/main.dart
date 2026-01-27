@@ -16,6 +16,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // String signature = await SmsAutoFill().getAppSignature;
+  // print("📩 App Signature: $signature");
+
   await FireBaseNotification().initNotifications();
 
 

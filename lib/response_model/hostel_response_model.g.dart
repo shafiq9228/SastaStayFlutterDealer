@@ -126,6 +126,7 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       branch: json['branch'] as int?,
       hostelImage: json['hostelImage'] as String?,
       hostelLicence: json['hostelLicence'] as String?,
+      hostelGstDocument: json['hostelGstDocument'] as String?,
       hostelName: json['hostelName'] as String?,
       aboutHostel: json['aboutHostel'] as String?,
       gstIn: json['gstIn'] as String?,
@@ -180,6 +181,7 @@ Map<String, dynamic> _$$HostelModelImplToJson(_$HostelModelImpl instance) =>
       'branch': instance.branch,
       'hostelImage': instance.hostelImage,
       'hostelLicence': instance.hostelLicence,
+      'hostelGstDocument': instance.hostelGstDocument,
       'hostelName': instance.hostelName,
       'aboutHostel': instance.aboutHostel,
       'gstIn': instance.gstIn,
@@ -289,15 +291,15 @@ Map<String, dynamic> _$$LeadModelImplToJson(_$LeadModelImpl instance) =>
 
 _$StatsDataModelImpl _$$StatsDataModelImplFromJson(Map<String, dynamic> json) =>
     _$StatsDataModelImpl(
-      type: json['type'] as String?,
-      amount: json['amount'] as int?,
+      title: json['title'] as String?,
+      value: json['value'],
     );
 
 Map<String, dynamic> _$$StatsDataModelImplToJson(
         _$StatsDataModelImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'amount': instance.amount,
+      'title': instance.title,
+      'value': instance.value,
     };
 
 _$FetchAmenitiesResponseModelImpl _$$FetchAmenitiesResponseModelImplFromJson(

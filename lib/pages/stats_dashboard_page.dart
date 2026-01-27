@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sasta_stay_dealer/components/custom_progress_bar.dart';
 import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
 import 'package:sasta_stay_dealer/utils/custom_colors.dart';
@@ -43,18 +44,6 @@ class _StatsDashboardPageState extends State<StatsDashboardPage> {
     }
   }
 
-  // Helper method to format amount based on type
-  String _formatAmount(String type, dynamic amount) {
-    if (type == "Earning" ||
-        type == "Withdraws" ||
-        type == "Pending Withdraws" ||
-        type == "Failed Withdraws" ||
-        type == "Pending Refunds" ||
-        type == "Refunds") {
-      return '₹${amount.toStringAsFixed(2)}';
-    }
-    return amount.toString();
-  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -359,18 +348,15 @@ class _StatsDashboardPageState extends State<StatsDashboardPage> {
                                 ),
                               );
                             }
-                            return GridView.builder(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 16,
-                                childAspectRatio: 1.2,
-                              ),
+                            return MasonryGridView.count(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
                               itemCount: stats.length,
                               itemBuilder: (context, index) {
                                 final stat = stats[index];
-                                final type = stat.type ?? "";
-                                final amount = stat.amount ?? 0;
+                                final type = stat.title ?? "";
+                                final value = stat.value ?? 0;
                                 final (icon, color) = _getStatIconAndColor(type);
 
                                 return Card(
@@ -380,10 +366,9 @@ class _StatsDashboardPageState extends State<StatsDashboardPage> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
@@ -393,19 +378,12 @@ class _StatsDashboardPageState extends State<StatsDashboardPage> {
                                                 color: color.withOpacity(0.1),
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: Icon(
-                                                icon,
-                                                color: color,
-                                                size: 20,
-                                              ),
+                                              child: Icon(icon, color: color, size: 20),
                                             ),
                                             const Spacer(),
                                             if (type.contains("Pending") || type.contains("Failed"))
                                               Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 4,
-                                                ),
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                 decoration: BoxDecoration(
                                                   color: type.contains("Failed")
                                                       ? Colors.red.shade100
@@ -425,28 +403,23 @@ class _StatsDashboardPageState extends State<StatsDashboardPage> {
                                               ),
                                           ],
                                         ),
-                                        const Spacer(),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              type,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            Text(
-                                              _formatAmount(type, amount),
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blueGrey.shade800,
-                                              ),
-                                            ),
-                                          ],
+                                        const SizedBox(height: 12),
+                                        Text(
+                                          type,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          value,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blueGrey.shade800,
+                                          ),
                                         ),
                                       ],
                                     ),

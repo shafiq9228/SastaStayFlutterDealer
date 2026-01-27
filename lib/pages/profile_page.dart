@@ -226,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Get.to(() => const TransactionsPage());
                                       }),
                                       if(userModel?.dealingType != "manager") DottedLine(dashColor: CustomColors.darkGray),
-                                      if(userModel?.dealingType != "manager") ProfileMenu(title: "Wallet", image: "assets/images/wallet.png", onTapped: (){
+                                      if(userModel?.dealingType != "manager") ProfileMenu(title: "Account Details", image: "assets/images/wallet.png", onTapped: (){
                                         Get.to(() =>  MoneyWithdrawPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray),

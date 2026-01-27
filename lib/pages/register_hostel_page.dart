@@ -45,7 +45,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
   RxBool registerByMobile = true.obs;
 
   final page1Value = ["hostelType","hostelName","aboutHostel","gstIn","checkInTime","checkOutTime"];
-  final page1LocationValue = ["address1","address2","city","state","pinCode","landMark","latitude","longitude"];
+  final page1LocationValue = ["address1","address2","city","state","pinCode","latitude","longitude"];
   final page2Value = ["hostelImage","hostelLicence","images"];
   final page3Value = ["rules","faq","amenities"];
 
@@ -54,7 +54,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
   // RxList<TaxModel> taxes = [TaxModel(name:"CGST",percentage:9.0),TaxModel(name:"SGST",percentage:9.0),TaxModel(name:"IGST",percentage:18.0),TaxModel(name:"CESS",percentage:0.0),TaxModel(name:"TDS",percentage:0.0)].obs;
 
 
-  final selectedPageIndex = 0;
+  Rx<int> selectedPageIndex = 0.obs;
 
   final pageController = PageController(initialPage: 0);
 
@@ -86,6 +86,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                   final primaryHostel = responseUserData?.primaryHostel;
                   if(rejected.value && rejectedValuesAdded.value == false){
                       authViewModel.hostelImage.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
+                      authViewModel.hostelGstDocument.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
                       authViewModel.images.value = rejectedFields?.contains("images") == true ? [] : primaryHostel?.images ?? [];
                       authViewModel.rules.value = rejectedFields?.contains("rules") == true ? [] : primaryHostel?.rules ?? [];
                       authViewModel.faqs.value = rejectedFields?.contains("faq") == true ? [] : primaryHostel?.faq ?? [];
@@ -171,6 +172,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                     hostelImage: authViewModel.hostelImage.value,
                                     images: authViewModel.images,
                                     hostelLicence: authViewModel.hostelLicence.value,
+                                    hostelGstDocument:authViewModel.hostelGstDocument.value,
 
                                     rules: authViewModel.rules,
                                     faq: authViewModel.faqs,
@@ -196,6 +198,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                                        if(locationValidatorResponse != null) throw locationValidatorResponse;
                                      }
                                      pageController.jumpToPage(currentPage + 1);
+                                     selectedPageIndex.value = currentPage + 1;
                                    }
                                    catch(error){
                                      Get.snackbar('Missing Details', error.toString(),snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.redAccent,colorText: Colors.white,);
@@ -420,7 +423,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              items: ['Boys','Girls','Couple'].map((gender) {
+              items: ["Boys","Girls","Co-living","Luxury"].map((gender) {
                 return DropdownMenuItem(
                   value: gender,
                   child: Text(gender),
@@ -731,6 +734,16 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
             Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'hostelLicence'));
           }),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical:10),
+          child: Text("Hostel Gst Document",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+        ),
+        SizedBox(
+          child: authViewModel.hostelGstDocument.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: authViewModel.hostelGstDocument.value, fileName: 'gst')  :
+          UploadingViewComponent(uploadingText: "Upload Gst Document", onClick: (){
+            Get.to(() => const FilePickerPage(fileView: false,fileType: 'image', fileName: 'gst'));
+          }),
+        ),
       ],
     );
   }
@@ -918,20 +931,21 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
         location?.city?.isNotEmpty == true &&
         location?.state?.isNotEmpty == true &&
         location?.pinCode != null &&
-        location?.landMark?.isNotEmpty == true &&
         location?.latitude != null &&
         location?.longitude != null;
 
     if (hostelNameController.text.isEmpty || aboutHostelController.text.isEmpty || authViewModel.checkInTime.value.isEmpty || authViewModel.checkOutTime.value.isEmpty || gstInController.text.isEmpty || !isLocationComplete) {
       pageController.jumpToPage(0);
+      selectedPageIndex.value = 0;
       print("Page : 0");
       return;
     }
 
 
     // Page 2 fields
-    if (authViewModel.hostelImage.value.isEmpty || authViewModel.images.isEmpty || authViewModel.hostelLicence.value.isEmpty) {
+    if (authViewModel.hostelImage.value.isEmpty || authViewModel.hostelGstDocument.value.isEmpty || authViewModel.images.isEmpty || authViewModel.hostelLicence.value.isEmpty) {
       pageController.jumpToPage(1);
+      selectedPageIndex.value = 1;
       print("Page : 1");
       return;
     }
@@ -939,6 +953,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
     // Page 3 fields
     if (authViewModel.rules.isEmpty || authViewModel.faqs.isEmpty || authViewModel.amenityIds.isEmpty) {
       pageController.jumpToPage(2);
+      selectedPageIndex.value = 2;
       print("Page : 2");
       return;
     }
@@ -959,44 +974,118 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
       }
       else{
         pageController.jumpToPage(currentPage - 1);
+        selectedPageIndex.value = currentPage - 1;
       }
     }
   }
 
+  // void calculateProgress() {
+  //   int filledFields = 0;
+  //   int totalFields = 12; // Total number of field groups
+  //
+  //   // Page 1 fields (5 field groups)
+  //   if (hostelNameController.text.isNotEmpty) filledFields++;
+  //   if (aboutHostelController.text.isNotEmpty) filledFields++;
+  //   if (authViewModel.checkInTime.value.isNotEmpty) filledFields++;
+  //   if (authViewModel.checkOutTime.value.isNotEmpty) filledFields++;
+  //   if (gstInController.text.isNotEmpty) filledFields++;
+  //
+  //   // Page 2 fields (3 field groups)
+  //   if (authViewModel.hostelImage.value.isNotEmpty) filledFields++;
+  //   if (authViewModel.images.isNotEmpty) filledFields++;
+  //   if (authViewModel.hostelLicence.value.isNotEmpty) filledFields++;
+  //
+  //   // Page 3 fields (2 field groups)
+  //   if (authViewModel.rules.isNotEmpty) filledFields++;
+  //   if (authViewModel.faqs.isNotEmpty) filledFields++;
+  //
+  //   // Page 4 fields (1 field group)
+  //   if (authViewModel.amenityIds.isNotEmpty) filledFields++;
+  //
+  //   // Page 5 fields (location - 1 field group, but all sub-fields must be filled)
+  //   final location = authViewModel.locationDetails.value;
+  //   bool isLocationComplete = location?.address1?.isNotEmpty == true &&
+  //       location?.city?.isNotEmpty == true &&
+  //       location?.state?.isNotEmpty == true &&
+  //       location?.pinCode != null &&
+  //       location?.landMark?.isNotEmpty == true &&
+  //       location?.latitude != null &&
+  //       location?.longitude != null;
+  //
+  //   if (isLocationComplete) filledFields++;
+  //
+  //   progress.value = (filledFields / totalFields * 100);
+  // }
+
+
   void calculateProgress() {
     int filledFields = 0;
-    int totalFields = 12; // Total number of field groups
+    int totalFields = 13;
 
-    // Page 1 fields (5 field groups)
-    if (hostelNameController.text.isNotEmpty) filledFields++;
-    if (aboutHostelController.text.isNotEmpty) filledFields++;
-    if (authViewModel.checkInTime.value.isNotEmpty) filledFields++;
-    if (authViewModel.checkOutTime.value.isNotEmpty) filledFields++;
-    if (gstInController.text.isNotEmpty) filledFields++;
+    if(selectedPageIndex.value == 0){
+      totalFields = 6;
+      if (hostelNameController.text.isNotEmpty) filledFields++;
+      if (aboutHostelController.text.isNotEmpty) filledFields++;
+      if (authViewModel.checkInTime.value.isNotEmpty) filledFields++;
+      if (authViewModel.checkOutTime.value.isNotEmpty) filledFields++;
+      if (gstInController.text.isNotEmpty) filledFields++;
 
-    // Page 2 fields (3 field groups)
-    if (authViewModel.hostelImage.value.isNotEmpty) filledFields++;
-    if (authViewModel.images.isNotEmpty) filledFields++;
-    if (authViewModel.hostelLicence.value.isNotEmpty) filledFields++;
+      final location = authViewModel.locationDetails.value;
+      bool isLocationComplete = location?.address1?.isNotEmpty == true &&
+          location?.city?.isNotEmpty == true &&
+          location?.state?.isNotEmpty == true &&
+          location?.pinCode != null &&
+          location?.latitude != null &&
+          location?.longitude != null;
 
-    // Page 3 fields (2 field groups)
-    if (authViewModel.rules.isNotEmpty) filledFields++;
-    if (authViewModel.faqs.isNotEmpty) filledFields++;
+      if (isLocationComplete) filledFields++;
+    }
+    else if(selectedPageIndex.value == 1){
+      totalFields = 4;
+      if (authViewModel.hostelImage.value.isNotEmpty) filledFields++;
+      if (authViewModel.images.isNotEmpty) filledFields++;
+      if (authViewModel.hostelLicence.value.isNotEmpty) filledFields++;
+      if (authViewModel.hostelGstDocument.value.isNotEmpty) filledFields++;
+    }
+    else if(selectedPageIndex.value == 2){
+      totalFields = 3;
+      if (authViewModel.rules.isNotEmpty) filledFields++;
+      if (authViewModel.faqs.isNotEmpty) filledFields++;
+      if (authViewModel.amenityIds.isNotEmpty) filledFields++;
+    }
+    else{
+      totalFields = 13;
+      // Page 1 fields (5 field groups)
+      if (hostelNameController.text.isNotEmpty) filledFields++;
+      if (aboutHostelController.text.isNotEmpty) filledFields++;
+      if (authViewModel.checkInTime.value.isNotEmpty) filledFields++;
+      if (authViewModel.checkOutTime.value.isNotEmpty) filledFields++;
+      if (gstInController.text.isNotEmpty) filledFields++;
 
-    // Page 4 fields (1 field group)
-    if (authViewModel.amenityIds.isNotEmpty) filledFields++;
+      // Page 2 fields (3 field groups)
+      if (authViewModel.hostelImage.value.isNotEmpty) filledFields++;
+      if (authViewModel.images.isNotEmpty) filledFields++;
+      if (authViewModel.hostelLicence.value.isNotEmpty) filledFields++;
+      if(authViewModel.hostelGstDocument.value.isNotEmpty)  filledFields++;
 
-    // Page 5 fields (location - 1 field group, but all sub-fields must be filled)
-    final location = authViewModel.locationDetails.value;
-    bool isLocationComplete = location?.address1?.isNotEmpty == true &&
-        location?.city?.isNotEmpty == true &&
-        location?.state?.isNotEmpty == true &&
-        location?.pinCode != null &&
-        location?.landMark?.isNotEmpty == true &&
-        location?.latitude != null &&
-        location?.longitude != null;
+      // Page 3 fields (2 field groups)
+      if (authViewModel.rules.isNotEmpty) filledFields++;
+      if (authViewModel.faqs.isNotEmpty) filledFields++;
 
-    if (isLocationComplete) filledFields++;
+      // Page 4 fields (1 field group)
+      if (authViewModel.amenityIds.isNotEmpty) filledFields++;
+
+      // Page 5 fields (location - 1 field group, but all sub-fields must be filled)
+      final location = authViewModel.locationDetails.value;
+      bool isLocationComplete = location?.address1?.isNotEmpty == true &&
+          location?.city?.isNotEmpty == true &&
+          location?.state?.isNotEmpty == true &&
+          location?.pinCode != null &&
+          location?.latitude != null &&
+          location?.longitude != null;
+
+      if (isLocationComplete) filledFields++;
+    }
 
     progress.value = (filledFields / totalFields * 100);
   }

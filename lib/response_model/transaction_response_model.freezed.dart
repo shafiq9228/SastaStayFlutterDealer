@@ -1884,7 +1884,11 @@ mixin _$UpiData {
   String? get id => throw _privateConstructorUsedError;
   String? get accountType => throw _privateConstructorUsedError;
   String? get accountNumber => throw _privateConstructorUsedError;
+  String? get bankName => throw _privateConstructorUsedError;
+  String? get ifscCode => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get fullName => throw _privateConstructorUsedError;
+  bool? get primaryAccount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1900,7 +1904,11 @@ abstract class $UpiDataCopyWith<$Res> {
       {String? id,
       String? accountType,
       String? accountNumber,
-      String? fullName});
+      String? bankName,
+      String? ifscCode,
+      String? name,
+      String? fullName,
+      bool? primaryAccount});
 }
 
 /// @nodoc
@@ -1919,7 +1927,11 @@ class _$UpiDataCopyWithImpl<$Res, $Val extends UpiData>
     Object? id = freezed,
     Object? accountType = freezed,
     Object? accountNumber = freezed,
+    Object? bankName = freezed,
+    Object? ifscCode = freezed,
+    Object? name = freezed,
     Object? fullName = freezed,
+    Object? primaryAccount = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1934,10 +1946,26 @@ class _$UpiDataCopyWithImpl<$Res, $Val extends UpiData>
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      bankName: freezed == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ifscCode: freezed == ifscCode
+          ? _value.ifscCode
+          : ifscCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryAccount: freezed == primaryAccount
+          ? _value.primaryAccount
+          : primaryAccount // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -1953,7 +1981,11 @@ abstract class _$$UpiDataImplCopyWith<$Res> implements $UpiDataCopyWith<$Res> {
       {String? id,
       String? accountType,
       String? accountNumber,
-      String? fullName});
+      String? bankName,
+      String? ifscCode,
+      String? name,
+      String? fullName,
+      bool? primaryAccount});
 }
 
 /// @nodoc
@@ -1970,7 +2002,11 @@ class __$$UpiDataImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? accountType = freezed,
     Object? accountNumber = freezed,
+    Object? bankName = freezed,
+    Object? ifscCode = freezed,
+    Object? name = freezed,
     Object? fullName = freezed,
+    Object? primaryAccount = freezed,
   }) {
     return _then(_$UpiDataImpl(
       id: freezed == id
@@ -1985,10 +2021,26 @@ class __$$UpiDataImplCopyWithImpl<$Res>
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
               as String?,
+      bankName: freezed == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ifscCode: freezed == ifscCode
+          ? _value.ifscCode
+          : ifscCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
+      primaryAccount: freezed == primaryAccount
+          ? _value.primaryAccount
+          : primaryAccount // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1997,7 +2049,14 @@ class __$$UpiDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UpiDataImpl implements _UpiData {
   const _$UpiDataImpl(
-      {this.id, this.accountType, this.accountNumber, this.fullName});
+      {this.id,
+      this.accountType,
+      this.accountNumber,
+      this.bankName,
+      this.ifscCode,
+      this.name,
+      this.fullName,
+      this.primaryAccount});
 
   factory _$UpiDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpiDataImplFromJson(json);
@@ -2009,11 +2068,19 @@ class _$UpiDataImpl implements _UpiData {
   @override
   final String? accountNumber;
   @override
+  final String? bankName;
+  @override
+  final String? ifscCode;
+  @override
+  final String? name;
+  @override
   final String? fullName;
+  @override
+  final bool? primaryAccount;
 
   @override
   String toString() {
-    return 'UpiData(id: $id, accountType: $accountType, accountNumber: $accountNumber, fullName: $fullName)';
+    return 'UpiData(id: $id, accountType: $accountType, accountNumber: $accountNumber, bankName: $bankName, ifscCode: $ifscCode, name: $name, fullName: $fullName, primaryAccount: $primaryAccount)';
   }
 
   @override
@@ -2026,14 +2093,21 @@ class _$UpiDataImpl implements _UpiData {
                 other.accountType == accountType) &&
             (identical(other.accountNumber, accountNumber) ||
                 other.accountNumber == accountNumber) &&
+            (identical(other.bankName, bankName) ||
+                other.bankName == bankName) &&
+            (identical(other.ifscCode, ifscCode) ||
+                other.ifscCode == ifscCode) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.fullName, fullName) ||
-                other.fullName == fullName));
+                other.fullName == fullName) &&
+            (identical(other.primaryAccount, primaryAccount) ||
+                other.primaryAccount == primaryAccount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, accountType, accountNumber, fullName);
+  int get hashCode => Object.hash(runtimeType, id, accountType, accountNumber,
+      bankName, ifscCode, name, fullName, primaryAccount);
 
   @JsonKey(ignore: true)
   @override
@@ -2054,7 +2128,11 @@ abstract class _UpiData implements UpiData {
       {final String? id,
       final String? accountType,
       final String? accountNumber,
-      final String? fullName}) = _$UpiDataImpl;
+      final String? bankName,
+      final String? ifscCode,
+      final String? name,
+      final String? fullName,
+      final bool? primaryAccount}) = _$UpiDataImpl;
 
   factory _UpiData.fromJson(Map<String, dynamic> json) = _$UpiDataImpl.fromJson;
 
@@ -2065,7 +2143,15 @@ abstract class _UpiData implements UpiData {
   @override
   String? get accountNumber;
   @override
+  String? get bankName;
+  @override
+  String? get ifscCode;
+  @override
+  String? get name;
+  @override
   String? get fullName;
+  @override
+  bool? get primaryAccount;
   @override
   @JsonKey(ignore: true)
   _$$UpiDataImplCopyWith<_$UpiDataImpl> get copyWith =>

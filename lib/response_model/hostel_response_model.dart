@@ -90,6 +90,7 @@ class HostelModel with _$HostelModel{
     int? branch,
     String? hostelImage,
     String? hostelLicence,
+    String? hostelGstDocument,
     String? hostelName,
     String? aboutHostel,
     String? gstIn,
@@ -177,8 +178,8 @@ class LeadModel with _$LeadModel{
 @Freezed()
 class StatsDataModel with _$StatsDataModel{
   const factory StatsDataModel({
-    String? type,
-    int? amount
+    String? title,
+    dynamic value
   }) = _StatsDataModel;
 
   factory StatsDataModel.fromJson(Map<String, dynamic> json) => _$StatsDataModelFromJson(json);

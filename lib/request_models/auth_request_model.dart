@@ -71,6 +71,7 @@ class RegistrationRequestModel with _$RegistrationRequestModel{
     String? hostelImage,
     String? hostelType,
     String? hostelLicence,
+    String? hostelGstDocument,
     String? hostelName,
     String? aboutHostel,
     List<ImageDataModel>? images,

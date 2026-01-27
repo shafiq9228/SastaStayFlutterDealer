@@ -6,7 +6,8 @@ import '../utils/custom_colors.dart';
 
 class UpiRadioComponent extends StatefulWidget {
   final UpiData? item;
-  const UpiRadioComponent({super.key,required this.item});
+  final Function(UpiData? item) onclick;
+  const UpiRadioComponent({super.key,required this.item, required this.onclick});
 
   @override
   State<UpiRadioComponent> createState() => _UpiRadioComponentState();
@@ -22,9 +23,7 @@ class _UpiRadioComponentState extends State<UpiRadioComponent> {
       padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 4),
       child: InkWell(
         onTap: (){
-          transactionViewModel.accountId.value = widget.item?.id ?? "";
-          transactionViewModel.upiId.value = transactionViewModel.upiId.value == (widget.item?.accountNumber ?? "") ? "" :(widget.item?.accountNumber ?? "");
-          transactionViewModel.accountType.value = transactionViewModel.accountType.value == (widget.item?.accountType ?? "") ? "" : (widget.item?.accountType ?? "" );
+          widget.onclick(widget.item);
         },
         child: IntrinsicHeight(
           child: Container(
@@ -44,14 +43,12 @@ class _UpiRadioComponentState extends State<UpiRadioComponent> {
                 children: [
                 Obx(() {
                   return Radio(
-                    value: widget.item?.accountNumber,
+                    value: widget.item?.id,
                     toggleable: true,
-                    groupValue: transactionViewModel.upiId.value,
+                    groupValue: transactionViewModel.accountDetails.value?.id,
                     activeColor: CustomColors.primary,
                     onChanged: (newValue) {
-                      transactionViewModel.accountId.value = widget.item?.id ?? "";
-                      transactionViewModel.upiId.value = newValue ?? "";
-                      transactionViewModel.accountType.value = widget.item?.accountType ?? "";
+                      widget.onclick(widget.item);
                       // serviceViewModel.selectedOption.value = newValue ?? '';
                     },
                   );

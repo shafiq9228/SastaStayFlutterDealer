@@ -1165,6 +1165,7 @@ mixin _$HostelModel {
   int? get branch => throw _privateConstructorUsedError;
   String? get hostelImage => throw _privateConstructorUsedError;
   String? get hostelLicence => throw _privateConstructorUsedError;
+  String? get hostelGstDocument => throw _privateConstructorUsedError;
   String? get hostelName => throw _privateConstructorUsedError;
   String? get aboutHostel => throw _privateConstructorUsedError;
   String? get gstIn => throw _privateConstructorUsedError;
@@ -1211,6 +1212,7 @@ abstract class $HostelModelCopyWith<$Res> {
       int? branch,
       String? hostelImage,
       String? hostelLicence,
+      String? hostelGstDocument,
       String? hostelName,
       String? aboutHostel,
       String? gstIn,
@@ -1261,6 +1263,7 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
     Object? branch = freezed,
     Object? hostelImage = freezed,
     Object? hostelLicence = freezed,
+    Object? hostelGstDocument = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
     Object? gstIn = freezed,
@@ -1317,6 +1320,10 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hostelGstDocument: freezed == hostelGstDocument
+          ? _value.hostelGstDocument
+          : hostelGstDocument // ignore: cast_nullable_to_non_nullable
               as String?,
       hostelName: freezed == hostelName
           ? _value.hostelName
@@ -1467,6 +1474,7 @@ abstract class _$$HostelModelImplCopyWith<$Res>
       int? branch,
       String? hostelImage,
       String? hostelLicence,
+      String? hostelGstDocument,
       String? hostelName,
       String? aboutHostel,
       String? gstIn,
@@ -1518,6 +1526,7 @@ class __$$HostelModelImplCopyWithImpl<$Res>
     Object? branch = freezed,
     Object? hostelImage = freezed,
     Object? hostelLicence = freezed,
+    Object? hostelGstDocument = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
     Object? gstIn = freezed,
@@ -1574,6 +1583,10 @@ class __$$HostelModelImplCopyWithImpl<$Res>
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hostelGstDocument: freezed == hostelGstDocument
+          ? _value.hostelGstDocument
+          : hostelGstDocument // ignore: cast_nullable_to_non_nullable
               as String?,
       hostelName: freezed == hostelName
           ? _value.hostelName
@@ -1683,6 +1696,7 @@ class _$HostelModelImpl implements _HostelModel {
       this.branch,
       this.hostelImage,
       this.hostelLicence,
+      this.hostelGstDocument,
       this.hostelName,
       this.aboutHostel,
       this.gstIn,
@@ -1744,6 +1758,8 @@ class _$HostelModelImpl implements _HostelModel {
   final String? hostelImage;
   @override
   final String? hostelLicence;
+  @override
+  final String? hostelGstDocument;
   @override
   final String? hostelName;
   @override
@@ -1857,7 +1873,7 @@ class _$HostelModelImpl implements _HostelModel {
 
   @override
   String toString() {
-    return 'HostelModel(id: $id, manager: $manager, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, faq: $faq, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, commission: $commission, rating: $rating, categoryRatings: $categoryRatings, imagesType: $imagesType, checkInTime: $checkInTime, checkOutTime: $checkOutTime)';
+    return 'HostelModel(id: $id, manager: $manager, approvalStatus: $approvalStatus, rejectedFields: $rejectedFields, reason: $reason, branch: $branch, hostelImage: $hostelImage, hostelLicence: $hostelLicence, hostelGstDocument: $hostelGstDocument, hostelName: $hostelName, aboutHostel: $aboutHostel, gstIn: $gstIn, hostelType: $hostelType, images: $images, faq: $faq, amenityIds: $amenityIds, amenities: $amenities, amenitiesMore: $amenitiesMore, room: $room, rooms: $rooms, roomsMore: $roomsMore, rules: $rules, location: $location, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, commission: $commission, rating: $rating, categoryRatings: $categoryRatings, imagesType: $imagesType, checkInTime: $checkInTime, checkOutTime: $checkOutTime)';
   }
 
   @override
@@ -1877,6 +1893,8 @@ class _$HostelModelImpl implements _HostelModel {
                 other.hostelImage == hostelImage) &&
             (identical(other.hostelLicence, hostelLicence) ||
                 other.hostelLicence == hostelLicence) &&
+            (identical(other.hostelGstDocument, hostelGstDocument) ||
+                other.hostelGstDocument == hostelGstDocument) &&
             (identical(other.hostelName, hostelName) ||
                 other.hostelName == hostelName) &&
             (identical(other.aboutHostel, aboutHostel) ||
@@ -1930,6 +1948,7 @@ class _$HostelModelImpl implements _HostelModel {
         branch,
         hostelImage,
         hostelLicence,
+        hostelGstDocument,
         hostelName,
         aboutHostel,
         gstIn,
@@ -1979,6 +1998,7 @@ abstract class _HostelModel implements HostelModel {
       final int? branch,
       final String? hostelImage,
       final String? hostelLicence,
+      final String? hostelGstDocument,
       final String? hostelName,
       final String? aboutHostel,
       final String? gstIn,
@@ -2023,6 +2043,8 @@ abstract class _HostelModel implements HostelModel {
   String? get hostelImage;
   @override
   String? get hostelLicence;
+  @override
+  String? get hostelGstDocument;
   @override
   String? get hostelName;
   @override
@@ -2986,8 +3008,8 @@ StatsDataModel _$StatsDataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StatsDataModel {
-  String? get type => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  dynamic get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -3001,7 +3023,7 @@ abstract class $StatsDataModelCopyWith<$Res> {
           StatsDataModel value, $Res Function(StatsDataModel) then) =
       _$StatsDataModelCopyWithImpl<$Res, StatsDataModel>;
   @useResult
-  $Res call({String? type, int? amount});
+  $Res call({String? title, dynamic value});
 }
 
 /// @nodoc
@@ -3017,18 +3039,18 @@ class _$StatsDataModelCopyWithImpl<$Res, $Val extends StatsDataModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? amount = freezed,
+    Object? title = freezed,
+    Object? value = freezed,
   }) {
     return _then(_value.copyWith(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -3041,7 +3063,7 @@ abstract class _$$StatsDataModelImplCopyWith<$Res>
       __$$StatsDataModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? type, int? amount});
+  $Res call({String? title, dynamic value});
 }
 
 /// @nodoc
@@ -3055,18 +3077,18 @@ class __$$StatsDataModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? amount = freezed,
+    Object? title = freezed,
+    Object? value = freezed,
   }) {
     return _then(_$StatsDataModelImpl(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -3074,19 +3096,19 @@ class __$$StatsDataModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StatsDataModelImpl implements _StatsDataModel {
-  const _$StatsDataModelImpl({this.type, this.amount});
+  const _$StatsDataModelImpl({this.title, this.value});
 
   factory _$StatsDataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$StatsDataModelImplFromJson(json);
 
   @override
-  final String? type;
+  final String? title;
   @override
-  final int? amount;
+  final dynamic value;
 
   @override
   String toString() {
-    return 'StatsDataModel(type: $type, amount: $amount)';
+    return 'StatsDataModel(title: $title, value: $value)';
   }
 
   @override
@@ -3094,13 +3116,14 @@ class _$StatsDataModelImpl implements _StatsDataModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatsDataModelImpl &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality().equals(other.value, value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, type, amount);
+  int get hashCode => Object.hash(
+      runtimeType, title, const DeepCollectionEquality().hash(value));
 
   @JsonKey(ignore: true)
   @override
@@ -3118,16 +3141,16 @@ class _$StatsDataModelImpl implements _StatsDataModel {
 }
 
 abstract class _StatsDataModel implements StatsDataModel {
-  const factory _StatsDataModel({final String? type, final int? amount}) =
+  const factory _StatsDataModel({final String? title, final dynamic value}) =
       _$StatsDataModelImpl;
 
   factory _StatsDataModel.fromJson(Map<String, dynamic> json) =
       _$StatsDataModelImpl.fromJson;
 
   @override
-  String? get type;
+  String? get title;
   @override
-  int? get amount;
+  dynamic get value;
   @override
   @JsonKey(ignore: true)
   _$$StatsDataModelImplCopyWith<_$StatsDataModelImpl> get copyWith =>

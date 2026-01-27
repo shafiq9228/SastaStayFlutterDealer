@@ -180,7 +180,11 @@ _$UpiDataImpl _$$UpiDataImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       accountType: json['accountType'] as String?,
       accountNumber: json['accountNumber'] as String?,
+      bankName: json['bankName'] as String?,
+      ifscCode: json['ifscCode'] as String?,
+      name: json['name'] as String?,
       fullName: json['fullName'] as String?,
+      primaryAccount: json['primaryAccount'] as bool?,
     );
 
 Map<String, dynamic> _$$UpiDataImplToJson(_$UpiDataImpl instance) =>
@@ -188,5 +192,9 @@ Map<String, dynamic> _$$UpiDataImplToJson(_$UpiDataImpl instance) =>
       'id': instance.id,
       'accountType': instance.accountType,
       'accountNumber': instance.accountNumber,
+      'bankName': instance.bankName,
+      'ifscCode': instance.ifscCode,
+      'name': instance.name,
       'fullName': instance.fullName,
+      'primaryAccount': instance.primaryAccount,
     };

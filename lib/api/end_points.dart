@@ -21,6 +21,7 @@ class EndPoints {
   static const fetchHostelRooms = "fetchHostelRooms";
   static const fetchAmenities = "fetchAmenities";
   static const setAsPrimaryHostel = "setAsPrimaryHostel";
+  static const setAsPrimaryAccount = "setAsPrimaryAccount";
 
   static const checkHostelRoomAvailability = "checkHostelRoomAvailability";
   static const checkHostelRoomAvailabilityDates = "checkBookingDates";

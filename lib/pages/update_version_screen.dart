@@ -120,7 +120,7 @@ class _UpdateVersionScreenState extends State<UpdateVersionScreen> {
   }
 
 
-  final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.sastastay.dealerapp";
+  final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.sastastays.dealer";
   final String appStoreUrl = "https://apps.apple.com/us/search?term=SastaStayUrl";
 
   Future<void> _launchURL() async {

@@ -148,7 +148,7 @@ class _SelectingTimeBottomSheetState extends State<WithdrawalDetailsBottomSheet>
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  transactionViewModel.performWithDrawBalanceAction(WithdrawBalanceRequestModel(amount: widget.amount ?? 00.00,accountId:transactionViewModel.accountId.value),context);
+                                  transactionViewModel.performWithDrawBalanceAction(WithdrawBalanceRequestModel(amount: widget.amount ?? 00.00,accountId:transactionViewModel.accountDetails.value?.id ?? ""),context);
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentMethodPage()));
                                 },
                                 child: const Text(

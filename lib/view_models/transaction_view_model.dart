@@ -20,6 +20,8 @@ class TransactionViewModel extends GetxController {
 
   final fetchTransactionsObserver =  PaginationModel(data: const ApiResult<FetchTransactionsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
 
+  final setAsPrimaryAccountObserver = const ApiResult<PrimaryResponseModel>.init().obs;
+
   final fetchWithdrawalDetailsObserver = const ApiResult<FetchWithdrawalDetailsResponseModel>.init().obs;
   final withdrawBalanceObserver = const ApiResult<AddBalanceResponseModel>.init().obs;
   final payUAddCustomerObserver = const ApiResult<PayUAddCustomerResponseModel>.init().obs;
@@ -30,9 +32,8 @@ class TransactionViewModel extends GetxController {
   final  createAccountObserver = const ApiResult<PrimaryResponseModel>.init().obs;
   final deleteAccountObserver = const ApiResult<PrimaryResponseModel>.init().obs;
   final  fetchAccountsObserver = const ApiResult<FetchAccountsResponseModel>.init().obs;
-  final  upiId = "".obs;
-  final  accountType = "".obs;
-  final  accountId = "".obs;
+
+  Rx<UpiData?>  accountDetails = Rx<UpiData?>(null);
 
   void performCreateBankAccountAction(CreateBankAccountRequestModel request) async {
     try {
@@ -91,7 +92,6 @@ class TransactionViewModel extends GetxController {
     }
   }
 
-
   void performDeleteAccountAction(String id) async {
     try {
       deleteAccountObserver.value = const ApiResult.loading();
@@ -137,9 +137,13 @@ class TransactionViewModel extends GetxController {
         final responseData = FetchAccountsResponseModel.fromJson(body);
         if (responseData.status == 1) {
           fetchAccountsObserver.value = ApiResult.success(responseData);
+          final primaryAccount = responseData.data?.firstWhereOrNull((item) => item.primaryAccount == true);
+          print(primaryAccount);
+          if(primaryAccount != null){
+            accountDetails.value = primaryAccount;
+          }
         } else {
-          fetchAccountsObserver.value =
-              ApiResult.error(responseData.message ?? "");
+          fetchAccountsObserver.value = ApiResult.error(responseData.message ?? "");
           Get.snackbar(responseData.message ?? '', responseData.message ?? '',
               snackPosition: SnackPosition.BOTTOM,backgroundColor: CustomColors.primary,colorText: Colors.white);
         }
@@ -283,26 +287,25 @@ class TransactionViewModel extends GetxController {
   }
 
 
-  void fetchWithdrawalDetails(AddBalanceRequestModel request) async {
+  Future<void> performSetAsPrimaryAccount(String accountId) async {
     try {
-      fetchWithdrawalDetailsObserver.value = const ApiResult.loading();
-      payUAddCustomerObserver.value = const ApiResult.init();
-      payUVerifyOtpObserver.value = const ApiResult.init();
-      final response = await apiProvider.post(EndPoints.fetchWithdrawalDetails, request.toJson());
+      setAsPrimaryAccountObserver.value = const ApiResult.loading();
+      final response = await apiProvider.post(EndPoints.setAsPrimaryAccount, {"accountId":accountId});
       final body = response.body;
       if (response.isOk && body != null) {
-        final responseData = FetchWithdrawalDetailsResponseModel.fromJson(body);
+        final responseData = PrimaryResponseModel.fromJson(body);
         if (responseData.status == 1) {
-          fetchWithdrawalDetailsObserver.value = ApiResult.success(responseData);
-        } else {
-          fetchWithdrawalDetailsObserver.value = ApiResult.error(responseData.message ?? "");
+          setAsPrimaryAccountObserver.value = ApiResult.success(responseData);
+          performFetchAccountsAction();
+          Get.snackbar('Success',"Account Saved As Primary",snackPosition: SnackPosition.BOTTOM, backgroundColor: CustomColors.primary,colorText: Colors.white,);
+          return;
         }
-      } else {
-        fetchWithdrawalDetailsObserver.value =
-            ApiResult.error("something went wrong. ${response.statusCode ?? 0}");
+        throw "Invalid Status";
       }
+      throw "something went wrong. ${response.statusCode ?? 0}";
     } catch (e) {
-      fetchWithdrawalDetailsObserver.value = ApiResult.error(e.toString());
+      Get.snackbar('Exception',e.toString(),snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red,colorText: Colors.white,);
+      setAsPrimaryAccountObserver.value = ApiResult.error(e.toString());
     }
   }
 

@@ -135,7 +135,11 @@ class UpiData with _$UpiData{
     String? id,
     String? accountType,
     String? accountNumber,
-    String? fullName
+    String? bankName,
+    String? ifscCode,
+    String? name,
+    String? fullName,
+    bool? primaryAccount
   }) = _UpiData;
 
   factory UpiData.fromJson(Map<String,dynamic> json)=> _$UpiDataFromJson(json);

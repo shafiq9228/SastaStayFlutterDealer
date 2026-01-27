@@ -890,6 +890,7 @@ mixin _$RegistrationRequestModel {
   String? get hostelImage => throw _privateConstructorUsedError;
   String? get hostelType => throw _privateConstructorUsedError;
   String? get hostelLicence => throw _privateConstructorUsedError;
+  String? get hostelGstDocument => throw _privateConstructorUsedError;
   String? get hostelName => throw _privateConstructorUsedError;
   String? get aboutHostel => throw _privateConstructorUsedError;
   List<ImageDataModel>? get images => throw _privateConstructorUsedError;
@@ -924,6 +925,7 @@ abstract class $RegistrationRequestModelCopyWith<$Res> {
       String? hostelImage,
       String? hostelType,
       String? hostelLicence,
+      String? hostelGstDocument,
       String? hostelName,
       String? aboutHostel,
       List<ImageDataModel>? images,
@@ -961,6 +963,7 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
     Object? hostelImage = freezed,
     Object? hostelType = freezed,
     Object? hostelLicence = freezed,
+    Object? hostelGstDocument = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
     Object? images = freezed,
@@ -1002,6 +1005,10 @@ class _$RegistrationRequestModelCopyWithImpl<$Res,
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hostelGstDocument: freezed == hostelGstDocument
+          ? _value.hostelGstDocument
+          : hostelGstDocument // ignore: cast_nullable_to_non_nullable
               as String?,
       hostelName: freezed == hostelName
           ? _value.hostelName
@@ -1084,6 +1091,7 @@ abstract class _$$RegistrationRequestModelImplCopyWith<$Res>
       String? hostelImage,
       String? hostelType,
       String? hostelLicence,
+      String? hostelGstDocument,
       String? hostelName,
       String? aboutHostel,
       List<ImageDataModel>? images,
@@ -1121,6 +1129,7 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
     Object? hostelImage = freezed,
     Object? hostelType = freezed,
     Object? hostelLicence = freezed,
+    Object? hostelGstDocument = freezed,
     Object? hostelName = freezed,
     Object? aboutHostel = freezed,
     Object? images = freezed,
@@ -1162,6 +1171,10 @@ class __$$RegistrationRequestModelImplCopyWithImpl<$Res>
       hostelLicence: freezed == hostelLicence
           ? _value.hostelLicence
           : hostelLicence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hostelGstDocument: freezed == hostelGstDocument
+          ? _value.hostelGstDocument
+          : hostelGstDocument // ignore: cast_nullable_to_non_nullable
               as String?,
       hostelName: freezed == hostelName
           ? _value.hostelName
@@ -1226,6 +1239,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
       this.hostelImage,
       this.hostelType,
       this.hostelLicence,
+      this.hostelGstDocument,
       this.hostelName,
       this.aboutHostel,
       final List<ImageDataModel>? images,
@@ -1261,6 +1275,8 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
   final String? hostelType;
   @override
   final String? hostelLicence;
+  @override
+  final String? hostelGstDocument;
   @override
   final String? hostelName;
   @override
@@ -1327,7 +1343,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
 
   @override
   String toString() {
-    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, faq: $faq, checkInTime: $checkInTime, checkOutTime: $checkOutTime, gstIn: $gstIn, location: $location, commission: $commission, kycDocuments: $kycDocuments)';
+    return 'RegistrationRequestModel(hostelId: $hostelId, mobile: $mobile, name: $name, email: $email, hostelImage: $hostelImage, hostelType: $hostelType, hostelLicence: $hostelLicence, hostelGstDocument: $hostelGstDocument, hostelName: $hostelName, aboutHostel: $aboutHostel, images: $images, amenities: $amenities, rules: $rules, faq: $faq, checkInTime: $checkInTime, checkOutTime: $checkOutTime, gstIn: $gstIn, location: $location, commission: $commission, kycDocuments: $kycDocuments)';
   }
 
   @override
@@ -1346,6 +1362,8 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
                 other.hostelType == hostelType) &&
             (identical(other.hostelLicence, hostelLicence) ||
                 other.hostelLicence == hostelLicence) &&
+            (identical(other.hostelGstDocument, hostelGstDocument) ||
+                other.hostelGstDocument == hostelGstDocument) &&
             (identical(other.hostelName, hostelName) ||
                 other.hostelName == hostelName) &&
             (identical(other.aboutHostel, aboutHostel) ||
@@ -1379,6 +1397,7 @@ class _$RegistrationRequestModelImpl implements _RegistrationRequestModel {
         hostelImage,
         hostelType,
         hostelLicence,
+        hostelGstDocument,
         hostelName,
         aboutHostel,
         const DeepCollectionEquality().hash(_images),
@@ -1417,6 +1436,7 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
           final String? hostelImage,
           final String? hostelType,
           final String? hostelLicence,
+          final String? hostelGstDocument,
           final String? hostelName,
           final String? aboutHostel,
           final List<ImageDataModel>? images,
@@ -1448,6 +1468,8 @@ abstract class _RegistrationRequestModel implements RegistrationRequestModel {
   String? get hostelType;
   @override
   String? get hostelLicence;
+  @override
+  String? get hostelGstDocument;
   @override
   String? get hostelName;
   @override

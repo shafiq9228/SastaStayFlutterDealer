@@ -629,11 +629,14 @@ mixin _$TransactionDataModel {
   dynamic get userId => throw _privateConstructorUsedError;
   dynamic get dealerId => throw _privateConstructorUsedError;
   dynamic get bookingId => throw _privateConstructorUsedError;
+  dynamic get withdrawTransactionId => throw _privateConstructorUsedError;
+  String? get failedReason => throw _privateConstructorUsedError;
   String? get orderId => throw _privateConstructorUsedError;
   String? get paymentId => throw _privateConstructorUsedError;
   int? get amount => throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  PaymentDetailModel? get paymentDetails => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -655,11 +658,16 @@ abstract class $TransactionDataModelCopyWith<$Res> {
       dynamic userId,
       dynamic dealerId,
       dynamic bookingId,
+      dynamic withdrawTransactionId,
+      String? failedReason,
       String? orderId,
       String? paymentId,
       int? amount,
       List<AmountDetailsModel>? logs,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      PaymentDetailModel? paymentDetails});
+
+  $PaymentDetailModelCopyWith<$Res>? get paymentDetails;
 }
 
 /// @nodoc
@@ -683,11 +691,14 @@ class _$TransactionDataModelCopyWithImpl<$Res,
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? bookingId = freezed,
+    Object? withdrawTransactionId = freezed,
+    Object? failedReason = freezed,
     Object? orderId = freezed,
     Object? paymentId = freezed,
     Object? amount = freezed,
     Object? logs = freezed,
     Object? createdAt = freezed,
+    Object? paymentDetails = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -718,6 +729,14 @@ class _$TransactionDataModelCopyWithImpl<$Res,
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      withdrawTransactionId: freezed == withdrawTransactionId
+          ? _value.withdrawTransactionId
+          : withdrawTransactionId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      failedReason: freezed == failedReason
+          ? _value.failedReason
+          : failedReason // ignore: cast_nullable_to_non_nullable
+              as String?,
       orderId: freezed == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
@@ -738,7 +757,23 @@ class _$TransactionDataModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      paymentDetails: freezed == paymentDetails
+          ? _value.paymentDetails
+          : paymentDetails // ignore: cast_nullable_to_non_nullable
+              as PaymentDetailModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentDetailModelCopyWith<$Res>? get paymentDetails {
+    if (_value.paymentDetails == null) {
+      return null;
+    }
+
+    return $PaymentDetailModelCopyWith<$Res>(_value.paymentDetails!, (value) {
+      return _then(_value.copyWith(paymentDetails: value) as $Val);
+    });
   }
 }
 
@@ -758,11 +793,17 @@ abstract class _$$TransactionDataModelImplCopyWith<$Res>
       dynamic userId,
       dynamic dealerId,
       dynamic bookingId,
+      dynamic withdrawTransactionId,
+      String? failedReason,
       String? orderId,
       String? paymentId,
       int? amount,
       List<AmountDetailsModel>? logs,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      PaymentDetailModel? paymentDetails});
+
+  @override
+  $PaymentDetailModelCopyWith<$Res>? get paymentDetails;
 }
 
 /// @nodoc
@@ -783,11 +824,14 @@ class __$$TransactionDataModelImplCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? dealerId = freezed,
     Object? bookingId = freezed,
+    Object? withdrawTransactionId = freezed,
+    Object? failedReason = freezed,
     Object? orderId = freezed,
     Object? paymentId = freezed,
     Object? amount = freezed,
     Object? logs = freezed,
     Object? createdAt = freezed,
+    Object? paymentDetails = freezed,
   }) {
     return _then(_$TransactionDataModelImpl(
       id: freezed == id
@@ -818,6 +862,14 @@ class __$$TransactionDataModelImplCopyWithImpl<$Res>
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      withdrawTransactionId: freezed == withdrawTransactionId
+          ? _value.withdrawTransactionId
+          : withdrawTransactionId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      failedReason: freezed == failedReason
+          ? _value.failedReason
+          : failedReason // ignore: cast_nullable_to_non_nullable
+              as String?,
       orderId: freezed == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
@@ -838,6 +890,10 @@ class __$$TransactionDataModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      paymentDetails: freezed == paymentDetails
+          ? _value.paymentDetails
+          : paymentDetails // ignore: cast_nullable_to_non_nullable
+              as PaymentDetailModel?,
     ));
   }
 }
@@ -853,11 +909,14 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
       this.userId,
       this.dealerId,
       this.bookingId,
+      this.withdrawTransactionId,
+      this.failedReason,
       this.orderId,
       this.paymentId,
       this.amount,
       final List<AmountDetailsModel>? logs,
-      this.createdAt})
+      this.createdAt,
+      this.paymentDetails})
       : _logs = logs;
 
   factory _$TransactionDataModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -879,6 +938,10 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
   @override
   final dynamic bookingId;
   @override
+  final dynamic withdrawTransactionId;
+  @override
+  final String? failedReason;
+  @override
   final String? orderId;
   @override
   final String? paymentId;
@@ -896,10 +959,12 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
 
   @override
   final DateTime? createdAt;
+  @override
+  final PaymentDetailModel? paymentDetails;
 
   @override
   String toString() {
-    return 'TransactionDataModel(id: $id, dealerTitle: $dealerTitle, transactionType: $transactionType, paymentStatus: $paymentStatus, userId: $userId, dealerId: $dealerId, bookingId: $bookingId, orderId: $orderId, paymentId: $paymentId, amount: $amount, logs: $logs, createdAt: $createdAt)';
+    return 'TransactionDataModel(id: $id, dealerTitle: $dealerTitle, transactionType: $transactionType, paymentStatus: $paymentStatus, userId: $userId, dealerId: $dealerId, bookingId: $bookingId, withdrawTransactionId: $withdrawTransactionId, failedReason: $failedReason, orderId: $orderId, paymentId: $paymentId, amount: $amount, logs: $logs, createdAt: $createdAt, paymentDetails: $paymentDetails)';
   }
 
   @override
@@ -917,13 +982,19 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.dealerId, dealerId) &&
             const DeepCollectionEquality().equals(other.bookingId, bookingId) &&
+            const DeepCollectionEquality()
+                .equals(other.withdrawTransactionId, withdrawTransactionId) &&
+            (identical(other.failedReason, failedReason) ||
+                other.failedReason == failedReason) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.paymentId, paymentId) ||
                 other.paymentId == paymentId) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             const DeepCollectionEquality().equals(other._logs, _logs) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.paymentDetails, paymentDetails) ||
+                other.paymentDetails == paymentDetails));
   }
 
   @JsonKey(ignore: true)
@@ -937,11 +1008,14 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(dealerId),
       const DeepCollectionEquality().hash(bookingId),
+      const DeepCollectionEquality().hash(withdrawTransactionId),
+      failedReason,
       orderId,
       paymentId,
       amount,
       const DeepCollectionEquality().hash(_logs),
-      createdAt);
+      createdAt,
+      paymentDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -968,11 +1042,14 @@ abstract class _TransactionDataModel implements TransactionDataModel {
       final dynamic userId,
       final dynamic dealerId,
       final dynamic bookingId,
+      final dynamic withdrawTransactionId,
+      final String? failedReason,
       final String? orderId,
       final String? paymentId,
       final int? amount,
       final List<AmountDetailsModel>? logs,
-      final DateTime? createdAt}) = _$TransactionDataModelImpl;
+      final DateTime? createdAt,
+      final PaymentDetailModel? paymentDetails}) = _$TransactionDataModelImpl;
 
   factory _TransactionDataModel.fromJson(Map<String, dynamic> json) =
       _$TransactionDataModelImpl.fromJson;
@@ -993,6 +1070,10 @@ abstract class _TransactionDataModel implements TransactionDataModel {
   @override
   dynamic get bookingId;
   @override
+  dynamic get withdrawTransactionId;
+  @override
+  String? get failedReason;
+  @override
   String? get orderId;
   @override
   String? get paymentId;
@@ -1003,9 +1084,569 @@ abstract class _TransactionDataModel implements TransactionDataModel {
   @override
   DateTime? get createdAt;
   @override
+  PaymentDetailModel? get paymentDetails;
+  @override
   @JsonKey(ignore: true)
   _$$TransactionDataModelImplCopyWith<_$TransactionDataModelImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+PaymentDetailModel _$PaymentDetailModelFromJson(Map<String, dynamic> json) {
+  return _PaymentDetailModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PaymentDetailModel {
+  dynamic get amount => throw _privateConstructorUsedError;
+  dynamic get discount => throw _privateConstructorUsedError;
+  bool? get discountByAdmin => throw _privateConstructorUsedError;
+  dynamic get roomGstPercentage => throw _privateConstructorUsedError;
+  dynamic get roomGst => throw _privateConstructorUsedError;
+  dynamic get platformCharges => throw _privateConstructorUsedError;
+  dynamic get platformGstPercentage => throw _privateConstructorUsedError;
+  dynamic get platformChargesBase => throw _privateConstructorUsedError;
+  dynamic get platformChargesGst => throw _privateConstructorUsedError;
+  dynamic get walletDeduction => throw _privateConstructorUsedError;
+  dynamic get subTotal => throw _privateConstructorUsedError;
+  dynamic get refundedAmount => throw _privateConstructorUsedError;
+  dynamic get chargePercentage => throw _privateConstructorUsedError;
+  dynamic get chargeAmount => throw _privateConstructorUsedError;
+  dynamic get chargeGst => throw _privateConstructorUsedError;
+  dynamic get outwardBaseAmount => throw _privateConstructorUsedError;
+  dynamic get outwardGst => throw _privateConstructorUsedError;
+  dynamic get outwardAmount => throw _privateConstructorUsedError;
+  dynamic get profitExcludingItc => throw _privateConstructorUsedError;
+  dynamic get profitIncludingItc => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PaymentDetailModelCopyWith<PaymentDetailModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PaymentDetailModelCopyWith<$Res> {
+  factory $PaymentDetailModelCopyWith(
+          PaymentDetailModel value, $Res Function(PaymentDetailModel) then) =
+      _$PaymentDetailModelCopyWithImpl<$Res, PaymentDetailModel>;
+  @useResult
+  $Res call(
+      {dynamic amount,
+      dynamic discount,
+      bool? discountByAdmin,
+      dynamic roomGstPercentage,
+      dynamic roomGst,
+      dynamic platformCharges,
+      dynamic platformGstPercentage,
+      dynamic platformChargesBase,
+      dynamic platformChargesGst,
+      dynamic walletDeduction,
+      dynamic subTotal,
+      dynamic refundedAmount,
+      dynamic chargePercentage,
+      dynamic chargeAmount,
+      dynamic chargeGst,
+      dynamic outwardBaseAmount,
+      dynamic outwardGst,
+      dynamic outwardAmount,
+      dynamic profitExcludingItc,
+      dynamic profitIncludingItc});
+}
+
+/// @nodoc
+class _$PaymentDetailModelCopyWithImpl<$Res, $Val extends PaymentDetailModel>
+    implements $PaymentDetailModelCopyWith<$Res> {
+  _$PaymentDetailModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = freezed,
+    Object? discount = freezed,
+    Object? discountByAdmin = freezed,
+    Object? roomGstPercentage = freezed,
+    Object? roomGst = freezed,
+    Object? platformCharges = freezed,
+    Object? platformGstPercentage = freezed,
+    Object? platformChargesBase = freezed,
+    Object? platformChargesGst = freezed,
+    Object? walletDeduction = freezed,
+    Object? subTotal = freezed,
+    Object? refundedAmount = freezed,
+    Object? chargePercentage = freezed,
+    Object? chargeAmount = freezed,
+    Object? chargeGst = freezed,
+    Object? outwardBaseAmount = freezed,
+    Object? outwardGst = freezed,
+    Object? outwardAmount = freezed,
+    Object? profitExcludingItc = freezed,
+    Object? profitIncludingItc = freezed,
+  }) {
+    return _then(_value.copyWith(
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      discount: freezed == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      discountByAdmin: freezed == discountByAdmin
+          ? _value.discountByAdmin
+          : discountByAdmin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      roomGstPercentage: freezed == roomGstPercentage
+          ? _value.roomGstPercentage
+          : roomGstPercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      roomGst: freezed == roomGst
+          ? _value.roomGst
+          : roomGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformCharges: freezed == platformCharges
+          ? _value.platformCharges
+          : platformCharges // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformGstPercentage: freezed == platformGstPercentage
+          ? _value.platformGstPercentage
+          : platformGstPercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformChargesBase: freezed == platformChargesBase
+          ? _value.platformChargesBase
+          : platformChargesBase // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformChargesGst: freezed == platformChargesGst
+          ? _value.platformChargesGst
+          : platformChargesGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      walletDeduction: freezed == walletDeduction
+          ? _value.walletDeduction
+          : walletDeduction // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      subTotal: freezed == subTotal
+          ? _value.subTotal
+          : subTotal // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      refundedAmount: freezed == refundedAmount
+          ? _value.refundedAmount
+          : refundedAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargePercentage: freezed == chargePercentage
+          ? _value.chargePercentage
+          : chargePercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargeAmount: freezed == chargeAmount
+          ? _value.chargeAmount
+          : chargeAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargeGst: freezed == chargeGst
+          ? _value.chargeGst
+          : chargeGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardBaseAmount: freezed == outwardBaseAmount
+          ? _value.outwardBaseAmount
+          : outwardBaseAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardGst: freezed == outwardGst
+          ? _value.outwardGst
+          : outwardGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardAmount: freezed == outwardAmount
+          ? _value.outwardAmount
+          : outwardAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      profitExcludingItc: freezed == profitExcludingItc
+          ? _value.profitExcludingItc
+          : profitExcludingItc // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      profitIncludingItc: freezed == profitIncludingItc
+          ? _value.profitIncludingItc
+          : profitIncludingItc // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PaymentDetailModelImplCopyWith<$Res>
+    implements $PaymentDetailModelCopyWith<$Res> {
+  factory _$$PaymentDetailModelImplCopyWith(_$PaymentDetailModelImpl value,
+          $Res Function(_$PaymentDetailModelImpl) then) =
+      __$$PaymentDetailModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {dynamic amount,
+      dynamic discount,
+      bool? discountByAdmin,
+      dynamic roomGstPercentage,
+      dynamic roomGst,
+      dynamic platformCharges,
+      dynamic platformGstPercentage,
+      dynamic platformChargesBase,
+      dynamic platformChargesGst,
+      dynamic walletDeduction,
+      dynamic subTotal,
+      dynamic refundedAmount,
+      dynamic chargePercentage,
+      dynamic chargeAmount,
+      dynamic chargeGst,
+      dynamic outwardBaseAmount,
+      dynamic outwardGst,
+      dynamic outwardAmount,
+      dynamic profitExcludingItc,
+      dynamic profitIncludingItc});
+}
+
+/// @nodoc
+class __$$PaymentDetailModelImplCopyWithImpl<$Res>
+    extends _$PaymentDetailModelCopyWithImpl<$Res, _$PaymentDetailModelImpl>
+    implements _$$PaymentDetailModelImplCopyWith<$Res> {
+  __$$PaymentDetailModelImplCopyWithImpl(_$PaymentDetailModelImpl _value,
+      $Res Function(_$PaymentDetailModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = freezed,
+    Object? discount = freezed,
+    Object? discountByAdmin = freezed,
+    Object? roomGstPercentage = freezed,
+    Object? roomGst = freezed,
+    Object? platformCharges = freezed,
+    Object? platformGstPercentage = freezed,
+    Object? platformChargesBase = freezed,
+    Object? platformChargesGst = freezed,
+    Object? walletDeduction = freezed,
+    Object? subTotal = freezed,
+    Object? refundedAmount = freezed,
+    Object? chargePercentage = freezed,
+    Object? chargeAmount = freezed,
+    Object? chargeGst = freezed,
+    Object? outwardBaseAmount = freezed,
+    Object? outwardGst = freezed,
+    Object? outwardAmount = freezed,
+    Object? profitExcludingItc = freezed,
+    Object? profitIncludingItc = freezed,
+  }) {
+    return _then(_$PaymentDetailModelImpl(
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      discount: freezed == discount
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      discountByAdmin: freezed == discountByAdmin
+          ? _value.discountByAdmin
+          : discountByAdmin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      roomGstPercentage: freezed == roomGstPercentage
+          ? _value.roomGstPercentage
+          : roomGstPercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      roomGst: freezed == roomGst
+          ? _value.roomGst
+          : roomGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformCharges: freezed == platformCharges
+          ? _value.platformCharges
+          : platformCharges // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformGstPercentage: freezed == platformGstPercentage
+          ? _value.platformGstPercentage
+          : platformGstPercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformChargesBase: freezed == platformChargesBase
+          ? _value.platformChargesBase
+          : platformChargesBase // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      platformChargesGst: freezed == platformChargesGst
+          ? _value.platformChargesGst
+          : platformChargesGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      walletDeduction: freezed == walletDeduction
+          ? _value.walletDeduction
+          : walletDeduction // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      subTotal: freezed == subTotal
+          ? _value.subTotal
+          : subTotal // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      refundedAmount: freezed == refundedAmount
+          ? _value.refundedAmount
+          : refundedAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargePercentage: freezed == chargePercentage
+          ? _value.chargePercentage
+          : chargePercentage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargeAmount: freezed == chargeAmount
+          ? _value.chargeAmount
+          : chargeAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      chargeGst: freezed == chargeGst
+          ? _value.chargeGst
+          : chargeGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardBaseAmount: freezed == outwardBaseAmount
+          ? _value.outwardBaseAmount
+          : outwardBaseAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardGst: freezed == outwardGst
+          ? _value.outwardGst
+          : outwardGst // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      outwardAmount: freezed == outwardAmount
+          ? _value.outwardAmount
+          : outwardAmount // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      profitExcludingItc: freezed == profitExcludingItc
+          ? _value.profitExcludingItc
+          : profitExcludingItc // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      profitIncludingItc: freezed == profitIncludingItc
+          ? _value.profitIncludingItc
+          : profitIncludingItc // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PaymentDetailModelImpl implements _PaymentDetailModel {
+  const _$PaymentDetailModelImpl(
+      {this.amount,
+      this.discount,
+      this.discountByAdmin,
+      this.roomGstPercentage,
+      this.roomGst,
+      this.platformCharges,
+      this.platformGstPercentage,
+      this.platformChargesBase,
+      this.platformChargesGst,
+      this.walletDeduction,
+      this.subTotal,
+      this.refundedAmount,
+      this.chargePercentage,
+      this.chargeAmount,
+      this.chargeGst,
+      this.outwardBaseAmount,
+      this.outwardGst,
+      this.outwardAmount,
+      this.profitExcludingItc,
+      this.profitIncludingItc});
+
+  factory _$PaymentDetailModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentDetailModelImplFromJson(json);
+
+  @override
+  final dynamic amount;
+  @override
+  final dynamic discount;
+  @override
+  final bool? discountByAdmin;
+  @override
+  final dynamic roomGstPercentage;
+  @override
+  final dynamic roomGst;
+  @override
+  final dynamic platformCharges;
+  @override
+  final dynamic platformGstPercentage;
+  @override
+  final dynamic platformChargesBase;
+  @override
+  final dynamic platformChargesGst;
+  @override
+  final dynamic walletDeduction;
+  @override
+  final dynamic subTotal;
+  @override
+  final dynamic refundedAmount;
+  @override
+  final dynamic chargePercentage;
+  @override
+  final dynamic chargeAmount;
+  @override
+  final dynamic chargeGst;
+  @override
+  final dynamic outwardBaseAmount;
+  @override
+  final dynamic outwardGst;
+  @override
+  final dynamic outwardAmount;
+  @override
+  final dynamic profitExcludingItc;
+  @override
+  final dynamic profitIncludingItc;
+
+  @override
+  String toString() {
+    return 'PaymentDetailModel(amount: $amount, discount: $discount, discountByAdmin: $discountByAdmin, roomGstPercentage: $roomGstPercentage, roomGst: $roomGst, platformCharges: $platformCharges, platformGstPercentage: $platformGstPercentage, platformChargesBase: $platformChargesBase, platformChargesGst: $platformChargesGst, walletDeduction: $walletDeduction, subTotal: $subTotal, refundedAmount: $refundedAmount, chargePercentage: $chargePercentage, chargeAmount: $chargeAmount, chargeGst: $chargeGst, outwardBaseAmount: $outwardBaseAmount, outwardGst: $outwardGst, outwardAmount: $outwardAmount, profitExcludingItc: $profitExcludingItc, profitIncludingItc: $profitIncludingItc)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PaymentDetailModelImpl &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.discount, discount) &&
+            (identical(other.discountByAdmin, discountByAdmin) ||
+                other.discountByAdmin == discountByAdmin) &&
+            const DeepCollectionEquality()
+                .equals(other.roomGstPercentage, roomGstPercentage) &&
+            const DeepCollectionEquality().equals(other.roomGst, roomGst) &&
+            const DeepCollectionEquality()
+                .equals(other.platformCharges, platformCharges) &&
+            const DeepCollectionEquality()
+                .equals(other.platformGstPercentage, platformGstPercentage) &&
+            const DeepCollectionEquality()
+                .equals(other.platformChargesBase, platformChargesBase) &&
+            const DeepCollectionEquality()
+                .equals(other.platformChargesGst, platformChargesGst) &&
+            const DeepCollectionEquality()
+                .equals(other.walletDeduction, walletDeduction) &&
+            const DeepCollectionEquality().equals(other.subTotal, subTotal) &&
+            const DeepCollectionEquality()
+                .equals(other.refundedAmount, refundedAmount) &&
+            const DeepCollectionEquality()
+                .equals(other.chargePercentage, chargePercentage) &&
+            const DeepCollectionEquality()
+                .equals(other.chargeAmount, chargeAmount) &&
+            const DeepCollectionEquality().equals(other.chargeGst, chargeGst) &&
+            const DeepCollectionEquality()
+                .equals(other.outwardBaseAmount, outwardBaseAmount) &&
+            const DeepCollectionEquality()
+                .equals(other.outwardGst, outwardGst) &&
+            const DeepCollectionEquality()
+                .equals(other.outwardAmount, outwardAmount) &&
+            const DeepCollectionEquality()
+                .equals(other.profitExcludingItc, profitExcludingItc) &&
+            const DeepCollectionEquality()
+                .equals(other.profitIncludingItc, profitIncludingItc));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(amount),
+        const DeepCollectionEquality().hash(discount),
+        discountByAdmin,
+        const DeepCollectionEquality().hash(roomGstPercentage),
+        const DeepCollectionEquality().hash(roomGst),
+        const DeepCollectionEquality().hash(platformCharges),
+        const DeepCollectionEquality().hash(platformGstPercentage),
+        const DeepCollectionEquality().hash(platformChargesBase),
+        const DeepCollectionEquality().hash(platformChargesGst),
+        const DeepCollectionEquality().hash(walletDeduction),
+        const DeepCollectionEquality().hash(subTotal),
+        const DeepCollectionEquality().hash(refundedAmount),
+        const DeepCollectionEquality().hash(chargePercentage),
+        const DeepCollectionEquality().hash(chargeAmount),
+        const DeepCollectionEquality().hash(chargeGst),
+        const DeepCollectionEquality().hash(outwardBaseAmount),
+        const DeepCollectionEquality().hash(outwardGst),
+        const DeepCollectionEquality().hash(outwardAmount),
+        const DeepCollectionEquality().hash(profitExcludingItc),
+        const DeepCollectionEquality().hash(profitIncludingItc)
+      ]);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PaymentDetailModelImplCopyWith<_$PaymentDetailModelImpl> get copyWith =>
+      __$$PaymentDetailModelImplCopyWithImpl<_$PaymentDetailModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PaymentDetailModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PaymentDetailModel implements PaymentDetailModel {
+  const factory _PaymentDetailModel(
+      {final dynamic amount,
+      final dynamic discount,
+      final bool? discountByAdmin,
+      final dynamic roomGstPercentage,
+      final dynamic roomGst,
+      final dynamic platformCharges,
+      final dynamic platformGstPercentage,
+      final dynamic platformChargesBase,
+      final dynamic platformChargesGst,
+      final dynamic walletDeduction,
+      final dynamic subTotal,
+      final dynamic refundedAmount,
+      final dynamic chargePercentage,
+      final dynamic chargeAmount,
+      final dynamic chargeGst,
+      final dynamic outwardBaseAmount,
+      final dynamic outwardGst,
+      final dynamic outwardAmount,
+      final dynamic profitExcludingItc,
+      final dynamic profitIncludingItc}) = _$PaymentDetailModelImpl;
+
+  factory _PaymentDetailModel.fromJson(Map<String, dynamic> json) =
+      _$PaymentDetailModelImpl.fromJson;
+
+  @override
+  dynamic get amount;
+  @override
+  dynamic get discount;
+  @override
+  bool? get discountByAdmin;
+  @override
+  dynamic get roomGstPercentage;
+  @override
+  dynamic get roomGst;
+  @override
+  dynamic get platformCharges;
+  @override
+  dynamic get platformGstPercentage;
+  @override
+  dynamic get platformChargesBase;
+  @override
+  dynamic get platformChargesGst;
+  @override
+  dynamic get walletDeduction;
+  @override
+  dynamic get subTotal;
+  @override
+  dynamic get refundedAmount;
+  @override
+  dynamic get chargePercentage;
+  @override
+  dynamic get chargeAmount;
+  @override
+  dynamic get chargeGst;
+  @override
+  dynamic get outwardBaseAmount;
+  @override
+  dynamic get outwardGst;
+  @override
+  dynamic get outwardAmount;
+  @override
+  dynamic get profitExcludingItc;
+  @override
+  dynamic get profitIncludingItc;
+  @override
+  @JsonKey(ignore: true)
+  _$$PaymentDetailModelImplCopyWith<_$PaymentDetailModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 HostelRoomBookingDataModel _$HostelRoomBookingDataModelFromJson(
@@ -1890,6 +2531,7 @@ mixin _$BookingModel {
   String? get paymentStatus => throw _privateConstructorUsedError;
   DateTime? get checkInDate => throw _privateConstructorUsedError;
   DateTime? get checkOutDate => throw _privateConstructorUsedError;
+  dynamic get transactionId => throw _privateConstructorUsedError;
   int? get guestCount => throw _privateConstructorUsedError;
   int? get amount => throw _privateConstructorUsedError;
   int? get discount => throw _privateConstructorUsedError;
@@ -1925,6 +2567,7 @@ abstract class $BookingModelCopyWith<$Res> {
       String? paymentStatus,
       DateTime? checkInDate,
       DateTime? checkOutDate,
+      dynamic transactionId,
       int? guestCount,
       int? amount,
       int? discount,
@@ -1960,6 +2603,7 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
     Object? paymentStatus = freezed,
     Object? checkInDate = freezed,
     Object? checkOutDate = freezed,
+    Object? transactionId = freezed,
     Object? guestCount = freezed,
     Object? amount = freezed,
     Object? discount = freezed,
@@ -2015,6 +2659,10 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
           ? _value.checkOutDate
           : checkOutDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      transactionId: freezed == transactionId
+          ? _value.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       guestCount: freezed == guestCount
           ? _value.guestCount
           : guestCount // ignore: cast_nullable_to_non_nullable
@@ -2075,6 +2723,7 @@ abstract class _$$BookingModelImplCopyWith<$Res>
       String? paymentStatus,
       DateTime? checkInDate,
       DateTime? checkOutDate,
+      dynamic transactionId,
       int? guestCount,
       int? amount,
       int? discount,
@@ -2108,6 +2757,7 @@ class __$$BookingModelImplCopyWithImpl<$Res>
     Object? paymentStatus = freezed,
     Object? checkInDate = freezed,
     Object? checkOutDate = freezed,
+    Object? transactionId = freezed,
     Object? guestCount = freezed,
     Object? amount = freezed,
     Object? discount = freezed,
@@ -2163,6 +2813,10 @@ class __$$BookingModelImplCopyWithImpl<$Res>
           ? _value.checkOutDate
           : checkOutDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      transactionId: freezed == transactionId
+          ? _value.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       guestCount: freezed == guestCount
           ? _value.guestCount
           : guestCount // ignore: cast_nullable_to_non_nullable
@@ -2218,6 +2872,7 @@ class _$BookingModelImpl implements _BookingModel {
       this.paymentStatus,
       this.checkInDate,
       this.checkOutDate,
+      this.transactionId,
       this.guestCount,
       this.amount,
       this.discount,
@@ -2257,6 +2912,8 @@ class _$BookingModelImpl implements _BookingModel {
   @override
   final DateTime? checkOutDate;
   @override
+  final dynamic transactionId;
+  @override
   final int? guestCount;
   @override
   final int? amount;
@@ -2294,7 +2951,7 @@ class _$BookingModelImpl implements _BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel(id: $id, bookedBy: $bookedBy, userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, guestCount: $guestCount, amount: $amount, discount: $discount, walletDeduction: $walletDeduction, subTotal: $subTotal, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
+    return 'BookingModel(id: $id, bookedBy: $bookedBy, userId: $userId, dealerId: $dealerId, hostelId: $hostelId, roomId: $roomId, orderId: $orderId, paymentId: $paymentId, paymentStatus: $paymentStatus, checkInDate: $checkInDate, checkOutDate: $checkOutDate, transactionId: $transactionId, guestCount: $guestCount, amount: $amount, discount: $discount, walletDeduction: $walletDeduction, subTotal: $subTotal, guestDetailsList: $guestDetailsList, logs: $logs, bookingStatus: $bookingStatus, createdAt: $createdAt)';
   }
 
   @override
@@ -2318,6 +2975,8 @@ class _$BookingModelImpl implements _BookingModel {
                 other.checkInDate == checkInDate) &&
             (identical(other.checkOutDate, checkOutDate) ||
                 other.checkOutDate == checkOutDate) &&
+            const DeepCollectionEquality()
+                .equals(other.transactionId, transactionId) &&
             (identical(other.guestCount, guestCount) ||
                 other.guestCount == guestCount) &&
             (identical(other.amount, amount) || other.amount == amount) &&
@@ -2351,6 +3010,7 @@ class _$BookingModelImpl implements _BookingModel {
         paymentStatus,
         checkInDate,
         checkOutDate,
+        const DeepCollectionEquality().hash(transactionId),
         guestCount,
         amount,
         discount,
@@ -2389,6 +3049,7 @@ abstract class _BookingModel implements BookingModel {
       final String? paymentStatus,
       final DateTime? checkInDate,
       final DateTime? checkOutDate,
+      final dynamic transactionId,
       final int? guestCount,
       final int? amount,
       final int? discount,
@@ -2425,6 +3086,8 @@ abstract class _BookingModel implements BookingModel {
   DateTime? get checkInDate;
   @override
   DateTime? get checkOutDate;
+  @override
+  dynamic get transactionId;
   @override
   int? get guestCount;
   @override

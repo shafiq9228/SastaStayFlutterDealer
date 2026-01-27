@@ -92,6 +92,7 @@ _$RegistrationRequestModelImpl _$$RegistrationRequestModelImplFromJson(
       hostelImage: json['hostelImage'] as String?,
       hostelType: json['hostelType'] as String?,
       hostelLicence: json['hostelLicence'] as String?,
+      hostelGstDocument: json['hostelGstDocument'] as String?,
       hostelName: json['hostelName'] as String?,
       aboutHostel: json['aboutHostel'] as String?,
       images: (json['images'] as List<dynamic>?)
@@ -127,6 +128,7 @@ Map<String, dynamic> _$$RegistrationRequestModelImplToJson(
       'hostelImage': instance.hostelImage,
       'hostelType': instance.hostelType,
       'hostelLicence': instance.hostelLicence,
+      'hostelGstDocument': instance.hostelGstDocument,
       'hostelName': instance.hostelName,
       'aboutHostel': instance.aboutHostel,
       'images': instance.images,

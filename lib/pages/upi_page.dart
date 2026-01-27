@@ -25,7 +25,7 @@ class UpiPage extends StatelessWidget {
          top: true,
          child: Column(
            children: [
-             const SecondaryHeadingComponent(buttonTxt: "Add Upi Accound"),
+             const SecondaryHeadingComponent(buttonTxt: "Add Upi Account"),
              Expanded(
                child: SingleChildScrollView(
                  child: Container(

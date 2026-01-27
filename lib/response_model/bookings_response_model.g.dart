@@ -74,6 +74,8 @@ _$TransactionDataModelImpl _$$TransactionDataModelImplFromJson(
       userId: json['userId'],
       dealerId: json['dealerId'],
       bookingId: json['bookingId'],
+      withdrawTransactionId: json['withdrawTransactionId'],
+      failedReason: json['failedReason'] as String?,
       orderId: json['orderId'] as String?,
       paymentId: json['paymentId'] as String?,
       amount: json['amount'] as int?,
@@ -83,6 +85,10 @@ _$TransactionDataModelImpl _$$TransactionDataModelImplFromJson(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      paymentDetails: json['paymentDetails'] == null
+          ? null
+          : PaymentDetailModel.fromJson(
+              json['paymentDetails'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TransactionDataModelImplToJson(
@@ -95,11 +101,64 @@ Map<String, dynamic> _$$TransactionDataModelImplToJson(
       'userId': instance.userId,
       'dealerId': instance.dealerId,
       'bookingId': instance.bookingId,
+      'withdrawTransactionId': instance.withdrawTransactionId,
+      'failedReason': instance.failedReason,
       'orderId': instance.orderId,
       'paymentId': instance.paymentId,
       'amount': instance.amount,
       'logs': instance.logs,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'paymentDetails': instance.paymentDetails,
+    };
+
+_$PaymentDetailModelImpl _$$PaymentDetailModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PaymentDetailModelImpl(
+      amount: json['amount'],
+      discount: json['discount'],
+      discountByAdmin: json['discountByAdmin'] as bool?,
+      roomGstPercentage: json['roomGstPercentage'],
+      roomGst: json['roomGst'],
+      platformCharges: json['platformCharges'],
+      platformGstPercentage: json['platformGstPercentage'],
+      platformChargesBase: json['platformChargesBase'],
+      platformChargesGst: json['platformChargesGst'],
+      walletDeduction: json['walletDeduction'],
+      subTotal: json['subTotal'],
+      refundedAmount: json['refundedAmount'],
+      chargePercentage: json['chargePercentage'],
+      chargeAmount: json['chargeAmount'],
+      chargeGst: json['chargeGst'],
+      outwardBaseAmount: json['outwardBaseAmount'],
+      outwardGst: json['outwardGst'],
+      outwardAmount: json['outwardAmount'],
+      profitExcludingItc: json['profitExcludingItc'],
+      profitIncludingItc: json['profitIncludingItc'],
+    );
+
+Map<String, dynamic> _$$PaymentDetailModelImplToJson(
+        _$PaymentDetailModelImpl instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'discount': instance.discount,
+      'discountByAdmin': instance.discountByAdmin,
+      'roomGstPercentage': instance.roomGstPercentage,
+      'roomGst': instance.roomGst,
+      'platformCharges': instance.platformCharges,
+      'platformGstPercentage': instance.platformGstPercentage,
+      'platformChargesBase': instance.platformChargesBase,
+      'platformChargesGst': instance.platformChargesGst,
+      'walletDeduction': instance.walletDeduction,
+      'subTotal': instance.subTotal,
+      'refundedAmount': instance.refundedAmount,
+      'chargePercentage': instance.chargePercentage,
+      'chargeAmount': instance.chargeAmount,
+      'chargeGst': instance.chargeGst,
+      'outwardBaseAmount': instance.outwardBaseAmount,
+      'outwardGst': instance.outwardGst,
+      'outwardAmount': instance.outwardAmount,
+      'profitExcludingItc': instance.profitExcludingItc,
+      'profitIncludingItc': instance.profitIncludingItc,
     };
 
 _$HostelRoomBookingDataModelImpl _$$HostelRoomBookingDataModelImplFromJson(
@@ -201,6 +260,7 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
       checkOutDate: json['checkOutDate'] == null
           ? null
           : DateTime.parse(json['checkOutDate'] as String),
+      transactionId: json['transactionId'],
       guestCount: json['guestCount'] as int?,
       amount: json['amount'] as int?,
       discount: json['discount'] as int?,
@@ -231,6 +291,7 @@ Map<String, dynamic> _$$BookingModelImplToJson(_$BookingModelImpl instance) =>
       'paymentStatus': instance.paymentStatus,
       'checkInDate': instance.checkInDate?.toIso8601String(),
       'checkOutDate': instance.checkOutDate?.toIso8601String(),
+      'transactionId': instance.transactionId,
       'guestCount': instance.guestCount,
       'amount': instance.amount,
       'discount': instance.discount,

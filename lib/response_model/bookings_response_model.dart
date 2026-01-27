@@ -48,16 +48,48 @@ class TransactionDataModel with _$TransactionDataModel {
     dynamic userId,
     dynamic dealerId,
     dynamic bookingId,
+    dynamic withdrawTransactionId,
+    String? failedReason,
     String? orderId,
     String? paymentId,
     int? amount,
     List<AmountDetailsModel>? logs,
-    DateTime? createdAt
+    DateTime? createdAt,
+    PaymentDetailModel? paymentDetails
   }) = _TransactionDataModel;
 
   factory TransactionDataModel.fromJson(Map<String, dynamic> json) => _$TransactionDataModelFromJson(json);
 }
 
+
+
+@Freezed()
+class PaymentDetailModel with _$PaymentDetailModel {
+  const factory PaymentDetailModel({
+    dynamic amount,
+    dynamic discount,
+    bool? discountByAdmin,
+    dynamic roomGstPercentage,
+    dynamic roomGst,
+    dynamic platformCharges,
+    dynamic platformGstPercentage,
+    dynamic platformChargesBase,
+    dynamic platformChargesGst,
+    dynamic walletDeduction,
+    dynamic subTotal,
+    dynamic refundedAmount,
+    dynamic chargePercentage,
+    dynamic chargeAmount,
+    dynamic chargeGst,
+    dynamic outwardBaseAmount,
+    dynamic outwardGst,
+    dynamic outwardAmount,
+    dynamic profitExcludingItc,
+    dynamic profitIncludingItc,
+  }) = _PaymentDetailModel;
+
+  factory PaymentDetailModel.fromJson(Map<String, dynamic> json) => _$PaymentDetailModelFromJson(json);
+}
 
 
 @Freezed()
@@ -124,6 +156,7 @@ class BookingModel with _$BookingModel {
     String? paymentStatus,
     DateTime? checkInDate,
     DateTime? checkOutDate,
+    dynamic transactionId,
     int? guestCount,
     int? amount,
     int? discount,
