@@ -29,7 +29,7 @@ Map<String, dynamic> _$$FetchWithdrawalDetailsResponseModelImplToJson(
 _$WithdrawalDetailsModelImpl _$$WithdrawalDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$WithdrawalDetailsModelImpl(
-      amount: (json['amount'] as num?)?.toDouble(),
+      amount: json['amount'],
       isDocumentApproved: json['isDocumentApproved'] as bool?,
       payUAuthetication: json['payUAuthetication'] as bool?,
       chargesList: (json['chargesList'] as List<dynamic>?)
@@ -50,7 +50,7 @@ _$ChargesListModelImpl _$$ChargesListModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ChargesListModelImpl(
       name: json['name'] as String?,
-      amount: (json['amount'] as num?)?.toDouble(),
+      amount: json['amount'],
       extraData: json['extraData'] as String?,
     );
 

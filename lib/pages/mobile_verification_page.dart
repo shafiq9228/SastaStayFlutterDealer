@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sasta_stay_dealer/components/secondary_heading_component.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:truecaller_sdk/truecaller_sdk.dart';
 import '../api/api_result.dart';
 import '../components/custom_progress_bar.dart';
@@ -257,8 +258,10 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
                   const SizedBox(height: 20),
                   Obx(() => authViewModel.sendOtpResponseObserver.value.maybeWhen(
                       loading: () =>  const CustomProgressBar(),
-                      orElse: () => PrimaryButton(buttonTxt: "Log In", buttonClick: () {
-                        authViewModel.sendOtp(SendOtpRequestModel(mobile: mobileNumberText.text.trim().isEmpty ? null : int.parse(mobileNumberText.text),primaryHostelId:widget.primaryHostelId));
+                      orElse: () => PrimaryButton(buttonTxt: "Log In", buttonClick: () async {
+                        authViewModel.sendOtpResponseObserver.value = const ApiResult.loading();
+                        String signature = await SmsAutoFill().getAppSignature;
+                        authViewModel.sendOtp(SendOtpRequestModel(mobile: mobileNumberText.text.trim().isEmpty ? null : int.parse(mobileNumberText.text),signature:signature,primaryHostelId:widget.primaryHostelId));
                       }))
                   ),
                   const SizedBox(height: 20)

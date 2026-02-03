@@ -71,6 +71,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
         },
         onStart: (){
           calculateProgress();
+          closeKeyboard(context);
         },
         child: Scaffold(
             backgroundColor: CustomColors.white,
@@ -523,7 +524,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical:10),
-          child: Text("LandMark",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+          child: Text("LandMark (optional)",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
         ),
         GestureDetector(
           onTap: (){
@@ -959,6 +960,10 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
     }
 
 
+  }
+
+  void closeKeyboard(BuildContext context) {
+    FocusScope.of(context).unfocus();
   }
 
 

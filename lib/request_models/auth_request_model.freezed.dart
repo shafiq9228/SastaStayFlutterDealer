@@ -500,6 +500,7 @@ SendOtpRequestModel _$SendOtpRequestModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SendOtpRequestModel {
   int? get mobile => throw _privateConstructorUsedError;
+  String? get signature => throw _privateConstructorUsedError;
   String? get primaryHostelId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -514,7 +515,7 @@ abstract class $SendOtpRequestModelCopyWith<$Res> {
           SendOtpRequestModel value, $Res Function(SendOtpRequestModel) then) =
       _$SendOtpRequestModelCopyWithImpl<$Res, SendOtpRequestModel>;
   @useResult
-  $Res call({int? mobile, String? primaryHostelId});
+  $Res call({int? mobile, String? signature, String? primaryHostelId});
 }
 
 /// @nodoc
@@ -531,6 +532,7 @@ class _$SendOtpRequestModelCopyWithImpl<$Res, $Val extends SendOtpRequestModel>
   @override
   $Res call({
     Object? mobile = freezed,
+    Object? signature = freezed,
     Object? primaryHostelId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -538,6 +540,10 @@ class _$SendOtpRequestModelCopyWithImpl<$Res, $Val extends SendOtpRequestModel>
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
               as int?,
+      signature: freezed == signature
+          ? _value.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as String?,
       primaryHostelId: freezed == primaryHostelId
           ? _value.primaryHostelId
           : primaryHostelId // ignore: cast_nullable_to_non_nullable
@@ -554,7 +560,7 @@ abstract class _$$SendOtpRequestModelImplCopyWith<$Res>
       __$$SendOtpRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? mobile, String? primaryHostelId});
+  $Res call({int? mobile, String? signature, String? primaryHostelId});
 }
 
 /// @nodoc
@@ -569,6 +575,7 @@ class __$$SendOtpRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mobile = freezed,
+    Object? signature = freezed,
     Object? primaryHostelId = freezed,
   }) {
     return _then(_$SendOtpRequestModelImpl(
@@ -576,6 +583,10 @@ class __$$SendOtpRequestModelImplCopyWithImpl<$Res>
           ? _value.mobile
           : mobile // ignore: cast_nullable_to_non_nullable
               as int?,
+      signature: freezed == signature
+          ? _value.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as String?,
       primaryHostelId: freezed == primaryHostelId
           ? _value.primaryHostelId
           : primaryHostelId // ignore: cast_nullable_to_non_nullable
@@ -587,7 +598,8 @@ class __$$SendOtpRequestModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
-  const _$SendOtpRequestModelImpl({required this.mobile, this.primaryHostelId});
+  const _$SendOtpRequestModelImpl(
+      {required this.mobile, required this.signature, this.primaryHostelId});
 
   factory _$SendOtpRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SendOtpRequestModelImplFromJson(json);
@@ -595,11 +607,13 @@ class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
   @override
   final int? mobile;
   @override
+  final String? signature;
+  @override
   final String? primaryHostelId;
 
   @override
   String toString() {
-    return 'SendOtpRequestModel(mobile: $mobile, primaryHostelId: $primaryHostelId)';
+    return 'SendOtpRequestModel(mobile: $mobile, signature: $signature, primaryHostelId: $primaryHostelId)';
   }
 
   @override
@@ -608,13 +622,16 @@ class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
         (other.runtimeType == runtimeType &&
             other is _$SendOtpRequestModelImpl &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
+            (identical(other.signature, signature) ||
+                other.signature == signature) &&
             (identical(other.primaryHostelId, primaryHostelId) ||
                 other.primaryHostelId == primaryHostelId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, mobile, primaryHostelId);
+  int get hashCode =>
+      Object.hash(runtimeType, mobile, signature, primaryHostelId);
 
   @JsonKey(ignore: true)
   @override
@@ -634,6 +651,7 @@ class _$SendOtpRequestModelImpl implements _SendOtpRequestModel {
 abstract class _SendOtpRequestModel implements SendOtpRequestModel {
   const factory _SendOtpRequestModel(
       {required final int? mobile,
+      required final String? signature,
       final String? primaryHostelId}) = _$SendOtpRequestModelImpl;
 
   factory _SendOtpRequestModel.fromJson(Map<String, dynamic> json) =
@@ -641,6 +659,8 @@ abstract class _SendOtpRequestModel implements SendOtpRequestModel {
 
   @override
   int? get mobile;
+  @override
+  String? get signature;
   @override
   String? get primaryHostelId;
   @override

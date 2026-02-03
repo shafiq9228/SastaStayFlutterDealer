@@ -73,7 +73,7 @@ class _KycDocumentComponentState extends State<KycDocumentComponent> {
         )
       ],
     ) : UploadingViewComponent(uploadingText: "Upload Your ${widget.documentModel?.documentType}", onClick: (){
-         Get.to(() => FilePickerPage(fileType: "image", fileView: false, fileName: widget.documentModel?.documentType ?? ""));
+      Get.to(() => FilePickerPage(fileType: "image", fileView: false, fileName: widget.documentModel?.documentType ?? ""));
     });
   }
 }

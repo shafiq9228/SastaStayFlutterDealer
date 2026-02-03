@@ -82,6 +82,22 @@ class AuthViewModel extends GetxController{
     )
   ].obs;
 
+  List<DocumentDataModel> initialKycDocuments = [
+    DocumentDataModel(
+      documentType: "aadhar",
+      documentStatus: "pending",
+      uploadedUrl: "",
+      errorTxt: '',
+    ),
+    DocumentDataModel(
+      documentType: "pan",
+      documentStatus: "pending",
+      uploadedUrl: "",
+      errorTxt: '',
+    )
+  ];
+
+
   String? getPrimaryId(){
     return dealerStatusObserver.value.maybeWhen(success: (data) => (data as FormHelperDataResponseModel).data?.primaryHostel?.id ?? "",orElse: () => "");
   }
@@ -268,7 +284,7 @@ class AuthViewModel extends GetxController{
         if(responseData.status == 1){
           fetchUserDetailsObserver.value = ApiResult.success(responseData);
           if((responseData.data?.kycDocuments ?? []).length == 2){
-            kysDocuments.value = responseData.data?.kycDocuments ??  kysDocuments;
+            kysDocuments.value = responseData.data?.kycDocuments ??  initialKycDocuments;
           }
 
           await FirebaseMessaging.instance.subscribeToTopic(responseData.data?.id ?? "");

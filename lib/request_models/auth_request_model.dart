@@ -39,6 +39,7 @@ class TrueCallerRequestModel with _$TrueCallerRequestModel{
 class SendOtpRequestModel with _$SendOtpRequestModel{
   const factory SendOtpRequestModel({
     required int? mobile,
+    required String? signature,
     String? primaryHostelId
   }) = _SendOtpRequestModel;
 

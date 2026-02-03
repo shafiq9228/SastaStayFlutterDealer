@@ -21,7 +21,7 @@ class FetchWithdrawalDetailsResponseModel with _$FetchWithdrawalDetailsResponseM
 @Freezed()
 class WithdrawalDetailsModel with _$WithdrawalDetailsModel {
   const factory WithdrawalDetailsModel({
-    double? amount,
+    dynamic amount,
     bool? isDocumentApproved,
     bool? payUAuthetication,
     List<ChargesListModel>? chargesList,
@@ -36,7 +36,7 @@ class WithdrawalDetailsModel with _$WithdrawalDetailsModel {
 class ChargesListModel with _$ChargesListModel{
   const factory ChargesListModel({
     String? name,
-    double? amount,
+    dynamic amount,
     String? extraData,
   }) = _ChargesListModel;
 

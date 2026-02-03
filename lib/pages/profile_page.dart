@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sasta_stay_dealer/components/add_guest_item.dart';
 import 'package:sasta_stay_dealer/components/error_text_component.dart';
 import 'package:sasta_stay_dealer/components/icon_title_message_component.dart';
+import 'package:sasta_stay_dealer/pages/dealer_terms_and_condition_page.dart';
 import 'package:sasta_stay_dealer/pages/help_support_page.dart';
 import 'package:sasta_stay_dealer/pages/hostels_page.dart';
 import 'package:sasta_stay_dealer/components/profile_menu.dart';
@@ -12,6 +13,7 @@ import 'package:sasta_stay_dealer/pages/rating_reviews_page.dart';
 import 'package:sasta_stay_dealer/pages/registration_page.dart';
 import 'package:sasta_stay_dealer/pages/transactions_page.dart';
 import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
+import 'package:sasta_stay_dealer/shimmers/profile_page_shimmer.dart';
 import 'package:sasta_stay_dealer/utils/auth_utils.dart';
 
 import '../components/custom_progress_bar.dart';
@@ -110,7 +112,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
-      onInit: _refreshData,
+      onInit: (){
+
+      },
+      onStart: _refreshData,
       child: Scaffold(
         backgroundColor: CustomColors.white,
         body: RefreshIndicator(
@@ -119,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
               top: true,
               child: Obx(() => authViewModel.fetchUserDetailsObserver.value.maybeWhen(
                   error: (error) => const SizedBox(width: double.infinity,height: double.infinity,child: Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: EmptyDataView(text: "Something went wrong"),))))),
-                  loading: () => SizedBox(width: double.infinity,height: double.infinity,child: Center(child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),child: SizedBox(width: double.infinity,height: 500,child: Center(child: SizedBox(height: 30,width: 30,child: CircularProgressIndicator(color: CustomColors.primary)),))))),
+                  loading: () => const ProfilePageShimmer(),
                   success: (data){
                     final userModel = (data as FetchUserDetailsResponseModel).data;
                     return SizedBox(
@@ -240,6 +245,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                       DottedLine(dashColor: CustomColors.darkGray,),
                                       ProfileMenu(title: "Coupons", image: "assets/images/couponv.png", onTapped: (){
                                         Get.to(() => const CouponsPage(selecting: false));
+                                      }),
+                                      DottedLine(dashColor: CustomColors.darkGray),
+                                      ProfileMenu(title: "Terms And Condition", image: "assets/images/terms.png", onTapped: (){
+                                        Get.to(() => DealerTermsAndConditionsPage());
                                       }),
                                       DottedLine(dashColor: CustomColors.darkGray),
                                       Obx(() => logOuting.value == true ? CustomProgressBar() :

@@ -226,7 +226,7 @@ WithdrawalDetailsModel _$WithdrawalDetailsModelFromJson(
 
 /// @nodoc
 mixin _$WithdrawalDetailsModel {
-  double? get amount => throw _privateConstructorUsedError;
+  dynamic get amount => throw _privateConstructorUsedError;
   bool? get isDocumentApproved => throw _privateConstructorUsedError;
   bool? get payUAuthetication => throw _privateConstructorUsedError;
   List<ChargesListModel>? get chargesList => throw _privateConstructorUsedError;
@@ -244,7 +244,7 @@ abstract class $WithdrawalDetailsModelCopyWith<$Res> {
       _$WithdrawalDetailsModelCopyWithImpl<$Res, WithdrawalDetailsModel>;
   @useResult
   $Res call(
-      {double? amount,
+      {dynamic amount,
       bool? isDocumentApproved,
       bool? payUAuthetication,
       List<ChargesListModel>? chargesList});
@@ -273,7 +273,7 @@ class _$WithdrawalDetailsModelCopyWithImpl<$Res,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as dynamic,
       isDocumentApproved: freezed == isDocumentApproved
           ? _value.isDocumentApproved
           : isDocumentApproved // ignore: cast_nullable_to_non_nullable
@@ -300,7 +300,7 @@ abstract class _$$WithdrawalDetailsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double? amount,
+      {dynamic amount,
       bool? isDocumentApproved,
       bool? payUAuthetication,
       List<ChargesListModel>? chargesList});
@@ -328,7 +328,7 @@ class __$$WithdrawalDetailsModelImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as dynamic,
       isDocumentApproved: freezed == isDocumentApproved
           ? _value.isDocumentApproved
           : isDocumentApproved // ignore: cast_nullable_to_non_nullable
@@ -359,7 +359,7 @@ class _$WithdrawalDetailsModelImpl implements _WithdrawalDetailsModel {
       _$$WithdrawalDetailsModelImplFromJson(json);
 
   @override
-  final double? amount;
+  final dynamic amount;
   @override
   final bool? isDocumentApproved;
   @override
@@ -384,7 +384,7 @@ class _$WithdrawalDetailsModelImpl implements _WithdrawalDetailsModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithdrawalDetailsModelImpl &&
-            (identical(other.amount, amount) || other.amount == amount) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
             (identical(other.isDocumentApproved, isDocumentApproved) ||
                 other.isDocumentApproved == isDocumentApproved) &&
             (identical(other.payUAuthetication, payUAuthetication) ||
@@ -395,8 +395,12 @@ class _$WithdrawalDetailsModelImpl implements _WithdrawalDetailsModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, amount, isDocumentApproved,
-      payUAuthetication, const DeepCollectionEquality().hash(_chargesList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(amount),
+      isDocumentApproved,
+      payUAuthetication,
+      const DeepCollectionEquality().hash(_chargesList));
 
   @JsonKey(ignore: true)
   @override
@@ -415,7 +419,7 @@ class _$WithdrawalDetailsModelImpl implements _WithdrawalDetailsModel {
 
 abstract class _WithdrawalDetailsModel implements WithdrawalDetailsModel {
   const factory _WithdrawalDetailsModel(
-          {final double? amount,
+          {final dynamic amount,
           final bool? isDocumentApproved,
           final bool? payUAuthetication,
           final List<ChargesListModel>? chargesList}) =
@@ -425,7 +429,7 @@ abstract class _WithdrawalDetailsModel implements WithdrawalDetailsModel {
       _$WithdrawalDetailsModelImpl.fromJson;
 
   @override
-  double? get amount;
+  dynamic get amount;
   @override
   bool? get isDocumentApproved;
   @override
@@ -445,7 +449,7 @@ ChargesListModel _$ChargesListModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChargesListModel {
   String? get name => throw _privateConstructorUsedError;
-  double? get amount => throw _privateConstructorUsedError;
+  dynamic get amount => throw _privateConstructorUsedError;
   String? get extraData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -460,7 +464,7 @@ abstract class $ChargesListModelCopyWith<$Res> {
           ChargesListModel value, $Res Function(ChargesListModel) then) =
       _$ChargesListModelCopyWithImpl<$Res, ChargesListModel>;
   @useResult
-  $Res call({String? name, double? amount, String? extraData});
+  $Res call({String? name, dynamic amount, String? extraData});
 }
 
 /// @nodoc
@@ -488,7 +492,7 @@ class _$ChargesListModelCopyWithImpl<$Res, $Val extends ChargesListModel>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as dynamic,
       extraData: freezed == extraData
           ? _value.extraData
           : extraData // ignore: cast_nullable_to_non_nullable
@@ -505,7 +509,7 @@ abstract class _$$ChargesListModelImplCopyWith<$Res>
       __$$ChargesListModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, double? amount, String? extraData});
+  $Res call({String? name, dynamic amount, String? extraData});
 }
 
 /// @nodoc
@@ -531,7 +535,7 @@ class __$$ChargesListModelImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as dynamic,
       extraData: freezed == extraData
           ? _value.extraData
           : extraData // ignore: cast_nullable_to_non_nullable
@@ -551,7 +555,7 @@ class _$ChargesListModelImpl implements _ChargesListModel {
   @override
   final String? name;
   @override
-  final double? amount;
+  final dynamic amount;
   @override
   final String? extraData;
 
@@ -566,14 +570,15 @@ class _$ChargesListModelImpl implements _ChargesListModel {
         (other.runtimeType == runtimeType &&
             other is _$ChargesListModelImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
             (identical(other.extraData, extraData) ||
                 other.extraData == extraData));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, amount, extraData);
+  int get hashCode => Object.hash(runtimeType, name,
+      const DeepCollectionEquality().hash(amount), extraData);
 
   @JsonKey(ignore: true)
   @override
@@ -593,7 +598,7 @@ class _$ChargesListModelImpl implements _ChargesListModel {
 abstract class _ChargesListModel implements ChargesListModel {
   const factory _ChargesListModel(
       {final String? name,
-      final double? amount,
+      final dynamic amount,
       final String? extraData}) = _$ChargesListModelImpl;
 
   factory _ChargesListModel.fromJson(Map<String, dynamic> json) =
@@ -602,7 +607,7 @@ abstract class _ChargesListModel implements ChargesListModel {
   @override
   String? get name;
   @override
-  double? get amount;
+  dynamic get amount;
   @override
   String? get extraData;
   @override
