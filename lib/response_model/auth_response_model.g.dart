@@ -185,3 +185,46 @@ Map<String, dynamic> _$$DocumentDataModelImplToJson(
       'uploadedUrl': instance.uploadedUrl,
       'errorTxt': instance.errorTxt,
     };
+
+_$FetchNotificationsResponseModelImpl
+    _$$FetchNotificationsResponseModelImplFromJson(Map<String, dynamic> json) =>
+        _$FetchNotificationsResponseModelImpl(
+          status: json['status'] as int?,
+          message: json['message'] as String?,
+          data: (json['data'] as List<dynamic>?)
+              ?.map(
+                  (e) => NotificationModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$$FetchNotificationsResponseModelImplToJson(
+        _$FetchNotificationsResponseModelImpl instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+_$NotificationModelImpl _$$NotificationModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NotificationModelImpl(
+      id: json['_id'] as String?,
+      topic: json['topic'] as String?,
+      title: json['title'] as String?,
+      body: json['body'] as String?,
+      image: json['image'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$$NotificationModelImplToJson(
+        _$NotificationModelImpl instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'topic': instance.topic,
+      'title': instance.title,
+      'body': instance.body,
+      'image': instance.image,
+      'createdAt': instance.createdAt?.toIso8601String(),
+    };

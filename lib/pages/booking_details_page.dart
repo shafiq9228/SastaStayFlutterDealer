@@ -642,6 +642,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
     final double roomGst = (payment.roomGst ?? 0).toDouble();
     final double platformCharges = (payment.platformCharges ?? 0).toDouble();
     final double dealerProfit = (payment.outwardAmount ?? 0).toDouble();
+    final double discount = payment.discountByAdmin == true ? 0 : (payment.discount ?? 0).toDouble();
     final double commission = (payment.chargeAmount ?? 0).toDouble();
     final double profitIncludingItc = (payment.profitIncludingItc ?? 0).toDouble();
 
@@ -1050,6 +1051,27 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                                       ),
                                       Text(
                                         '₹${payment.outwardGst?.toStringAsFixed(2) ?? '0.00'}',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.green[800],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  if(discount >0) const SizedBox(height: 4),
+                                  if(discount >0) Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Coupon Discount',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.green[800],
+                                        ),
+                                      ),
+                                      Text(
+                                        '-₹${discount}',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,

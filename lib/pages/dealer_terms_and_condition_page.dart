@@ -58,7 +58,7 @@ class DealerTermsContent extends StatelessWidget {
 
         SectionTitle('4. Commission Structure'),
         SectionContent(
-            'PG Hostel charges a commission of 10-15% on all successful bookings made through the Platform. '
+            'PG Hostel charges a commission of 10-25% on all successful bookings made through the Platform. '
                 'Commission rates are subject to change with 30 days prior notice. '
                 'Payment to dealers will be processed within 7 business days after guest check-in.'
         ),
@@ -140,7 +140,7 @@ class DealerTermsContent extends StatelessWidget {
             'Disputes will first attempt resolution through mediation. '
                 'Unresolved disputes will be settled through binding arbitration in accordance with '
                 'the Arbitration and Conciliation Act. Legal proceedings must be initiated in the '
-                'courts of [Your City/Country].'
+                'courts of [Hyderabad].'
         ),
 
         SectionTitle('16. Amendments'),
@@ -153,8 +153,8 @@ class DealerTermsContent extends StatelessWidget {
         SectionTitle('17. Dealer Support'),
         SectionContent(
             'For questions about these Terms and Conditions or dealer account management, '
-                'please contact our dealer support team at: dealersupport@pghostel.com '
-                'or call our dealer helpline: +91-XXX-XXXX-XXX'
+                'please contact our dealer support team at: sastastays@gmail.com '
+                'or call our dealer helpline: +91-9848313231'
         ),
 
         const SizedBox(height: 80),

@@ -10,6 +10,8 @@ class EndPoints {
   static const registerDealer = "registerDealer";
   static const uploadFile = "uploadFile";
 
+  static const fetchNotifications = "fetchNotifications";
+  static const deleteNotification = "deleteNotification";
   static const getImageTypes = "getImageTypes";
 
   static const registerHostel = "registerHostel";

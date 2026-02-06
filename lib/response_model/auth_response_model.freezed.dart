@@ -2071,3 +2071,444 @@ abstract class _DocumentDataModel implements DocumentDataModel {
   _$$DocumentDataModelImplCopyWith<_$DocumentDataModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+FetchNotificationsResponseModel _$FetchNotificationsResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _FetchNotificationsResponseModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FetchNotificationsResponseModel {
+  int? get status => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  List<NotificationModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FetchNotificationsResponseModelCopyWith<FetchNotificationsResponseModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FetchNotificationsResponseModelCopyWith<$Res> {
+  factory $FetchNotificationsResponseModelCopyWith(
+          FetchNotificationsResponseModel value,
+          $Res Function(FetchNotificationsResponseModel) then) =
+      _$FetchNotificationsResponseModelCopyWithImpl<$Res,
+          FetchNotificationsResponseModel>;
+  @useResult
+  $Res call({int? status, String? message, List<NotificationModel>? data});
+}
+
+/// @nodoc
+class _$FetchNotificationsResponseModelCopyWithImpl<$Res,
+        $Val extends FetchNotificationsResponseModel>
+    implements $FetchNotificationsResponseModelCopyWith<$Res> {
+  _$FetchNotificationsResponseModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FetchNotificationsResponseModelImplCopyWith<$Res>
+    implements $FetchNotificationsResponseModelCopyWith<$Res> {
+  factory _$$FetchNotificationsResponseModelImplCopyWith(
+          _$FetchNotificationsResponseModelImpl value,
+          $Res Function(_$FetchNotificationsResponseModelImpl) then) =
+      __$$FetchNotificationsResponseModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? status, String? message, List<NotificationModel>? data});
+}
+
+/// @nodoc
+class __$$FetchNotificationsResponseModelImplCopyWithImpl<$Res>
+    extends _$FetchNotificationsResponseModelCopyWithImpl<$Res,
+        _$FetchNotificationsResponseModelImpl>
+    implements _$$FetchNotificationsResponseModelImplCopyWith<$Res> {
+  __$$FetchNotificationsResponseModelImplCopyWithImpl(
+      _$FetchNotificationsResponseModelImpl _value,
+      $Res Function(_$FetchNotificationsResponseModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_$FetchNotificationsResponseModelImpl(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FetchNotificationsResponseModelImpl
+    implements _FetchNotificationsResponseModel {
+  const _$FetchNotificationsResponseModelImpl(
+      {this.status, this.message, final List<NotificationModel>? data})
+      : _data = data;
+
+  factory _$FetchNotificationsResponseModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$FetchNotificationsResponseModelImplFromJson(json);
+
+  @override
+  final int? status;
+  @override
+  final String? message;
+  final List<NotificationModel>? _data;
+  @override
+  List<NotificationModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'FetchNotificationsResponseModel(status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchNotificationsResponseModelImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, status, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchNotificationsResponseModelImplCopyWith<
+          _$FetchNotificationsResponseModelImpl>
+      get copyWith => __$$FetchNotificationsResponseModelImplCopyWithImpl<
+          _$FetchNotificationsResponseModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FetchNotificationsResponseModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FetchNotificationsResponseModel
+    implements FetchNotificationsResponseModel {
+  const factory _FetchNotificationsResponseModel(
+          {final int? status,
+          final String? message,
+          final List<NotificationModel>? data}) =
+      _$FetchNotificationsResponseModelImpl;
+
+  factory _FetchNotificationsResponseModel.fromJson(Map<String, dynamic> json) =
+      _$FetchNotificationsResponseModelImpl.fromJson;
+
+  @override
+  int? get status;
+  @override
+  String? get message;
+  @override
+  List<NotificationModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchNotificationsResponseModelImplCopyWith<
+          _$FetchNotificationsResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
+  return _NotificationModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NotificationModel {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  String? get topic => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get body => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NotificationModelCopyWith<NotificationModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NotificationModelCopyWith<$Res> {
+  factory $NotificationModelCopyWith(
+          NotificationModel value, $Res Function(NotificationModel) then) =
+      _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? topic,
+      String? title,
+      String? body,
+      String? image,
+      DateTime? createdAt});
+}
+
+/// @nodoc
+class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
+    implements $NotificationModelCopyWith<$Res> {
+  _$NotificationModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? topic = freezed,
+    Object? title = freezed,
+    Object? body = freezed,
+    Object? image = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      topic: freezed == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NotificationModelImplCopyWith<$Res>
+    implements $NotificationModelCopyWith<$Res> {
+  factory _$$NotificationModelImplCopyWith(_$NotificationModelImpl value,
+          $Res Function(_$NotificationModelImpl) then) =
+      __$$NotificationModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? topic,
+      String? title,
+      String? body,
+      String? image,
+      DateTime? createdAt});
+}
+
+/// @nodoc
+class __$$NotificationModelImplCopyWithImpl<$Res>
+    extends _$NotificationModelCopyWithImpl<$Res, _$NotificationModelImpl>
+    implements _$$NotificationModelImplCopyWith<$Res> {
+  __$$NotificationModelImplCopyWithImpl(_$NotificationModelImpl _value,
+      $Res Function(_$NotificationModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? topic = freezed,
+    Object? title = freezed,
+    Object? body = freezed,
+    Object? image = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_$NotificationModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      topic: freezed == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NotificationModelImpl implements _NotificationModel {
+  const _$NotificationModelImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.topic,
+      this.title,
+      this.body,
+      this.image,
+      this.createdAt});
+
+  factory _$NotificationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotificationModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  final String? topic;
+  @override
+  final String? title;
+  @override
+  final String? body;
+  @override
+  final String? image;
+  @override
+  final DateTime? createdAt;
+
+  @override
+  String toString() {
+    return 'NotificationModel(id: $id, topic: $topic, title: $title, body: $body, image: $image, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NotificationModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.topic, topic) || other.topic == topic) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, topic, title, body, image, createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NotificationModelImplCopyWith<_$NotificationModelImpl> get copyWith =>
+      __$$NotificationModelImplCopyWithImpl<_$NotificationModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NotificationModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NotificationModel implements NotificationModel {
+  const factory _NotificationModel(
+      {@JsonKey(name: '_id') final String? id,
+      final String? topic,
+      final String? title,
+      final String? body,
+      final String? image,
+      final DateTime? createdAt}) = _$NotificationModelImpl;
+
+  factory _NotificationModel.fromJson(Map<String, dynamic> json) =
+      _$NotificationModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  String? get topic;
+  @override
+  String? get title;
+  @override
+  String? get body;
+  @override
+  String? get image;
+  @override
+  DateTime? get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$NotificationModelImplCopyWith<_$NotificationModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

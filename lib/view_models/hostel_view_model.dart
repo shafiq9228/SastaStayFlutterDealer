@@ -21,6 +21,8 @@ class HostelViewModel extends GetxController{
 
   final fetchHostelDetailsObserver = const ApiResult<FetchHostelDetailsResponseModel>.init().obs;
   final fetchHostelStatisticsObserver = const ApiResult<FetchHostelStatisticsResponseModel>.init().obs;
+  final fetchNotificationsObserver =  PaginationModel(data: const ApiResult<FetchNotificationsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "").obs;
+  final deleteNotificationObserver =   const ApiResult<PrimaryResponseModel>.init().obs;
 
 
   final setAsPrimaryHostelResponseObserver = const ApiResult<FormHelperDataResponseModel>.init().obs;
@@ -564,6 +566,93 @@ class HostelViewModel extends GetxController{
       observer.refresh();
     }
   }
+
+
+  Future<void> fetchNotifications(PaginationRequestModel request,bool refresh) async {
+    final observer = fetchNotificationsObserver;
+    try{
+      if(refresh == true){
+        observer.value = PaginationModel(data: const ApiResult<FetchNotificationsResponseModel>.init().obs, isLoading: false, isPaginationCompleted: false, page: 1, error: "");
+      }
+
+      if (observer.value.isPaginationCompleted || observer.value.isLoading == true) return;
+
+      if(observer.value.page == 1){
+        observer.value.data.value = const ApiResult.loading();
+      }
+      else{
+        observer.value.isLoading = true;
+        observer.refresh();
+      }
+
+      const maxListApiReturns = 20;
+      observer.refresh();
+
+      final String? validatorResponse = AuthUtils.validateRequestFields(['page'], request.toJson());
+      if(validatorResponse != null) throw validatorResponse;
+
+      final response = await apiProvider.post(EndPoints.fetchNotifications,request.toJson());
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = FetchNotificationsResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          observer.value.data.value.maybeWhen(success: (data) {
+            final oldList = (data as FetchNotificationsResponseModel)?.data?.toList();
+            oldList?.addAll(responseData.data ?? List.empty());
+            observer.value.data.value = ApiResult.success(responseData.copyWith(data: oldList));
+          }, orElse: () {
+            observer.value.data.value = ApiResult.success(responseData);
+          });
+
+          observer.value.page = observer.value.page + 1;
+          if ((responseData.data?.length ?? 0) < maxListApiReturns) {
+            observer.value.isPaginationCompleted = true;
+          }
+          observer.value.isLoading = false;
+          observer.refresh();
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      observer.value.data.value = ApiResult.error(e.toString());
+      observer.value.isLoading = false;
+      observer.refresh();
+    }
+  }
+
+  Future<void> deleteNotification(String? notificationId) async {
+    try{
+      if(notificationId == null || notificationId.trim().isEmpty) throw "couponId Is Required";
+      deleteNotificationObserver.value = ApiResult.loadingCondition(notificationId,false);
+      final response = await apiProvider.post(EndPoints.deleteNotification,{"notificationId":notificationId});
+      final body = response.body;
+      if(response.isOk && body !=null){
+        final responseData = PrimaryResponseModel.fromJson(body);
+        if(responseData.status == 1){
+          fetchNotificationsObserver.value.data.value.whenOrNull(success: (responseData){
+            var userResponse = (responseData as FetchNotificationsResponseModel);
+            final coupons = userResponse.data?.toList() ?? List.empty();
+            coupons.removeWhere((notification) => notification.id == notificationId);
+            userResponse = userResponse.copyWith(data:coupons);
+            fetchNotificationsObserver.value.data.value = ApiResult.success(userResponse);
+          });
+          deleteNotificationObserver.value = ApiResult.success(responseData);
+          return;
+        }
+        throw "${responseData.message}";
+      }
+      throw "Response Body Null";
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),backgroundColor: CustomColors.primary,colorText: CustomColors.white,snackPosition: SnackPosition.BOTTOM);
+      deleteNotificationObserver.value = ApiResult.error(e.toString());
+    }
+  }
+
 
 
 }

@@ -138,7 +138,8 @@ AlertDialog unAvailableAlert() {
   );
 }
 
-String timeAgoCustom(DateTime date) {
+String timeAgoCustom(DateTime? date) {
+  if(date == null) return "";
   final currentDay = DateFormat('dd-MM-yyyy').format(DateTime.now());
   final logDay = DateFormat('dd-MM-yyyy').format(date);
   return "${currentDay == logDay ? "today" : DateFormat("dd/MM/yyyy").format(date)} ${DateFormat('jm').format(date)}";

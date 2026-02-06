@@ -166,3 +166,29 @@ class DocumentDataModel with _$DocumentDataModel{
 
   factory DocumentDataModel.fromJson(Map<String, dynamic> json) => _$DocumentDataModelFromJson(json);
 }
+
+
+@Freezed()
+class FetchNotificationsResponseModel with _$FetchNotificationsResponseModel{
+  const factory FetchNotificationsResponseModel({
+    int? status,
+    String? message,
+    List<NotificationModel>? data
+  }) = _FetchNotificationsResponseModel;
+
+  factory FetchNotificationsResponseModel.fromJson(Map<String, dynamic> json) => _$FetchNotificationsResponseModelFromJson(json);
+}
+
+@Freezed()
+class NotificationModel with _$NotificationModel{
+  const factory NotificationModel({
+    @JsonKey(name: '_id') String? id,
+    String? topic,
+    String? title,
+    String? body,
+    String? image,
+    DateTime? createdAt
+  }) = _NotificationModel;
+
+  factory NotificationModel.fromJson(Map<String, dynamic> json) => _$NotificationModelFromJson(json);
+}

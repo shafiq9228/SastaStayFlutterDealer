@@ -96,6 +96,23 @@ class _CouponsPageState extends State<CouponsPage> {
                                           itemCount: couponsList?.length ?? 0,
                                           itemBuilder: (context, index) {
                                             final couponModel = couponsList?[index];
+                                            return Dismissible(
+                                              key: Key(couponModel?.id.toString() ?? index.toString()), // unique key
+                                              direction: DismissDirection.endToStart, // swipe from right to left
+                                              background: Container(
+                                                alignment: Alignment.centerRight,
+                                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                                color: Colors.red,
+                                                child: const Icon(Icons.delete, color: Colors.white),
+                                              ),
+                                              onDismissed: (direction) async {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text("Coupon deleted")),
+                                                );
+                                                await hostelViewModel.deleteCoupon(couponModel?.id);
+                                              },
+                                              child: CouponCodeComponent(couponModel:couponModel, selecting: widget.selecting),
+                                            );
                                             return CouponCodeComponent(couponModel:couponModel, selecting: widget.selecting);
                                           }),
                                       Visibility(
