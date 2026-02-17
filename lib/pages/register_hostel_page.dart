@@ -691,7 +691,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical:10),
-          child: Text("Hostel Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+          child: Text("Hostel Banner Image",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
         ),
         SizedBox(
           child: authViewModel.hostelImage.value.isNotEmpty ?  UploadedViewComponent(fileType: "image", imageUrl: authViewModel.hostelImage.value, fileName: 'hostelImage')  :
@@ -701,7 +701,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical:10),
-          child: Text("Edit Hostel Images",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
+          child: Text("Hostel Facility Photos",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: CustomColors.textColor)),
         ),
         InkWell(
           onTap: (){

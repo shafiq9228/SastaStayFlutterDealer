@@ -52,7 +52,7 @@ class TransactionDataModel with _$TransactionDataModel {
     String? failedReason,
     String? orderId,
     String? paymentId,
-    int? amount,
+    dynamic amount,
     List<AmountDetailsModel>? logs,
     DateTime? createdAt,
     PaymentDetailModel? paymentDetails
@@ -95,9 +95,9 @@ class PaymentDetailModel with _$PaymentDetailModel {
 @Freezed()
 class HostelRoomBookingDataModel with _$HostelRoomBookingDataModel {
   const factory HostelRoomBookingDataModel({
-    int? amount,
-    int? discount,
-    int? subTotal,
+    dynamic amount,
+    dynamic discount,
+    dynamic subTotal,
     List<AmountDetailsModel>? paymentDetailLogs,
     BookingModel? bookingResponse,
     List<BookingModel>? onGoingBookings,
@@ -158,10 +158,10 @@ class BookingModel with _$BookingModel {
     DateTime? checkOutDate,
     dynamic transactionId,
     int? guestCount,
-    int? amount,
-    int? discount,
-    int? walletDeduction,
-    int? subTotal,
+    dynamic amount,
+    dynamic discount,
+    dynamic walletDeduction,
+    dynamic subTotal,
     List<GuestDetailsModel>? guestDetailsList,
     List<AmountDetailsModel>? logs,
     String? bookingStatus,
@@ -218,7 +218,7 @@ class CouponDataModel with _$CouponDataModel{
     String? createdBy,
     DateTime? expiryDate,
     String? code,
-    int? orderValue,
+    dynamic orderValue,
     int? discount
   }) = _CouponDataModel;
 

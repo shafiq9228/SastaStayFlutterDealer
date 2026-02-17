@@ -633,7 +633,7 @@ mixin _$TransactionDataModel {
   String? get failedReason => throw _privateConstructorUsedError;
   String? get orderId => throw _privateConstructorUsedError;
   String? get paymentId => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
+  dynamic get amount => throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   PaymentDetailModel? get paymentDetails => throw _privateConstructorUsedError;
@@ -662,7 +662,7 @@ abstract class $TransactionDataModelCopyWith<$Res> {
       String? failedReason,
       String? orderId,
       String? paymentId,
-      int? amount,
+      dynamic amount,
       List<AmountDetailsModel>? logs,
       DateTime? createdAt,
       PaymentDetailModel? paymentDetails});
@@ -748,7 +748,7 @@ class _$TransactionDataModelCopyWithImpl<$Res,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       logs: freezed == logs
           ? _value.logs
           : logs // ignore: cast_nullable_to_non_nullable
@@ -797,7 +797,7 @@ abstract class _$$TransactionDataModelImplCopyWith<$Res>
       String? failedReason,
       String? orderId,
       String? paymentId,
-      int? amount,
+      dynamic amount,
       List<AmountDetailsModel>? logs,
       DateTime? createdAt,
       PaymentDetailModel? paymentDetails});
@@ -881,7 +881,7 @@ class __$$TransactionDataModelImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       logs: freezed == logs
           ? _value._logs
           : logs // ignore: cast_nullable_to_non_nullable
@@ -946,7 +946,7 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
   @override
   final String? paymentId;
   @override
-  final int? amount;
+  final dynamic amount;
   final List<AmountDetailsModel>? _logs;
   @override
   List<AmountDetailsModel>? get logs {
@@ -989,7 +989,7 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.paymentId, paymentId) ||
                 other.paymentId == paymentId) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
             const DeepCollectionEquality().equals(other._logs, _logs) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -1012,7 +1012,7 @@ class _$TransactionDataModelImpl implements _TransactionDataModel {
       failedReason,
       orderId,
       paymentId,
-      amount,
+      const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(_logs),
       createdAt,
       paymentDetails);
@@ -1046,7 +1046,7 @@ abstract class _TransactionDataModel implements TransactionDataModel {
       final String? failedReason,
       final String? orderId,
       final String? paymentId,
-      final int? amount,
+      final dynamic amount,
       final List<AmountDetailsModel>? logs,
       final DateTime? createdAt,
       final PaymentDetailModel? paymentDetails}) = _$TransactionDataModelImpl;
@@ -1078,7 +1078,7 @@ abstract class _TransactionDataModel implements TransactionDataModel {
   @override
   String? get paymentId;
   @override
-  int? get amount;
+  dynamic get amount;
   @override
   List<AmountDetailsModel>? get logs;
   @override
@@ -1656,9 +1656,9 @@ HostelRoomBookingDataModel _$HostelRoomBookingDataModelFromJson(
 
 /// @nodoc
 mixin _$HostelRoomBookingDataModel {
-  int? get amount => throw _privateConstructorUsedError;
-  int? get discount => throw _privateConstructorUsedError;
-  int? get subTotal => throw _privateConstructorUsedError;
+  dynamic get amount => throw _privateConstructorUsedError;
+  dynamic get discount => throw _privateConstructorUsedError;
+  dynamic get subTotal => throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get paymentDetailLogs =>
       throw _privateConstructorUsedError;
   BookingModel? get bookingResponse => throw _privateConstructorUsedError;
@@ -1678,9 +1678,9 @@ abstract class $HostelRoomBookingDataModelCopyWith<$Res> {
           HostelRoomBookingDataModel>;
   @useResult
   $Res call(
-      {int? amount,
-      int? discount,
-      int? subTotal,
+      {dynamic amount,
+      dynamic discount,
+      dynamic subTotal,
       List<AmountDetailsModel>? paymentDetailLogs,
       BookingModel? bookingResponse,
       List<BookingModel>? onGoingBookings});
@@ -1713,15 +1713,15 @@ class _$HostelRoomBookingDataModelCopyWithImpl<$Res,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       subTotal: freezed == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       paymentDetailLogs: freezed == paymentDetailLogs
           ? _value.paymentDetailLogs
           : paymentDetailLogs // ignore: cast_nullable_to_non_nullable
@@ -1760,9 +1760,9 @@ abstract class _$$HostelRoomBookingDataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? amount,
-      int? discount,
-      int? subTotal,
+      {dynamic amount,
+      dynamic discount,
+      dynamic subTotal,
       List<AmountDetailsModel>? paymentDetailLogs,
       BookingModel? bookingResponse,
       List<BookingModel>? onGoingBookings});
@@ -1795,15 +1795,15 @@ class __$$HostelRoomBookingDataModelImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       subTotal: freezed == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       paymentDetailLogs: freezed == paymentDetailLogs
           ? _value._paymentDetailLogs
           : paymentDetailLogs // ignore: cast_nullable_to_non_nullable
@@ -1838,11 +1838,11 @@ class _$HostelRoomBookingDataModelImpl implements _HostelRoomBookingDataModel {
       _$$HostelRoomBookingDataModelImplFromJson(json);
 
   @override
-  final int? amount;
+  final dynamic amount;
   @override
-  final int? discount;
+  final dynamic discount;
   @override
-  final int? subTotal;
+  final dynamic subTotal;
   final List<AmountDetailsModel>? _paymentDetailLogs;
   @override
   List<AmountDetailsModel>? get paymentDetailLogs {
@@ -1876,11 +1876,9 @@ class _$HostelRoomBookingDataModelImpl implements _HostelRoomBookingDataModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HostelRoomBookingDataModelImpl &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.discount, discount) ||
-                other.discount == discount) &&
-            (identical(other.subTotal, subTotal) ||
-                other.subTotal == subTotal) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.discount, discount) &&
+            const DeepCollectionEquality().equals(other.subTotal, subTotal) &&
             const DeepCollectionEquality()
                 .equals(other._paymentDetailLogs, _paymentDetailLogs) &&
             (identical(other.bookingResponse, bookingResponse) ||
@@ -1893,9 +1891,9 @@ class _$HostelRoomBookingDataModelImpl implements _HostelRoomBookingDataModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      amount,
-      discount,
-      subTotal,
+      const DeepCollectionEquality().hash(amount),
+      const DeepCollectionEquality().hash(discount),
+      const DeepCollectionEquality().hash(subTotal),
       const DeepCollectionEquality().hash(_paymentDetailLogs),
       bookingResponse,
       const DeepCollectionEquality().hash(_onGoingBookings));
@@ -1918,9 +1916,9 @@ class _$HostelRoomBookingDataModelImpl implements _HostelRoomBookingDataModel {
 abstract class _HostelRoomBookingDataModel
     implements HostelRoomBookingDataModel {
   const factory _HostelRoomBookingDataModel(
-          {final int? amount,
-          final int? discount,
-          final int? subTotal,
+          {final dynamic amount,
+          final dynamic discount,
+          final dynamic subTotal,
           final List<AmountDetailsModel>? paymentDetailLogs,
           final BookingModel? bookingResponse,
           final List<BookingModel>? onGoingBookings}) =
@@ -1930,11 +1928,11 @@ abstract class _HostelRoomBookingDataModel
       _$HostelRoomBookingDataModelImpl.fromJson;
 
   @override
-  int? get amount;
+  dynamic get amount;
   @override
-  int? get discount;
+  dynamic get discount;
   @override
-  int? get subTotal;
+  dynamic get subTotal;
   @override
   List<AmountDetailsModel>? get paymentDetailLogs;
   @override
@@ -2533,10 +2531,10 @@ mixin _$BookingModel {
   DateTime? get checkOutDate => throw _privateConstructorUsedError;
   dynamic get transactionId => throw _privateConstructorUsedError;
   int? get guestCount => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
-  int? get discount => throw _privateConstructorUsedError;
-  int? get walletDeduction => throw _privateConstructorUsedError;
-  int? get subTotal => throw _privateConstructorUsedError;
+  dynamic get amount => throw _privateConstructorUsedError;
+  dynamic get discount => throw _privateConstructorUsedError;
+  dynamic get walletDeduction => throw _privateConstructorUsedError;
+  dynamic get subTotal => throw _privateConstructorUsedError;
   List<GuestDetailsModel>? get guestDetailsList =>
       throw _privateConstructorUsedError;
   List<AmountDetailsModel>? get logs => throw _privateConstructorUsedError;
@@ -2569,10 +2567,10 @@ abstract class $BookingModelCopyWith<$Res> {
       DateTime? checkOutDate,
       dynamic transactionId,
       int? guestCount,
-      int? amount,
-      int? discount,
-      int? walletDeduction,
-      int? subTotal,
+      dynamic amount,
+      dynamic discount,
+      dynamic walletDeduction,
+      dynamic subTotal,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
       String? bookingStatus,
@@ -2670,19 +2668,19 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       walletDeduction: freezed == walletDeduction
           ? _value.walletDeduction
           : walletDeduction // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       subTotal: freezed == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       guestDetailsList: freezed == guestDetailsList
           ? _value.guestDetailsList
           : guestDetailsList // ignore: cast_nullable_to_non_nullable
@@ -2725,10 +2723,10 @@ abstract class _$$BookingModelImplCopyWith<$Res>
       DateTime? checkOutDate,
       dynamic transactionId,
       int? guestCount,
-      int? amount,
-      int? discount,
-      int? walletDeduction,
-      int? subTotal,
+      dynamic amount,
+      dynamic discount,
+      dynamic walletDeduction,
+      dynamic subTotal,
       List<GuestDetailsModel>? guestDetailsList,
       List<AmountDetailsModel>? logs,
       String? bookingStatus,
@@ -2824,19 +2822,19 @@ class __$$BookingModelImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       walletDeduction: freezed == walletDeduction
           ? _value.walletDeduction
           : walletDeduction // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       subTotal: freezed == subTotal
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       guestDetailsList: freezed == guestDetailsList
           ? _value._guestDetailsList
           : guestDetailsList // ignore: cast_nullable_to_non_nullable
@@ -2916,13 +2914,13 @@ class _$BookingModelImpl implements _BookingModel {
   @override
   final int? guestCount;
   @override
-  final int? amount;
+  final dynamic amount;
   @override
-  final int? discount;
+  final dynamic discount;
   @override
-  final int? walletDeduction;
+  final dynamic walletDeduction;
   @override
-  final int? subTotal;
+  final dynamic subTotal;
   final List<GuestDetailsModel>? _guestDetailsList;
   @override
   List<GuestDetailsModel>? get guestDetailsList {
@@ -2979,13 +2977,11 @@ class _$BookingModelImpl implements _BookingModel {
                 .equals(other.transactionId, transactionId) &&
             (identical(other.guestCount, guestCount) ||
                 other.guestCount == guestCount) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.discount, discount) ||
-                other.discount == discount) &&
-            (identical(other.walletDeduction, walletDeduction) ||
-                other.walletDeduction == walletDeduction) &&
-            (identical(other.subTotal, subTotal) ||
-                other.subTotal == subTotal) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.discount, discount) &&
+            const DeepCollectionEquality()
+                .equals(other.walletDeduction, walletDeduction) &&
+            const DeepCollectionEquality().equals(other.subTotal, subTotal) &&
             const DeepCollectionEquality()
                 .equals(other._guestDetailsList, _guestDetailsList) &&
             const DeepCollectionEquality().equals(other._logs, _logs) &&
@@ -3012,10 +3008,10 @@ class _$BookingModelImpl implements _BookingModel {
         checkOutDate,
         const DeepCollectionEquality().hash(transactionId),
         guestCount,
-        amount,
-        discount,
-        walletDeduction,
-        subTotal,
+        const DeepCollectionEquality().hash(amount),
+        const DeepCollectionEquality().hash(discount),
+        const DeepCollectionEquality().hash(walletDeduction),
+        const DeepCollectionEquality().hash(subTotal),
         const DeepCollectionEquality().hash(_guestDetailsList),
         const DeepCollectionEquality().hash(_logs),
         bookingStatus,
@@ -3051,10 +3047,10 @@ abstract class _BookingModel implements BookingModel {
       final DateTime? checkOutDate,
       final dynamic transactionId,
       final int? guestCount,
-      final int? amount,
-      final int? discount,
-      final int? walletDeduction,
-      final int? subTotal,
+      final dynamic amount,
+      final dynamic discount,
+      final dynamic walletDeduction,
+      final dynamic subTotal,
       final List<GuestDetailsModel>? guestDetailsList,
       final List<AmountDetailsModel>? logs,
       final String? bookingStatus,
@@ -3091,13 +3087,13 @@ abstract class _BookingModel implements BookingModel {
   @override
   int? get guestCount;
   @override
-  int? get amount;
+  dynamic get amount;
   @override
-  int? get discount;
+  dynamic get discount;
   @override
-  int? get walletDeduction;
+  dynamic get walletDeduction;
   @override
-  int? get subTotal;
+  dynamic get subTotal;
   @override
   List<GuestDetailsModel>? get guestDetailsList;
   @override
@@ -3751,7 +3747,7 @@ mixin _$CouponDataModel {
   String? get createdBy => throw _privateConstructorUsedError;
   DateTime? get expiryDate => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
-  int? get orderValue => throw _privateConstructorUsedError;
+  dynamic get orderValue => throw _privateConstructorUsedError;
   int? get discount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3774,7 +3770,7 @@ abstract class $CouponDataModelCopyWith<$Res> {
       String? createdBy,
       DateTime? expiryDate,
       String? code,
-      int? orderValue,
+      dynamic orderValue,
       int? discount});
 }
 
@@ -3833,7 +3829,7 @@ class _$CouponDataModelCopyWithImpl<$Res, $Val extends CouponDataModel>
       orderValue: freezed == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
@@ -3858,7 +3854,7 @@ abstract class _$$CouponDataModelImplCopyWith<$Res>
       String? createdBy,
       DateTime? expiryDate,
       String? code,
-      int? orderValue,
+      dynamic orderValue,
       int? discount});
 }
 
@@ -3915,7 +3911,7 @@ class __$$CouponDataModelImplCopyWithImpl<$Res>
       orderValue: freezed == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       discount: freezed == discount
           ? _value.discount
           : discount // ignore: cast_nullable_to_non_nullable
@@ -3957,7 +3953,7 @@ class _$CouponDataModelImpl implements _CouponDataModel {
   @override
   final String? code;
   @override
-  final int? orderValue;
+  final dynamic orderValue;
   @override
   final int? discount;
 
@@ -3983,16 +3979,25 @@ class _$CouponDataModelImpl implements _CouponDataModel {
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.code, code) || other.code == code) &&
-            (identical(other.orderValue, orderValue) ||
-                other.orderValue == orderValue) &&
+            const DeepCollectionEquality()
+                .equals(other.orderValue, orderValue) &&
             (identical(other.discount, discount) ||
                 other.discount == discount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, discountType, isActive,
-      singleUse, createdBy, expiryDate, code, orderValue, discount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      discountType,
+      isActive,
+      singleUse,
+      createdBy,
+      expiryDate,
+      code,
+      const DeepCollectionEquality().hash(orderValue),
+      discount);
 
   @JsonKey(ignore: true)
   @override
@@ -4018,7 +4023,7 @@ abstract class _CouponDataModel implements CouponDataModel {
       final String? createdBy,
       final DateTime? expiryDate,
       final String? code,
-      final int? orderValue,
+      final dynamic orderValue,
       final int? discount}) = _$CouponDataModelImpl;
 
   factory _CouponDataModel.fromJson(Map<String, dynamic> json) =
@@ -4040,7 +4045,7 @@ abstract class _CouponDataModel implements CouponDataModel {
   @override
   String? get code;
   @override
-  int? get orderValue;
+  dynamic get orderValue;
   @override
   int? get discount;
   @override

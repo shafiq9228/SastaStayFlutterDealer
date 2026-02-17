@@ -105,10 +105,10 @@ class HostelModel with _$HostelModel{
     int? roomsMore,
     List<String>? rules,
     LocationModel? location,
-    int? monthlyIncome,
-    int? totalIncome,
+    dynamic monthlyIncome,
+    dynamic totalIncome,
     int? totalVotes,
-    int? commission,
+    dynamic commission,
     dynamic rating,
     List<CategoryRating>? categoryRatings,
     List<String>? imagesType,
@@ -258,8 +258,8 @@ class RoomModel with _$RoomModel{
 class RentModel with _$RentModel{
   const factory RentModel({
     @JsonKey(name: '_id') String? id,
-    int? daily,
-    int? monthly,
+    dynamic daily,
+    dynamic monthly,
   }) = _RentModel;
 
   factory RentModel.fromJson(Map<String, dynamic> json) => _$RentModelFromJson(json);

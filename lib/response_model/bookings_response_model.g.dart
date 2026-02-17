@@ -78,7 +78,7 @@ _$TransactionDataModelImpl _$$TransactionDataModelImplFromJson(
       failedReason: json['failedReason'] as String?,
       orderId: json['orderId'] as String?,
       paymentId: json['paymentId'] as String?,
-      amount: json['amount'] as int?,
+      amount: json['amount'],
       logs: (json['logs'] as List<dynamic>?)
           ?.map((e) => AmountDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -164,9 +164,9 @@ Map<String, dynamic> _$$PaymentDetailModelImplToJson(
 _$HostelRoomBookingDataModelImpl _$$HostelRoomBookingDataModelImplFromJson(
         Map<String, dynamic> json) =>
     _$HostelRoomBookingDataModelImpl(
-      amount: json['amount'] as int?,
-      discount: json['discount'] as int?,
-      subTotal: json['subTotal'] as int?,
+      amount: json['amount'],
+      discount: json['discount'],
+      subTotal: json['subTotal'],
       paymentDetailLogs: (json['paymentDetailLogs'] as List<dynamic>?)
           ?.map((e) => AmountDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -262,10 +262,10 @@ _$BookingModelImpl _$$BookingModelImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['checkOutDate'] as String),
       transactionId: json['transactionId'],
       guestCount: json['guestCount'] as int?,
-      amount: json['amount'] as int?,
-      discount: json['discount'] as int?,
-      walletDeduction: json['walletDeduction'] as int?,
-      subTotal: json['subTotal'] as int?,
+      amount: json['amount'],
+      discount: json['discount'],
+      walletDeduction: json['walletDeduction'],
+      subTotal: json['subTotal'],
       guestDetailsList: (json['guestDetailsList'] as List<dynamic>?)
           ?.map((e) => GuestDetailsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -373,7 +373,7 @@ _$CouponDataModelImpl _$$CouponDataModelImplFromJson(
           ? null
           : DateTime.parse(json['expiryDate'] as String),
       code: json['code'] as String?,
-      orderValue: json['orderValue'] as int?,
+      orderValue: json['orderValue'],
       discount: json['discount'] as int?,
     );
 

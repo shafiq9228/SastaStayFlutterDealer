@@ -1180,10 +1180,10 @@ mixin _$HostelModel {
   int? get roomsMore => throw _privateConstructorUsedError;
   List<String>? get rules => throw _privateConstructorUsedError;
   LocationModel? get location => throw _privateConstructorUsedError;
-  int? get monthlyIncome => throw _privateConstructorUsedError;
-  int? get totalIncome => throw _privateConstructorUsedError;
+  dynamic get monthlyIncome => throw _privateConstructorUsedError;
+  dynamic get totalIncome => throw _privateConstructorUsedError;
   int? get totalVotes => throw _privateConstructorUsedError;
-  int? get commission => throw _privateConstructorUsedError;
+  dynamic get commission => throw _privateConstructorUsedError;
   dynamic get rating => throw _privateConstructorUsedError;
   List<CategoryRating>? get categoryRatings =>
       throw _privateConstructorUsedError;
@@ -1227,10 +1227,10 @@ abstract class $HostelModelCopyWith<$Res> {
       int? roomsMore,
       List<String>? rules,
       LocationModel? location,
-      int? monthlyIncome,
-      int? totalIncome,
+      dynamic monthlyIncome,
+      dynamic totalIncome,
       int? totalVotes,
-      int? commission,
+      dynamic commission,
       dynamic rating,
       List<CategoryRating>? categoryRatings,
       List<String>? imagesType,
@@ -1384,11 +1384,11 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
       monthlyIncome: freezed == monthlyIncome
           ? _value.monthlyIncome
           : monthlyIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalIncome: freezed == totalIncome
           ? _value.totalIncome
           : totalIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalVotes: freezed == totalVotes
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
@@ -1396,7 +1396,7 @@ class _$HostelModelCopyWithImpl<$Res, $Val extends HostelModel>
       commission: freezed == commission
           ? _value.commission
           : commission // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -1489,10 +1489,10 @@ abstract class _$$HostelModelImplCopyWith<$Res>
       int? roomsMore,
       List<String>? rules,
       LocationModel? location,
-      int? monthlyIncome,
-      int? totalIncome,
+      dynamic monthlyIncome,
+      dynamic totalIncome,
       int? totalVotes,
-      int? commission,
+      dynamic commission,
       dynamic rating,
       List<CategoryRating>? categoryRatings,
       List<String>? imagesType,
@@ -1647,11 +1647,11 @@ class __$$HostelModelImplCopyWithImpl<$Res>
       monthlyIncome: freezed == monthlyIncome
           ? _value.monthlyIncome
           : monthlyIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalIncome: freezed == totalIncome
           ? _value.totalIncome
           : totalIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalVotes: freezed == totalVotes
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
@@ -1659,7 +1659,7 @@ class __$$HostelModelImplCopyWithImpl<$Res>
       commission: freezed == commission
           ? _value.commission
           : commission // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -1837,13 +1837,13 @@ class _$HostelModelImpl implements _HostelModel {
   @override
   final LocationModel? location;
   @override
-  final int? monthlyIncome;
+  final dynamic monthlyIncome;
   @override
-  final int? totalIncome;
+  final dynamic totalIncome;
   @override
   final int? totalVotes;
   @override
-  final int? commission;
+  final dynamic commission;
   @override
   final dynamic rating;
   final List<CategoryRating>? _categoryRatings;
@@ -1917,14 +1917,14 @@ class _$HostelModelImpl implements _HostelModel {
             const DeepCollectionEquality().equals(other._rules, _rules) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.monthlyIncome, monthlyIncome) ||
-                other.monthlyIncome == monthlyIncome) &&
-            (identical(other.totalIncome, totalIncome) ||
-                other.totalIncome == totalIncome) &&
+            const DeepCollectionEquality()
+                .equals(other.monthlyIncome, monthlyIncome) &&
+            const DeepCollectionEquality()
+                .equals(other.totalIncome, totalIncome) &&
             (identical(other.totalVotes, totalVotes) ||
                 other.totalVotes == totalVotes) &&
-            (identical(other.commission, commission) ||
-                other.commission == commission) &&
+            const DeepCollectionEquality()
+                .equals(other.commission, commission) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality()
                 .equals(other._categoryRatings, _categoryRatings) &&
@@ -1963,10 +1963,10 @@ class _$HostelModelImpl implements _HostelModel {
         roomsMore,
         const DeepCollectionEquality().hash(_rules),
         location,
-        monthlyIncome,
-        totalIncome,
+        const DeepCollectionEquality().hash(monthlyIncome),
+        const DeepCollectionEquality().hash(totalIncome),
         totalVotes,
-        commission,
+        const DeepCollectionEquality().hash(commission),
         const DeepCollectionEquality().hash(rating),
         const DeepCollectionEquality().hash(_categoryRatings),
         const DeepCollectionEquality().hash(_imagesType),
@@ -2013,10 +2013,10 @@ abstract class _HostelModel implements HostelModel {
       final int? roomsMore,
       final List<String>? rules,
       final LocationModel? location,
-      final int? monthlyIncome,
-      final int? totalIncome,
+      final dynamic monthlyIncome,
+      final dynamic totalIncome,
       final int? totalVotes,
-      final int? commission,
+      final dynamic commission,
       final dynamic rating,
       final List<CategoryRating>? categoryRatings,
       final List<String>? imagesType,
@@ -2074,13 +2074,13 @@ abstract class _HostelModel implements HostelModel {
   @override
   LocationModel? get location;
   @override
-  int? get monthlyIncome;
+  dynamic get monthlyIncome;
   @override
-  int? get totalIncome;
+  dynamic get totalIncome;
   @override
   int? get totalVotes;
   @override
-  int? get commission;
+  dynamic get commission;
   @override
   dynamic get rating;
   @override
@@ -4416,8 +4416,8 @@ RentModel _$RentModelFromJson(Map<String, dynamic> json) {
 mixin _$RentModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
-  int? get daily => throw _privateConstructorUsedError;
-  int? get monthly => throw _privateConstructorUsedError;
+  dynamic get daily => throw _privateConstructorUsedError;
+  dynamic get monthly => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -4430,7 +4430,7 @@ abstract class $RentModelCopyWith<$Res> {
   factory $RentModelCopyWith(RentModel value, $Res Function(RentModel) then) =
       _$RentModelCopyWithImpl<$Res, RentModel>;
   @useResult
-  $Res call({@JsonKey(name: '_id') String? id, int? daily, int? monthly});
+  $Res call({@JsonKey(name: '_id') String? id, dynamic daily, dynamic monthly});
 }
 
 /// @nodoc
@@ -4458,11 +4458,11 @@ class _$RentModelCopyWithImpl<$Res, $Val extends RentModel>
       daily: freezed == daily
           ? _value.daily
           : daily // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       monthly: freezed == monthly
           ? _value.monthly
           : monthly // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -4475,7 +4475,7 @@ abstract class _$$RentModelImplCopyWith<$Res>
       __$$RentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: '_id') String? id, int? daily, int? monthly});
+  $Res call({@JsonKey(name: '_id') String? id, dynamic daily, dynamic monthly});
 }
 
 /// @nodoc
@@ -4501,11 +4501,11 @@ class __$$RentModelImplCopyWithImpl<$Res>
       daily: freezed == daily
           ? _value.daily
           : daily // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       monthly: freezed == monthly
           ? _value.monthly
           : monthly // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
     ));
   }
 }
@@ -4523,9 +4523,9 @@ class _$RentModelImpl implements _RentModel {
   @JsonKey(name: '_id')
   final String? id;
   @override
-  final int? daily;
+  final dynamic daily;
   @override
-  final int? monthly;
+  final dynamic monthly;
 
   @override
   String toString() {
@@ -4538,13 +4538,17 @@ class _$RentModelImpl implements _RentModel {
         (other.runtimeType == runtimeType &&
             other is _$RentModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.daily, daily) || other.daily == daily) &&
-            (identical(other.monthly, monthly) || other.monthly == monthly));
+            const DeepCollectionEquality().equals(other.daily, daily) &&
+            const DeepCollectionEquality().equals(other.monthly, monthly));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, daily, monthly);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      const DeepCollectionEquality().hash(daily),
+      const DeepCollectionEquality().hash(monthly));
 
   @JsonKey(ignore: true)
   @override
@@ -4563,8 +4567,8 @@ class _$RentModelImpl implements _RentModel {
 abstract class _RentModel implements RentModel {
   const factory _RentModel(
       {@JsonKey(name: '_id') final String? id,
-      final int? daily,
-      final int? monthly}) = _$RentModelImpl;
+      final dynamic daily,
+      final dynamic monthly}) = _$RentModelImpl;
 
   factory _RentModel.fromJson(Map<String, dynamic> json) =
       _$RentModelImpl.fromJson;
@@ -4573,9 +4577,9 @@ abstract class _RentModel implements RentModel {
   @JsonKey(name: '_id')
   String? get id;
   @override
-  int? get daily;
+  dynamic get daily;
   @override
-  int? get monthly;
+  dynamic get monthly;
   @override
   @JsonKey(ignore: true)
   _$$RentModelImplCopyWith<_$RentModelImpl> get copyWith =>

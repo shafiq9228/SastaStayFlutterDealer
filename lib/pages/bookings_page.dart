@@ -131,7 +131,7 @@ class _BookingsPageState extends State<BookingsPage> {
                                     child: Center(
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                                        child: Text("$heading (${getListCount(heading)})",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor),),
+                                        child: Text(filterType.value != heading ? "${heading ?? ''}" : "$heading (${getListCount(heading)})",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16,color: CustomColors.textColor),),
                                       ),
                                     ),
                                   ),

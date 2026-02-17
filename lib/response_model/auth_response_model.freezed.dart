@@ -1425,8 +1425,8 @@ mixin _$DealerModel {
   String? get source => throw _privateConstructorUsedError;
   String? get version => throw _privateConstructorUsedError;
   String? get deviceId => throw _privateConstructorUsedError;
-  int? get monthlyIncome => throw _privateConstructorUsedError;
-  int? get totalIncome => throw _privateConstructorUsedError;
+  dynamic get monthlyIncome => throw _privateConstructorUsedError;
+  dynamic get totalIncome => throw _privateConstructorUsedError;
   int? get totalVotes => throw _privateConstructorUsedError;
   dynamic get rating => throw _privateConstructorUsedError;
   String? get dealingType => throw _privateConstructorUsedError;
@@ -1455,8 +1455,8 @@ abstract class $DealerModelCopyWith<$Res> {
       String? source,
       String? version,
       String? deviceId,
-      int? monthlyIncome,
-      int? totalIncome,
+      dynamic monthlyIncome,
+      dynamic totalIncome,
       int? totalVotes,
       dynamic rating,
       String? dealingType,
@@ -1529,11 +1529,11 @@ class _$DealerModelCopyWithImpl<$Res, $Val extends DealerModel>
       monthlyIncome: freezed == monthlyIncome
           ? _value.monthlyIncome
           : monthlyIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalIncome: freezed == totalIncome
           ? _value.totalIncome
           : totalIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalVotes: freezed == totalVotes
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
@@ -1575,8 +1575,8 @@ abstract class _$$DealerModelImplCopyWith<$Res>
       String? source,
       String? version,
       String? deviceId,
-      int? monthlyIncome,
-      int? totalIncome,
+      dynamic monthlyIncome,
+      dynamic totalIncome,
       int? totalVotes,
       dynamic rating,
       String? dealingType,
@@ -1647,11 +1647,11 @@ class __$$DealerModelImplCopyWithImpl<$Res>
       monthlyIncome: freezed == monthlyIncome
           ? _value.monthlyIncome
           : monthlyIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalIncome: freezed == totalIncome
           ? _value.totalIncome
           : totalIncome // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       totalVotes: freezed == totalVotes
           ? _value.totalVotes
           : totalVotes // ignore: cast_nullable_to_non_nullable
@@ -1718,9 +1718,9 @@ class _$DealerModelImpl implements _DealerModel {
   @override
   final String? deviceId;
   @override
-  final int? monthlyIncome;
+  final dynamic monthlyIncome;
   @override
-  final int? totalIncome;
+  final dynamic totalIncome;
   @override
   final int? totalVotes;
   @override
@@ -1759,10 +1759,10 @@ class _$DealerModelImpl implements _DealerModel {
             (identical(other.version, version) || other.version == version) &&
             (identical(other.deviceId, deviceId) ||
                 other.deviceId == deviceId) &&
-            (identical(other.monthlyIncome, monthlyIncome) ||
-                other.monthlyIncome == monthlyIncome) &&
-            (identical(other.totalIncome, totalIncome) ||
-                other.totalIncome == totalIncome) &&
+            const DeepCollectionEquality()
+                .equals(other.monthlyIncome, monthlyIncome) &&
+            const DeepCollectionEquality()
+                .equals(other.totalIncome, totalIncome) &&
             (identical(other.totalVotes, totalVotes) ||
                 other.totalVotes == totalVotes) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
@@ -1786,8 +1786,8 @@ class _$DealerModelImpl implements _DealerModel {
       source,
       version,
       deviceId,
-      monthlyIncome,
-      totalIncome,
+      const DeepCollectionEquality().hash(monthlyIncome),
+      const DeepCollectionEquality().hash(totalIncome),
       totalVotes,
       const DeepCollectionEquality().hash(rating),
       dealingType,
@@ -1818,8 +1818,8 @@ abstract class _DealerModel implements DealerModel {
       final String? source,
       final String? version,
       final String? deviceId,
-      final int? monthlyIncome,
-      final int? totalIncome,
+      final dynamic monthlyIncome,
+      final dynamic totalIncome,
       final int? totalVotes,
       final dynamic rating,
       final String? dealingType,
@@ -1847,9 +1847,9 @@ abstract class _DealerModel implements DealerModel {
   @override
   String? get deviceId;
   @override
-  int? get monthlyIncome;
+  dynamic get monthlyIncome;
   @override
-  int? get totalIncome;
+  dynamic get totalIncome;
   @override
   int? get totalVotes;
   @override

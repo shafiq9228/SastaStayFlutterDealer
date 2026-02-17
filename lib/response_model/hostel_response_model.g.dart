@@ -156,10 +156,10 @@ _$HostelModelImpl _$$HostelModelImplFromJson(Map<String, dynamic> json) =>
       location: json['location'] == null
           ? null
           : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
-      monthlyIncome: json['monthlyIncome'] as int?,
-      totalIncome: json['totalIncome'] as int?,
+      monthlyIncome: json['monthlyIncome'],
+      totalIncome: json['totalIncome'],
       totalVotes: json['totalVotes'] as int?,
-      commission: json['commission'] as int?,
+      commission: json['commission'],
       rating: json['rating'],
       categoryRatings: (json['categoryRatings'] as List<dynamic>?)
           ?.map((e) => CategoryRating.fromJson(e as Map<String, dynamic>))
@@ -422,8 +422,8 @@ Map<String, dynamic> _$$RoomModelImplToJson(_$RoomModelImpl instance) =>
 _$RentModelImpl _$$RentModelImplFromJson(Map<String, dynamic> json) =>
     _$RentModelImpl(
       id: json['_id'] as String?,
-      daily: json['daily'] as int?,
-      monthly: json['monthly'] as int?,
+      daily: json['daily'],
+      monthly: json['monthly'],
     );
 
 Map<String, dynamic> _$$RentModelImplToJson(_$RentModelImpl instance) =>

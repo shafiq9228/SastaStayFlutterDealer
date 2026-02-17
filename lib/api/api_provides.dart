@@ -7,7 +7,7 @@ class ApiProvider<T> extends GetConnect{
   String apiKey = "654321";
   // String localUrl = ;
   // String liveUrl = ;
-  String liveUrl = true ? "https://sastastay-1d420.el.r.appspot.com/dealer/" : "http://192.168.0.218:8055/dealer/" ;
+  String liveUrl = true ? "https://sastastay-1d420.el.r.appspot.com/dealer/" : "http://192.168.0.218:8055/dealer/";
 
   @override
   void onInit() {
