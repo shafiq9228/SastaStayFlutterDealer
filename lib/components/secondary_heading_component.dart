@@ -13,7 +13,8 @@ class SecondaryHeadingComponent extends StatelessWidget {
   final VoidCallback? buttonClick;
   final String? extraBtnText;
   final VoidCallback? extraBtnClick;
-  const SecondaryHeadingComponent({super.key, required this.buttonTxt, this.buttonClick, this.extraBtnText, this.extraBtnClick});
+  final Widget? trailing;
+  const SecondaryHeadingComponent({super.key, required this.buttonTxt, this.buttonClick, this.extraBtnText, this.extraBtnClick, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,8 @@ class SecondaryHeadingComponent extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
+        if (trailing != null) trailing!,
       ],
     ));
   }

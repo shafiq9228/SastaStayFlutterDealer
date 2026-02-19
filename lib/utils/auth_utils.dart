@@ -28,6 +28,15 @@ class AuthUtils {
     return DateFormat.yMd().format(indiaTime);
   }
 
+  static String maskMobileNumber(String mobile) {
+    if (mobile.length <= 2) return mobile;
+
+    final visibleDigits = mobile.substring(mobile.length - 2);
+    final maskedPart = '*' * (mobile.length - 2);
+
+    return maskedPart + visibleDigits;
+  }
+
   static String dateFormatToCheckInCheckOut1(DateTime? checkInDate, DateTime? checkOutDate) {
     if (checkInDate == null || checkOutDate == null) return "";
 

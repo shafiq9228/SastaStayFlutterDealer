@@ -4,6 +4,7 @@ import 'package:sasta_stay_dealer/response_model/auth_response_model.dart';
 import 'package:sasta_stay_dealer/utils/app_styles.dart';
 
 import '../response_model/hostel_response_model.dart';
+import '../utils/auth_utils.dart';
 import '../utils/custom_colors.dart';
 import 'custom_network_image.dart';
 
@@ -60,7 +61,7 @@ class LeadComponent extends StatelessWidget {
                   Row(
                     children: [
                       Text("Mobile : ",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.black)),
-                      Expanded(child: Text("${userModel?.mobile ?? 0}",textAlign: TextAlign.right,maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.black))),
+                      Expanded(child: Text("${AuthUtils.maskMobileNumber("${userModel?.mobile ?? 0}")}",textAlign: TextAlign.right,maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,color: CustomColors.black))),
                     ],
                   ),
                   const SizedBox(height: 5),

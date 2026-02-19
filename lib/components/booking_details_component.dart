@@ -160,7 +160,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
 
     return GestureDetector(
       onTap: (){
-        Get.to(() => BookingDetailsPage(bookingId: widget.bookingModel?.id ?? ""));
+        Get.to(() => BookingDetailsPage(bookingId: widget.bookingModel?.id ?? "",withdrawTransaction:withdrawTransaction));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
@@ -229,7 +229,7 @@ class _BookingDetailsComponentState extends State<BookingDetailsComponent> {
                                   const SizedBox(width: 5),
                                   Expanded(
                                     child: Text(
-                                      "${userModel?.mobile ?? 0}",
+                                      "${AuthUtils.maskMobileNumber("${userModel?.mobile ?? 0}")}",
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(

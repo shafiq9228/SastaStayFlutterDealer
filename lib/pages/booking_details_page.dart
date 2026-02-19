@@ -33,8 +33,9 @@ import 'hostel_images_page.dart';
 
 class BookingDetailsPage extends StatefulWidget {
   final String bookingId;
+  final TransactionDataModel? withdrawTransaction;
   final bool? fromBooking;
-  const BookingDetailsPage({super.key, required this.bookingId, this.fromBooking});
+  const BookingDetailsPage({super.key, required this.bookingId,this.withdrawTransaction,this.fromBooking});
 
   @override
   State<BookingDetailsPage> createState() => _BookingDetailsPageState();
@@ -42,6 +43,136 @@ class BookingDetailsPage extends StatefulWidget {
 
 class _BookingDetailsPageState extends State<BookingDetailsPage> {
   final bookingViewModel = Get.put(BookingViewModel());
+
+
+  Widget _buildWithdrawStatusWidget() {
+
+
+    final paymentStatus = widget.withdrawTransaction?.paymentStatus?.toLowerCase();
+
+    if (widget.withdrawTransaction == null || paymentStatus == null) {
+      // If no withdraw transaction exists yet
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: CustomColors.primary.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: CustomColors.primary, width: 1),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.pending_actions, size: 12, color: CustomColors.primary),
+            const SizedBox(width: 4),
+            Text(
+              'Processing',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color:CustomColors.primary,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    switch (paymentStatus) {
+      case 'success':
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.green[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.green.withOpacity(0.5), width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.check_circle, size: 12, color: Colors.green[700]),
+              const SizedBox(width: 4),
+              Text(
+                'Paid',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.green[700],
+                ),
+              ),
+            ],
+          ),
+        );
+
+      case 'failed':
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.red[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.red.withOpacity(0.5), width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.error_outline, size: 12, color: Colors.red[700]),
+              const SizedBox(width: 4),
+              Text(
+                'Failed',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red[700],
+                ),
+              ),
+            ],
+          ),
+        );
+
+      case 'pending':
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.orange[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.orange.withOpacity(0.5), width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.schedule, size: 12, color: Colors.orange[700]),
+              const SizedBox(width: 4),
+              Text(
+                'Pending',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.orange[700],
+                ),
+              ),
+            ],
+          ),
+        );
+
+      default:
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey.withOpacity(0.5), width: 1),
+          ),
+          child: Text(
+            paymentStatus,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[700],
+            ),
+          ),
+        );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +284,20 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                                     child: Row(
                                       children: [
                                         Expanded(child: Text("Order Id : ${bookingDataModel?.orderId ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
-                                        Icon(Icons.copy_rounded,color: CustomColors.textColor,size: 15)
+                                        // Icon(Icons.copy_rounded,color: CustomColors.textColor,size: 15)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration:  AppStyles.gradientColorDecoration2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        Expanded(child: Text("Withdraw Transaction Id : ${widget.withdrawTransaction?.id ?? ''}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,color: CustomColors.textColor))),
+                                        _buildWithdrawStatusWidget(),
                                       ],
                                     ),
                                   ),
@@ -1059,8 +1203,8 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                                       ),
                                     ],
                                   ),
-                                  if(discount >0) const SizedBox(height: 4),
-                                  if(discount >0) Row(
+                                  if(discount > 0) const SizedBox(height: 4),
+                                  if(discount > 0) Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
@@ -1090,8 +1234,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                     ],
                   ),
                 ),
-                if (dealerDetails?.primaryAccountId == null)
-                  InkWell(
+                if (dealerDetails?.primaryAccountId == null) InkWell(
                     onTap: () {
                       Get.to(() => MoneyWithdrawPage());
                     },
@@ -1154,8 +1297,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                     ),
                   ),
                 // Payment Settlement Status
-                if (withdrawTransactionModel != null)
-                  Padding(
+                if (withdrawTransactionModel != null) Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

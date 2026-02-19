@@ -22,6 +22,12 @@ class TransactionsPage extends StatefulWidget {
 }
 
 class _TransactionsPageState extends State<TransactionsPage> {
+
+  RxString filter = "all".obs;
+
+  final filterEnums = ["All","Booking","Withdraw","Refund"];
+
+
   final transactionViewModel = Get.put(TransactionViewModel());
 
   @override
@@ -34,9 +40,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
             top:true,
             child: Column(
               children: [
-                SecondaryHeadingComponent(buttonTxt: "Transaction History", buttonClick: (){
-                  Get.back();
-                }),
+                SecondaryHeadingComponent(
+                  buttonTxt: "Transaction History",
+                  buttonClick: (){
+                    Get.back();
+                  },
+                  trailing: _buildDropdown(),
+                ),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () => _refreshData(),
@@ -121,13 +131,49 @@ class _TransactionsPageState extends State<TransactionsPage> {
       ),);
   }
 
+
+  Widget _buildDropdown() {
+    return Container(
+      width: 110,
+      height: 34,
+      margin: const EdgeInsets.only(right:10),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: CustomColors.gray),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: Obx(
+          () => DropdownButton<String>(
+            isExpanded: true,
+            icon: const Icon(Icons.keyboard_arrow_down, size: 15),
+            value: filter.value.toLowerCase().toString(),
+            items: filterEnums.map((e) {
+              return DropdownMenuItem(
+                value: e.toLowerCase().toString(),
+                child: Text(e ?? "", style: const TextStyle(fontSize: 12)),
+              );
+            }).toList(),
+            onChanged: (value) {
+              filter.value = value ?? "all";
+              print(filter.value);
+              _refreshData();
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+
   Future<void> _refreshData() async{
-    transactionViewModel.fetchTransactions(const PaginationRequestModel(page: 1),true);
+    transactionViewModel.fetchTransactions(PaginationRequestModel(page: 1,type:filter.value),true);
   }
 
   Future<void> _addData() async {
     final observer = transactionViewModel.fetchTransactionsObserver;
     if(observer.value.isPaginationCompleted || observer.value.isLoading ) return;
-    transactionViewModel.fetchTransactions(PaginationRequestModel(page: observer.value.page),false);
+    transactionViewModel.fetchTransactions(PaginationRequestModel(page: observer.value.page,type:filter.value),false);
   }
 }
