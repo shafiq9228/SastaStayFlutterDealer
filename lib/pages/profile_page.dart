@@ -215,7 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       DottedLine(dashColor: CustomColors.darkGray,),
                                       Obx(() =>
                                           Visibility(
-                                          visible: (authViewModel.kysDocuments).any((edir) =>  edir.documentStatus == "pending") == true,
+                                          visible: (authViewModel.kysDocuments).any((edir) =>  edir.documentStatus != "approved") == true,
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
