@@ -120,6 +120,8 @@ class FetchAccountsResponseModel with _$FetchAccountsResponseModel{
 class OptionsData with _$OptionsData{
 
   const factory OptionsData({
+    bool? payUAutherised,
+    bool? blocked,
     bool? upiWithdrawals,
     bool? bankWithdrawals
   }) = _OptionsData;

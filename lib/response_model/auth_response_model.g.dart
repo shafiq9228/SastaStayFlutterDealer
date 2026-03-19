@@ -147,6 +147,7 @@ _$DealerModelImpl _$$DealerModelImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => DocumentDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       primaryAccountId: json['primaryAccountId'],
+      payUAutherised: json['payUAutherised'] as bool?,
     );
 
 Map<String, dynamic> _$$DealerModelImplToJson(_$DealerModelImpl instance) =>
@@ -166,6 +167,7 @@ Map<String, dynamic> _$$DealerModelImplToJson(_$DealerModelImpl instance) =>
       'dealingType': instance.dealingType,
       'kycDocuments': instance.kycDocuments,
       'primaryAccountId': instance.primaryAccountId,
+      'payUAutherised': instance.payUAutherised,
     };
 
 _$DocumentDataModelImpl _$$DocumentDataModelImplFromJson(

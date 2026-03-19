@@ -160,10 +160,10 @@ class TransactionViewModel extends GetxController {
     }
   }
 
-  void performPayUAddCustomer() async {
+  void performPayUAddCustomer(String mobile,String fullName) async {
     try {
       payUAddCustomerObserver.value = const ApiResult.loading();
-      final response = await apiProvider.post(EndPoints.payUAddCustomer,{});
+      final response = await apiProvider.post(EndPoints.payUAddCustomer,{"mobile":mobile,"fullName":fullName});
       final body = response.body;
       if (response.isOk && body != null) {
         final responseData = PayUAddCustomerResponseModel.fromJson(body);
@@ -171,12 +171,12 @@ class TransactionViewModel extends GetxController {
           payUAddCustomerObserver.value = ApiResult.success(responseData);
         }
         else if(responseData.status == 2){
-          payUAddCustomerObserver.value = const ApiResult.init();
-          fetchWithdrawalDetailsObserver.value.whenOrNull(success: (fetchWithDraw) {
-            final fetchWithDrawDataModel = (fetchWithDraw  as FetchWithdrawalDetailsResponseModel).data;
-            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAuthetication: true);
-            final modifiedData = FetchWithdrawalDetailsResponseModel(data: modifiedDataModel);
-            fetchWithdrawalDetailsObserver.value = ApiResult.success(modifiedData);
+          fetchAccountsObserver.value = const ApiResult.init();
+          fetchAccountsObserver.value.whenOrNull(success: (fetchWithDraw) {
+            final fetchWithDrawDataModel = (fetchWithDraw  as FetchAccountsResponseModel).options;
+            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAutherised: true);
+            final modifiedData = FetchAccountsResponseModel(options: modifiedDataModel);
+            fetchAccountsObserver.value = ApiResult.success(modifiedData);
           });
         }
         else {
@@ -205,11 +205,11 @@ class TransactionViewModel extends GetxController {
         final responseData = PrimaryResponseModel.fromJson(body);
         if (responseData.status == 1) {
           payUVerifyOtpObserver.value = ApiResult.success(responseData);
-          fetchWithdrawalDetailsObserver.value.whenOrNull(success: (fetchWithDraw) {
-            final fetchWithDrawDataModel = (fetchWithDraw  as FetchWithdrawalDetailsResponseModel).data;
-            final modifiedDataModel =  fetchWithDrawDataModel?.copyWith(payUAuthetication: true);
-            final modifiedData = FetchWithdrawalDetailsResponseModel(data: modifiedDataModel);
-            fetchWithdrawalDetailsObserver.value = ApiResult.success(modifiedData);
+          fetchAccountsObserver.value.whenOrNull(success: (fetchAcc) {
+            final fetchAccounts = (fetchAcc as FetchAccountsResponseModel).options;
+            final modifiedDataModel =  fetchAccounts?.copyWith(payUAutherised: true);
+            final modifiedData = FetchAccountsResponseModel(options: modifiedDataModel);
+            fetchAccountsObserver.value = ApiResult.success(modifiedData);
           });
         } else {
           payUVerifyOtpObserver.value = ApiResult.error(responseData.message ?? "");

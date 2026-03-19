@@ -168,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: CustomColors.darkGray)),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             InkWell(
                               onTap: () {
                                 Get.to(() => RegistrationPage(dealer: userModel));
@@ -200,7 +200,51 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 50),
+                            const SizedBox(height: 20),
+                            if(userModel?.dealingType != "manager" && userModel?.primaryAccountId == null) InkWell(
+                              onTap: (){
+                                Get.to(() =>  MoneyWithdrawPage());
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  decoration: AppStyles.redBg5,
+                                  child: Row(
+                                    children: [
+                                      Container(decoration: AppStyles.whiteCircleBg, child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset("assets/images/mark.png",width: 20,height: 20,),
+                                      )),
+                                      Expanded(child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        child: Text("Please add your bank account details. Payments will be processed automatically from the admin panel after verification.",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.textColor)),
+                                      ))
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(height: 10),
+                            if(userModel?.dealingType != "manager" && userModel?.payUAutherised == false) InkWell(
+                              onTap: (){
+                                Get.to(() =>  MoneyWithdrawPage());
+                              },
+                              child: Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  decoration: AppStyles.redBg5,
+                                  child: Row(
+                                    children: [
+                                      Container(decoration: AppStyles.whiteCircleBg, child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset("assets/images/mark.png",width: 20,height: 20,),
+                                      )),
+                                      Expanded(child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        child: Text("Login Required For Withdrawal Verification.",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: CustomColors.textColor)),
+                                      ))
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(height: 30),
                             Padding(
                               padding: const EdgeInsets.all(15),
                               child: Container(

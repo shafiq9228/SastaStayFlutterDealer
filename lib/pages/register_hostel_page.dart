@@ -87,7 +87,7 @@ class _RegisterHostelPageState extends State<RegisterHostelPage> {
                   final primaryHostel = responseUserData?.primaryHostel;
                   if(rejected.value && rejectedValuesAdded.value == false){
                       authViewModel.hostelImage.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
-                      authViewModel.hostelGstDocument.value = rejectedFields?.contains("hostelImage") == true ? "" : primaryHostel?.hostelImage ?? "";
+                      authViewModel.hostelGstDocument.value = rejectedFields?.contains("hostelGstDocument") == true ? "" : primaryHostel?.hostelGstDocument ?? "";
                       authViewModel.images.value = rejectedFields?.contains("images") == true ? [] : primaryHostel?.images ?? [];
                       authViewModel.rules.value = rejectedFields?.contains("rules") == true ? [] : primaryHostel?.rules ?? [];
                       authViewModel.faqs.value = rejectedFields?.contains("faq") == true ? [] : primaryHostel?.faq ?? [];

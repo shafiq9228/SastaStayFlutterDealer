@@ -102,6 +102,10 @@ class AuthViewModel extends GetxController{
     return dealerStatusObserver.value.maybeWhen(success: (data) => (data as FormHelperDataResponseModel).data?.primaryHostel?.id ?? "",orElse: () => "");
   }
 
+  DealerModel? getFetchedUserDetails(){
+    return fetchUserDetailsObserver.value.maybeWhen(success: (data) => (data as FetchUserDetailsResponseModel).data ?? null,orElse: () => null);
+  }
+
   Future<Position?> fetchCurrentLocation() async {
     if (locationPosition.value == null) {
       await Geolocator.requestPermission();

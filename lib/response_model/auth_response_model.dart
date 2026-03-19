@@ -148,7 +148,8 @@ class DealerModel with _$DealerModel{
     dynamic rating,
     String? dealingType,
     List<DocumentDataModel>? kycDocuments,
-    dynamic primaryAccountId
+    dynamic primaryAccountId,
+    bool? payUAutherised
   }) = _DealerModel;
 
   factory DealerModel.fromJson(Map<String, dynamic> json) => _$DealerModelFromJson(json);

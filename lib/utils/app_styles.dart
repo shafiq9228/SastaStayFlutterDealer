@@ -96,6 +96,15 @@ class AppStyles {
           )
       );
 
+  static  final  redBg5 = BoxDecoration(
+      color: const Color(0xFFFFA7A7).withOpacity(0.2)
+      ,borderRadius: BorderRadius.circular(15),
+      border: Border.all(
+          width: 0.5,
+          color: const Color(0xFFF80505)
+      )
+  );
+
       static  final  categoryBg5 = BoxDecoration(
           color: const Color(0xFFD7D1D1).withOpacity(0.2)
           ,borderRadius: BorderRadius.circular(15),

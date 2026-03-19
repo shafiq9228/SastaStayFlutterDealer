@@ -165,12 +165,16 @@ Map<String, dynamic> _$$FetchAccountsResponseModelImplToJson(
 
 _$OptionsDataImpl _$$OptionsDataImplFromJson(Map<String, dynamic> json) =>
     _$OptionsDataImpl(
+      payUAutherised: json['payUAutherised'] as bool?,
+      blocked: json['blocked'] as bool?,
       upiWithdrawals: json['upiWithdrawals'] as bool?,
       bankWithdrawals: json['bankWithdrawals'] as bool?,
     );
 
 Map<String, dynamic> _$$OptionsDataImplToJson(_$OptionsDataImpl instance) =>
     <String, dynamic>{
+      'payUAutherised': instance.payUAutherised,
+      'blocked': instance.blocked,
       'upiWithdrawals': instance.upiWithdrawals,
       'bankWithdrawals': instance.bankWithdrawals,
     };

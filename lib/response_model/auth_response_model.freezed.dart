@@ -1433,6 +1433,7 @@ mixin _$DealerModel {
   List<DocumentDataModel>? get kycDocuments =>
       throw _privateConstructorUsedError;
   dynamic get primaryAccountId => throw _privateConstructorUsedError;
+  bool? get payUAutherised => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1461,7 +1462,8 @@ abstract class $DealerModelCopyWith<$Res> {
       dynamic rating,
       String? dealingType,
       List<DocumentDataModel>? kycDocuments,
-      dynamic primaryAccountId});
+      dynamic primaryAccountId,
+      bool? payUAutherised});
 }
 
 /// @nodoc
@@ -1492,6 +1494,7 @@ class _$DealerModelCopyWithImpl<$Res, $Val extends DealerModel>
     Object? dealingType = freezed,
     Object? kycDocuments = freezed,
     Object? primaryAccountId = freezed,
+    Object? payUAutherised = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1554,6 +1557,10 @@ class _$DealerModelCopyWithImpl<$Res, $Val extends DealerModel>
           ? _value.primaryAccountId
           : primaryAccountId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      payUAutherised: freezed == payUAutherised
+          ? _value.payUAutherised
+          : payUAutherised // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -1581,7 +1588,8 @@ abstract class _$$DealerModelImplCopyWith<$Res>
       dynamic rating,
       String? dealingType,
       List<DocumentDataModel>? kycDocuments,
-      dynamic primaryAccountId});
+      dynamic primaryAccountId,
+      bool? payUAutherised});
 }
 
 /// @nodoc
@@ -1610,6 +1618,7 @@ class __$$DealerModelImplCopyWithImpl<$Res>
     Object? dealingType = freezed,
     Object? kycDocuments = freezed,
     Object? primaryAccountId = freezed,
+    Object? payUAutherised = freezed,
   }) {
     return _then(_$DealerModelImpl(
       id: freezed == id
@@ -1672,6 +1681,10 @@ class __$$DealerModelImplCopyWithImpl<$Res>
           ? _value.primaryAccountId
           : primaryAccountId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      payUAutherised: freezed == payUAutherised
+          ? _value.payUAutherised
+          : payUAutherised // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1694,7 +1707,8 @@ class _$DealerModelImpl implements _DealerModel {
       this.rating,
       this.dealingType,
       final List<DocumentDataModel>? kycDocuments,
-      this.primaryAccountId})
+      this.primaryAccountId,
+      this.payUAutherised})
       : _kycDocuments = kycDocuments;
 
   factory _$DealerModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -1739,10 +1753,12 @@ class _$DealerModelImpl implements _DealerModel {
 
   @override
   final dynamic primaryAccountId;
+  @override
+  final bool? payUAutherised;
 
   @override
   String toString() {
-    return 'DealerModel(id: $id, mobile: $mobile, name: $name, email: $email, otp: $otp, source: $source, version: $version, deviceId: $deviceId, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, rating: $rating, dealingType: $dealingType, kycDocuments: $kycDocuments, primaryAccountId: $primaryAccountId)';
+    return 'DealerModel(id: $id, mobile: $mobile, name: $name, email: $email, otp: $otp, source: $source, version: $version, deviceId: $deviceId, monthlyIncome: $monthlyIncome, totalIncome: $totalIncome, totalVotes: $totalVotes, rating: $rating, dealingType: $dealingType, kycDocuments: $kycDocuments, primaryAccountId: $primaryAccountId, payUAutherised: $payUAutherised)';
   }
 
   @override
@@ -1771,7 +1787,9 @@ class _$DealerModelImpl implements _DealerModel {
             const DeepCollectionEquality()
                 .equals(other._kycDocuments, _kycDocuments) &&
             const DeepCollectionEquality()
-                .equals(other.primaryAccountId, primaryAccountId));
+                .equals(other.primaryAccountId, primaryAccountId) &&
+            (identical(other.payUAutherised, payUAutherised) ||
+                other.payUAutherised == payUAutherised));
   }
 
   @JsonKey(ignore: true)
@@ -1792,7 +1810,8 @@ class _$DealerModelImpl implements _DealerModel {
       const DeepCollectionEquality().hash(rating),
       dealingType,
       const DeepCollectionEquality().hash(_kycDocuments),
-      const DeepCollectionEquality().hash(primaryAccountId));
+      const DeepCollectionEquality().hash(primaryAccountId),
+      payUAutherised);
 
   @JsonKey(ignore: true)
   @override
@@ -1824,7 +1843,8 @@ abstract class _DealerModel implements DealerModel {
       final dynamic rating,
       final String? dealingType,
       final List<DocumentDataModel>? kycDocuments,
-      final dynamic primaryAccountId}) = _$DealerModelImpl;
+      final dynamic primaryAccountId,
+      final bool? payUAutherised}) = _$DealerModelImpl;
 
   factory _DealerModel.fromJson(Map<String, dynamic> json) =
       _$DealerModelImpl.fromJson;
@@ -1860,6 +1880,8 @@ abstract class _DealerModel implements DealerModel {
   List<DocumentDataModel>? get kycDocuments;
   @override
   dynamic get primaryAccountId;
+  @override
+  bool? get payUAutherised;
   @override
   @JsonKey(ignore: true)
   _$$DealerModelImplCopyWith<_$DealerModelImpl> get copyWith =>

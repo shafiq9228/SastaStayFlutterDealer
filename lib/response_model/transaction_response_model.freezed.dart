@@ -1730,6 +1730,8 @@ OptionsData _$OptionsDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OptionsData {
+  bool? get payUAutherised => throw _privateConstructorUsedError;
+  bool? get blocked => throw _privateConstructorUsedError;
   bool? get upiWithdrawals => throw _privateConstructorUsedError;
   bool? get bankWithdrawals => throw _privateConstructorUsedError;
 
@@ -1745,7 +1747,11 @@ abstract class $OptionsDataCopyWith<$Res> {
           OptionsData value, $Res Function(OptionsData) then) =
       _$OptionsDataCopyWithImpl<$Res, OptionsData>;
   @useResult
-  $Res call({bool? upiWithdrawals, bool? bankWithdrawals});
+  $Res call(
+      {bool? payUAutherised,
+      bool? blocked,
+      bool? upiWithdrawals,
+      bool? bankWithdrawals});
 }
 
 /// @nodoc
@@ -1761,10 +1767,20 @@ class _$OptionsDataCopyWithImpl<$Res, $Val extends OptionsData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payUAutherised = freezed,
+    Object? blocked = freezed,
     Object? upiWithdrawals = freezed,
     Object? bankWithdrawals = freezed,
   }) {
     return _then(_value.copyWith(
+      payUAutherised: freezed == payUAutherised
+          ? _value.payUAutherised
+          : payUAutherised // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      blocked: freezed == blocked
+          ? _value.blocked
+          : blocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       upiWithdrawals: freezed == upiWithdrawals
           ? _value.upiWithdrawals
           : upiWithdrawals // ignore: cast_nullable_to_non_nullable
@@ -1785,7 +1801,11 @@ abstract class _$$OptionsDataImplCopyWith<$Res>
       __$$OptionsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? upiWithdrawals, bool? bankWithdrawals});
+  $Res call(
+      {bool? payUAutherised,
+      bool? blocked,
+      bool? upiWithdrawals,
+      bool? bankWithdrawals});
 }
 
 /// @nodoc
@@ -1799,10 +1819,20 @@ class __$$OptionsDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payUAutherised = freezed,
+    Object? blocked = freezed,
     Object? upiWithdrawals = freezed,
     Object? bankWithdrawals = freezed,
   }) {
     return _then(_$OptionsDataImpl(
+      payUAutherised: freezed == payUAutherised
+          ? _value.payUAutherised
+          : payUAutherised // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      blocked: freezed == blocked
+          ? _value.blocked
+          : blocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       upiWithdrawals: freezed == upiWithdrawals
           ? _value.upiWithdrawals
           : upiWithdrawals // ignore: cast_nullable_to_non_nullable
@@ -1818,11 +1848,19 @@ class __$$OptionsDataImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$OptionsDataImpl implements _OptionsData {
-  const _$OptionsDataImpl({this.upiWithdrawals, this.bankWithdrawals});
+  const _$OptionsDataImpl(
+      {this.payUAutherised,
+      this.blocked,
+      this.upiWithdrawals,
+      this.bankWithdrawals});
 
   factory _$OptionsDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$OptionsDataImplFromJson(json);
 
+  @override
+  final bool? payUAutherised;
+  @override
+  final bool? blocked;
   @override
   final bool? upiWithdrawals;
   @override
@@ -1830,7 +1868,7 @@ class _$OptionsDataImpl implements _OptionsData {
 
   @override
   String toString() {
-    return 'OptionsData(upiWithdrawals: $upiWithdrawals, bankWithdrawals: $bankWithdrawals)';
+    return 'OptionsData(payUAutherised: $payUAutherised, blocked: $blocked, upiWithdrawals: $upiWithdrawals, bankWithdrawals: $bankWithdrawals)';
   }
 
   @override
@@ -1838,6 +1876,9 @@ class _$OptionsDataImpl implements _OptionsData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OptionsDataImpl &&
+            (identical(other.payUAutherised, payUAutherised) ||
+                other.payUAutherised == payUAutherised) &&
+            (identical(other.blocked, blocked) || other.blocked == blocked) &&
             (identical(other.upiWithdrawals, upiWithdrawals) ||
                 other.upiWithdrawals == upiWithdrawals) &&
             (identical(other.bankWithdrawals, bankWithdrawals) ||
@@ -1846,7 +1887,8 @@ class _$OptionsDataImpl implements _OptionsData {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, upiWithdrawals, bankWithdrawals);
+  int get hashCode => Object.hash(
+      runtimeType, payUAutherised, blocked, upiWithdrawals, bankWithdrawals);
 
   @JsonKey(ignore: true)
   @override
@@ -1864,12 +1906,18 @@ class _$OptionsDataImpl implements _OptionsData {
 
 abstract class _OptionsData implements OptionsData {
   const factory _OptionsData(
-      {final bool? upiWithdrawals,
+      {final bool? payUAutherised,
+      final bool? blocked,
+      final bool? upiWithdrawals,
       final bool? bankWithdrawals}) = _$OptionsDataImpl;
 
   factory _OptionsData.fromJson(Map<String, dynamic> json) =
       _$OptionsDataImpl.fromJson;
 
+  @override
+  bool? get payUAutherised;
+  @override
+  bool? get blocked;
   @override
   bool? get upiWithdrawals;
   @override
